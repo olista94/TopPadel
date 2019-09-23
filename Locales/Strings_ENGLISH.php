@@ -40,6 +40,9 @@ array(
 	'Reservas' => 'Reservations',
 	'Fecha reserva' => 'Reservation date',
 	'Hora inicio' => 'Start time',
+	'Elegir pareja' => 'Select partner',
+	'Jugadores' => 'Players',
+	'Ya te has inscrito en este torneo' => 'You have already registered for this tournament',
 	
 	'Volver' => 'Back',
 	'La password para este usuario no es correcta' => 'The password for this user is incorrect',

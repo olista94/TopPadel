@@ -42,6 +42,9 @@ array(
 	'Reservas' => 'Reservas',
 	'Fecha reserva' => 'Fecha reserva',
 	'Hora inicio' => 'Hora inicio',
+	'Elegir pareja' => 'Elegir pareja',
+	'Jugadores' => 'Jugadores',
+	'Ya te has inscrito en este torneo' => 'Ya te has inscrito en este torneo',
 	
 	
 	'Registro' => 'Registro',
