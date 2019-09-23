@@ -125,10 +125,17 @@ if(!IsAuthenticated()){
 
 		//Accion por defecto cuando no hay ninguna accion
 		default: /*PARA EL SHOWALL */
+		if(isset($_SESSION['tipo'])){
+		if($_SESSION['tipo']=='ADMIN'){		 
 			$torneo = new Torneos_Model('','','','','',''); //Se construye el objeto torneo
 			$datos = $torneo -> search(); //Se buscan todos los torneos y se pasan a datos
 			$respuesta = new Torneos_SHOWALL($datos,'../Controllers/Torneos_Controller.php'); //Se crea el SHOWALL para mostrar todos los torneos
-
+		}else{
+			$torneo = new Torneos_Model('','','','','',''); //Se construye el objeto torneo
+			$datos = $torneo -> searchPorCategoria(); //Se buscan todos los torneos y se pasan a datos
+			$respuesta = new Torneos_SHOWALL($datos,'../Controllers/Torneos_Controller.php');
+		}
+	}
 	}
 }
 ?>
