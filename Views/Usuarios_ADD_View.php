@@ -68,8 +68,8 @@ Fecha: 20/12/2018-->
       
 	  <label for="sexo"><?php echo $strings['Sexo']; ?></label>
 	  <select name="sexo" id="sexo">
-		<option value="Hombre"><?php echo $strings['Hombre']; ?></option>
-		<option value="Mujer"><?php echo $strings['Mujer']; ?></option>
+		<option value="Masculina"><?php echo $strings['Hombre']; ?></option>
+		<option value="Femenina"><?php echo $strings['Mujer']; ?></option>
 	  </select>
 	  
     </div>

@@ -71,8 +71,8 @@ Fecha: 20/12/2018-->
 	
 			<label ><?php echo $strings['Sexo']; ?></label>
 				<select name="sexo" id="sexo">
-				<option value="Hombre" <?php if($this -> fila['sexo'] == 'Hombre') echo "selected"; ?>><?php echo $strings['Hombre']; ?></option>
-				<option value="Mujer" <?php if($this -> fila['sexo'] == 'Mujer') echo "selected"; ?>><?php echo $strings['Mujer']; ?></option>
+				<option value="Masculina" <?php if($this -> fila['sexo'] == 'Masculina') echo "selected"; ?>><?php echo $strings['Hombre']; ?></option>
+				<option value="Femenina" <?php if($this -> fila['sexo'] == 'Femenina') echo "selected"; ?>><?php echo $strings['Mujer']; ?></option>
 			</select>  
     </div>
 	<!--Boton para confirmar editar-->

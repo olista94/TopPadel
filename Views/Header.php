@@ -35,7 +35,7 @@ idioma = "<?php echo $_SESSION['idioma']; ?>"; //Variable global que permite pas
 
 <?php
 if(isset($_SESSION['tipo'])){//Si se loguea como ADMIN
-	if($_SESSION['tipo']=='ADMIN'){
+	
 ?>
 
 <header id="main-header">	
@@ -106,68 +106,5 @@ if(isset($_SESSION['tipo'])){//Si se loguea como ADMIN
 </header>
 
 <?php
-	}
-	else{//Si se loguea como un usuario normal
-		?>
-		
-		<header id="main-header">	
-
-	<div class="fixednav">
-		<div class="topnav">
-			<div class="topnav-centered">
-				<a><h2><?php echo $strings['ToDoList']; ?></h2></a>
-			</div>
-
-			<a class="alogo"><button class="logo"></button></a>
-
-			<div class="topnav-right">
-                <?php	
-                    if (IsAuthenticated()){//Si esta autenticado
-                ?>
-				 <!--Login del usuario conectado-->
-				<button class="user"><?php echo $_SESSION['login'];?></button>				   		
-				<!--Desconectar-->
-				<a href='../Functions/Desconectar.php'><button class="logout"></button></a>
-
-                <?php                    
-                    }
-                    else{
-                ?>
-				    <!--Si no esta logueado muestra un boton para ir al registro--> 
-                    <a href='../Controllers/Registro_Controller.php'><button class="registrar"></button></a>
-                <?php
-                    }	
-                ?>
-				
-			</div>
-<!--Banderas para cambiar el idioma-->
-		
-			<div class="flags1" >
-			 <!--Al ingles-->
-				<form name='idioma' action="../Functions/CambioIdioma.php" method="POST" style="display: inline-block; margin:0; padding:0;">
-					<input type="hidden" name='idioma' value="ENGLISH">
-					<input type="image" src="../Views/img/uk.png"  width="45px">
-				</form>
-				 <!--Al castellano-->
-				<form name='idioma' action="../Functions/CambioIdioma.php" method="POST" style="display: inline-block; margin:0; padding:0;">
-					<input type="hidden" name='idioma' value="SPANISH" >
-					<input type="image"  src="../Views/img/spain.png"  width="35px" >
-				</form>
-				 <!--Al gallego-->
-				<form name='idioma' action="../Functions/CambioIdioma.php" method="POST" style="display: inline-block; margin:0; padding:0;">
-					<input type="hidden" name='idioma' value="GALLAECIAN" >
-					<input type="image"  src="../Views/img/galicia.png" width="35px">	
-				</form>
-			</div>
-
-		</div>
-	</div>
- <!--Opciones del menu que puede gestionar si no es ADMIN (gestion de sus tareas y fases y añadir usuarios)-->
-	
-
-</header>
-		
-<?php
-}
 }
 ?>

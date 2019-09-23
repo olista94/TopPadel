@@ -4,9 +4,6 @@ include_once '../Functions/Authentication.php';
 //Header
 include '../Views/Header.php';
 
-//Si se loguea como ADMIN
-if(isset($_SESSION['tipo'])){
-	if($_SESSION['tipo']=='ADMIN'){
 
  //Declaracion de la clase 
  class Torneos_SHOWALL{	 
@@ -30,7 +27,10 @@ if(isset($_SESSION['tipo'])){
 	//Archivo del idioma	
 		include '../Locales/Strings_'. $_SESSION['idioma'] .'.php';  
 	 
+			
+		
 ?>
+
 <!--Tabla con los datos de los torneos-->
 	<div class="showall">   
                                 
@@ -43,6 +43,7 @@ if(isset($_SESSION['tipo'])){
 			</form></th></tr>
 	<!--Campos Categoria,nombre,Edicion,Fecha,Nivel -->
 			<tr>
+			
 				<th><?php echo $strings['Nombre']; ?></th>
 				<th><?php echo $strings['Categoria']; ?></th>
 				<th><?php echo $strings['Edicion']; ?></th>
@@ -69,9 +70,17 @@ if(isset($_SESSION['tipo'])){
 						<button class="editar" name="action" value="Confirmar_EDIT" type="submit"></button>
 						<button class="borrar" name="action" value="Confirmar_DELETE1" type="submit"></button>
 						<button class="add" name="action" value="Confirmar_SHOWCURRENT" type="submit"></button>
-						<button class="inscripcion" name="action" value="Confirmar_INSCRIPCION" type="submit"></button>
+						
 					</td>
+					
 				</form>
+				<form action="../Controllers/Inscripcion_Controller.php" method="post" name="action" >
+					<input type="hidden" name="ID_Torneo" value="<?php echo $fila['ID_Torneo']; ?>">
+					<td style="text-align:right">
+					<!--Botones para editar,borrar o ver en detalle-->
+						<button class="inscripcion" name="action" value="Confirmar_INSCRIPCION1" type="submit"></button>
+					</td>
+					</form>
 			</tr>
 		<?php
 			}
@@ -89,7 +98,3 @@ if(isset($_SESSION['tipo'])){
 <!--Pie de pagina-->
 	<?php include '../Views/Footer.php'; ?>
 </footer>
-	<?php   
-    }
-}		
-?>

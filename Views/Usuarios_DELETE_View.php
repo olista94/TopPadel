@@ -89,7 +89,8 @@ Fecha: 20/12/2018-->
 				
 				<tr>
                     <th><?php echo $strings['Sexo']; ?></th>
-                    <td><?php echo $this -> fila['sexo']; ?></td>
+                    <td><?php if($this -> fila['sexo'] == 'Masculina') echo $strings['Hombre'];
+					else echo $strings['Mujer']; ?></td>
                 </tr>
 
 				<tr>
