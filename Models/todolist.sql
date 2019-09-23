@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-09-2019 a las 20:54:48
+-- Tiempo de generación: 20-09-2019 a las 18:31:12
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.1.32
 
@@ -17,8 +17,9 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-
-
+--
+-- Base de datos: `todolist`
+--
 DROP SCHEMA IF EXISTS `todolist` ;
 
 -- -----------------------------------------------------
@@ -26,9 +27,36 @@ DROP SCHEMA IF EXISTS `todolist` ;
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `todolist` DEFAULT CHARACTER SET utf8 ;
 USE `todolist` ;
+
+-- --------------------------------------------------------
+
+-- -----------------------------------------------------
+-- User todolist
+-- -----------------------------------------------------
+
+GRANT ALL PRIVILEGES ON todolist.* TO todolist@localhost IDENTIFIED BY "todolist";
 --
--- Base de datos: `todolist`
+-- Estructura de tabla para la tabla `parejas`
 --
+
+CREATE TABLE `parejas` (
+  `ID_Pareja` tinyint(5) NOT NULL,
+  `usuarios_login` varchar(45) NOT NULL,
+  `usuarios_login1` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `parejas_has_torneos`
+--
+
+CREATE TABLE `parejas_has_torneos` (
+  `parejas_ID_Pareja` tinyint(5) NOT NULL,
+  `parejas_usuarios_login` varchar(45) NOT NULL,
+  `parejas_usuarios_login1` varchar(45) NOT NULL,
+  `torneos_ID_Torneo` tinyint(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -52,7 +80,6 @@ INSERT INTO `pista` (`ID_Pista`, `Nombre_Pista`) VALUES
 (6, 'Pista 4'),
 (7, 'Pista 5'),
 (8, 'Pista 6');
-
 
 -- --------------------------------------------------------
 
@@ -85,17 +112,24 @@ CREATE TABLE `torneo` (
   `ID_Torneo` tinyint(5) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `categoria` varchar(15) NOT NULL,
+  `fecha` date NOT NULL,
   `edicion` int(5) NOT NULL,
   `nivel` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `torneo`
+--
+
+INSERT INTO `torneo` (`ID_Torneo`, `nombre`, `categoria`, `fecha`, `edicion`, `nivel`) VALUES
+(1, 'Roland Garros', 'Masculina', '2019-05-22', 2019, 1),
+(2, 'Wimbledon', 'Masculina', '2019-07-01', 2019, 1),
+(3, 'US Open', 'Femenina', '2019-09-12', 2019, 5),
+(4, 'Australia Open', 'Femenina', '2019-01-14', 2019, 3),
+(5, 'Portonovo Open', 'Mixta', '2019-10-22', 2019, 4),
+(6, 'Ourense Tour', 'Mixta', '2019-12-25', 2019, 7);
 
 
-CREATE TABLE `parejas` (
-  `ID_Pareja` tinyint(5) NOT NULL,
-  `usuarios_login` varchar(45) NOT NULL,
-  `usuarios_login1` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- --------------------------------------------------------
 
 --
@@ -111,7 +145,7 @@ CREATE TABLE `usuarios` (
   `telefono` varchar(11) NOT NULL,
   `email` varchar(60) NOT NULL,
   `fecha` date NOT NULL,
-  `sexo` enum('Hombre','Mujer') NOT NULL,
+  `sexo` enum('Masculina','Femenina') NOT NULL,
   `tipo` enum('ADMIN','NORMAL','ENTRENADOR') NOT NULL,
   `socio` enum('SI','NO') NOT NULL DEFAULT 'NO',
   `cuenta` varchar(30) DEFAULT NULL
@@ -122,12 +156,40 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`login`, `password`, `dni`, `nombre`, `apellidos`, `telefono`, `email`, `fecha`, `sexo`, `tipo`, `socio`, `cuenta`) VALUES
-('admin', 'admin', '11111111H', 'Admin', 'Adminez Adminez', '676532185', 'admin@admin.es', '1991-05-14', 'Hombre', 'ADMIN', 'NO', NULL),
-('ypgarcia', 'asdf', '44657078W', 'Iago', 'Perez Garcia', '669517850', 'ypgarcia@esei.uvigo.es', '1996-04-21', 'Hombre', 'NORMAL', 'NO', NULL);
+('admin', 'admin', '11111111H', 'Admin', 'Adminez Adminez', '676532185', 'admin@admin.es', '1991-05-14', 'Masculina', 'ADMIN', 'NO', NULL),
+('ypgarcia', 'asdf', '44657078W', 'Iago', 'Perez Garcia', '669517850', 'ypgarcia@esei.uvigo.es', '1996-04-21', 'Masculina', 'NORMAL', 'NO', NULL),
+('olista', '1234', '24252751X', 'Oscar', 'Lista Rivera', '643956059', 'adminadmin@gmail.com', '1994-05-22', 'Masculina', 'NORMAL', 'NO', NULL),
+('pepa', 'pepa', '16581943R', 'Pepa', 'Gonzalez Perez', '670084078', 'pepapepa@gmail.com', '1976-10-27', 'Femenina','NORMAL', 'NO', NULL),
+('maria', 'maria', '92643593F', 'Maria', 'Saez de la Torre', '626851194', 'mariamaria@gmail.com', '1979-01-07', 'Femenina','NORMAL', 'NO', NULL),
+('juan', 'juan', '63498344J', 'Juan', 'Guerrero Vera', '660877067', 'juanjuan@gmail.com', '2001-06-22', 'Masculina','NORMAL', 'NO', NULL),
+('rosa', 'rosa', '12393504T', 'Rosa', 'Cruz Moreno', '878127326', 'rosarosa@gmail.com', '1993-11-11', 'Femenina','NORMAL', 'NO', NULL),
+('manuel', 'manuel', '26685410M', 'Manuel', 'Abril Farres', '828297632', 'manuelmanuel@gmail.com', '1981-02-28', 'Masculina','NORMAL', 'NO', NULL),
+('sara', 'sara', '53518040F', 'Sara', 'Ezquerro Iglesias', '626693106', 'sarasara@gmail.com',  '1988-08-03', 'Femenina','NORMAL', 'NO', NULL),
+('belen', 'belen', '25038044Z', 'Belen', 'Varela Brey',  '770249813', 'belenbelen@gmail.com', '1977-07-07', 'Femenina','NORMAL', 'NO', NULL),
+('santi', 'santi', '71557134V', 'Santiago', 'Castor Nogales', '695259914', 'santisanti@gmail.com', '1997-01-01', 'Masculina','NORMAL', 'NO', NULL),
+('felipe', 'felipe', '12345678Z', 'Felipe Juan Pablo Alfonso', 'de Todos los Santos de Borbón y Grecia', '669680477', 'felipevi@gmail.com', '1968-01-30', 'Masculina','NORMAL', 'NO', NULL);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `parejas`
+--
+ALTER TABLE `parejas`
+  ADD PRIMARY KEY (`ID_Pareja`,`usuarios_login`,`usuarios_login1`),
+  ADD KEY `fk_usuarios_parejas` (`usuarios_login`),
+  ADD KEY `fk_usuarios_parejas1` (`usuarios_login1`);
+
+--
+-- Indices de la tabla `parejas_has_torneos`
+--
+ALTER TABLE `parejas_has_torneos`
+  ADD PRIMARY KEY (`parejas_ID_Pareja`,`parejas_usuarios_login`,`parejas_usuarios_login1`,`torneos_ID_Torneo`),
+  ADD KEY `fk_parejas_parejas_has_torneos` (`parejas_ID_Pareja`),
+  ADD KEY `fk_parejas_parejas_has_torneos1` (`parejas_usuarios_login`),
+  ADD KEY `fk_parejas_parejas_has_torneos2` (`parejas_usuarios_login1`),
+  ADD KEY `fk_parejas_parejas_has_torneos3` (`torneos_ID_Torneo`);
 
 --
 -- Indices de la tabla `pista`
@@ -143,11 +205,6 @@ ALTER TABLE `reservas`
   ADD PRIMARY KEY (`usuarios_login`,`pista_ID_Pista`,`hora_inicio`,`fecha_reserva`),
   ADD KEY `fk_usuarios_has_pista_pista1` (`pista_ID_Pista`);
 
-
-ALTER TABLE `parejas`
-  ADD PRIMARY KEY (`ID_Pareja`,`usuarios_login`,`usuarios_login1`),
-  ADD KEY `fk_usuarios_parejas` (`usuarios_login`),
-  ADD KEY `fk_usuarios_parejas1` (`usuarios_login1`);
 --
 -- Indices de la tabla `torneo`
 --
@@ -169,6 +226,12 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `pista`
   MODIFY `ID_Pista` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `torneo`
+--
+ALTER TABLE `torneo`
+  MODIFY `ID_Torneo` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

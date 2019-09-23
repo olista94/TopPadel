@@ -238,6 +238,50 @@ function DevolverTipo()
         return 'No existe';//Devuelve mensaje de error	
 }  
 
+function DevolverSexo()
+{	
+    $sql = "SELECT sexo FROM usuarios WHERE (`login` = '$this->login')";
+    $sql;
+    $result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if ($result->num_rows == 1)
+    {    
+    	return $result -> fetch_array()[0];//Guarda el resultado (El tipo de usuario)
+    } 
+    else
+        return 'No existe';//Devuelve mensaje de error	
+} 
+
+function BuscarHombre()
+{	
+    $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Masculina' AND `login` <> '".$_SESSION['login']."')";
+    echo $sql;
+    $result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado;//Se devuelve el resultado de la consulta
+	}
+}
+
+function BuscarMujer()
+{	
+    $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Femenina' AND `login` <> '".$_SESSION['login']."')";
+    echo $sql;
+    $result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado;//Se devuelve el resultado de la consulta
+	}
+
+}
 }//fin de clase
 
 ?> 

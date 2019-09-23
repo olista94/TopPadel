@@ -1,28 +1,22 @@
 <?php
 //Declaracion de la clase
-class Torneos_Model{
+class Inscripcion_Model{
 	
-	var $ID_Torneo;
+	var $parejas_ID_Pareja;
 	
-	var $nombre;
+	var $parejas_usuarios_login;
 	
-	var $categoria;
+	var $parejas_usuarios_login1;
 
-	var $edicion;
-	
-	var $fecha;
-	
-	var $nivel;
+	var $torneos_ID_Torneo;
 	
 	//Constructor de la clase
-	function __construct ($ID_Torneo,$nombre,$categoria,$edicion,$fecha,$nivel){
-		$this -> ID_Torneo = $ID_Torneo;
-		$this -> nombre = $nombre;
-		$this -> categoria = $categoria;
-		$this -> edicion = $edicion;
-		$this -> fecha = $fecha;
-		$this -> nivel = $nivel;
-
+	function __construct ($parejas_ID_Pareja,$parejas_usuarios_login,$parejas_usuarios_login1,$torneos_ID_Torneo){
+		$this -> parejas_ID_Pareja = $parejas_ID_Pareja;
+		$this -> parejas_usuarios_login = $parejas_usuarios_login;
+		$this -> parejas_usuarios_login1 = $parejas_usuarios_login1;
+		$this -> torneos_ID_Torneo = $torneos_ID_Torneo;
+		
 		//Incluimos el archivo de acceso a la bd
 		include_once 'Access_DB.php';
 		//Funcion de conexion a la bd
@@ -32,18 +26,17 @@ class Torneos_Model{
 function add(){
 	
 	//Sentencia sql para insertar
-	$sql = "INSERT INTO torneo
+	$sql = "INSERT INTO parejas_has_torneos
 			VALUES (
-				'$this->ID_Torneo',
-				'$this->nombre',
-				'$this->categoria',
-				'$this->fecha',
-				'$this->edicion',
-				'$this->nivel')
+				'$this->parejas_ID_Pareja',
+				'$this->parejas_usuarios_login',
+				'$this->parejas_usuarios_login1',
+				'$this->torneos_ID_Torneo'
+				)
 			";
 echo $sql;
 	if (!$this->mysqli->query($sql)) { 
-		return 'Error al insertar';//Devuelve mensaje de error
+		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
 	}
 	else{ 
 		return 'Insercion correcta'; //Devuelve mensaje de exito	
@@ -165,40 +158,6 @@ function edit()
     }
     else 
     	return 'No existe';//Devuelve mensaje de error
-}
-function BuscarCategoria(){
-	$sql = "SELECT categoria
-			FROM torneo
-			WHERE ID_Torneo = '$this->ID_Torneo' ";
-					
-	
-	
-	if (!($resultado = $this->mysqli->query($sql))){
-		return 'No existe'; //Devuelve mensaje de error
-	}
-    else{ 
-		$result = $resultado->fetch_array()[0];//Se guarda el resultado de la consulta sql
-		
-		return $result;//Se devuelve el resultado de la consulta
-	}
-}
-
-function BuscarID_Torneo(){
-	$sql = "SELECT ID_Torneo
-			FROM torneo
-			WHERE ID_Torneo = '$this->ID_Torneo' ";
-					
-	
-	
-	if (!($resultado = $this->mysqli->query($sql))){
-		return 'No existe'; //Devuelve mensaje de error
-	}
-    else{ 
-		$result = $resultado->fetch_array()[0];//Se guarda el resultado de la consulta sql
-		
-		return $result;//Se devuelve el resultado de la consulta
-	}
-}
- 
+} 
 }
 ?>
