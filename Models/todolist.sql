@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-09-2019 a las 18:31:12
+-- Tiempo de generación: 23-09-2019 a las 19:44:21
 -- Versión del servidor: 10.4.6-MariaDB
--- Versión de PHP: 7.1.32
+-- Versión de PHP: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -17,24 +17,27 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Base de datos: `todolist`
 --
-DROP SCHEMA IF EXISTS `todolist` ;
-
--- -----------------------------------------------------
--- Schema todolist
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `todolist` DEFAULT CHARACTER SET utf8 ;
-USE `todolist` ;
 
 -- --------------------------------------------------------
 
--- -----------------------------------------------------
--- User todolist
--- -----------------------------------------------------
+--
+-- Estructura de tabla para la tabla `clases`
+--
 
-GRANT ALL PRIVILEGES ON todolist.* TO todolist@localhost IDENTIFIED BY "todolist";
+CREATE TABLE `clases` (
+  `ID_Clase` tinyint(5) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `hora_inicio` time NOT NULL,
+  `hora_fin` time NOT NULL,
+  `login_entrenador` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
 --
 -- Estructura de tabla para la tabla `parejas`
 --
@@ -129,7 +132,6 @@ INSERT INTO `torneo` (`ID_Torneo`, `nombre`, `categoria`, `fecha`, `edicion`, `n
 (5, 'Portonovo Open', 'Mixta', '2019-10-22', 2019, 4),
 (6, 'Ourense Tour', 'Mixta', '2019-12-25', 2019, 7);
 
-
 -- --------------------------------------------------------
 
 --
@@ -157,21 +159,30 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`login`, `password`, `dni`, `nombre`, `apellidos`, `telefono`, `email`, `fecha`, `sexo`, `tipo`, `socio`, `cuenta`) VALUES
 ('admin', 'admin', '11111111H', 'Admin', 'Adminez Adminez', '676532185', 'admin@admin.es', '1991-05-14', 'Masculina', 'ADMIN', 'NO', NULL),
-('ypgarcia', 'asdf', '44657078W', 'Iago', 'Perez Garcia', '669517850', 'ypgarcia@esei.uvigo.es', '1996-04-21', 'Masculina', 'NORMAL', 'NO', NULL),
+('belen', 'belen', '25038044Z', 'Belen', 'Varela Brey', '770249813', 'belenbelen@gmail.com', '1977-07-07', 'Femenina', 'NORMAL', 'NO', NULL),
+('felipe', 'felipe', '12345678Z', 'Felipe Juan Pablo Alfonso', 'de Todos los Santos de Borbón y Grecia', '669680477', 'felipevi@gmail.com', '1968-01-30', 'Masculina', 'NORMAL', 'NO', NULL),
+('jonifboy17', 'abp', '44493919M', 'Jonathan', 'Fernandez Perez', '696627355', 'jonathanelfp@gmail.com', '2019-09-25', 'Masculina', 'NORMAL', 'NO', NULL),
+('juan', 'juan', '63498344J', 'Juan', 'Guerrero Vera', '660877067', 'juanjuan@gmail.com', '2001-06-22', 'Masculina', 'NORMAL', 'NO', NULL),
+('manuel', 'manuel', '26685410M', 'Manuel', 'Abril Farres', '828297632', 'manuelmanuel@gmail.com', '1981-02-28', 'Masculina', 'NORMAL', 'NO', NULL),
+('maria', 'maria', '92643593F', 'Maria', 'Saez de la Torre', '626851194', 'mariamaria@gmail.com', '1979-01-07', 'Femenina', 'NORMAL', 'NO', NULL),
 ('olista', '1234', '24252751X', 'Oscar', 'Lista Rivera', '643956059', 'adminadmin@gmail.com', '1994-05-22', 'Masculina', 'NORMAL', 'NO', NULL),
-('pepa', 'pepa', '16581943R', 'Pepa', 'Gonzalez Perez', '670084078', 'pepapepa@gmail.com', '1976-10-27', 'Femenina','NORMAL', 'NO', NULL),
-('maria', 'maria', '92643593F', 'Maria', 'Saez de la Torre', '626851194', 'mariamaria@gmail.com', '1979-01-07', 'Femenina','NORMAL', 'NO', NULL),
-('juan', 'juan', '63498344J', 'Juan', 'Guerrero Vera', '660877067', 'juanjuan@gmail.com', '2001-06-22', 'Masculina','NORMAL', 'NO', NULL),
-('rosa', 'rosa', '12393504T', 'Rosa', 'Cruz Moreno', '878127326', 'rosarosa@gmail.com', '1993-11-11', 'Femenina','NORMAL', 'NO', NULL),
-('manuel', 'manuel', '26685410M', 'Manuel', 'Abril Farres', '828297632', 'manuelmanuel@gmail.com', '1981-02-28', 'Masculina','NORMAL', 'NO', NULL),
-('sara', 'sara', '53518040F', 'Sara', 'Ezquerro Iglesias', '626693106', 'sarasara@gmail.com',  '1988-08-03', 'Femenina','NORMAL', 'NO', NULL),
-('belen', 'belen', '25038044Z', 'Belen', 'Varela Brey',  '770249813', 'belenbelen@gmail.com', '1977-07-07', 'Femenina','NORMAL', 'NO', NULL),
-('santi', 'santi', '71557134V', 'Santiago', 'Castor Nogales', '695259914', 'santisanti@gmail.com', '1997-01-01', 'Masculina','NORMAL', 'NO', NULL),
-('felipe', 'felipe', '12345678Z', 'Felipe Juan Pablo Alfonso', 'de Todos los Santos de Borbón y Grecia', '669680477', 'felipevi@gmail.com', '1968-01-30', 'Masculina','NORMAL', 'NO', NULL);
+('pepa', 'pepa', '16581943R', 'Pepa', 'Gonzalez Perez', '670084078', 'pepapepa@gmail.com', '1976-10-27', 'Femenina', 'NORMAL', 'NO', NULL),
+('rosa', 'rosa', '12393504T', 'Rosa', 'Cruz Moreno', '878127326', 'rosarosa@gmail.com', '1993-11-11', 'Femenina', 'NORMAL', 'NO', NULL),
+('santi', 'santi', '71557134V', 'Santiago', 'Castor Nogales', '695259914', 'santisanti@gmail.com', '1997-01-01', 'Masculina', 'NORMAL', 'NO', NULL),
+('sara', 'sara', '53518040F', 'Sara', 'Ezquerro Iglesias', '626693106', 'sarasara@gmail.com', '1988-08-03', 'Femenina', 'NORMAL', 'NO', NULL),
+('ypgarcia', 'asdf', '44657078W', 'Iago', 'Perez Garcia', '669517850', 'ypgarcia@esei.uvigo.es', '1996-04-21', 'Masculina', 'NORMAL', 'NO', NULL);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `clases`
+--
+ALTER TABLE `clases`
+  ADD PRIMARY KEY (`ID_Clase`),
+  ADD KEY `FK_ID_Entrenador` (`ID_Clase`),
+  ADD KEY `login_entrenador` (`login_entrenador`);
 
 --
 -- Indices de la tabla `parejas`
@@ -222,6 +233,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `clases`
+--
+ALTER TABLE `clases`
+  MODIFY `ID_Clase` tinyint(5) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `pista`
 --
 ALTER TABLE `pista`
@@ -231,11 +248,17 @@ ALTER TABLE `pista`
 -- AUTO_INCREMENT de la tabla `torneo`
 --
 ALTER TABLE `torneo`
-  MODIFY `ID_Torneo` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Torneo` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `clases`
+--
+ALTER TABLE `clases`
+  ADD CONSTRAINT `clases_ibfk_1` FOREIGN KEY (`login_entrenador`) REFERENCES `usuarios` (`login`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `reservas`
