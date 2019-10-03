@@ -43,7 +43,7 @@ class Inscripcion_ADD{
 					<!--Categorias-->
 					<label>
 					<?php echo $strings['Jugadores']; ?></label><br>
-					<select name="parejas_usuarios_login1">
+					<select name="usuarios_login1">
 						<?php
 							while($usuarios=$this->usuarios->fetch_array()){
 						?>

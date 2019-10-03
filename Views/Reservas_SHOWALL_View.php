@@ -60,22 +60,30 @@ include_once '../Views/Header.php';
 			</tr>
 		<?php 
 		//Mientras haya filas en la bd
-			while($fila = $this ->datos->fetch_array()){                        
+		
+			while($fila = $this ->datos->fetch_array()){      
+print_r($fila);			
 		?>
 			<tr>
-				<form action="../Controllers/Reservas_Controller.php" method="post" name="action" >
-					<input type="hidden" name="usuario_login" value="<?php echo $fila['usuario_login']; ?>">
+				
 					<!--Datos-->
-					<td><?php echo $fila['usuario_login']; ?></td>
+					<td><?php echo $fila['login']; ?></td>
 					<td><?php echo $fila['fecha_reserva']; ?></td>
 					<td><?php echo $fila['pista_ID_Pista']; ?></td>		
 					<td style="text-align:right">
+					<form action="../Controllers/Reservas_Controller.php" method="post" name="action" >
+					<input type="hidden" name="login" value="<?php echo $fila['login']; ?>">
+					<input type="hidden" name="pista_ID_Pista" value="<?php echo $fila['pista_ID_Pista']; ?>">
+					<input type="hidden" name="fecha_reserva" value="<?php echo $fila['fecha_reserva']; ?>">
+					<input type="hidden" name="hora_inicio" value="<?php echo $fila['hora_inicio']; ?>">
+					
 					<!--Botones para editar,borrar o ver en detalle-->
 						<button class="editar" name="action" value="Confirmar_EDIT" type="submit"></button>
 						<button class="borrar" name="action" value="Confirmar_DELETE1" type="submit"></button>
 						<button class="add" name="action" value="Confirmar_SHOWCURRENT" type="submit"></button>
+					</form>
 					</td>
-				</form>
+				
 			</tr>
 		<?php
 			}
