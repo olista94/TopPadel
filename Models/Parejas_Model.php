@@ -1,15 +1,18 @@
 <?php
 //Declaracion de la clase
-class Inscripcion_Model{
+class Parejas_Model{
 	
-	var $parejas_ID_Pareja;
-
-	var $torneos_ID_Torneo;
+	var $ID_Pareja;
+	
+	var $usuarios_login;
+	
+	var $usuarios_login1;
 	
 	//Constructor de la clase
-	function __construct ($parejas_ID_Pareja,$torneos_ID_Torneo){
-		$this -> parejas_ID_Pareja = $parejas_ID_Pareja;
-		$this -> torneos_ID_Torneo = $torneos_ID_Torneo;
+	function __construct ($ID_Pareja,$usuarios_login,$usuarios_login1){
+		$this -> ID_Pareja = $ID_Pareja;
+		$this -> usuarios_login = $usuarios_login;
+		$this -> usuarios_login1 = $usuarios_login1;
 		
 		//Incluimos el archivo de acceso a la bd
 		include_once 'Access_DB.php';
@@ -20,11 +23,12 @@ class Inscripcion_Model{
 function add(){
 	
 	//Sentencia sql para insertar
-	$sql = "INSERT INTO parejas_has_torneos
+	$sql = "INSERT INTO `parejas` (usuarios_login,usuarios_login1)
 			VALUES (
-				'$this->parejas_ID_Pareja',
-				'$this->torneos_ID_Torneo'
-				)
+				'".$this->usuarios_login."',
+				'".$this->usuarios_login1."'
+			 )
+			
 			";
 echo $sql;
 	if (!$this->mysqli->query($sql)) { 
@@ -153,17 +157,14 @@ function edit()
 
 
 
-function PuedeApuntarse($login)
+function PuedeApuntarse()
 {	
     $sql = "SELECT *
 			FROM parejas_has_torneos
-			WHERE parejas_ID_Pareja IN (
-				SELECT ID_Pareja
-				FROM parejas
-				WHERE (usuarios_login = '".$login."' OR usuarios_login1 = '".$login."')
-				AND torneos_ID_Torneo = '".$this->torneos_ID_Torneo."')
-			";
-   echo $sql;
+			WHERE ((`parejas_usuarios_login` = '".$_SESSION['login']."' OR
+			`parejas_usuarios_login1` = '".$_SESSION['login']."') AND `torneos_ID_Torneo` = '$this->torneos_ID_Torneo')"
+			;
+   
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
 	if ($result->num_rows == 0){
@@ -180,7 +181,7 @@ function PuedeApuntarPareja()
 			WHERE ((`parejas_usuarios_login` = '$this->parejas_usuarios_login1' OR
 			`parejas_usuarios_login1` = '$this->parejas_usuarios_login1') AND `torneos_ID_Torneo` = '$this->torneos_ID_Torneo')"
 			;
-   
+    echo $sql;
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
 	if ($result->num_rows == 0){
@@ -192,37 +193,20 @@ function PuedeApuntarPareja()
 
 }
 
-
-function DevolverIDPareja() 
+function DevolverIDPareja()
 {	
-	
-    $sql = "SELECT parejas_ID_Pareja
-			FROM parejas_has_torneos
-			WHERE (`ID_Pareja` = '$this->ID_Pareja')";
-   
-    if (!($resultado = $this->mysqli->query($sql))){
-		return 'No existe'; //Devuelve mensaje de error
-	}
-    else{//Devuelve el resultado
-		$result = $resultado;
-		return $result;
-	}
-}
-
-
-function DevolverPareja() 
-{	
-	
-    $sql = "SELECT pareja_usuarios_login1
-			FROM parejas_has_torneos
-			WHERE (`parejas_ID_Pareja` = '$this->parejas_ID_Pareja')";
-   
-    if (!($resultado = $this->mysqli->query($sql))){
-		return 'No existe'; //Devuelve mensaje de error
-	}
-    else{//Devuelve el resultado
-		$result = $resultado;
-		return $result;
+    $sql = "SELECT MAX(ID_Pareja)
+			FROM parejas
+			WHERE (`usuarios_login` = '".$this->usuarios_login."' AND
+			`usuarios_login1` = '".$this->usuarios_login1."')"
+			;
+   echo $sql;
+    $result = $this->mysqli->query($sql);//Guarda el resultado
+    
+	if ($result->num_rows == 1){
+		return $result -> fetch_array()[0];
+	}else{
+		return false;
 	}
 }
 

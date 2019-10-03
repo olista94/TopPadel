@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-09-2019 a las 19:44:21
+-- Tiempo de generación: 03-10-2019 a las 17:31:51
 -- Versión del servidor: 10.4.6-MariaDB
--- Versión de PHP: 7.3.9
+-- Versión de PHP: 7.1.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,20 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `todolist`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `clases`
---
-
-CREATE TABLE `clases` (
-  `ID_Clase` tinyint(5) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `hora_inicio` time NOT NULL,
-  `hora_fin` time NOT NULL,
-  `login_entrenador` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -56,8 +42,6 @@ CREATE TABLE `parejas` (
 
 CREATE TABLE `parejas_has_torneos` (
   `parejas_ID_Pareja` tinyint(5) NOT NULL,
-  `parejas_usuarios_login` varchar(45) NOT NULL,
-  `parejas_usuarios_login1` varchar(45) NOT NULL,
   `torneos_ID_Torneo` tinyint(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -159,9 +143,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`login`, `password`, `dni`, `nombre`, `apellidos`, `telefono`, `email`, `fecha`, `sexo`, `tipo`, `socio`, `cuenta`) VALUES
 ('admin', 'admin', '11111111H', 'Admin', 'Adminez Adminez', '676532185', 'admin@admin.es', '1991-05-14', 'Masculina', 'ADMIN', 'NO', NULL),
-('belen', 'belen', '25038044Z', 'Belen', 'Varela Brey', '770249813', 'belenbelen@gmail.com', '1977-07-07', 'Femenina', 'NORMAL', 'NO', NULL),
+('belen', 'belen', '25038044Z', 'Belen', 'Varela Perez', '770249813', 'belenbelen@gmail.com', '1977-07-07', 'Femenina', 'NORMAL', 'NO', NULL),
 ('felipe', 'felipe', '12345678Z', 'Felipe Juan Pablo Alfonso', 'de Todos los Santos de Borbón y Grecia', '669680477', 'felipevi@gmail.com', '1968-01-30', 'Masculina', 'NORMAL', 'NO', NULL),
-('jonifboy17', 'abp', '44493919M', 'Jonathan', 'Fernandez Perez', '696627355', 'jonathanelfp@gmail.com', '2019-09-25', 'Masculina', 'NORMAL', 'NO', NULL),
 ('juan', 'juan', '63498344J', 'Juan', 'Guerrero Vera', '660877067', 'juanjuan@gmail.com', '2001-06-22', 'Masculina', 'NORMAL', 'NO', NULL),
 ('manuel', 'manuel', '26685410M', 'Manuel', 'Abril Farres', '828297632', 'manuelmanuel@gmail.com', '1981-02-28', 'Masculina', 'NORMAL', 'NO', NULL),
 ('maria', 'maria', '92643593F', 'Maria', 'Saez de la Torre', '626851194', 'mariamaria@gmail.com', '1979-01-07', 'Femenina', 'NORMAL', 'NO', NULL),
@@ -177,14 +160,6 @@ INSERT INTO `usuarios` (`login`, `password`, `dni`, `nombre`, `apellidos`, `tele
 --
 
 --
--- Indices de la tabla `clases`
---
-ALTER TABLE `clases`
-  ADD PRIMARY KEY (`ID_Clase`),
-  ADD KEY `FK_ID_Entrenador` (`ID_Clase`),
-  ADD KEY `login_entrenador` (`login_entrenador`);
-
---
 -- Indices de la tabla `parejas`
 --
 ALTER TABLE `parejas`
@@ -196,10 +171,8 @@ ALTER TABLE `parejas`
 -- Indices de la tabla `parejas_has_torneos`
 --
 ALTER TABLE `parejas_has_torneos`
-  ADD PRIMARY KEY (`parejas_ID_Pareja`,`parejas_usuarios_login`,`parejas_usuarios_login1`,`torneos_ID_Torneo`),
+  ADD PRIMARY KEY (`parejas_ID_Pareja`,`torneos_ID_Torneo`),
   ADD KEY `fk_parejas_parejas_has_torneos` (`parejas_ID_Pareja`),
-  ADD KEY `fk_parejas_parejas_has_torneos1` (`parejas_usuarios_login`),
-  ADD KEY `fk_parejas_parejas_has_torneos2` (`parejas_usuarios_login1`),
   ADD KEY `fk_parejas_parejas_has_torneos3` (`torneos_ID_Torneo`);
 
 --
@@ -233,10 +206,10 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `clases`
+-- AUTO_INCREMENT de la tabla `parejas`
 --
-ALTER TABLE `clases`
-  MODIFY `ID_Clase` tinyint(5) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `parejas`
+  MODIFY `ID_Pareja` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pista`
@@ -253,12 +226,6 @@ ALTER TABLE `torneo`
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `clases`
---
-ALTER TABLE `clases`
-  ADD CONSTRAINT `clases_ibfk_1` FOREIGN KEY (`login_entrenador`) REFERENCES `usuarios` (`login`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `reservas`

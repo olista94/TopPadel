@@ -118,23 +118,13 @@ function search1(){
 function searchAdmin(){ 
 
 	$sql = "
-			  SELECT fecha_reserva,hora_inicio,hora_fin,u.login,p.nombre_pista
-			   FROM reservas,pista p,usuarios u
-			   WHERE `usuarios_login`= u.login && `pista_ID_Pista`=p.ID_Pista &&
-			   
-			   (`fecha_reserva` LIKE '%$this->fecha_reserva%') &&
-			   
-			   (`hora_inicio` LIKE '%$this->hora_inicio%') &&
-			   
-			   (`hora_fin` LIKE '%$this->hora_fin%') &&
-			  
-			   (`u.login` LIKE '%$this->usuarios_login%') &&
-			   
-			   (p.ID_Pista LIKE '%$this->pista_ID_Pista%')
+			  SELECT fecha_reserva,hora_inicio,hora_fin,login,nombre_pista
+			   FROM reservas,pista ,usuarios 
+			   WHERE `usuarios_login`= `login` && `pista_ID_Pista`=`ID_Pista` 
 	
 	
 	";		   
-
+	echo $sql;
 	if (!($resultado = $this->mysqli->query($sql))){
 	return 'Error en la búsqueda';//Devuelve mensaje de error
 	

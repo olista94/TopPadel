@@ -188,7 +188,7 @@ function search(){
 					(`tipo` LIKE '%$this->tipo%')
 					
     				)";
-				echo $sql;
+				
    
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda';//Devuelve mensaje de error	
@@ -254,7 +254,7 @@ function DevolverSexo()
 
 function BuscarHombre()
 {	
-    $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Masculina' AND `login` <> '".$_SESSION['login']."')";
+    $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Masculina' AND `login` <> '".$_SESSION['login']."' AND `login` <> 'admin')";
     echo $sql;
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
@@ -269,7 +269,7 @@ function BuscarHombre()
 
 function BuscarMujer()
 {	
-    $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Femenina' AND `login` <> '".$_SESSION['login']."')";
+    $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Femenina' AND `login` <> '".$_SESSION['login']."' AND `login` <> 'admin' )";
     echo $sql;
     $result = $this->mysqli->query($sql);//Guarda el resultado
     

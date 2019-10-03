@@ -91,7 +91,7 @@ function search(){
 	 				(`Nombre_Pista` LIKE '%$this->Nombre_Pista%')
 									
     				)";
-					echo $sql;
+					
 				
    //Si se produce un error
     if (!($resultado = $this->mysqli->query($sql))){
