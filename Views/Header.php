@@ -97,6 +97,7 @@ if(isset($_SESSION['tipo'])){//Si se loguea como ADMIN
 		<li><a href="../Controllers/Torneos_Controller.php"><?php echo $strings['Torneos']; ?></a></li>
 		<li><a href="../Controllers/Pistas_Controller.php"><?php echo $strings['Pistas']; ?></a></li>
 		<li><a href="../Controllers/Reservas_Controller.php"><?php echo $strings['Reservas']; ?></a></li>
+		<li><a href="../Controllers/Promociones_Controller.php"><?php echo $strings['Promociones']; ?></a></li>
 		
 		<a href="javascript:void(0);" class="icon" onclick="responsiveMenu()">
 			<i class="fa fa-bars"></i>
