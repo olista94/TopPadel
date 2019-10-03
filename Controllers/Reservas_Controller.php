@@ -14,11 +14,11 @@ if (!IsAuthenticated()){ //si no está autenticado
 	include_once "../Models/Usuarios_Model.php";
 	include_once "../Models/Pistas_Model.php";
 	include_once "../Views/Reservas_SHOWALL_View.php";
-	include_once "../Views/Reservas_ADD_View.php";
-	include_once "../Views/Reservas_SEARCH_View.php";
-	include_once "../Views/Reservas_EDIT_View.php";
-	include_once "../Views/Reservas_DELETE_View.php";
-	include_once "../Views/Reservas_SHOWCURRENT_View.php";
+	//include_once "../Views/Reservas_ADD_View.php";
+	//include_once "../Views/Reservas_SEARCH_View.php";
+	//include_once "../Views/Reservas_EDIT_View.php";
+	//include_once "../Views/Reservas_DELETE_View.php";
+	//include_once "../Views/Reservas_SHOWCURRENT_View.php";
 	
 	/* RECOGE LOS DATOS DEL FORMULARIO */
 	function getDataForm(){

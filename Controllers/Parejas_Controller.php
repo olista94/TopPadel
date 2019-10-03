@@ -12,7 +12,6 @@ if(isset($_SESSION['tipo'])){
 	
 		//Incluye la funciones que se encuentran en los siguientes ficheros:
 		include_once "../Models/Inscripcion_Model.php";
-		include_once "../Models/Parejas_Model.php";
 		//include_once "../Views/Inscripciones_SHOWALL_View.php";
 		include_once "../Views/Inscripcion_ADD_View.php";
 		//include_once "../Views/Inscripciones_SEARCH_View.php";
@@ -23,29 +22,39 @@ if(isset($_SESSION['tipo'])){
 		include_once "../Functions/Authentication.php";
 		include_once "../Models/Usuarios_Model.php";
 		include_once "../Models/Torneos_Model.php";
+		include_once "../Models/Inscripcion_Model.php";
+		include_once "../Controllers/Inscripcion_Controller.php";
 
 		/* RECOGE LOS DATOS DEL FORMULARIO */
 		function getDataForm(){
-			if(isset($_REQUEST['parejas_ID_Pareja'])){
-				$parejas_ID_Pareja = $_REQUEST['parejas_ID_Pareja'];//Identificador de la Inscripcion
+			if(isset($_REQUEST['ID_Pareja'])){
+				$ID_Pareja = $_REQUEST['ID_Pareja'];//Identificador de la Inscripcion
 				
 			}
 			else{
-				$parejas_ID_Pareja = "";
+				$ID_Pareja = "";
 			}
 			
-			
-			if(isset($_REQUEST['torneos_ID_Torneo'])){
-				$torneos_ID_Torneo = $_REQUEST['torneos_ID_Torneo'];//Identificador de la Inscripcion	
+			if(isset($_REQUEST['usuarios_login'])){
+				$usuarios_login = $_REQUEST['usuarios_login'];//Identificador de la Inscripcion	
 			}
 			else{
-				$torneos_ID_Torneo = "";
+				$usuarios_login = $_SESSION['login'];
 			}
 			
-			$inscripcion = new Inscripcion_Model ($parejas_ID_Pareja,$torneos_ID_Torneo);
+			if(isset($_REQUEST['usuarios_login1'])){
+				$usuarios_login1 = $_REQUEST['usuarios_login1'];//Identificador de la Inscripcion	
+			}
+			else{
+				$usuarios_login1 = "";
+			}
 			
-			//Devuelve el objeto Inscripcion
-			return $inscripcion;
+			
+			
+			$pareja = new Parejas_Model ($ID_Pareja,$usuarios_login,$usuarios_login1);
+			
+			//Devuelve el objeto pareja
+			return $pareja;
 		}
 		
 		//Si no existe un botón action le asigno cadena vacía para asegurarme que entre por el default del switch
@@ -55,55 +64,17 @@ if(isset($_SESSION['tipo'])){
 
 		//Acciones a realizar dependiendo del boton pulsado
 		switch ($_REQUEST['action']){
-			//Pulsa añadir Inscripcion en Inscripcions_SHOWALL
-			case 'Confirmar_INSCRIPCION1':		
-			//Muestra el form de ADD Inscripcion
-			$torneo = new Torneos_Model($_REQUEST['ID_Torneo'],"","","","","");
-			$cat = $torneo -> BuscarCategoria();
 			
-			$id_torneo = $torneo -> BuscarID_Torneo();
-			$_SESSION['idtorneo'] = $_REQUEST['ID_Torneo'];
-			
-			$usuario = new Usuarios_Model('','','','','','','','',$_SESSION['sexo'],'');
-			$sexo = $_SESSION['sexo'];
-			
-			
-			$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
-			$ins = $inscripcion -> PuedeApuntarse($_SESSION['login']);
-			
-			if($ins == true){
-			
-			if( ($cat == 'Masculina' && $sexo == 'Masculina') || ($cat == 'Mixta' && $sexo == 'Femenina') ){
-				
-				$u = $usuario -> BuscarHombre();
-				new Inscripcion_ADD($u,$torneo,$id_torneo,'../Controllers/Inscripcions_Controller.php');
-				
-			}
-			else if( ($cat == 'Mixta' && $sexo == 'Masculina') || ($cat == 'Femenina' && $sexo == 'Femenina') ){
-				$u = $usuario -> BuscarMujer();
-				new Inscripcion_ADD($u,$torneo,$id_torneo,'../Controllers/Inscripcions_Controller.php');
-			}
-			}else{
-				echo "Ya estas apuntado";
-			}
-			
-			break;
 			//Confirma el ADD de Inscripcion tras rellenar el form ADD
 			case 'Confirmar_INSCRIPCION2':
 			//Recoge los datos
+			$pareja = new Parejas_Model('','','');
+			$pareja = getDataForm();
 			
-			
-			$pareja = new Parejas_Model('',$_SESSION['login'],$_REQUEST['usuarios_login1']);
-			$p = $pareja -> add();
-			$idpareja = $pareja -> DevolverIDPareja();
-				
-			$inscripcion = new Inscripcion_Model($idpareja,$_SESSION['idtorneo']);
-				
-			$mensaje = $inscripcion-> add();
-				
+				//LLama a la funcion sql para insertar pareja
+				$mensaje = $pareja-> add();
 				//Crea un nuevo objeto de tipo MESSAGE que muestra por pantalla el texto de la respuesta y hace un enlace para permitir la vuelta hacia atrás (hacia el controlador)
-			new MESSAGE($mensaje,'../Controllers/Inscripcion_Controller.php');
-				
+				new MESSAGE($mensaje,'../Controllers/Parejas_Controller.php');
 			
 			break;
 			
@@ -116,7 +87,6 @@ if(isset($_SESSION['tipo'])){
 				$datos = $inscripcion -> search();
 				//Las muestra en una tabla
 				$respuesta = new Inscripcion_SHOWALL($datos,'../Controllers/Inscripcion_Controller.php'); */
-				
 				header('Location:../Controllers/Torneos_Controller.php');
 		}
 	
