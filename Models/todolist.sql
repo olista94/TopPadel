@@ -3,9 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-10-2019 a las 17:31:51
+-- Tiempo de generación: 03-10-2019 a las 18:03:18
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.1.32
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -20,31 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `todolist`
 --
-DROP SCHEMA IF EXISTS `todolist` ;
-
--- -----------------------------------------------------
--- Schema todolist
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `todolist` DEFAULT CHARACTER SET utf8 ;
-USE `todolist` ;
-
--- --------------------------------------------------------
-
--- -----------------------------------------------------
--- User todolist
--- -----------------------------------------------------
-
-GRANT ALL PRIVILEGES ON todolist.* TO todolist@localhost IDENTIFIED BY "todolist";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `todolist`
---
+CREATE DATABASE IF NOT EXISTS `todolist` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `todolist`;
 
 -- --------------------------------------------------------
 
@@ -52,11 +30,15 @@ GRANT ALL PRIVILEGES ON todolist.* TO todolist@localhost IDENTIFIED BY "todolist
 -- Estructura de tabla para la tabla `parejas`
 --
 
-CREATE TABLE `parejas` (
-  `ID_Pareja` tinyint(5) NOT NULL,
+DROP TABLE IF EXISTS `parejas`;
+CREATE TABLE IF NOT EXISTS `parejas` (
+  `ID_Pareja` tinyint(5) NOT NULL AUTO_INCREMENT,
   `usuarios_login` varchar(45) NOT NULL,
-  `usuarios_login1` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `usuarios_login1` varchar(15) NOT NULL,
+  PRIMARY KEY (`ID_Pareja`,`usuarios_login`,`usuarios_login1`),
+  KEY `fk_usuarios_parejas` (`usuarios_login`),
+  KEY `fk_usuarios_parejas1` (`usuarios_login1`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -64,9 +46,13 @@ CREATE TABLE `parejas` (
 -- Estructura de tabla para la tabla `parejas_has_torneos`
 --
 
-CREATE TABLE `parejas_has_torneos` (
+DROP TABLE IF EXISTS `parejas_has_torneos`;
+CREATE TABLE IF NOT EXISTS `parejas_has_torneos` (
   `parejas_ID_Pareja` tinyint(5) NOT NULL,
-  `torneos_ID_Torneo` tinyint(5) NOT NULL
+  `torneos_ID_Torneo` tinyint(5) NOT NULL,
+  PRIMARY KEY (`parejas_ID_Pareja`,`torneos_ID_Torneo`),
+  KEY `fk_parejas_parejas_has_torneos` (`parejas_ID_Pareja`),
+  KEY `fk_parejas_parejas_has_torneos3` (`torneos_ID_Torneo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -75,10 +61,13 @@ CREATE TABLE `parejas_has_torneos` (
 -- Estructura de tabla para la tabla `pista`
 --
 
-CREATE TABLE `pista` (
-  `ID_Pista` tinyint(5) NOT NULL,
-  `Nombre_Pista` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `pista`;
+CREATE TABLE IF NOT EXISTS `pista` (
+  `ID_Pista` tinyint(5) NOT NULL AUTO_INCREMENT,
+  `Nombre_Pista` varchar(45) NOT NULL,
+  PRIMARY KEY (`ID_Pista`),
+  UNIQUE KEY `Nombre_Pista` (`Nombre_Pista`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pista`
@@ -95,15 +84,36 @@ INSERT INTO `pista` (`ID_Pista`, `Nombre_Pista`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `promociones`
+--
+
+DROP TABLE IF EXISTS `promociones`;
+CREATE TABLE IF NOT EXISTS `promociones` (
+  `ID_Promo` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha` date NOT NULL,
+  `hora_fin` time NOT NULL,
+  `usuarios_login_usuario` varchar(45) DEFAULT NULL,
+  `pista_ID_Pista` tinyint(5) DEFAULT NULL,
+  PRIMARY KEY (`ID_Promo`),
+  KEY `usuarios_login_usuario` (`usuarios_login_usuario`),
+  KEY `pista_ID_Pista` (`pista_ID_Pista`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `reservas`
 --
 
-CREATE TABLE `reservas` (
+DROP TABLE IF EXISTS `reservas`;
+CREATE TABLE IF NOT EXISTS `reservas` (
   `usuarios_login` varchar(45) NOT NULL,
   `pista_ID_Pista` tinyint(5) NOT NULL,
   `fecha_reserva` date NOT NULL,
   `hora_inicio` time NOT NULL,
-  `hora_fin` time DEFAULT NULL
+  `hora_fin` time DEFAULT NULL,
+  PRIMARY KEY (`usuarios_login`,`pista_ID_Pista`,`hora_inicio`,`fecha_reserva`),
+  KEY `fk_usuarios_has_pista_pista1` (`pista_ID_Pista`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -119,14 +129,16 @@ INSERT INTO `reservas` (`usuarios_login`, `pista_ID_Pista`, `fecha_reserva`, `ho
 -- Estructura de tabla para la tabla `torneo`
 --
 
-CREATE TABLE `torneo` (
-  `ID_Torneo` tinyint(5) NOT NULL,
+DROP TABLE IF EXISTS `torneo`;
+CREATE TABLE IF NOT EXISTS `torneo` (
+  `ID_Torneo` tinyint(5) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `categoria` varchar(15) NOT NULL,
   `fecha` date NOT NULL,
   `edicion` int(5) NOT NULL,
-  `nivel` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `nivel` int(5) NOT NULL,
+  PRIMARY KEY (`ID_Torneo`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `torneo`
@@ -146,7 +158,8 @@ INSERT INTO `torneo` (`ID_Torneo`, `nombre`, `categoria`, `fecha`, `edicion`, `n
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-CREATE TABLE `usuarios` (
+DROP TABLE IF EXISTS `usuarios`;
+CREATE TABLE IF NOT EXISTS `usuarios` (
   `login` varchar(45) NOT NULL,
   `password` varchar(128) NOT NULL,
   `dni` varchar(9) NOT NULL,
@@ -158,7 +171,8 @@ CREATE TABLE `usuarios` (
   `sexo` enum('Masculina','Femenina') NOT NULL,
   `tipo` enum('ADMIN','NORMAL','ENTRENADOR') NOT NULL,
   `socio` enum('SI','NO') NOT NULL DEFAULT 'NO',
-  `cuenta` varchar(30) DEFAULT NULL
+  `cuenta` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -180,76 +194,15 @@ INSERT INTO `usuarios` (`login`, `password`, `dni`, `nombre`, `apellidos`, `tele
 ('ypgarcia', 'asdf', '44657078W', 'Iago', 'Perez Garcia', '669517850', 'ypgarcia@esei.uvigo.es', '1996-04-21', 'Masculina', 'NORMAL', 'NO', NULL);
 
 --
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `parejas`
---
-ALTER TABLE `parejas`
-  ADD PRIMARY KEY (`ID_Pareja`,`usuarios_login`,`usuarios_login1`),
-  ADD KEY `fk_usuarios_parejas` (`usuarios_login`),
-  ADD KEY `fk_usuarios_parejas1` (`usuarios_login1`);
-
---
--- Indices de la tabla `parejas_has_torneos`
---
-ALTER TABLE `parejas_has_torneos`
-  ADD PRIMARY KEY (`parejas_ID_Pareja`,`torneos_ID_Torneo`),
-  ADD KEY `fk_parejas_parejas_has_torneos` (`parejas_ID_Pareja`),
-  ADD KEY `fk_parejas_parejas_has_torneos3` (`torneos_ID_Torneo`);
-
---
--- Indices de la tabla `pista`
---
-ALTER TABLE `pista`
-  ADD PRIMARY KEY (`ID_Pista`),
-  ADD UNIQUE KEY `Nombre_Pista` (`Nombre_Pista`);
-
---
--- Indices de la tabla `reservas`
---
-ALTER TABLE `reservas`
-  ADD PRIMARY KEY (`usuarios_login`,`pista_ID_Pista`,`hora_inicio`,`fecha_reserva`),
-  ADD KEY `fk_usuarios_has_pista_pista1` (`pista_ID_Pista`);
-
---
--- Indices de la tabla `torneo`
---
-ALTER TABLE `torneo`
-  ADD PRIMARY KEY (`ID_Torneo`);
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`login`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `parejas`
---
-ALTER TABLE `parejas`
-  MODIFY `ID_Pareja` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `pista`
---
-ALTER TABLE `pista`
-  MODIFY `ID_Pista` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT de la tabla `torneo`
---
-ALTER TABLE `torneo`
-  MODIFY `ID_Torneo` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `promociones`
+--
+ALTER TABLE `promociones`
+  ADD CONSTRAINT `promociones_ibfk_1` FOREIGN KEY (`usuarios_login_usuario`) REFERENCES `usuarios` (`login`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `promociones_ibfk_2` FOREIGN KEY (`pista_ID_Pista`) REFERENCES `pista` (`ID_Pista`);
 
 --
 -- Filtros para la tabla `reservas`
