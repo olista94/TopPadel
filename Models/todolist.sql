@@ -6,11 +6,35 @@
 -- Tiempo de generación: 03-10-2019 a las 17:31:51
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.1.32
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `todolist`
+--
+DROP SCHEMA IF EXISTS `todolist` ;
+
+-- -----------------------------------------------------
+-- Schema todolist
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `todolist` DEFAULT CHARACTER SET utf8 ;
+USE `todolist` ;
+
+-- --------------------------------------------------------
+
+-- -----------------------------------------------------
+-- User todolist
+-- -----------------------------------------------------
+
+GRANT ALL PRIVILEGES ON todolist.* TO todolist@localhost IDENTIFIED BY "todolist";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
