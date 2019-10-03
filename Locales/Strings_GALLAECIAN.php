@@ -38,6 +38,9 @@ array(
 	'Jugadores' => 'Xogadores',
 	'Ya te has inscrito en este torneo' => 'Xa estas inscrito neste torneo',
 
+	'Promociones' => 'Promocións',
+	'Promocion' => 'Promoción',
+
 	'Ediciones' => 'Edicións',
 	'Edicion' => 'Edición',
 	'Masculina' => 'Masculina',

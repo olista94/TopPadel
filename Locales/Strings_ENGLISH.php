@@ -43,6 +43,9 @@ array(
 	'Elegir pareja' => 'Select partner',
 	'Jugadores' => 'Players',
 	'Ya te has inscrito en este torneo' => 'You have already registered for this tournament',
+
+	'Promociones' => 'Promotions',
+	'Promocion' => 'Promotion',
 	
 	'Volver' => 'Back',
 	'La password para este usuario no es correcta' => 'The password for this user is incorrect',

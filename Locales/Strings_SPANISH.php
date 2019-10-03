@@ -46,7 +46,9 @@ array(
 	'Jugadores' => 'Jugadores',
 	'Ya te has inscrito en este torneo' => 'Ya te has inscrito en este torneo',
 	
-	
+	'Promociones' => 'Promociones',
+	'Promocion' => 'Promoción',
+
 	'Registro' => 'Registro',
 	'Inserción realizada con éxito' => 'Inserción realizada con éxito',
 	'Error en la inserción' => 'Error en la inserción',
