@@ -45,10 +45,19 @@ array(
 	'Elegir pareja' => 'Elegir pareja',
 	'Jugadores' => 'Jugadores',
 	'Ya te has inscrito en este torneo' => 'Ya te has inscrito en este torneo',
-	
+	'Hora' => 'Hora',
+	'Añadir reserva' => 'Añadir reserva',
+	'Borrar reserva' => 'Borrar reserva',
+	'Hora fin' => 'Hora fin',
+	'Buscar reserva' => 'Buscar reserva',
 	'Promociones' => 'Promociones',
 	'Promocion' => 'Promoción',
-
+	'Añadir promocion' => 'Añadir promoción',
+	'Buscar promocion' => 'Buscar promoción',
+	'ID Promocion' => 'ID Promoción',
+	'Detalles de la promocion' => 'Detalles de la promoción',
+	'Borrar promocion' => 'Borrar promoción',
+	
 	'Registro' => 'Registro',
 	'Inserción realizada con éxito' => 'Inserción realizada con éxito',
 	'Error en la inserción' => 'Error en la inserción',
