@@ -48,8 +48,8 @@ include_once '../Views/Header.php';
 			<tr><th class="title" colspan="4"><?php echo $strings['Reservas']; ?>
 			<form class="tableActions" action="../Controllers/Reservas_Controller.php" method="">
 			<!--Botones para añadir o buscar-->
-			<button class="buscar-little" name="action" value="Confirmar_SEARCH" type="submit"></button>
-			<button class="anadir-little"  name="action" value="Confirmar_ADD" type="submit"></button>
+			<button class="buscar-little" name="action" value="Confirmar_SEARCH1" type="submit"></button>
+			<button class="anadir-little"  name="action" value="Confirmar_ADD1" type="submit"></button>
 			</form></th></tr>
 			<!--Campos a mostrar-->
 			<tr>
@@ -62,23 +62,22 @@ include_once '../Views/Header.php';
 		//Mientras haya filas en la bd
 		
 			while($fila = $this ->datos->fetch_array()){      
-print_r($fila);			
+
 		?>
 			<tr>
-				
-					<!--Datos-->
-					<td><?php echo $fila['login']; ?></td>
-					<td><?php echo $fila['fecha_reserva']; ?></td>
-					<td><?php echo $fila['pista_ID_Pista']; ?></td>		
-					<td style="text-align:right">
-					<form action="../Controllers/Reservas_Controller.php" method="post" name="action" >
-					<input type="hidden" name="login" value="<?php echo $fila['login']; ?>">
+				<form action="../Controllers/Reservas_Controller.php" method="post" name="action" >
+					<input type="hidden" name="usuarios_login" value="<?php echo $fila['login']; ?>">
 					<input type="hidden" name="pista_ID_Pista" value="<?php echo $fila['pista_ID_Pista']; ?>">
 					<input type="hidden" name="fecha_reserva" value="<?php echo $fila['fecha_reserva']; ?>">
 					<input type="hidden" name="hora_inicio" value="<?php echo $fila['hora_inicio']; ?>">
+					<!--Datos-->
+					<td><?php echo $fila['login']; ?></td>
+					<td><?php echo $fila['fecha_reserva']; ?></td>
+					<td><?php echo $fila['nombre_pista']; ?></td>		
+					<td style="text-align:right">
 					
-					<!--Botones para editar,borrar o ver en detalle-->
-						<button class="editar" name="action" value="Confirmar_EDIT" type="submit"></button>
+					
+					<!--Botones para editar,borrar o ver en detalle-->		
 						<button class="borrar" name="action" value="Confirmar_DELETE1" type="submit"></button>
 						<button class="add" name="action" value="Confirmar_SHOWCURRENT" type="submit"></button>
 					</form>

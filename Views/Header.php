@@ -3,7 +3,6 @@ CREADO POR: Los Cangrejas
 Fecha: 20/12/2018-->
 
 <?php
-
  //Comprueba si esta autenticado
 	include_once '../Functions/Authentication.php';
 	if (!isset($_SESSION['idioma'])) {
