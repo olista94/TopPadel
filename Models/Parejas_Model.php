@@ -200,7 +200,7 @@ function DevolverIDPareja()
 			WHERE (`usuarios_login` = '".$this->usuarios_login."' AND
 			`usuarios_login1` = '".$this->usuarios_login1."')"
 			;
-   echo $sql;
+   
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
 	if ($result->num_rows == 1){

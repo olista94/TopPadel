@@ -39,7 +39,7 @@ function add(){
 				'$this->hora_fin'
 				)
 			";
-
+echo $sql;
 	if (!$this->mysqli->query($sql)) { 
 		return 'Error al insertar';//Devuelve mensaje de error
 	}
@@ -47,42 +47,6 @@ function add(){
 		return 'Insercion correcta'; //Devuelve mensaje de exito	
 	}
 } 
-
-//Funcion para editar una reserva
-function edit()
-{
-	
-    $sql = "SELECT * FROM reservas WHERE (usuarios_login = '$this->usuarios_login'
-									AND pista_ID_Pista = '$this->pista_ID_Pista'
-									AND fecha_reserva = '$this->fecha_reserva'
-									AND hora_inicio = '$this->hora_inicio'
-	
-	)";
-    
-    $result = $this->mysqli->query($sql);//Guarda el resultado
-    
-    if ($result->num_rows == 1)
-    {	
-		//Sentencia sql para editar
-		$sql = "UPDATE reservas SET
-					`pista_ID_Pista` = '$this->pista_ID_Pista',
-					`fecha_reserva` = '$this->fecha_reserva',
-					`hora_inicio` = '$this->hora_inicio'
-					
-
-				WHERE (`id_tarea` = '$this->id_tarea')";
-
-        if (!($resultado = $this->mysqli->query($sql))){
-			return 'Error en la modificación';//Devuelve mensaje de error
-		}
-		else{ 
-			return 'Modificado correctamente'; //Devuelve mensaje de exito
-		}
-    }
-    else 
-    	return 'No existe';//Devuelve mensaje de error
-} 
-
 
 
 //Funcion para buscar las tareas si es un usuario normal (no ADMIN)
@@ -115,16 +79,38 @@ function search1(){
 }
 
 //Funcion para buscar todas las tareas si es ADMIN
-function searchAdmin(){ 
+function ReservasShowAll(){ 
 
 	$sql = "
-			  SELECT fecha_reserva,hora_inicio,hora_fin,login,nombre_pista
-			   FROM reservas,pista ,usuarios 
+			  SELECT fecha_reserva,hora_inicio,hora_fin,login,nombre_pista,pista_ID_Pista
+			   FROM reservas,pista,usuarios 
 			   WHERE `usuarios_login`= `login` && `pista_ID_Pista`=`ID_Pista` 
 	
 	
 	";		   
-	echo $sql;
+	if (!($resultado = $this->mysqli->query($sql))){
+	return 'Error en la búsqueda';//Devuelve mensaje de error
+	
+	}
+	else{ 
+	return $resultado;//Se devuelve el resultado de la consulta
+	}
+}
+
+function SearchAdmin(){ 
+
+	$sql = "
+			  SELECT fecha_reserva,hora_inicio,hora_fin,login,nombre_pista,pista_ID_Pista
+			   FROM reservas,pista,usuarios 
+			   WHERE (`usuarios_login`= `login` && `pista_ID_Pista`=`ID_Pista`) 
+			   && (
+					(`usuarios_login` LIKE '%$this->usuarios_login%') &&
+	 				(`pista_ID_Pista` LIKE '%$this->pista_ID_Pista%') &&
+					(`fecha_reserva` LIKE '%$this->fecha_reserva%') &&
+					(`hora_inicio` LIKE '%$this->hora_inicio%') &&
+					(`hora_fin` LIKE '%$this->hora_fin%')
+			)";
+  
 	if (!($resultado = $this->mysqli->query($sql))){
 	return 'Error en la búsqueda';//Devuelve mensaje de error
 	
@@ -137,14 +123,22 @@ function searchAdmin(){
 //Funcion para borrar una tarea
 function delete()
 {	
-    $sql = "SELECT * FROM tareas WHERE (`id_tarea` = '$this->id_tarea')";
+    $sql = "SELECT * FROM reservas WHERE (`usuarios_login` = '$this->usuarios_login'
+										AND `pista_ID_Pista` = '$this->pista_ID_Pista'
+										AND `fecha_reserva` = '$this->fecha_reserva'
+										AND `hora_inicio` = '$this->hora_inicio'
+										)";
     
     $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
     
     if ($result->num_rows == 1)
     {
     	//Sentencia sql para borrar
-        $sql = "DELETE FROM tareas WHERE (`id_tarea` = '$this->id_tarea')";
+        $sql = "DELETE FROM reservas WHERE (`usuarios_login` = '$this->usuarios_login'
+										AND `pista_ID_Pista` = '$this->pista_ID_Pista'
+										AND `fecha_reserva` = '$this->fecha_reserva'
+										AND `hora_inicio` = '$this->hora_inicio'
+										)";
         
         $this->mysqli->query($sql);//Guarda el resultado
         
@@ -156,7 +150,12 @@ function delete()
 
 //Funcion que devuelve los datos de una tarea
 function rellenadatos() {	
-	$sql = "SELECT * FROM tareas WHERE (`id_tarea` = '$this->id_tarea')";
+	$sql = "SELECT * FROM reservas WHERE (`usuarios_login` = '$this->usuarios_login'
+										AND `pista_ID_Pista` = '$this->pista_ID_Pista'
+										AND `fecha_reserva` = '$this->fecha_reserva'
+										AND `hora_inicio` = '$this->hora_inicio'
+										)";
+									
    
     if (!($resultado = $this->mysqli->query($sql))){
 		
