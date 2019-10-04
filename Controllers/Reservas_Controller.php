@@ -14,11 +14,10 @@ if (!IsAuthenticated()){ //si no está autenticado
 	include_once "../Models/Usuarios_Model.php";
 	include_once "../Models/Pistas_Model.php";
 	include_once "../Views/Reservas_SHOWALL_View.php";
-	//include_once "../Views/Reservas_ADD_View.php";
-	//include_once "../Views/Reservas_SEARCH_View.php";
-	//include_once "../Views/Reservas_EDIT_View.php";
-	//include_once "../Views/Reservas_DELETE_View.php";
-	//include_once "../Views/Reservas_SHOWCURRENT_View.php";
+	include_once "../Views/Reservas_ADD_View.php";
+	include_once "../Views/Reservas_SEARCH_View.php";
+	include_once "../Views/Reservas_DELETE_View.php";
+	include_once "../Views/Reservas_SHOWCURRENT_View.php";
 	
 	/* RECOGE LOS DATOS DEL FORMULARIO */
 	function getDataForm(){
@@ -71,54 +70,32 @@ if (!IsAuthenticated()){ //si no está autenticado
 	//Accioneas a realizar según la acción que venga de la vista
 	switch ($_REQUEST['action']){
 		//Añadir una reserva desde el showall
-		case 'Confirmar_ADD':
+		case 'Confirmar_ADD1':
 			//Si no se le están pasando datos entonces crea una vista para añadir
-			if(count($_REQUEST) < 4 ){
+			
 				$usuarios = new Usuarios_Model("","","","","","","","","","","",""); //Construye el objeto usuarios llamando al modelo
 				$u = $usuarios -> search(); //Busca los usuarios
 				
 				$pistas = new Pistas_Model("",""); //Construye el objeto categorias llamando al modelo
 				$p = $pistas -> search(); //Busca las categorias
 				
-				new Reservas_ADD($u,$p,$cat,'../Controllers/Reservas_Controller.php');	//Crea la vista de añadir
-			//Si se le pasan datos entonces los recoge
-			}else{
+				new Reservas_ADD($u,$p,'../Controllers/Reservas_Controller.php');	//Crea la vista de añadir
+			break;
+			case 'Confirmar_ADD2':
 				$reserva = getDataForm();	//Asigna los datos obtenidos al objeto reserva		
 				$mensaje = $reserva-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
 				
 				//Si el insertado es correcto
 				new MESSAGE($mensaje,'../Controllers/Reservas_Controller.php');			 
-			}		
+					
 		break;
 
-		//Editar una tarea
-		case 'Confirmar_EDIT':
-			//Si no se le están pasando datos entonces crea una vista para editar
-			if(count($_REQUEST) < 4 ){			
-				$tarea = new TAREAS_Model($_REQUEST['id_tarea'],'','','','','','',''); //Construye el objeto TAREAS con el id de la tarea que se pasa
-				$datos = $tarea->rellenadatos(); //Se rellenan los datos de la tarea
-
-				$array = $datos -> fetch_array(); //Se construye el array con los datos
-				$prioridades = new PRIORIDADES_Model("","",""); //Se crea el objeto prioridades
-				$p = $prioridades -> search(); //Se buscan las prioridades y se meten en p
-				
-				$categorias = new CATEGORIAS_Model("",""); //Se crea el objeto categorias
-				$cat = $categorias -> search(); //Se buscan las categorias y se meten en cat
-
-				$datos = $tarea->rellenadatos(); //Se rellenan los datos de la tarea
-
-				new Tareas_EDIT($datos,$p,$cat,'../Controllers/Tareas_Controller.php'); //Se crea una vista para editar una tarea
-			//Si se le han pasado datos
-			}else{			
-				$tarea = getDataForm(); //Se cogen los datos del formulario
-				$mensaje = $tarea-> edit(); //Se edita con los nuevos datos y se guarda el mensaje de retorno
-				new MESSAGE($mensaje,'../Controllers/Tareas_Controller.php'); //Se crea la vista de mensaje con el mensaje
-			}
-		break;
-
+		
 		//Si se selecciona la accion buscar desde el showall
-		case 'Confirmar_SEARCH1':							
-			new Tareas_SEARCH('../Controllers/Tareas_Controller.php'); //Se crea la vista para buscar
+		case 'Confirmar_SEARCH1':
+				$pistas = new Pistas_Model("",""); //Construye el objeto categorias llamando al modelo
+				$p = $pistas -> search(); //Busca las categorias		
+			new Reservas_SEARCH($p,'../Controllers/Reservas_Controller.php'); //Se crea la vista para buscar
 		break;
 
 		//Si se le da a buscar desde la vista de buscar
@@ -126,13 +103,15 @@ if (!IsAuthenticated()){ //si no está autenticado
 			//Si el usuario es de tipo admin puede buscar entre todas las tareas
 			if(isset($_SESSION['tipo'])){
 				if($_SESSION['tipo']=='ADMIN'){
-					$tarea = getDataForm(); //Se llena el objeto tarea con los datos del formulario
-					$datos = $tarea-> searchAdmin(); //Se busca en todas las tareas y se guardan los datos
-					$archivos = $tarea -> ContarArchivos(); //Se cuentan los archivos de la tarea
-					$fases = $tarea -> ContarFases(); //Se cuentan las fases de la tarea
-					$contactos = $tarea -> ContarContactos(); //Se cuentan los contactos de la tarea
+					$reserva = getDataForm(); 
+					$datos = $reserva-> searchAdmin(); 
+					$usuarios = new Usuarios_Model("","","","","","","","","","","",""); //Construye el objeto usuarios llamando al modelo
+					$u = $usuarios -> search(); //Busca los usuarios
 				
-					new Tareas_SHOWALL($datos,$archivos,$fases,$contactos,'../Controllers/Tareas_Controller.php'); //Se muestran las tareas encontradas en un showall
+					$pistas = new Pistas_Model("",""); //Construye el objeto categorias llamando al modelo
+					$p = $pistas -> search(); //Busca las categorias
+				
+					new Reservas_SHOWALL($datos,$u,$p,'../Controllers/Tareas_Controller.php'); //Se muestran las tareas encontradas en un showall
 				//En otro caso el usuario es un usuario normal
 				}else{
 					$tarea = getDataForm(); //Se llena el objeto tarea con los datos del formulario
@@ -147,48 +126,47 @@ if (!IsAuthenticated()){ //si no está autenticado
 
 		//Si se le da a borrar desde la vista del showall
 		case 'Confirmar_DELETE1':		
-			$prioridades = new PRIORIDADES_Model("","",""); //Se crea un modelo de prioridades
-			if(count($_REQUEST) < 4 ){			
-				$tarea = new TAREAS_Model($_REQUEST['id_tarea'],'','','','','','',''); //Se crea un modelo de tarea con el id que se le pasa
-				$datos = $tarea->rellenadatos(); //Se rellena datos con los datos de la tarea
+			
 				
-				$array = $datos -> fetch_array(); //Creamos el array con los datos
-				$prioridades = new PRIORIDADES_Model($array['PRIORIDADES_nivel'],"",""); //Creamos un modelo de prioridad con el nivel de prioridad
-				$p = $prioridades -> searchById(); //Buscamos la prioridad por nivel
+				 //Construye el objeto categorias llamando al modelo
+				//$p = $pistas -> search(); 
 				
-				$categorias = new CATEGORIAS_Model($array['CATEGORIAS_id_CATEGORIAS'],""); //Creamos una categoria con el modelo y el id de la categoria
-				$cat = $categorias -> searchById(); //Buscamos la categoria por nivel
-				$datos = $tarea->rellenadatos(); //Volvemos rellenar los datos de la tarea
+				$reserva = new Reservas_Model($_REQUEST['usuarios_login'],$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],"");
 				
-				new Tareas_DELETE($datos,$p,$cat,'../Controllers/Tareas_Controller.php'); //Creamos una vista de delete con los datos obtenidos
-			}
+				$datos = $reserva -> rellenadatos();
+				$array = $datos -> fetch_array();
+				
+				$pistas = new Pistas_Model($array['pista_ID_Pista'],"");
+				
+				$p = $pistas -> searchById();
+				$datos = $reserva -> rellenadatos();
+				
+				new Reservas_DELETE($datos,$p,'../Controllers/Reservas_Controller.php'); //Creamos una vista de delete con los datos obtenidos
+			
 		break;
 		
 		// Si queremos borrar desde la vista de borrar
 		case 'Confirmar_DELETE2':		
-			$tarea = new TAREAS_Model($_REQUEST['id_tarea'],'','','','','','',''); //Creamos un objeto tarea con el id de la tarea a borrar
-			$mensaje = $tarea-> delete(); //Llamamos a delete y guardamos el mensaje que devuelve
-			new MESSAGE($mensaje,'../Controllers/Tareas_Controller.php'); //Mostramos el mensaje	
+			$reserva = new Reservas_Model($_REQUEST['usuarios_login'],$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],"");
+			$mensaje = $reserva-> delete(); //Llamamos a delete y guardamos el mensaje que devuelve
+			new MESSAGE($mensaje,'../Controllers/Reservas_Controller.php'); //Mostramos el mensaje	
 		break;
 
-		//Si queremos mostrar los datos de una tarea en concreto
+		//Si queremos mostrar los datos de una reserva en concreto
 		case 'Confirmar_SHOWCURRENT':
 			//Si no se le pasan argumentos por request
-			if(count($_REQUEST) < 4 ){	
-
-				$tarea = new TAREAS_Model($_REQUEST['id_tarea'],'','','','','','',''); //Creamos un objeto tarea con el id de la tarea a ver
-				$datos = $tarea->rellenadatos(); //Se rellena datos con los datos de la tarea
+				$reserva = new Reservas_Model($_REQUEST['usuarios_login'],$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],"");
 				
-				$array = $datos -> fetch_array(); //Creamos el array con los datos
-				$prioridades = new PRIORIDADES_Model($array['PRIORIDADES_nivel'],"",""); //Creamos un modelo de prioridad con el nivel de prioridad
-				$p = $prioridades -> searchById(); //Buscamos la prioridad por nivel
+				$datos = $reserva -> rellenadatos();
+				$array = $datos -> fetch_array();
 				
-				$categorias = new CATEGORIAS_Model($array['CATEGORIAS_id_CATEGORIAS'],""); //Creamos una categoria con el modelo y el id de la categoria
-				$cat = $categorias -> searchById(); //Buscamos la categoria por nivel
-				$datos = $tarea->rellenadatos(); //Volvemos rellenar los datos de la tarea
+				$pistas = new Pistas_Model($array['pista_ID_Pista'],"");
 				
-				new Tareas_SHOWCURRENT($datos,$p,$cat,'../Controllers/Tareas_Controller.php'); //Creamos una vista de delete con los datos obtenidos
-			}
+				$p = $pistas -> searchById();
+				$datos = $reserva -> rellenadatos();
+				
+				new Reservas_SHOWCURRENT($datos,$p,'../Controllers/Reservas_Controller.php'); //Creamos una vista de delete con los datos obtenidos
+			
 		break;
 		
 
@@ -204,8 +182,8 @@ if (!IsAuthenticated()){ //si no está autenticado
 				
 					$pistas = new Pistas_Model("",""); //Construye el objeto categorias llamando al modelo
 					$p = $pistas -> search(); //Busca las categorias
-					
-					$datos = $reserva -> searchAdmin();//Recuperamos todas las reservas y las guardamos en datos						
+					       
+					$datos = $reserva -> ReservasShowAll();//Recuperamos todas las reservas y las guardamos en datos						
 					
 					
 					//Creamos una vista de todas las reservas completas con los datos
