@@ -19,7 +19,7 @@ idioma = "<?php echo $_SESSION['idioma']; ?>"; //Variable global que permite pas
 
 <html>
 <head>
-	<title>ET4</title>
+	<title>TopPadel</title>
 	
 	 <!--Archivos css,js...necesarios para el funcionamiento de la aplicacion-->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
@@ -42,7 +42,7 @@ if(isset($_SESSION['tipo'])){//Si se loguea como ADMIN
 	<div class="fixednav">
 		<div class="topnav">
 			<div class="topnav-centered">
-				<a><h2><?php echo $strings['ToDoList']; ?></h2></a>
+				<a><h2>TopPadel</h2></a>
 			</div>
 
 			<a class="alogo"><button class="logo"></button></a>

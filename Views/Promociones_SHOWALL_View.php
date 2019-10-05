@@ -11,13 +11,22 @@ include_once '../Views/Header.php';
  class Promociones_SHOWALL{ 
 	//Datos de datos
 	var $datos;
-
+	var $usuarios;
+	var $usuarios2;
 	//Variable con el enlace al showall
 	var $enlace;	
 	
 	//Constructor de la clase
-	function __construct($datos,$enlace){
+	function __construct($datos,$usuarios,$enlace){
 		$this -> datos = $datos;
+		$this -> usuarios = $usuarios;
+		$this -> usuarios2 = [];
+		//Cuenta el numero de usuarios
+		if($this -> usuarios -> num_rows > 0){
+			while($usu = $this -> usuarios -> fetch_array()){
+						$this -> usuarios2[$usu[1]] = $usu[0];	
+							}
+		}
 		$this -> enlace = $enlace;
 		$this -> pinta();
 	}
@@ -46,6 +55,7 @@ include_once '../Views/Header.php';
 				<th><?php echo $strings['Usuario']; ?></th>
 				<th><?php echo $strings['Fecha']; ?></th>
 				<th><?php echo $strings['Pista']; ?></th>
+				<th><?php echo $strings['Anotados']; ?></th>
 				<th></th>
 			</tr>
 		<?php 
@@ -61,7 +71,30 @@ include_once '../Views/Header.php';
 					<!--Datos-->
 					<td><?php echo $fila['usuarios_login_usuario']; ?></td>
 					<td><?php echo $fila['fecha']; ?></td>
-					<td><?php echo $fila['Nombre_Pista'] ?></td>		
+					<td><?php echo $fila['Nombre_Pista'] ?></td>
+					<td>
+						 <!--Muestra el numero de usuarios-->
+						<?php
+						if($this -> usuarios-> num_rows == 0){
+							//Si no hay usuarios muestra 0
+							echo '0';
+						}
+						else{
+							$entra = 0;
+							//Foreach para contar los usuarios que tiene la tarea
+							foreach($this -> usuarios2 as $indice => $valor){
+								if($indice == $fila['ID_Promo']){
+									$entra = 1;
+									echo $valor;
+								}
+							}
+							if($entra == 0){
+								echo '0';
+							}
+							$entra = 0;
+						}
+						?>
+						</td>					
 					<td style="text-align:right">
 					
 					
@@ -69,6 +102,8 @@ include_once '../Views/Header.php';
 						
 						<button class="borrar" name="action" value="Confirmar_DELETE1" type="submit"></button>
 						<button class="add" name="action" value="Confirmar_SHOWCURRENT" type="submit"></button>
+						<button class="inscripcion" name="action" value="Confirmar_INSCRIPCION1" type="submit"></button>
+					
 					</form>
 					</td>
 				

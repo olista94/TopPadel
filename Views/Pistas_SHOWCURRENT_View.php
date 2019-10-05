@@ -39,7 +39,7 @@ Fecha: 20/12/2018-->
             <input type="hidden" name="ID_Pista" value= "<?php echo $this -> fila['ID_Pista'] ?>">	
             <table class="showU" style="margin-left: 30%;">
 
-                <tr><th class="title" colspan="2"><?php echo $strings['Borrar pista']; ?>
+                <tr><th class="title" colspan="2"><?php echo $strings['Detalles de la pista']; ?>
                    <!--Boton para volver atrás -->
 				   <button onclick="location.href='../Controllers/Pistas_Controller.php';" class="volver"></button></th>
                 </tr>

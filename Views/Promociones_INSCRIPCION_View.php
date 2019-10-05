@@ -6,7 +6,7 @@ Fecha: 26/12/2018-->
   	 //Comprueba que esta autenticado
 	include_once '../Functions/Authentication.php';
   //Declaracion de la clase
- class Reservas_SHOWCURRENT{
+ class Promociones_INSCRIPCION{
 	
 //Datos de la reserva	
 	var $fila;
@@ -38,22 +38,20 @@ Fecha: 26/12/2018-->
 ?>
      	<!--Tabla con los datos de la reserva-->       
 		<div class="show-half">
-            <form class="formShow" enctype="multipart/form-data" action="../Controllers/Reservas_Controller.php">
+            <form class="formShow" enctype="multipart/form-data" action="../Controllers/Promociones_Controller.php">
                  <!--Clave de la reserva que se pasa como hidden al model-->
-				<input type="hidden" name="usuarios_login" value= "<?php echo $this -> fila['usuarios_login'] ?>">
-				<input type="hidden" name="pista_ID_Pista" value= "<?php echo $this -> fila['pista_ID_Pista'] ?>">
-				<input type="hidden" name="fecha_reserva" value= "<?php echo $this -> fila['fecha_reserva'] ?>">
-				<input type="hidden" name="hora_inicio" value= "<?php echo $this -> fila['hora_inicio'] ?>">
+				<input type="hidden" name="ID_Promo" value= "<?php echo $this -> fila['ID_Promo'] ?>">
+				
                 <table class="showU" style="margin-left: 30%;">
 
-                    <tr><th class="title" colspan="4"><?php echo $strings['Detalles de la reserva']; ?>
+                    <tr><th class="title" colspan="4"><?php echo $strings['¿Apuntarse a esta promocion?']; ?>
                         <!--Boton para volver atrás -->
-						<button onclick="location.href='../Controllers/Reservas_Controller.php';" class="volver"></button></th>
+						<button onclick="location.href='../Controllers/	Promociones_Controller.php';" class="volver"></button></th>
                     </tr>
 					
-                    <tr>
+					<tr>
                         <th><?php echo $strings['Usuario']; ?></th>
-                        <td><?php echo $this -> fila['usuarios_login']; ?></td>								
+                        <td><?php echo $this -> fila['usuarios_login_usuario']; ?></td>								
                     </tr>
 					
                     <tr>
@@ -62,19 +60,19 @@ Fecha: 26/12/2018-->
                     </tr>
 					
                     <tr>
-                        <th><?php echo $strings['Fecha reserva']; ?></th>
-                        <td><?php echo $this -> fila['fecha_reserva']; ?></td>
+                        <th><?php echo $strings['Fecha']; ?></th>
+                        <td><?php echo $this -> fila['fecha']; ?></td>
                     </tr>
 					
                     <tr>
                         <th><?php echo $strings['Hora inicio']; ?></th>
                         <td><?php echo $this -> fila['hora_inicio']; ?></td>
                     </tr>
-					
-                    <tr>
-                        <th><?php echo $strings['Hora fin']; ?></th>
-                        <td><?php echo $this -> fila['hora_fin']; ?></td>
-                    </tr>
+					   <tr>
+					<!--Boton de confirmar borrado-->
+                        <th><button class="aceptar" type="submit" name="action" value="Confirmar_INSCRIPCION2"></button></th>
+                    
+                    </tr> 
                                                                             
                 </table>
             </form>            
