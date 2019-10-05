@@ -65,7 +65,7 @@ function search(){
 					(`nivel` LIKE '%$this->nivel%')
 					
     				)";
-			
+
 				
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda'; //Devuelve mensaje de error

@@ -169,66 +169,6 @@ function rellenadatos() {
 	}
 }
 
-//Funcion que devuelve todas las tareas
-function TareasShowAll(){
-	$sql = "SELECT id_tarea,t.descripcion AS descripcion_tarea ,p.descripcion AS descripcion_prioridad, p.color AS color_tarea,
-			Fecha_Ini, t.completada AS completa, c.nombre as categoria
-			FROM tareas t,prioridades p, categorias c 
-			WHERE t.PRIORIDADES_nivel = p.nivel && c.id_CATEGORIAS = t.CATEGORIAS_id_CATEGORIAS";
-	
-	
-	if (!($resultado = $this->mysqli->query($sql))){
-		return 'No existe'; //Devuelve mensaje de error
-	}
-    else{ 
-		$result = $resultado;//Se guarda el resultado de la consulta sql
-		return $result;//Se devuelve el resultado de la consulta
-	}
-}
-
-//Funcion que devuelve todas la tareas de un usuario normal
-function TareasShowAllNormal(){
-	$sql = "SELECT id_tarea,t.descripcion AS descripcion_tarea ,p.descripcion AS descripcion_prioridad, p.color AS color_tarea,
-			Fecha_Ini, t.completada AS completa, c.nombre as categoria
-			FROM tareas t,prioridades p, categorias c 
-			WHERE t.PRIORIDADES_nivel = p.nivel && c.id_CATEGORIAS = t.CATEGORIAS_id_CATEGORIAS && `USUARIOS_login` = '".$_SESSION['login']."'";
-	
-	
-	if (!($resultado = $this->mysqli->query($sql))){
-		return 'No existe'; //Devuelve mensaje de error
-	}
-    else{ 
-		$result = $resultado;//Se guarda el resultado de la consulta sql
-		return $result;//Se devuelve el resultado de la consulta
-	}
-}
-
-
-
-
-
-
-
-//Busca las tareas que pertenezcan a un usuario normal
-function BuscarTareasUser(){
-	$sql = " SELECT id_tarea,t.descripcion AS descripcion_tarea ,p.descripcion 
-	AS descripcion_prioridad, p.color AS color_tarea, Fecha_Ini, t.completada AS completa
-			FROM tareas t,prioridades p
-			WHERE `USUARIOS_login` = '".$_SESSION['login']."' && t.PRIORIDADES_nivel = p.nivel
-					";
-	
-	
-	if (!($resultado = $this->mysqli->query($sql))){
-		return 'No existe'; //Devuelve mensaje de error
-	}
-    else{ 
-		$result = $resultado;//Se guarda el resultado de la consulta sql
-		
-		
-		return $result;//Se devuelve el resultado de la consulta
-	}
-}
-
 
 
 }//fin de clase

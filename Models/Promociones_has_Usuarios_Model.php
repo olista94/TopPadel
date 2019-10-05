@@ -1,15 +1,15 @@
 <?php
 //Declaracion de la clase
-class Inscripcion_Model{
+class Promociones_has_Usuarios_Model{
 	
-	var $parejas_ID_Pareja;
+	var $promociones_ID_Promo;
 
-	var $torneos_ID_Torneo;
+	var $usuarios_login;
 	
 	//Constructor de la clase
-	function __construct ($parejas_ID_Pareja,$torneos_ID_Torneo){
-		$this -> parejas_ID_Pareja = $parejas_ID_Pareja;
-		$this -> torneos_ID_Torneo = $torneos_ID_Torneo;
+	function __construct ($promociones_ID_Promo,$usuarios_login){
+		$this -> promociones_ID_Promo = $promociones_ID_Promo;
+		$this -> usuarios_login = $usuarios_login;
 		
 		//Incluimos el archivo de acceso a la bd
 		include_once 'Access_DB.php';
@@ -20,10 +20,10 @@ class Inscripcion_Model{
 function add(){
 	
 	//Sentencia sql para insertar
-	$sql = "INSERT INTO parejas_has_torneos
+	$sql = "INSERT INTO Promociones_has_Usuarios
 			VALUES (
-				'$this->parejas_ID_Pareja',
-				'$this->torneos_ID_Torneo'
+				'$this->promociones_ID_Promo',
+				'$this->usuarios_login'
 				)
 			";
 echo $sql;
@@ -39,10 +39,10 @@ echo $sql;
 function search(){ 
 			//Sentencia sql para buscar
 	     $sql = "SELECT *
-       			FROM torneo
+       			FROM Promociones_has_Usuarios
     			WHERE
     				( 
-    				(`ID_Torneo` LIKE '%$this->ID_Torneo%') &&
+    				(`promociones_ID_Promo` LIKE '%$this->ID_Torneo%') &&
 	 				(`nombre` LIKE '%$this->nombre%') &&
 					(`categoria` LIKE '%$this->categoria%') &&
 					(`edicion` LIKE '%$this->edicion%') &&
@@ -74,7 +74,7 @@ function searchPorCategoria(){
 					
     				)";
 			
-				
+				echo $sql;
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda'; //Devuelve mensaje de error
 	
@@ -163,7 +163,7 @@ function PuedeApuntarse($login)
 				WHERE (usuarios_login = '".$login."' OR usuarios_login1 = '".$login."')
 				AND torneos_ID_Torneo = '".$this->torneos_ID_Torneo."')
 			";
-
+   echo $sql;
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
 	if ($result->num_rows == 0){

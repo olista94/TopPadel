@@ -42,41 +42,7 @@ function add(){
 		return 'Insercion correcta'; //Devuelve mensaje de exito	
 	}
 } 
-//Funcion para editar una promocion
-function edit()
-{
-	
-    $sql = "SELECT * FROM promociones WHERE (ID_Promo = '$this->ID_Promo'
-									AND fecha = '$this->fecha'
-									AND hora_inicio = '$this->hora_inicio'
-									AND usuarios_login_usuario = '$this->usuarios_login_usuario'
-									AND pista_ID_Pista = '$this->pista_ID_Pista'
-	
-	)";
-    
-    $result = $this->mysqli->query($sql);//Guarda el resultado
-    
-    if ($result->num_rows == 1)
-    {	
-		//Sentencia sql para editar
-		$sql = "UPDATE promo SET
-					'ID_Promo' = '$this->ID_Promo',
-					'fecha' = '$this->fecha',
-					'hora_inicio' = '$this->hora_inicio',
-					'usuarios_login_usuario' = '$this->usuarios_login_usuario',
-					'pista_ID_Pista' = '$this->pista_ID_Pista'
-					
-				WHERE (`ID_Promo` = '$this->ID_Promo')";
-        if (!($resultado = $this->mysqli->query($sql))){
-			return 'Error en la modificación';//Devuelve mensaje de error
-		}
-		else{ 
-			return 'Modificado correctamente'; //Devuelve mensaje de exito
-		}
-    }
-    else 
-    	return 'No existe';//Devuelve mensaje de error
-} 
+ 
 //Funcion para buscar las promociones si es un usuario normal (no ADMIN)
 function search1(){ 
 	$sql = "
@@ -162,55 +128,43 @@ function PromocionesShowAll(){
 		return $result;//Se devuelve el resultado de la consulta
 	}
 }
-//Funcion que devuelve todas la tareas de un usuario normal
-function TareasShowAllNormal(){
-	$sql = "SELECT id_tarea,t.descripcion AS descripcion_tarea ,p.descripcion AS descripcion_prioridad, p.color AS color_tarea,
-			Fecha_Ini, t.completada AS completa, c.nombre as categoria
-			FROM tareas t, prioridades p, categorias c 
-			WHERE t.PRIORIDADES_nivel = p.nivel && c.id_CATEGORIAS = t.CATEGORIAS_id_CATEGORIAS && `USUARIOS_login` = '".$_SESSION['login']."'";
-	
-	
-	if (!($resultado = $this->mysqli->query($sql))){
-		return 'No existe'; //Devuelve mensaje de error
-	}
-    else{ 
-		$result = $resultado;//Se guarda el resultado de la consulta sql
-		return $result;//Se devuelve el resultado de la consulta
-	}
-}
-//Busca las tareas que pertenezcan a un usuario normal
-function BuscarTareasUser(){
-	$sql = " SELECT id_tarea,t.descripcion AS descripcion_tarea ,p.descripcion 
-	AS descripcion_prioridad, p.color AS color_tarea, Fecha_Ini, t.completada AS completa
-			FROM tareas t, prioridades p
-			WHERE `USUARIOS_login` = '".$_SESSION['login']."' && t.PRIORIDADES_nivel = p.nivel
-					";
-	
-	
-	if (!($resultado = $this->mysqli->query($sql))){
-		return 'No existe'; //Devuelve mensaje de error
-	}
-    else{ 
-		$result = $resultado;//Se guarda el resultado de la consulta sql
-		
-		
-		return $result;//Se devuelve el resultado de la consulta
-	}
-}
-function DevolverIDPista() 
+
+function DevolverIDPromo()
 {	
-	
-    $sql = "SELECT Pista_ID_Pista
+    $sql = "SELECT MAX(ID_Promo)
 			FROM promociones
-			WHERE (`ID_Promo` = '".$this->ID_Promo."')";
-   	echo $sql;
-    $result = $this->mysqli->query($sql);
-    if($result->num_rows==1){
-    	return $result->fetch_array()[0];
-    }
-    else{
-    	return false;
-    }
-} 
+			WHERE (`usuarios_login_usuario` = '".$this->usuarios_login_usuario."'
+			)";
+   
+    $result = $this->mysqli->query($sql);//Guarda el resultado
+    
+	if ($result->num_rows == 1){
+		return $result -> fetch_array()[0];
+	}else{
+		return false;
+	}
+}
+
+function ContarUsuarios()
+{	
+    $sql = "SELECT COUNT(DISTINCT `usuarios_login`),`promociones_ID_Promo`
+			FROM promociones_has_usuarios
+			GROUP BY `promociones_ID_Promo`
+			";
+    
+    $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
+    
+    if ($result)
+    {
+    	
+       return $result;//Se devuelve el resultado de la consulta
+    } 
+    else
+        return 'No existe';//Devuelve mensaje de error
+}
+
+
+
+
 }//fin de clase
 ?> 
