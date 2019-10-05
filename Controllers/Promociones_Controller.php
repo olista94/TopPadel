@@ -16,6 +16,8 @@ if (!IsAuthenticated()){ //si no está autenticado
 	include_once "../Views/Promociones_SEARCH_View.php";
 	include_once "../Views/Promociones_DELETE_View.php";
 	include_once "../Views/Promociones_SHOWCURRENT_View.php";
+	include_once "../Views/Promociones_INSCRIPCION_View.php";
+	include_once "../Models/Promociones_has_Usuarios_Model.php";
 	
 	/* RECOGE LOS DATOS DEL FORMULARIO */
 	function getDataForm(){
@@ -72,10 +74,49 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$promocion = getDataForm();	//Asigna los datos obtenidos al objeto promocion		
 				$mensaje = $promocion-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
 				
+				$idpromo = $promocion -> DevolverIDPromo();
+				
+				$apuntar = new Promociones_has_Usuarios_Model($idpromo,$_SESSION['login']);
+				$a = $apuntar -> add();
+				
 				//Si el insertado es correcto
 				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');			 
 					
 		break;
+		
+		case 'Confirmar_INSCRIPCION1':
+		
+				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","");
+				$inscritos = $promocion -> ContarUsuarios();
+				$array = $inscritos -> fetch_array();
+				
+				echo $_REQUEST['ID_Promo'];
+				echo $array[0];
+				while($array[0] < 4){
+				
+				$datos = $promocion -> rellenadatos();
+				$array = $datos -> fetch_array();
+				
+				$pistas = new Pistas_Model($array['pista_ID_Pista'],"");
+				
+				$p = $pistas -> searchById();
+				$datos = $promocion -> rellenadatos();
+				
+				new Promociones_INSCRIPCION($datos,$p,'../Controllers/Promociones_Controller.php');
+				}
+				new MESSAGE('Esta promocion esta cerrada','../Controllers/Promociones_Controller.php');
+		break;
+		
+		case 'Confirmar_INSCRIPCION2':
+				
+				$apuntar = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login']);
+				$mensaje = $apuntar -> add();
+				
+				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');//Mostramos el mensaje				
+
+				
+		break;
+		
 		
 		//Si se selecciona la accion buscar desde el showall
 		case 'Confirmar_SEARCH1':	
@@ -149,8 +190,9 @@ if (!IsAuthenticated()){ //si no está autenticado
 					$promocion = new Promociones_Model('','','','','');//Creamos un objeto promocion
 					
 					$datos = $promocion -> PromocionesShowAll();
+					$usuarios = $promocion -> ContarUsuarios();
 					//Creamos una vista de todas las promociones completas con los datos
-					$respuesta = new Promociones_SHOWALL($datos,'../Controllers/Promociones_Controller.php');	
+					$respuesta = new Promociones_SHOWALL($datos,$usuarios,'../Controllers/Promociones_Controller.php');	
 				//Si es usuario normal
 				}else{		   
 					$promocion = new Promociones_Model('','','','','');//Creamos un objeto promocion

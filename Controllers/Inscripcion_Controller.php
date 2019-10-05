@@ -83,9 +83,8 @@ if(isset($_SESSION['tipo'])){
 				$u = $usuario -> BuscarMujer();
 				new Inscripcion_ADD($u,$torneo,$id_torneo,'../Controllers/Inscripcions_Controller.php');
 			}
-			}else{
-				echo "Ya estas apuntado";
 			}
+			new MESSAGE('Ya estas apuntado a este campeonato','../Controllers/Torneos_Controller.php');
 			
 			break;
 			//Confirma el ADD de Inscripcion tras rellenar el form ADD
