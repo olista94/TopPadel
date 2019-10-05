@@ -49,6 +49,12 @@ array(
 	'ID Promocion' => 'ID Promoción',
 	'Detalles de la promocion' => 'Detalles da promoción',
 	'Borrar promocion' => 'Borrar promoción',
+	'Detalles de la pista' => 'Detalles da pista',
+	'Detalles de la reserva' => 'Detalles da reserva',
+	'¿Apuntarse a esta promocion?' => '¿Apuntarse a esta promoción?',
+	'Anotados' => 'Anotados',
+	'Esta promocion esta cerrada' => 'Esta promoción está pechada',
+	'Ya estas apuntado a este campeonato' => 'Xa estás apuntado a este campeonato',
 
 	'Ediciones' => 'Edicións',
 	'Edicion' => 'Edición',

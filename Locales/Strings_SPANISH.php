@@ -57,6 +57,12 @@ array(
 	'ID Promocion' => 'ID Promoción',
 	'Detalles de la promocion' => 'Detalles de la promoción',
 	'Borrar promocion' => 'Borrar promoción',
+	'Detalles de la pista' => 'Detalles de la pista',
+	'Detalles de la reserva' => 'Detalles de la reserva',
+	'¿Apuntarse a esta promocion?' => '¿Apuntarse a esta promoción?',
+	'Anotados' => 'Anotados',
+	'Esta promocion esta cerrada' => 'Esta promoción está cerrada',
+	'Ya estas apuntado a este campeonato' => 'Ya estás apuntado a este campeonato',
 	
 	'Registro' => 'Registro',
 	'Inserción realizada con éxito' => 'Inserción realizada con éxito',

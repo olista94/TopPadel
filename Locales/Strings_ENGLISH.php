@@ -55,6 +55,12 @@ array(
 	'ID Promocion' => 'Promo ID',
 	'Detalles de la promocion' => 'Promo details',
 	'Borrar promocion' => 'Delete promo',
+	'Detalles de la pista' => 'Court details',
+	'Detalles de la reserva' => 'Booking details',
+	'¿Apuntarse a esta promocion?' => '¿Join this promo?',
+	'Anotados' => 'Listed',
+	'Esta promocion esta cerrada' => 'This promo is closed',
+	'Ya estas apuntado a este campeonato' => 'You are aleready listed for this championship',
 	
 	'Volver' => 'Back',
 	'La password para este usuario no es correcta' => 'The password for this user is incorrect',
