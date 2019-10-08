@@ -56,6 +56,7 @@ include_once '../Views/Header.php';
 				<th><?php echo $strings['Usuario']; ?></th>
 				<th><?php echo $strings['Fecha reserva']; ?></th>
 				<th><?php echo $strings['Pista']; ?></th>
+				<th><?php echo $strings['Hora']; ?></th>
 				<th></th>
 			</tr>
 		<?php 
@@ -73,7 +74,8 @@ include_once '../Views/Header.php';
 					<!--Datos-->
 					<td><?php echo $fila['login']; ?></td>
 					<td><?php echo $fila['fecha_reserva']; ?></td>
-					<td><?php echo $fila['nombre_pista']; ?></td>		
+					<td><?php echo $fila['nombre_pista']; ?></td>
+					<td><?php echo $fila['hora_inicio']; ?></td>					
 					<td style="text-align:right">
 					
 					
