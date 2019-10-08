@@ -95,23 +95,19 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$horasOcupadas = $reservas -> BuscarHorasOcupadas();
 				
 				$array = Array ('08:00:00','09:30:00','11:00:00','12:30:00','14:00:00','15:30:00','17:00:00','18:30:00','20:00:00','21:30:00');
-				$esta = false;
-				$horasLibres = Array();
 				
-				foreach ($array as $h){
-					while($indice = $horasOcupadas -> fetch_array()[0]){
-						if($indice == $h){
-							$esta = true;
-						}
-					}
-					if(!$esta){
-						array_push($horasLibres,$h);
-					}
-					$esta = false;
+		
+				$ocup = Array();
+				
+				while($h = $horasOcupadas->fetch_array()[0]){
+					array_push($ocup,$h);
+					
 				}
 				
+				$resultado = array_diff($array, $ocup);
+
 				
-				new Reservas_ADD_Hora($_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$horasLibres,'../Controllers/Reservas_Controller.php');	//Crea la vista de añadir
+				new Reservas_ADD_Hora($_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$resultado,'../Controllers/Reservas_Controller.php');	//Crea la vista de añadir
 			break;
 			
 			case 'Confirmar_ADD_Hora':
