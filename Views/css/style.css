@@ -864,9 +864,7 @@ nav a{
       display:block;
       position:absolute;
       top:30px;
-      left:0px;
-
-
+      left:-5px;
 }
 
 .cerrar{
