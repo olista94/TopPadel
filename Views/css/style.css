@@ -448,6 +448,9 @@ button {
 .aceptar {
   background-image: url(../img/aceptar.png);
   background-color: #4CAF50;
+  position: absolute;
+  margin-top: 225px;
+  margin-left: -155px;
 }
 
 .continuar {
@@ -796,6 +799,7 @@ select{
 
 .login_form{
   background-color: whitesmoke;
+  padding-bottom: 60px;
 }
 
 .show-half{
@@ -857,7 +861,7 @@ nav a{
             
  nav li>ul{
       display:none;
-  margin-bottom: 500px;
+      margin-bottom: 500px;
       }
 
  nav li:hover>ul{
