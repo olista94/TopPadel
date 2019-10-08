@@ -23,6 +23,8 @@ Fecha: 27/12/2018-->
 			
 		<div>	
 			<legend><?php echo $strings['Inicia sesión']; ?>
+			<!--Boton para loguearse-->
+			<button type="submit" title="<?php echo $strings['Iniciar sesion']; ?>" value="Confirmar_LOGIN" name="action" class="aceptar" onclick="if (validarLogin(document.forms['FormLogin'])) document.forms['FormLogin'].submit();else return false;"></button>
 			<!--Boton para registrar un usuario nuevo-->
 			<button type="submit" title="<?php echo $strings['Registrar nuevo usuario']; ?>" class="registrarse" name="action" value="Confirmar_REGISTRO"></button>
 			</legend>
@@ -34,8 +36,6 @@ Fecha: 27/12/2018-->
 			<input type = 'password' id="password" name = 'password' placeholder ="<?php echo $strings['Contraseña']; ?>"  value = '' onblur=" return !comprobarVacio(this) && comprobarAlfabetico(this,15)"><br>
 
 		</div>
-		<!--Boton para loguearse-->
-		<button type="submit" title="<?php echo $strings['Iniciar sesion']; ?>" value="Confirmar_LOGIN" name="action" class="aceptar" onclick="if (validarLogin(document.forms['FormLogin'])) document.forms['FormLogin'].submit();else return false;"></button>
 				
 	</form>
 	<!--Banderas para cambiar el idioma-->
