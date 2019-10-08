@@ -4,19 +4,19 @@ Fecha: 26/12/2018-->
 
 <?php
  //Declaracion de la clase 
-class Reservas_ADD{
-	 //Id de la tarea a la que pertenece la fase a añadir
-	var $usuario;
-	//Descripcion de la tarea a la que pertenece la fase a añadir
-	var $pista;
+class Reservas_ADD_Pista{
 
+	//Descripcion de la tarea a la que pertenece la fase a añadir
+	var $pistasLibres;
+	var $fecha_reserva;
 	//Variable con el enlace al form de ADD fase
 	var $enlace;	
 	//Constructor de la clase
-	function __construct($usuario,$pista,$enlace){
+	function __construct($pistasLibres,$fecha_reserva,$enlace){
 				
-		$this -> usuario = $usuario;
-		$this -> pista = $pista;
+
+		$this -> pistasLibres = $pistasLibres;
+		$this -> fecha_reserva = $fecha_reserva;
 		$this -> enlace = $enlace;		
 		$this -> mostrar();
 	}
@@ -33,6 +33,7 @@ class Reservas_ADD{
 		<div class="form">
 
 			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Reservas_Controller.php" enctype="multipart/form-data">
+				<input type = "hidden" name = "fecha_reserva" value = '<?php echo $this->fecha_reserva; ?>'>
 				<legend><?php echo $strings['Añadir reserva'];?>
 				
 				</legend>
@@ -45,7 +46,7 @@ class Reservas_ADD{
 					<?php echo $strings['Pista']; ?></label>
 					<select name="pista_ID_Pista">
 						<?php
-							while($pista=$this->pista->fetch_array()){
+							while($pista=$this->pistasLibres->fetch_array()){
 						?>
 								<option value="<?php echo $pista[0];?>"><?php echo $pista[1];?>
 
@@ -54,39 +55,10 @@ class Reservas_ADD{
 							}
 						?>
 					</select>
-				<!--Campo para seleccionar (o no) los archivos de la fase-->
-				<label>
-					<?php echo $strings['Hora']; ?></label>
-					<select name = "hora_inicio">
-						<option value="08:00">08:00</option>
+					<br>
 
-						<option value="09:30">09:30</option>
-
-						<option value="11:00">11:00</option>
-
-						<option value="12:30">12:30</option>
-
-						<option value="14:00">14:00</option>
-
-						<option value="15:30">15:30</option>
-
-						<option value="17:00">17:00</option>
-
-						<option value="18:30">18:30</option>
-
-						<option value="20:00">20:00</option>
-
-						<option value="21:30">21:30</option>
-
-				</select>
-
-				<label for="fecha_reserva"><?php echo $strings['Fecha']; ?></label>
-				<input type="text" name="fecha_reserva" size="18" class="tcal" value=""  onblur=" return comprobarFecha(this)">
-					
-				</div>
-				
 				<!--Boton para finalizar-->
-				<button type="submit" name="action" value="Confirmar_ADD2" value="Submit" class="aceptar"></button>
+				<button type="submit" name="action" value="Confirmar_ADD_Pista" value="Submit" class="aceptar"></button>
 				<!--Boton de borrado de texto-->
 				<button type="reset" value="Reset" class="cancelar"></button>
 

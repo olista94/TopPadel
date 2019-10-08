@@ -55,9 +55,15 @@ if(isset($_SESSION['tipo'])){//Si se loguea como ADMIN
                     if (IsAuthenticated()){//Si esta autenticado
                 ?>
 				 <!--Login del usuario conectado-->
-				<button class="user"><?php echo $_SESSION['login'];?></button>				   		
-				<!--Desconectar-->
-				<a href='../Functions/Desconectar.php'><button class="logout"></button></a>
+			
+			<li><a class="dropdownElm" onclick="dropdown()"><?php echo $_SESSION['login'];?></a>
+				<nav class="dropdownContent" id="myDropdown">
+					<a href="../Controllers/Usuarios_Controller.php?action=Confirmar_SHOWCURRENT1"><?php echo $strings['Perfil']; ?></a>
+					<a href="../Controllers/Tareas_Controller.php?action=Mostrar_Completas"><?php echo $strings['Hacerte socio']; ?></a>
+					<a href='../Functions/Desconectar.php'><?php echo $strings['Cerrar sesion']; ?></a>
+				</nav>
+			</li>				
+				
 
                 <?php                    
                     }
