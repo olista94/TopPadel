@@ -61,6 +61,9 @@ array(
 	'Anotados' => 'Listed',
 	'Esta promocion esta cerrada' => 'This promo is closed',
 	'Ya estas apuntado a este campeonato' => 'You are aleready listed for this championship',
+	'Perfil' => 'Profile',
+	'Cerrar sesion' => 'Log out',
+	'Hacerte socio' => 'Become a member',
 	
 	'Volver' => 'Back',
 	'La password para este usuario no es correcta' => 'The password for this user is incorrect',

@@ -55,6 +55,10 @@ array(
 	'Anotados' => 'Anotados',
 	'Esta promocion esta cerrada' => 'Esta promoción está pechada',
 	'Ya estas apuntado a este campeonato' => 'Xa estás apuntado a este campeonato',
+	'Perfil' => 'Perfil',
+	'Cerrar sesion' => 'Pechar sesión',
+	'Hacerte socio' => 'Faite socio',
+	
 
 	'Ediciones' => 'Edicións',
 	'Edicion' => 'Edición',
