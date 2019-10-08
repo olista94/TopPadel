@@ -5,9 +5,9 @@ Fecha: 20/12/2018-->
 	 <!--Pie-->
 <div class="footer" id="footer">
 	<!--Creador-->
-	<li><a href="../Views/Integrantes.php" target=_blank><?php echo $strings['Creado por']; ?>: Los Cangrejas </a></li>
+	<li>© TopPadel</li>
 	 <!--Fecha-->
-		<li><a><?php echo $strings['Fecha']; ?>: 21/12/2018</a></li>
+		<!--<li><a><?php echo $strings['Fecha']; ?>: 21/12/2018</a></li>-->
 </div>
 </body>
 </html>
