@@ -10,15 +10,13 @@ class Reservas_Model {
 	var $pista_ID_Pista;
 	var $fecha_reserva;
 	var $hora_inicio;
-	var $hora_fin;
 	
 //Constructor de la clase
-function __construct($usuarios_login,$pista_ID_Pista,$fecha_reserva,$hora_inicio,$hora_fin){
+function __construct($usuarios_login,$pista_ID_Pista,$fecha_reserva,$hora_inicio){
 	$this->usuarios_login = $usuarios_login;
 	$this->pista_ID_Pista = $pista_ID_Pista;
 	$this->fecha_reserva = $fecha_reserva;
 	$this->hora_inicio = $hora_inicio;
-	$this->hora_fin = $hora_fin;
 
 		//Incluimos el archivo de acceso a la bd
 		include_once 'Access_DB.php';
@@ -35,8 +33,8 @@ function add(){
 				'$this->usuarios_login',
 				'$this->pista_ID_Pista',
 				'$this->fecha_reserva',
-				'$this->hora_inicio',
-				'$this->hora_fin'
+				'$this->hora_inicio'
+
 				)
 			";
 
@@ -57,7 +55,7 @@ function pistaLibreDia(){
 								where `fecha_reserva` = '$this->fecha_reserva'
 								GROUP by `pista_ID_Pista`
 								HAVING COUNT(*) = 10)";
-	
+
 	$resultado = $this->mysqli->query($sql);
 	
 	if (!$resultado) { 
@@ -75,6 +73,7 @@ function BuscarHorasOcupadas(){
 			where `fecha_reserva` = '$this->fecha_reserva'
 			and `pista_ID_Pista` = '$this->pista_ID_Pista'";
 	
+
 	$resultado = $this->mysqli->query($sql);
 	
 	if (!$resultado) { 
@@ -89,14 +88,13 @@ function BuscarHorasOcupadas(){
 function search1(){ 
 
 	$sql = "
-			   SELECT fecha_reserva,hora_inicio,hora_fin,u.login,p.nombre_pista
+			   SELECT fecha_reserva,hora_inicio,u.login,p.nombre_pista
 			   FROM reservas,pista p,usuarios u
 			   WHERE `usuarios_login`= u.login && `pista_ID_Pista`=p.ID_Pista &&
 			   
 			   (`fecha_reserva` LIKE '%$this->fecha_reserva%') &&
 			   
 			   (`hora_inicio` LIKE '%$this->hora_inicio%') &&
-			   (`hora_fin` LIKE '%$this->hora_fin%') &&
 			  
 			   (`usuarios_login` = '".$_SESSION['login']."') &&
 			   
@@ -118,7 +116,7 @@ function search1(){
 function ReservasShowAll(){ 
 
 	$sql = "
-			  SELECT fecha_reserva,hora_inicio,hora_fin,login,nombre_pista,pista_ID_Pista
+			  SELECT fecha_reserva,hora_inicio,login,nombre_pista,pista_ID_Pista
 			   FROM reservas,pista,usuarios 
 			   WHERE `usuarios_login`= `login` && `pista_ID_Pista`=`ID_Pista` 
 	
@@ -136,15 +134,14 @@ function ReservasShowAll(){
 function SearchAdmin(){ 
 
 	$sql = "
-			  SELECT fecha_reserva,hora_inicio,hora_fin,login,nombre_pista,pista_ID_Pista
+			  SELECT fecha_reserva,hora_inicio,login,nombre_pista,pista_ID_Pista
 			   FROM reservas,pista,usuarios 
 			   WHERE (`usuarios_login`= `login` && `pista_ID_Pista`=`ID_Pista`) 
 			   && (
 					(`usuarios_login` LIKE '%$this->usuarios_login%') &&
 	 				(`pista_ID_Pista` LIKE '%$this->pista_ID_Pista%') &&
 					(`fecha_reserva` LIKE '%$this->fecha_reserva%') &&
-					(`hora_inicio` LIKE '%$this->hora_inicio%') &&
-					(`hora_fin` LIKE '%$this->hora_fin%')
+					(`hora_inicio` LIKE '%$this->hora_inicio%')
 			)";
   
 	if (!($resultado = $this->mysqli->query($sql))){
