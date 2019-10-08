@@ -163,6 +163,25 @@ function ContarUsuarios()
         return 'No existe';//Devuelve mensaje de error
 }
 
+function PuedeApuntarse()
+{	
+    $sql = "SELECT COUNT(DISTINCT `usuarios_login`),`promociones_ID_Promo`
+			FROM promociones_has_usuarios
+			WHERE (`promociones_ID_Promo` = '$this->ID_Promo')
+			GROUP BY `promociones_ID_Promo`
+			"; 
+    
+    $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
+    
+    if ($result)
+    {
+    	
+       return $result;//Se devuelve el resultado de la consulta
+    } 
+    else
+        return 'No existe';//Devuelve mensaje de error
+}
+
 
 
 

@@ -39,7 +39,7 @@ function add(){
 				'$this->hora_fin'
 				)
 			";
-echo $sql;
+
 	if (!$this->mysqli->query($sql)) { 
 		return 'Error al insertar';//Devuelve mensaje de error
 	}
@@ -48,6 +48,42 @@ echo $sql;
 	}
 } 
 
+function pistaLibreDia(){
+
+	 $sql = "SELECT *
+			from pista
+			where ID_Pista NOT IN (SELECT `pista_ID_Pista`
+								FROM reservas
+								where `fecha_reserva` = '$this->fecha_reserva'
+								GROUP by `pista_ID_Pista`
+								HAVING COUNT(*) = 10)";
+	
+	$resultado = $this->mysqli->query($sql);
+	
+	if (!$resultado) { 
+		return 'No hay pistas este dia';//Devuelve mensaje de error
+	}
+	else{ 
+		return $resultado; //Devuelve mensaje de exito	
+	}
+}	
+
+function BuscarHorasOcupadas(){
+
+	 $sql = "SELECT `hora_inicio`
+			FROM reservas
+			where `fecha_reserva` = '$this->fecha_reserva'
+			and `pista_ID_Pista` = '$this->pista_ID_Pista'";
+	
+	$resultado = $this->mysqli->query($sql);
+	
+	if (!$resultado) { 
+		return 'No hay horas disponibles';//Devuelve mensaje de error
+	}
+	else{ 
+		return $resultado; //Devuelve mensaje de exito	
+	}
+}
 
 //Funcion para buscar las tareas si es un usuario normal (no ADMIN)
 function search1(){ 
