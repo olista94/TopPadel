@@ -14,7 +14,10 @@ if (!IsAuthenticated()){ //si no está autenticado
 	include_once "../Models/Usuarios_Model.php";
 	include_once "../Models/Pistas_Model.php";
 	include_once "../Views/Reservas_SHOWALL_View.php";
-	include_once "../Views/Reservas_ADD_View.php";
+	//include_once "../Views/Reservas_ADD_View.php";
+	include_once "../Views/Reservas_ADD_Pista_View.php";
+	include_once "../Views/Reservas_ADD_Fecha_View.php";
+	include_once "../Views/Reservas_ADD_Hora_View.php";
 	include_once "../Views/Reservas_SEARCH_View.php";
 	include_once "../Views/Reservas_DELETE_View.php";
 	include_once "../Views/Reservas_SHOWCURRENT_View.php";
@@ -48,6 +51,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 			$hora_inicio = ""; //Si no, se pone como vacío
 		}
 		
+		
 		//Comprueba si está el campo
 		if(isset($_REQUEST['hora_fin'])){
 			$hora_fin = $_REQUEST['hora_fin'];//Si el campo se le ha pasado se le asigna
@@ -71,20 +75,50 @@ if (!IsAuthenticated()){ //si no está autenticado
 	switch ($_REQUEST['action']){
 		//Añadir una reserva desde el showall
 		case 'Confirmar_ADD1':
-			//Si no se le están pasando datos entonces crea una vista para añadir
-			
-				$usuarios = new Usuarios_Model("","","","","","","","","","","",""); //Construye el objeto usuarios llamando al modelo
-				$u = $usuarios -> search(); //Busca los usuarios
 				
-				$pistas = new Pistas_Model("",""); //Construye el objeto categorias llamando al modelo
-				$p = $pistas -> search(); //Busca las categorias
-				
-				new Reservas_ADD($u,$p,'../Controllers/Reservas_Controller.php');	//Crea la vista de añadir
+				new Reservas_ADD_Fecha('../Controllers/Reservas_Controller.php');	//Crea la vista de añadir
 			break;
-			case 'Confirmar_ADD2':
-				$reserva = getDataForm();	//Asigna los datos obtenidos al objeto reserva		
-				$mensaje = $reserva-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
+			
+			case 'Confirmar_ADD_Fecha':
+					
+				$reservas = new Reservas_Model("","",$_REQUEST['fecha_reserva'],"","");
+				$pistasLibres = $reservas -> pistaLibreDia();
 				
+				
+				new Reservas_ADD_Pista($pistasLibres,$_REQUEST['fecha_reserva'],'../Controllers/Reservas_Controller.php');
+				
+				
+			break;
+			
+			case 'Confirmar_ADD_Pista':
+				$reservas = new Reservas_Model("",$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],"","");
+				$horasOcupadas = $reservas -> BuscarHorasOcupadas();
+				
+				$array = Array ('08:00:00','09:30:00','11:00:00','12:30:00','14:00:00','15:30:00','17:00:00','18:30:00','20:00:00','21:30:00');
+				$esta = false;
+				$horasLibres = Array();
+				
+				foreach ($array as $h){
+					while($indice = $horasOcupadas -> fetch_array()[0]){
+						if($indice == $h){
+							$esta = true;
+						}
+					}
+					if(!$esta){
+						array_push($horasLibres,$h);
+					}
+					$esta = false;
+				}
+				
+				
+				new Reservas_ADD_Hora($_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$horasLibres,'../Controllers/Reservas_Controller.php');	//Crea la vista de añadir
+			break;
+			
+			case 'Confirmar_ADD_Hora':
+			print_r($_REQUEST);
+				$reserva = getDataForm();
+				//Asigna los datos obtenidos al objeto reserva		
+				$mensaje = $reserva-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
 				//Si el insertado es correcto
 				new MESSAGE($mensaje,'../Controllers/Reservas_Controller.php');			 
 					
@@ -175,7 +209,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 			if(isset($_SESSION['tipo'])){
 				//Si el usuario es de tipo admin
 				if($_SESSION['tipo']=='ADMIN'){		   
-					$reserva = new Reservas_Model('','','','','');//Creamos un objeto reserva
+					$reserva = new Reservas_Model('','','','','','');//Creamos un objeto reserva
 					
 					$usuarios = new Usuarios_Model("","","","","","","","","","","",""); //Construye el objeto usuarios llamando al modelo
 					$u = $usuarios -> search(); //Busca los usuarios

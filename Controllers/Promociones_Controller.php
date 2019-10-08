@@ -71,28 +71,45 @@ if (!IsAuthenticated()){ //si no está autenticado
 			//Si se le pasan datos entonces los recoge
 		break;
 		case 'Confirmar_ADD2':	
+		
+			if(isset($_SESSION['tipo'])){
+				if($_SESSION['tipo']=='ADMIN'){	
 				$promocion = getDataForm();	//Asigna los datos obtenidos al objeto promocion		
 				$mensaje = $promocion-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
 				
 				$idpromo = $promocion -> DevolverIDPromo();
 				
-				$apuntar = new Promociones_has_Usuarios_Model($idpromo,$_SESSION['login']);
+				$apuntar = new Promociones_has_Usuarios_Model($idpromo,"");
 				$a = $apuntar -> add();
 				
+				
 				//Si el insertado es correcto
-				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');			 
+				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');	
+				}
+				else{
+					$promocion = getDataForm();	//Asigna los datos obtenidos al objeto promocion		
+					$mensaje = $promocion-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
+				
+					$idpromo = $promocion -> DevolverIDPromo();
+				
+					$apuntar = new Promociones_has_Usuarios_Model($idpromo,$_SESSION['login']);
+					$a = $apuntar -> add();
+				
+				
+				//Si el insertado es correcto
+				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');	
+				}
+			}
 					
 		break;
 		
 		case 'Confirmar_INSCRIPCION1':
 		
 				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","");
-				$inscritos = $promocion -> ContarUsuarios();
+				$inscritos = $promocion -> PuedeApuntarse();
 				$array = $inscritos -> fetch_array();
 				
-				echo $_REQUEST['ID_Promo'];
-				echo $array[0];
-				while($array[0] < 4){
+				if($array[0] < 4 || empty($array[0]) == true){
 				
 				$datos = $promocion -> rellenadatos();
 				$array = $datos -> fetch_array();
@@ -103,8 +120,9 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$datos = $promocion -> rellenadatos();
 				
 				new Promociones_INSCRIPCION($datos,$p,'../Controllers/Promociones_Controller.php');
-				}
+				}else{
 				new MESSAGE('Esta promocion esta cerrada','../Controllers/Promociones_Controller.php');
+				}
 		break;
 		
 		case 'Confirmar_INSCRIPCION2':
@@ -197,10 +215,10 @@ if (!IsAuthenticated()){ //si no está autenticado
 				}else{		   
 					$promocion = new Promociones_Model('','','','','');//Creamos un objeto promocion
 					
-					$datos = $promocion -> search1();//Recuperamos todas las promociones y las guardamos en datos		
-					
-					//Creamos una vista de todas las promciones completas con los datos
-					$respuesta = new Promociones_SHOWALL($datos,'../Controllers/Promociones_Controller.php');	
+					$datos = $promocion -> PromocionesShowAll();
+					$usuarios = $promocion -> ContarUsuarios();
+					//Creamos una vista de todas las promociones completas con los datos
+					$respuesta = new Promociones_SHOWALL($datos,$usuarios,'../Controllers/Promociones_Controller.php');	
 				}	 
 			}
 	}

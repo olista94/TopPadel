@@ -13,7 +13,7 @@ include_once "../Functions/Authentication.php";
 //Comprobamos si esta el tipo de usuario en sesion
 if(isset($_SESSION['tipo'])){
 	//Si el usuario es tipo admin
-	if($_SESSION['tipo']=='ADMIN'){
+	
 		
 		if (!IsAuthenticated()){ //si no está autenticado
 
@@ -52,7 +52,7 @@ if(isset($_SESSION['tipo'])){
 			if(!isset($_REQUEST['action'])){
 				$_REQUEST['action'] = ''; //Sino la dejamos vacia
 			}
-
+		if($_SESSION['tipo']=='ADMIN'){
 			//Segun la accion definida
 			switch ($_REQUEST['action']){
 				
@@ -128,6 +128,15 @@ if(isset($_SESSION['tipo'])){
 						new Usuarios_SHOWCURRENT($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
 					}
 				break;
+				
+				case 'Confirmar_SHOWCURRENT1':
+					//Si no le pasamos datos desde formulario
+					
+						$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','');//Creamos el objeto usuario
+						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
+						new Usuarios_SHOWCURRENT($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+					
+				break;
 
 				default: /*PARA EL SHOWALL */
 					$usuario = new Usuarios_Model('','','','','','','','','','');//Creamos el objeto usuario
@@ -135,9 +144,19 @@ if(isset($_SESSION['tipo'])){
 					$respuesta = new Usuarios_SHOWALL($datos,'../Controllers/Usuarios_Controller.php'); //Mostramos los usuarios en el showall
 			}
 		}
-	}else{
-		new MESSAGE('No puedes ver esto si no eres administrador', '../Controllers/Index_Controller.php'); //muestra el mensaje
+	
+	
+	else{
+		if($_REQUEST['action'] == 'Confirmar_SHOWCURRENT1'){
+			$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','');//Creamos el objeto usuario
+						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
+						new Usuarios_SHOWCURRENT($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+		}
+		else{
+			new MESSAGE('No puedes ver esto si no eres administrador', '../Controllers/Index_Controller.php'); //muestra el mensaje
+		}
 	}
+}
 }
 
 ?>
