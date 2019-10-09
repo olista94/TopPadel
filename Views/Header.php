@@ -62,7 +62,7 @@ if(isset($_SESSION['tipo'])){//Si se loguea como ADMIN
 							<a href="../Controllers/Usuarios_Controller.php?action=Confirmar_SHOWCURRENT1"><?php echo $strings['Perfil']; ?></a>
 						</li>
 						<li>
-							<a href="../Controllers/Tareas_Controller.php?action=Mostrar_Completas"><?php echo $strings['Hacerte socio']; ?></a>
+							<a href="../Controllers/Usuarios_Controller.php?action=Hacerse_Socio1"><?php echo $strings['Hacerte socio']; ?></a>
 						</li>
 						<li class="cerrar">
 							<a href='../Functions/Desconectar.php'><?php echo $strings['Cerrar sesion']; ?></a>
