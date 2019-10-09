@@ -3,7 +3,6 @@ CREADO POR: Los Cangrejas
 Fecha: 27/12/2018-->
 
 <?php
-
  //Declaracion de la clase 
 	class Login_View{
 //Constructor de la clase
@@ -24,7 +23,7 @@ Fecha: 27/12/2018-->
 		<div>	
 			<legend><?php echo $strings['Inicia sesión']; ?>
 			<!--Boton para loguearse-->
-			<button type="submit" title="<?php echo $strings['Iniciar sesion']; ?>" value="Confirmar_LOGIN" name="action" class="aceptar" onclick="if (validarLogin(document.forms['FormLogin'])) document.forms['FormLogin'].submit();else return false;"></button>
+			<button type="submit" title="<?php echo $strings['Iniciar sesion']; ?>" value="Confirmar_LOGIN" name="action" class="aceptar1" onclick="if (validarLogin(document.forms['FormLogin'])) document.forms['FormLogin'].submit();else return false;"></button>
 			<!--Boton para registrar un usuario nuevo-->
 			<button type="submit" title="<?php echo $strings['Registrar nuevo usuario']; ?>" class="registrarse" name="action" value="Confirmar_REGISTRO"></button>
 			</legend>
@@ -61,5 +60,4 @@ Fecha: 27/12/2018-->
 			include '../Views/Footer.php';
 		} //fin metodo render
 	} //fin Login
-
 ?>
