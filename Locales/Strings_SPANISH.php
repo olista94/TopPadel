@@ -66,6 +66,8 @@ array(
 	'Perfil' => 'Perfil',
 	'Cerrar sesion' => 'Cerrar sesión',
 	'Hacerte socio' => 'Hazte socio',
+	'¿Cerrada?' => '¿Cerrada?',
+	'Ya estas apuntado' => 'Ya estás apuntado',
 	
 	'Registro' => 'Registro',
 	'Inserción realizada con éxito' => 'Inserción realizada con éxito',

@@ -64,6 +64,8 @@ array(
 	'Perfil' => 'Profile',
 	'Cerrar sesion' => 'Log out',
 	'Hacerte socio' => 'Member',
+	'¿Cerrada?' => 'Closed?',
+	'Ya estas apuntado' => 'You are already listed',
 	
 	'Volver' => 'Back',
 	'La password para este usuario no es correcta' => 'The password for this user is incorrect',
