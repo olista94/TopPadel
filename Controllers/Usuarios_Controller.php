@@ -29,6 +29,7 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Views/Usuarios_EDIT_View.php";
 			include_once "../Views/Usuarios_SHOWCURRENT_View.php";
 			include_once "../Views/Usuarios_DELETE_View.php";
+			include_once "../Views/Socios_Home_View.php";
 
 			/* RECOGE LOS DATOS DEL FORMULARIO */
 			function getDataForm(){
@@ -151,6 +152,12 @@ if(isset($_SESSION['tipo'])){
 			$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','');//Creamos el objeto usuario
 						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
 						new Usuarios_SHOWCURRENT($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+		}
+
+		else if($_REQUEST['action'] == 'Hacerse_Socio1'){
+			$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','');
+						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
+									new Socios_Home($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
 		}
 		else{
 			new MESSAGE('No puedes ver esto si no eres administrador', '../Controllers/Index_Controller.php'); //muestra el mensaje
