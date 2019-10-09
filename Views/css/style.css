@@ -448,9 +448,6 @@ button {
 .aceptar {
   background-image: url(../img/aceptar.png);
   background-color: #4CAF50;
-  position: absolute;
-  margin-top: 225px;
-  margin-left: -155px;
 }
 
 .continuar {
@@ -874,4 +871,12 @@ nav a{
 .cerrar{
   padding-bottom: 20px;
 
+}
+
+.aceptar1 {
+  background-image: url(../img/aceptar.png);
+  background-color: #4CAF50;
+  position: absolute;
+  margin-top:225px;
+  margin-left:-155px;
 }
