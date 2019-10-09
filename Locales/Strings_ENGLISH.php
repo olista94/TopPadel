@@ -63,7 +63,7 @@ array(
 	'Ya estas apuntado a este campeonato' => 'You are aleready listed for this championship',
 	'Perfil' => 'Profile',
 	'Cerrar sesion' => 'Log out',
-	'Hacerte socio' => 'Become a member',
+	'Hacerte socio' => 'Member',
 	
 	'Volver' => 'Back',
 	'La password para este usuario no es correcta' => 'The password for this user is incorrect',
