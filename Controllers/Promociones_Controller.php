@@ -106,22 +106,31 @@ if (!IsAuthenticated()){ //si no está autenticado
 		case 'Confirmar_INSCRIPCION1':
 		
 				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","");
-				$inscritos = $promocion -> PuedeApuntarse();
+				
+				$ins = $promocion -> PuedeApuntarse();
+				
+				
+				$inscritos = $promocion -> ContarUsuarios1();
 				$array = $inscritos -> fetch_array();
 				
+
 				if($array[0] < 4 || empty($array[0]) == true){
+					if($ins == true){
+						$datos = $promocion -> rellenadatos();
+						$array = $datos -> fetch_array();
 				
-				$datos = $promocion -> rellenadatos();
-				$array = $datos -> fetch_array();
+						$pistas = new Pistas_Model($array['pista_ID_Pista'],"");
 				
-				$pistas = new Pistas_Model($array['pista_ID_Pista'],"");
+						$p = $pistas -> searchById();
+						$datos = $promocion -> rellenadatos();
 				
-				$p = $pistas -> searchById();
-				$datos = $promocion -> rellenadatos();
-				
-				new Promociones_INSCRIPCION($datos,$p,'../Controllers/Promociones_Controller.php');
-				}else{
-				new MESSAGE('Esta promocion esta cerrada','../Controllers/Promociones_Controller.php');
+						new Promociones_INSCRIPCION($datos,$p,'../Controllers/Promociones_Controller.php');
+					}else{
+						new MESSAGE('Ya estas apuntado','../Controllers/Promociones_Controller.php');
+					}
+				}
+				else{
+					new MESSAGE('Esta promocion esta cerrada','../Controllers/Promociones_Controller.php');
 				}
 		break;
 		
