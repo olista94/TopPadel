@@ -163,13 +163,13 @@ function ContarUsuarios()
         return 'No existe';//Devuelve mensaje de error
 }
 
-function PuedeApuntarse()
+function ContarUsuarios1()
 {	
     $sql = "SELECT COUNT(DISTINCT `usuarios_login`),`promociones_ID_Promo`
 			FROM promociones_has_usuarios
 			WHERE (`promociones_ID_Promo` = '$this->ID_Promo')
 			GROUP BY `promociones_ID_Promo`
-			"; 
+			";
     
     $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
     
@@ -181,6 +181,23 @@ function PuedeApuntarse()
     else
         return 'No existe';//Devuelve mensaje de error
 }
+
+function PuedeApuntarse()
+{	
+    $sql = "SELECT usuarios_login
+			FROM promociones_has_usuarios
+			WHERE (`promociones_ID_Promo` = '$this->ID_Promo') AND (`usuarios_login` = '".$_SESSION['login']."')
+			"; 
+    
+    $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
+    
+	if ($result->num_rows == 1){
+		return false;
+	}else{
+		return true;
+	}
+}
+
 
 
 
