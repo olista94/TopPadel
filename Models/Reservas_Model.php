@@ -102,7 +102,7 @@ function search1(){
 	
 	
 	";		   
-
+echo $sql;
 	if (!($resultado = $this->mysqli->query($sql))){
 	return 'Error en la búsqueda';//Devuelve mensaje de error
 
@@ -118,7 +118,8 @@ function ReservasShowAll(){
 	$sql = "
 			  SELECT fecha_reserva,hora_inicio,login,nombre_pista,pista_ID_Pista
 			   FROM reservas,pista,usuarios 
-			   WHERE `usuarios_login`= `login` && `pista_ID_Pista`=`ID_Pista` 
+			   WHERE `usuarios_login`= `login` && `pista_ID_Pista`=`ID_Pista`
+				Order by 1
 	
 	
 	";		   

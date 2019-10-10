@@ -32,9 +32,10 @@ function add(){
 				'$this->fecha',
 				'$this->hora_inicio',
 				'$this->usuarios_login_usuario',
-				'$this->pista_ID_Pista'
+				'$this->pista_ID_Pista',
+				'NO'
 				)
-			";
+			";echo $sql;
 	if (!$this->mysqli->query($sql)) { 
 		return 'Error al insertar';//Devuelve mensaje de error
 	}
@@ -59,7 +60,7 @@ function search1(){
 //Funcion para buscar todas las promociones si es ADMIN
 function searchAdmin(){ 
 	$sql = "
-			  SELECT fecha,hora_inicio,usuarios_login_usuario,Nombre_Pista,pista_ID_Pista
+			  SELECT promo.ID_Promo,fecha,hora_inicio,usuarios_login_usuario,Nombre_Pista,pista_ID_Pista
 			   FROM promociones promo,pista p
 			   WHERE (`pista_ID_Pista`=`ID_Pista`) 
 			   && (
@@ -68,7 +69,7 @@ function searchAdmin(){
 					(`fecha` LIKE '%$this->fecha%') &&
 					(`hora_inicio` LIKE '%$this->hora_inicio%') &&
 					(`ID_Promo` LIKE '%$this->ID_Promo%')
-			)";   
+			)";  
 
 	if (!($resultado = $this->mysqli->query($sql))){
 	return 'Error en la búsqueda';//Devuelve mensaje de error
@@ -113,11 +114,27 @@ function rellenadatos() {
 	}
 }
 //Funcion que devuelve todas las promociones
-function PromocionesShowAll(){
+function PromocionesShowAllTodas(){
 	$sql = "SELECT ID_Promo,fecha,hora_inicio,usuarios_login_usuario,
 			pista_ID_Pista,p.Nombre_Pista
 			FROM promociones promo,pista p
 			WHERE promo.`pista_ID_Pista`= p.ID_Pista";
+	
+
+	if (!($resultado = $this->mysqli->query($sql))){
+		return 'No existe'; //Devuelve mensaje de error
+	}
+    else{ 
+		$result = $resultado;//Se guarda el resultado de la consulta sql
+		return $result;//Se devuelve el resultado de la consulta
+	}
+}
+
+function PromocionesShowAllMias(){
+	$sql = "SELECT ID_Promo,fecha,hora_inicio,usuarios_login_usuario,
+			pista_ID_Pista,p.Nombre_Pista
+			FROM promociones promo,pista p
+			WHERE promo.`pista_ID_Pista`= p.ID_Pista AND `usuarios_login_usuario` = '".$_SESSION['login']."'";
 	
 
 	if (!($resultado = $this->mysqli->query($sql))){
