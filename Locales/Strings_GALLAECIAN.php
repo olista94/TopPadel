@@ -47,7 +47,7 @@ array(
 	'Añadir promocion' => 'Engadir promoción',
 	'Buscar promocion' => 'Buscar promoción',
 	'ID Promocion' => 'ID Promoción',
-	'Detalles de la promocion' => 'Detalles da promoción',
+	'Detalles de la promocion' => 'Detalles da promo',
 	'Borrar promocion' => 'Borrar promoción',
 	'Detalles de la pista' => 'Detalles da pista',
 	'Detalles de la reserva' => 'Detalles da reserva',
@@ -60,6 +60,12 @@ array(
 	'Hacerte socio' => 'Faite socio',
 	'¿Cerrada?' => '¿Cerrada?',
 	'Ya estas apuntado' => 'Xa estás apuntado',
+	'Cubierta'=>'Cuberta',
+	'Suelo' => 'Chan',
+	'Interior' => 'Interior',
+	'Exterior' => 'Exterior',
+	'Dura'=>'Dura',
+	'Blanda'=>'Blanda',
 	
 
 	'Ediciones' => 'Edicións',
@@ -134,6 +140,8 @@ array(
 	'Nuevo usuario' => 'Novo usuario',
 	'Registrarse' => 'Rexistrarse',
 	'Registrar nuevo usuario' => 'Rexistrar novo usuario',
+	'Mis promos' => 'Miñas promos',
+	'Mostrar' => 'Amosar',
 	
 	'Formulario para añadir usuario' => 'Formulario para engadir usuario',
 	'Max. 15 caracteres' => 'Max. 15 caracteres',
