@@ -11,9 +11,10 @@ session_start();
 include_once "../Views/MESSAGE.php";
 include_once "../Functions/Authentication.php";
 
-if(isset($_SESSION['tipo'])){
-	//Si se loguea como ADMIN
-	if($_SESSION['tipo']=='ADMIN'){
+if (!IsAuthenticated()){ //si no está autenticado
+    new MESSAGE('No puedes ver esto si no estás logueado', '../Controllers/Login_Controller.php'); //muestra el mensaje
+}else{
+	
 		//Incluye la funciones que se encuentran en los siguientes ficheros:
 		include_once "../Models/Pistas_Model.php";
 		include_once "../Views/Pistas_SHOWALL_View.php";
@@ -34,9 +35,13 @@ if(isset($_SESSION['tipo'])){
 			else{
 				$ID_Pista = "";
 			}
-			$Nombre_Pista = $_REQUEST['Nombre_Pista'];//Nombre de la pista	
+			$Nombre_Pista = $_REQUEST['Nombre_Pista'];
+			$techo = $_REQUEST['techo'];
+			$suelo = $_REQUEST['suelo'];
+			
+			//Nombre de la pista	
 			//Creamos un objeto Pista
-			$pista = new Pistas_Model ($ID_Pista,$Nombre_Pista);
+			$pista = new Pistas_Model ($ID_Pista,$Nombre_Pista,$techo,$suelo);
 			
 			//Devuelve el objeto Pista
 			return $pista;
@@ -49,10 +54,21 @@ if(isset($_SESSION['tipo'])){
 
 		//Acciones a realizar dependiendo del boton pulsado
 		switch ($_REQUEST['action']){
+			
+			
+					
 			//Pulsa añadir pista en Pistas_SHOWALL
-			case 'Confirmar_ADD1':		
+			case 'Confirmar_ADD1':	
+			if(isset($_SESSION['tipo'])){
+				if($_SESSION['tipo']=='ADMIN'){			
 			//Muestra el form de ADD pista
 				new Pistas_ADD('../Controllers/Pistas_Controller.php');
+				
+				}else{
+					new MESSAGE('No puedes ver esto si no eres administrador', '../Controllers/Pistas_Controller.php'); 
+				}
+				
+			}
 			break;
 			//Confirma el ADD de pista tras rellenar el form ADD
 			case 'Confirmar_ADD2':
@@ -62,16 +78,26 @@ if(isset($_SESSION['tipo'])){
 				$mensaje = $pista-> add();
 				//Crea un nuevo objeto de tipo MESSAGE que muestra por pantalla el texto de la respuesta y hace un enlace para permitir la vuelta hacia atrás (hacia el controlador)
 				new MESSAGE($mensaje,'../Controllers/Pistas_Controller.php');
+				
 			break;
 			
 			//Pulsa editar categoria en Pistas_SHOWALL
 			case 'Confirmar_EDIT1':
-			//Pasa el id de la pista a editar
-				$pista = new Pistas_Model($_REQUEST['ID_Pista'],'');
+			if(isset($_SESSION['tipo'])){
+				if($_SESSION['tipo']=='ADMIN'){	
+			
+				$pista = new Pistas_Model($_REQUEST['ID_Pista'],'','','');
 				//Recoge los datos
 				$datos = $pista->rellenadatos();
 				//Muestra el form de EDIT
 				new Pistas_EDIT($datos,'../Controllers/Pistas_Controller.php');
+				
+				}else{
+					new MESSAGE('No puedes ver esto si no eres administrador', '../Controllers/Pistas_Controller.php'); 
+				}
+				
+			}
+				
 			break;
 			//Confirma el EDIT de pista tras rellenar el form EDIT
 			case 'Confirmar_EDIT2':	
@@ -99,18 +125,27 @@ if(isset($_SESSION['tipo'])){
 		
 			//Pulsa borrar pista en Pistas_SHOWALL
 			case 'Confirmar_DELETE1':
+			if(isset($_SESSION['tipo'])){
+				if($_SESSION['tipo']=='ADMIN'){
+			
 			//Pasa el id de la pista a borrar
-				$pista = new Pistas_Model($_REQUEST['ID_Pista'],'');
+				$pista = new Pistas_Model($_REQUEST['ID_Pista'],'','','');
 				//Recoge los datos
 				$datos = $pista->rellenadatos();
 				//Muestra la tabla con los datos de la pista a borrar
 				new Pistas_DELETE($datos,'../Controllers/Pistas_Controller.php');
+				}else{
+					new MESSAGE('No puedes ver esto si no eres administrador', '../Controllers/Pistas_Controller.php'); 
+				}
+				
+			}
+				
 			break;
 			
 			//Confirma el DELETE pista
 			case 'Confirmar_DELETE2':	
 			//Pasa el id de la pista a borrar			
-				$pista = new Pistas_Model($_REQUEST['ID_Pista'],'');
+				$pista = new Pistas_Model($_REQUEST['ID_Pista'],'','','');
 				//Borra dicha pista de la bd
 				$mensaje = $pista-> delete();
 			//Crea un nuevo objeto de tipo MESSAGE que muestra por pantalla el texto de la respuesta y hace un enlace para permitir la vuelta hacia atrás (hacia el controlador)
@@ -121,7 +156,7 @@ if(isset($_SESSION['tipo'])){
 			case 'Confirmar_SHOWCURRENT':
 				if(count($_REQUEST) < 4 ){
 					//Pasa el id de la pista a mostrar
-					$pista = new Pistas_Model($_REQUEST['ID_Pista'],'');
+					$pista = new Pistas_Model($_REQUEST['ID_Pista'],'','','');
 					//Recoge los datos
 					$datos = $pista->rellenadatos();
 					//Muesta la tabla con los datos de la categoria seleccionada
@@ -132,16 +167,14 @@ if(isset($_SESSION['tipo'])){
 			//Por defecto al seleccionar la seccion de Pistas en el menu se mostrara el SHOWALL
 			default: /*PARA EL SHOWALL */
 			//Busca todas las pistas
-				$pista = new Pistas_Model('','');
+				$pista = new Pistas_Model('','','','');
 				$datos = $pista -> search();
 				//Las muestra en una tabla
 				$respuesta = new Pistas_SHOWALL($datos,'../Controllers/Pistas_Controller.php');
 
 		}
-	}else{
-		//muestra el mensaje si no es admin
-		new MESSAGE('No puedes ver esto si no eres administrador', '../Controllers/Index_Controller.php'); 
 	}
-}
+
+
 
 ?>
