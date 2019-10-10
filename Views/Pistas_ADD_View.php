@@ -36,9 +36,19 @@ Fecha: 20/12/2018-->
 <!--Campo nombre de la pista-->
     <div>	
       <label ><?php echo $strings['Nombre de la pista']; ?></label>
-      <input type="text" id="Nombre_Pista" name="Nombre_Pista" size="50" onblur=" return !comprobarVacio(this) && comprobarTexto(this,45);">
+      <input type="text" id="Nombre_Pista" name="Nombre_Pista" size="40" onblur=" return !comprobarVacio(this) && comprobarTexto(this,45);">
       
-      
+      <label for="techo"><?php echo $strings['Cubierta']; ?></label>
+	  <select name="techo" id="techo">
+		<option value="Interior"><?php echo $strings['Interior']; ?></option>
+		<option value="Exterior"><?php echo $strings['Exterior']; ?></option>
+	  </select>
+	  
+	  <label for="suelo"><?php echo $strings['Suelo']; ?></label>
+	  <select name="suelo" id="suelo">
+		<option value="Dura"><?php echo $strings['Dura']; ?></option>
+		<option value="Blanda"><?php echo $strings['Blanda']; ?></option>
+	  </select>
       
     </div>
     <!--Boton de confirmar inserción-->

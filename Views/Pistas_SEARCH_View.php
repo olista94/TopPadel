@@ -40,7 +40,22 @@ Fecha: 20/12/2018-->
             <!--Campo nombre de la pista-->
                 <label ><?php echo $strings['Nombre de la pista']; ?></label>
                 <input type="text"  name="Nombre_Pista" size="45"/>
-            
+				
+				<label for="techo"><?php echo $strings['Cubierta']; ?></label>
+					<select name="techo" id="techo">
+						<option value=""></option>
+						<option value="Interior"><?php echo $strings['Interior']; ?></option>
+						<option value="Exterior"><?php echo $strings['Exterior']; ?></option>
+					</select>
+				
+				<label for="suelo"><?php echo $strings['Suelo']; ?></label>
+					<select name="suelo" id="suelo">
+						<option value=""></option>
+						<option value="Dura"><?php echo $strings['Dura']; ?></option>
+						<option value="Blanda"><?php echo $strings['Blanda']; ?></option>
+					</select>
+					<br>
+					
             
             <!--Boton de busqueda-->
             <button type="submit" name="action" value="Confirmar_SEARCH2" class="buscar"></button>

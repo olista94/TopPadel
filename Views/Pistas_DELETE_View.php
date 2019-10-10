@@ -53,6 +53,16 @@ Fecha: 20/12/2018-->
                     <th><?php echo $strings['Nombre de la pista']; ?></th>
                     <td><?php echo $this -> fila['Nombre_Pista']; ?></td>
                 </tr>
+				
+				<tr>
+                    <th><?php echo $strings['Cubierta']; ?></th>
+                    <td><?php echo $this -> fila['techo']; ?></td>
+                </tr>
+				
+				<tr>
+                    <th><?php echo $strings['Suelo']; ?></th>
+                    <td><?php echo $this -> fila['suelo']; ?></td>
+                </tr>
                 
 
 				<tr>

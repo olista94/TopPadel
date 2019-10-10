@@ -44,9 +44,21 @@ class Pistas_EDIT{
 				<div>	
 				  <label ><?php echo $strings['Nombre de la pista']; ?></label>
 				  <input type="text" id="Nombre_Pista" name="Nombre_Pista" size="50" value="<?php echo $this -> fila['Nombre_Pista']; ?>" onblur=" return !comprobarVacio(this) && comprobarTexto(this,45);">
+				
+				
+				<label ><?php echo $strings['Cubierta']; ?></label>
+					<select name="techo" id="techo">
+						<option value="Interior" <?php if($this -> fila['techo'] == 'Interior') echo "selected"; ?>><?php echo $strings['Interior']; ?></option>
+						<option value="Exterior" <?php if($this -> fila['techo'] == 'Exterior') echo "selected"; ?>><?php echo $strings['Exterior']; ?></option>
+					</select>  
+	
+				<label ><?php echo $strings['Suelo']; ?></label>
+					<select name="suelo" id="suelo">
+						<option value="Dura" <?php if($this -> fila['suelo'] == 'Dura') echo "selected"; ?>><?php echo $strings['Dura']; ?></option>
+						<option value="Blanda" <?php if($this -> fila['suelo'] == 'Blanda') echo "selected"; ?>><?php echo $strings['Blanda']; ?></option>
+					</select>  
+
 				</div>
-	
-	
 				<!--Boton de confirmar editado-->
 				<button type="submit" name="action" value="Confirmar_EDIT2" value="Submit" class="aceptar"></button>
 				<!--Boton de borrado-->
