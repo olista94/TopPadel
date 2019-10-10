@@ -809,6 +809,8 @@ select{
 .welcome{
   width: 100%;
   text-align: center;
+  color: white;
+  font-weight: bold;
   /*margin-top: 3%;*/
 }
 
