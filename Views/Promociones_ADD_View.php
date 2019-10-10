@@ -5,8 +5,7 @@ Fecha: 26/12/2018-->
 <?php
  //Declaracion de la clase 
 class Promociones_ADD{
-	 //Id de la tarea a la que pertenece la fase a añadir
-	var $usuario;
+
 	//Descripcion de la tarea a la que pertenece la fase a añadir
 	var $pista;
 

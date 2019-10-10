@@ -1,4 +1,4 @@
-<!-- TABLA QUE MUESTRA TODAS LAS TAREAS
+<!-- TABLA QUE MUESTRA TODAS LAS PROMOCIONES
 CREADO POR: Los Cangrejas
 Fecha: 26/12/2018-->
 
@@ -7,24 +7,26 @@ Fecha: 26/12/2018-->
 include_once '../Functions/Authentication.php';
 //Header
 include_once '../Views/Header.php';
-
  //Declaracion de la clase 
- class Reservas_SHOWALL{ 
-	//Datos de todas las tareas
+ class Promociones_SHOWALL_Admin{ 
+	//Datos de datos
 	var $datos;
-
-	
-	//Datos de las pistas
-	var $pistas;
-	
+	var $usuarios;
+	var $usuarios2;
 	//Variable con el enlace al showall
 	var $enlace;	
 	
 	//Constructor de la clase
-	function __construct($datos,$pistas,$enlace){
-		
+	function __construct($datos,$usuarios,$enlace){
 		$this -> datos = $datos;
-		$this -> pistas = $pistas;
+		$this -> usuarios = $usuarios;
+		$this -> usuarios2 = [];
+		//Cuenta el numero de usuarios
+		if($this -> usuarios -> num_rows > 0){
+			while($usu = $this -> usuarios -> fetch_array()){
+						$this -> usuarios2[$usu[1]] = $usu[0];	
+							}
+		}
 		$this -> enlace = $enlace;
 		$this -> pinta();
 	}
@@ -42,43 +44,69 @@ include_once '../Views/Header.php';
 	<div class="showall">   
                                 
 		<table class="showAllUsers">
-			<tr><th class="title" colspan="4"><?php echo $strings['Reservas']; ?>
-			<form class="tableActions" action="../Controllers/Reservas_Controller.php" method="">
+			<tr><th class="title" colspan="4"><?php echo $strings['Promociones']; ?>
+			
+			<form class="tableActions" action="../Controllers/Promociones_Controller.php" method="">
 			<!--Botones para añadir o buscar-->
 			<button class="buscar-little" name="action" value="Confirmar_SEARCH1" type="submit"></button>
 			<button class="anadir-little"  name="action" value="Confirmar_ADD1" type="submit"></button>
-			</form></th></tr>
+			</form>
+			
+			</th></tr>
 			<!--Campos a mostrar-->
 			<tr>
 				<th><?php echo $strings['Usuario']; ?></th>
-				<th><?php echo $strings['Fecha reserva']; ?></th>
+				<th><?php echo $strings['Fecha']; ?></th>
 				<th><?php echo $strings['Pista']; ?></th>
-				<th><?php echo $strings['Hora']; ?></th>
+				<th><?php echo $strings['Anotados']; ?></th>
 				<th></th>
 			</tr>
 		<?php 
 		//Mientras haya filas en la bd
 		
 			while($fila = $this ->datos->fetch_array()){      
-
+		
 		?>
 			<tr>
-				<form action="../Controllers/Reservas_Controller.php" method="post" name="action" >
-					<input type="hidden" name="usuarios_login" value="<?php echo $fila['login']; ?>">
-					<input type="hidden" name="pista_ID_Pista" value="<?php echo $fila['pista_ID_Pista']; ?>">
-					<input type="hidden" name="fecha_reserva" value="<?php echo $fila['fecha_reserva']; ?>">
-					<input type="hidden" name="hora_inicio" value="<?php echo $fila['hora_inicio']; ?>">
+				<form action="../Controllers/Promociones_Controller.php" method="post" name="action" >
+					
+					<input type="hidden" name="ID_Promo" value="<?php echo $fila['ID_Promo']; ?>">
 					<!--Datos-->
-					<td><?php echo $fila['login']; ?></td>
-					<td><?php echo $fila['fecha_reserva']; ?></td>
-					<td><?php echo $fila['nombre_pista']; ?></td>
-					<td><?php echo $fila['hora_inicio']; ?></td>					
+					<td><?php echo $fila['usuarios_login_usuario']; ?></td>
+					<td><?php echo $fila['fecha']; ?></td>
+					<td><?php echo $fila['Nombre_Pista'] ?></td>
+					<td>
+						 <!--Muestra el numero de usuarios-->
+						<?php
+						if($this -> usuarios-> num_rows == 0){
+							//Si no hay usuarios muestra 0
+							echo '0';
+						}
+						else{
+							$entra = 0;
+							//Foreach para contar los usuarios que tiene la tarea
+							foreach($this -> usuarios2 as $indice => $valor){
+								if($indice == $fila['ID_Promo']){
+									$entra = 1;
+									echo $valor;
+								}
+							}
+							if($entra == 0){
+								echo '0';
+							}
+							$entra = 0;
+						}
+						?>
+						</td>					
 					<td style="text-align:right">
 					
 					
-					<!--Botones para editar,borrar o ver en detalle-->		
+					<!--Botones para editar,borrar o ver en detalle-->
+						
 						<button class="borrar" name="action" value="Confirmar_DELETE1" type="submit"></button>
 						<button class="add" name="action" value="Confirmar_SHOWCURRENT" type="submit"></button>
+						<button class="inscripcion" name="action" value="Confirmar_INSCRIPCION1" type="submit"></button>
+					
 					</form>
 					</td>
 				
