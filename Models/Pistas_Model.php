@@ -7,11 +7,15 @@ class Pistas_Model {
 	var $ID_Pista;
 	//Nombre de la pista
 	var $Nombre_Pista;
+	var $techo;
+	var $suelo;
 	
 //Constructor de la clase
-function __construct($ID_Pista,$Nombre_Pista){
+function __construct($ID_Pista,$Nombre_Pista,$techo,$suelo){
 	$this->ID_Pista = $ID_Pista;
 	$this->Nombre_Pista = $Nombre_Pista;
+	$this->techo = $techo;
+	$this->suelo = $suelo;
 	//Incluimos el archivo de acceso a la bd
 	include_once 'Access_DB.php';
 	//Funcion de conexion a la bd
@@ -22,10 +26,14 @@ function __construct($ID_Pista,$Nombre_Pista){
 function add(){
 			//Sentencia sql que insetara la categoria
 		$sql = "INSERT INTO pista (
-			Nombre_Pista
+			Nombre_Pista,
+			techo,
+			suelo
 			) 
 				VALUES (
-					'$this->Nombre_Pista'
+					'$this->Nombre_Pista',
+					'$this->techo',
+					'$this->suelo'
 					)";
 			
 			//Si ya se han insertado la PK o FK
@@ -65,7 +73,9 @@ function edit()
     if ($result->num_rows == 1)
     {	
 		$sql = "UPDATE pista SET		
-					`Nombre_Pista` = '$this->Nombre_Pista'				
+					`Nombre_Pista` = '$this->Nombre_Pista',
+					`techo` = '$this->techo',
+					`suelo` = '$this->suelo'
 				WHERE (`ID_Pista` = '$this->ID_Pista')";
 				//Si se realiza erroneamente la edicion
         if (!($resultado = $this->mysqli->query($sql))){
@@ -88,10 +98,10 @@ function search(){
     			WHERE
     				( 
 					(`ID_Pista` LIKE '%$this->ID_Pista%')	&&
-	 				(`Nombre_Pista` LIKE '%$this->Nombre_Pista%')
-									
+	 				(`Nombre_Pista` LIKE '%$this->Nombre_Pista%') &&
+					(`techo` LIKE '%$this->techo%') &&
+					(`suelo` LIKE '%$this->suelo%')				
     				)";
-					
 				
    //Si se produce un error
     if (!($resultado = $this->mysqli->query($sql))){
