@@ -11,7 +11,9 @@ if (!IsAuthenticated()){ //si no está autenticado
 	include_once "../Models/Promociones_Model.php";
 	include_once "../Models/Usuarios_Model.php";
 	include_once "../Models/Pistas_Model.php";
-	include_once "../Views/Promociones_SHOWALL_View.php";
+	include_once "../Views/Promociones_SHOWALL_Admin_View.php";
+	include_once "../Views/Promociones_SHOWALL_Todas_View.php";
+	include_once "../Views/Promociones_SHOWALL_Mias_View.php";
 	include_once "../Views/Promociones_ADD_View.php";
 	include_once "../Views/Promociones_SEARCH_View.php";
 	include_once "../Views/Promociones_DELETE_View.php";
@@ -64,7 +66,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 		//Añadir una promocion desde el showall
 		case 'Confirmar_ADD1':
 
-				$pistas = new Pistas_Model("",""); //Construye el objeto categorias llamando al modelo
+				$pistas = new Pistas_Model("","","",""); //Construye el objeto categorias llamando al modelo
 				$p = $pistas -> search(); //Busca las categorias
 				
 				new Promociones_ADD($p,'../Controllers/Promociones_Controller.php');	//Crea la vista de añadir
@@ -119,7 +121,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 						$datos = $promocion -> rellenadatos();
 						$array = $datos -> fetch_array();
 				
-						$pistas = new Pistas_Model($array['pista_ID_Pista'],"");
+						$pistas = new Pistas_Model($array['pista_ID_Pista'],"","","");
 				
 						$p = $pistas -> searchById();
 						$datos = $promocion -> rellenadatos();
@@ -147,30 +149,21 @@ if (!IsAuthenticated()){ //si no está autenticado
 		
 		//Si se selecciona la accion buscar desde el showall
 		case 'Confirmar_SEARCH1':	
-				$pistas = new Pistas_Model("",""); //Construye el objeto categorias llamando al modelo
+				$pistas = new Pistas_Model("","","",""); //Construye el objeto categorias llamando al modelo
 				$p = $pistas -> search(); //Busca las categorias		
 			new Promociones_SEARCH($p,'../Controllers/Promociones_Controller.php'); //Se crea la vista para buscar
 		break;
 		//Si se le da a buscar desde la vista de buscar
 		case 'Confirmar_SEARCH2':
 			//Si el usuario es de tipo admin puede buscar entre todas las tareas
-			if(isset($_SESSION['tipo'])){
-				if($_SESSION['tipo']=='ADMIN'){
-									
-					$promocion = getDataForm(); //Se llena el objeto tarea con los datos del formulario
-					$datos = $promocion-> searchAdmin(); //Se busca en todas las tareas y se guardan los datos
-
-					new Promociones_SHOWALL($datos,'../Controllers/Tareas_Controller.php'); //Se muestran las tareas encontradas en un showall
-				//En otro caso el usuario es un usuario normal
-				}else{
-					$tarea = getDataForm(); //Se llena el objeto tarea con los datos del formulario
-					$datos = $tarea-> search1(); //Se busca en las tareas del usuario y seguardan los datos
-					$archivos = $tarea -> ContarArchivos(); //se cuentan los archivos de la tarea
-					$fases = $tarea -> ContarFases(); //se cuentan las fases de la tarea
-					$contactos = $tarea -> ContarContactos(); // se cuentan los contactos de la tarea
-					new Tareas_SHOWALL($datos,$archivos,$fases,$contactos,'../Controllers/Tareas_Controller.php'); //Se muestran las tareas encontradas en un showall
-				}
-			}		
+			
+			$promocion = new Promociones_Model('','','','','');				
+			$promocion = getDataForm(); 
+					
+			$datos = $promocion-> searchAdmin(); 
+			$usuarios = $promocion -> ContarUsuarios();
+			new Promociones_SHOWALL($datos,$usuarios,'../Controllers/Promociones_Controller.php'); 		
+			
 		break;
 		//Si se le da a borrar desde la vista del showall
 		case 'Confirmar_DELETE1':		
@@ -180,7 +173,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$datos = $promocion -> rellenadatos();
 				$array = $datos -> fetch_array();
 				
-				$pistas = new Pistas_Model($array['pista_ID_Pista'],"");
+				$pistas = new Pistas_Model($array['pista_ID_Pista'],"","","");
 				
 				$p = $pistas -> searchById();
 				$datos = $promocion -> rellenadatos();
@@ -201,7 +194,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$datos = $promocion -> rellenadatos();
 				$array = $datos -> fetch_array();
 				
-				$pistas = new Pistas_Model($array['pista_ID_Pista'],"");
+				$pistas = new Pistas_Model($array['pista_ID_Pista'],"","","");
 				
 				$p = $pistas -> searchById();
 				$datos = $promocion -> rellenadatos();
@@ -216,19 +209,36 @@ if (!IsAuthenticated()){ //si no está autenticado
 				if($_SESSION['tipo']=='ADMIN'){		   
 					$promocion = new Promociones_Model('','','','','');//Creamos un objeto promocion
 					
-					$datos = $promocion -> PromocionesShowAll();
+					$datos = $promocion -> PromocionesShowAllTodas();
 					$usuarios = $promocion -> ContarUsuarios();
 					//Creamos una vista de todas las promociones completas con los datos
-					$respuesta = new Promociones_SHOWALL($datos,$usuarios,'../Controllers/Promociones_Controller.php');	
+					$respuesta = new Promociones_SHOWALL_Admin($datos,$usuarios,'../Controllers/Promociones_Controller.php');	
 				//Si es usuario normal
-				}else{		   
-					$promocion = new Promociones_Model('','','','','');//Creamos un objeto promocion
+				}else{
+
+					switch ($_REQUEST['action']){
+		
+					case 'Mostrar_Todas':
+						$promocion = new Promociones_Model('','','','','');//Creamos un objeto promocion
+						
+						$datos = $promocion -> PromocionesShowAllTodas();
+						$usuarios = $promocion -> ContarUsuarios();
+						//Creamos una vista de todas las promociones completas con los datos
+						$respuesta = new Promociones_SHOWALL_Todas($datos,$usuarios,'../Controllers/Promociones_Controller.php');	
+					break;
 					
-					$datos = $promocion -> PromocionesShowAll();
-					$usuarios = $promocion -> ContarUsuarios();
-					//Creamos una vista de todas las promociones completas con los datos
-					$respuesta = new Promociones_SHOWALL($datos,$usuarios,'../Controllers/Promociones_Controller.php');	
+					default:
+						
+						$promocion = new Promociones_Model('','','','','');//Creamos un objeto promocion
+						
+						$datos = $promocion -> PromocionesShowAllMias();
+						$usuarios = $promocion -> ContarUsuarios();
+						//Creamos una vista de todas las promociones completas con los datos
+						$respuesta = new Promociones_SHOWALL_Mias($datos,$usuarios,'../Controllers/Promociones_Controller.php');	
+					break;
+					
 				}	 
+			}
 			}
 	}
 }

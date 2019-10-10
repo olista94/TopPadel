@@ -123,7 +123,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 		
 		//Si se selecciona la accion buscar desde el showall
 		case 'Confirmar_SEARCH1':
-				$pistas = new Pistas_Model("",""); //Construye el objeto categorias llamando al modelo
+				$pistas = new Pistas_Model("","","",""); //Construye el objeto categorias llamando al modelo
 				$p = $pistas -> search(); //Busca las categorias		
 			new Reservas_SEARCH($p,'../Controllers/Reservas_Controller.php'); //Se crea la vista para buscar
 		break;
@@ -135,21 +135,20 @@ if (!IsAuthenticated()){ //si no está autenticado
 				if($_SESSION['tipo']=='ADMIN'){
 					$reserva = getDataForm(); 
 					$datos = $reserva-> searchAdmin(); 
-					$usuarios = new Usuarios_Model("","","","","","","","","","","",""); //Construye el objeto usuarios llamando al modelo
-					$u = $usuarios -> search(); //Busca los usuarios
 				
-					$pistas = new Pistas_Model("",""); //Construye el objeto categorias llamando al modelo
+					$pistas = new Pistas_Model("","","",""); //Construye el objeto categorias llamando al modelo
 					$p = $pistas -> search(); //Busca las categorias
 				
-					new Reservas_SHOWALL($datos,$u,$p,'../Controllers/Tareas_Controller.php'); //Se muestran las tareas encontradas en un showall
+					new Reservas_SHOWALL($datos,$p,'../Controllers/Reservas_Controller.php'); //Se muestran las tareas encontradas en un showall
 				//En otro caso el usuario es un usuario normal
 				}else{
-					$tarea = getDataForm(); //Se llena el objeto tarea con los datos del formulario
-					$datos = $tarea-> search1(); //Se busca en las tareas del usuario y seguardan los datos
-					$archivos = $tarea -> ContarArchivos(); //se cuentan los archivos de la tarea
-					$fases = $tarea -> ContarFases(); //se cuentan las fases de la tarea
-					$contactos = $tarea -> ContarContactos(); // se cuentan los contactos de la tarea
-					new Tareas_SHOWALL($datos,$archivos,$fases,$contactos,'../Controllers/Tareas_Controller.php'); //Se muestran las tareas encontradas en un showall
+					$reserva = getDataForm(); 
+					$datos = $reserva-> search1(); 
+				
+					$pistas = new Pistas_Model("","","",""); //Construye el objeto categorias llamando al modelo
+					$p = $pistas -> search(); //Busca las categorias
+				
+					new Reservas_SHOWALL($datos,$p,'../Controllers/Reservas_Controller.php');
 				}
 			}		
 		break;
@@ -166,7 +165,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$datos = $reserva -> rellenadatos();
 				$array = $datos -> fetch_array();
 				
-				$pistas = new Pistas_Model($array['pista_ID_Pista'],"");
+				$pistas = new Pistas_Model($array['pista_ID_Pista'],"","","");
 				
 				$p = $pistas -> searchById();
 				$datos = $reserva -> rellenadatos();
@@ -190,7 +189,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$datos = $reserva -> rellenadatos();
 				$array = $datos -> fetch_array();
 				
-				$pistas = new Pistas_Model($array['pista_ID_Pista'],"");
+				$pistas = new Pistas_Model($array['pista_ID_Pista'],"","","");
 				
 				$p = $pistas -> searchById();
 				$datos = $reserva -> rellenadatos();
@@ -206,26 +205,28 @@ if (!IsAuthenticated()){ //si no está autenticado
 				//Si el usuario es de tipo admin
 				if($_SESSION['tipo']=='ADMIN'){		   
 					$reserva = new Reservas_Model('','','','','','');//Creamos un objeto reserva
-					
-					$usuarios = new Usuarios_Model("","","","","","","","","","","",""); //Construye el objeto usuarios llamando al modelo
-					$u = $usuarios -> search(); //Busca los usuarios
 				
-					$pistas = new Pistas_Model("",""); //Construye el objeto categorias llamando al modelo
-					$p = $pistas -> search(); //Busca las categorias
+					$pistas = new Pistas_Model("","","",""); //Construye el objeto pistas llamando al modelo
+					$p = $pistas -> search(); //Busca las pistas
 					       
 					$datos = $reserva -> ReservasShowAll();//Recuperamos todas las reservas y las guardamos en datos						
 					
 					
 					//Creamos una vista de todas las reservas completas con los datos
-					$respuesta = new Reservas_SHOWALL($datos,$u,$p,'../Controllers/Reservas_Controller.php');	
+					$respuesta = new Reservas_SHOWALL($datos,$p,'../Controllers/Reservas_Controller.php');	
 				//Si es usuario normal
-				}else{		   
-					$reserva = new Reservas_Model('','','','','');//Creamos un objeto reserva
+				}else{
 					
-					$datos = $reserva -> search1();//Recuperamos todas las reservas y las guardamos en datos		
+					$reserva = new Reservas_Model('','','','','','');//Creamos un objeto reserva
+				
+					$pistas = new Pistas_Model("","","",""); //Construye el objeto pistas llamando al modelo
+					$p = $pistas -> search(); //Busca las pistas
+					       
+					$datos = $reserva -> search1();//Recuperamos todas las reservas y las guardamos en datos						
 					
-					//Creamos una vista de todas las tareas completas con los datos
-					$respuesta = new Reservas_SHOWALL($datos,'../Controllers/Reservas_Controller.php');	
+					
+					//Creamos una vista de todas las reservas completas con los datos
+					$respuesta = new Reservas_SHOWALL($datos,$p,'../Controllers/Reservas_Controller.php');
 				}	 
 			}
 	}
