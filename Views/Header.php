@@ -19,6 +19,7 @@ idioma = "<?php echo $_SESSION['idioma']; ?>"; //Variable global que permite pas
 
 <html>
 <head>
+	
 	<title>TopPadel</title>
 	
 	 <!--Archivos css,js...necesarios para el funcionamiento de la aplicacion-->
