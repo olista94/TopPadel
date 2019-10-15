@@ -9,15 +9,15 @@ Fecha: 26/12/2018-->
  class Reservas_SHOWCURRENT{
 	
 //Datos de la reserva	
-	var $fila;
+	var $datos;
 	//Prioridad de la reserva
 	var $pista;
 	//Variable con el enlace a la tabla DELETE
 	var $enlace;
 	//Constructor de la clase	
-	function __construct($fila,$pista,$enlace){
+	function __construct($datos,$pista,$enlace){
 
-		$this -> fila = $fila -> fetch_array();
+		$this -> fila = $datos -> fetch_array();
 
 		$this -> pista = $pista -> fetch_array();
 		$this -> enlace = $enlace;
@@ -35,6 +35,7 @@ Fecha: 26/12/2018-->
         }
 		//Archivo del idioma
         include '../Locales/Strings_'. $_SESSION['idioma'] .'.php';
+		
 ?>
      	<!--Tabla con los datos de la reserva-->       
 		<div class="show-half">
@@ -53,7 +54,8 @@ Fecha: 26/12/2018-->
 					
                     <tr>
                         <th><?php echo $strings['Usuario']; ?></th>
-                        <td><?php echo $this -> fila['usuarios_login']; ?></td>								
+                        <td><?php echo $this -> fila['usuarios_login']; ?></td>	
+						
                     </tr>
 					
                     <tr>
@@ -70,11 +72,7 @@ Fecha: 26/12/2018-->
                         <th><?php echo $strings['Hora inicio']; ?></th>
                         <td><?php echo $this -> fila['hora_inicio']; ?></td>
                     </tr>
-					
-                    <tr>
-                        <th><?php echo $strings['Hora fin']; ?></th>
-                        <td><?php echo $this -> fila['hora_fin']; ?></td>
-                    </tr>
+
                                                                             
                 </table>
             </form>            

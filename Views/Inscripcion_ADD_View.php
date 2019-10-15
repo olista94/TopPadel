@@ -5,17 +5,17 @@
 class Inscripcion_ADD{
 	 
 	var $fila;
-	//Prioridades para añadir a la tarea (solo 1)
-	var $usuarios;
 	var $torneo;
 	var $id_torneo;
+	var $disponibles;
 	var $enlace;	
 	//Constructor de la clase
-	function __construct($usuarios,$torneo,$id_torneo,$enlace){
+	function __construct($torneo,$id_torneo,$disponibles,$enlace){
 				
-		$this -> usuarios = $usuarios;
+
 		$this -> torneo = $torneo;
 		$this -> id_torneo = $id_torneo;
+		$this -> disponibles = $disponibles;
 		$this -> enlace = $enlace;
 		$this -> mostrar();
 	}
@@ -40,21 +40,17 @@ class Inscripcion_ADD{
 					
 						
 					
-					<!--Categorias-->
 					<label>
-					<?php echo $strings['Jugadores']; ?></label><br>
-					<select name="usuarios_login1">
+					<?php echo $strings['Jugadores']; ?></label>
+					<select name = "usuarios_login1">
+					
 						<?php
-							while($usuarios=$this->usuarios->fetch_array()){
+						foreach ($this->disponibles as $disp){
+							echo "<option value = '".$disp."'>".$disp."</option>";
+						}
 						?>
-						<!--Usa la PK aunque muestre el nombre de la categoria-->
-								<option value="<?php echo $usuarios[0];?>"><?php echo $usuarios['login'];?>
 
-								</option>
-						<?php
-							}
-						?>
-					</select>
+				</select>
 					<input type="hidden" name="torneos_ID_Torneo" value="<?php echo $this -> id_torneo;?>">
 					
 				</div>

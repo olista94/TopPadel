@@ -59,7 +59,7 @@ include '../Views/Header.php';
 				<form action="../Controllers/Torneos_Controller.php" method="post" name="action" >
 					<input type="hidden" name="ID_Torneo" value="<?php echo $fila['ID_Torneo']; ?>">
 					<!--Datos-->
-					<td><?php echo $fila['nombre']; ?></td>
+					<td><button class="tarea" name="action" value="Confirmar_SHOWTORNEO"><?php echo $fila['nombre']; ?></button></td>
 					<td><?php echo $fila['categoria']; ?></td>
 					<td><?php echo $fila['edicion']; ?></td>	
 					<td><?php echo $fila['fecha']; ?></td>

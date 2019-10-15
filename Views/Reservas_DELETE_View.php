@@ -71,10 +71,7 @@ Fecha: 26/12/2018-->
                         <td><?php echo $this -> fila['hora_inicio']; ?></td>
                     </tr>
 					
-                    <tr>
-                        <th><?php echo $strings['Hora fin']; ?></th>
-                        <td><?php echo $this -> fila['hora_fin']; ?></td>
-                    </tr>
+
 
                     <tr>
 					<!--Boton de confirmar borrado-->
