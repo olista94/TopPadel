@@ -30,7 +30,7 @@ function add(){
 			 )
 			
 			";
-echo $sql;
+ ;
 	if (!$this->mysqli->query($sql)) { 
 		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
 	}
@@ -78,7 +78,7 @@ function searchPorCategoria(){
 					
     				)";
 			
-				echo $sql;
+				 ;
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda'; //Devuelve mensaje de error
 	
@@ -181,7 +181,7 @@ function PuedeApuntarPareja()
 			WHERE ((`parejas_usuarios_login` = '$this->parejas_usuarios_login1' OR
 			`parejas_usuarios_login1` = '$this->parejas_usuarios_login1') AND `torneos_ID_Torneo` = '$this->torneos_ID_Torneo')"
 			;
-    echo $sql;
+     ;
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
 	if ($result->num_rows == 0){

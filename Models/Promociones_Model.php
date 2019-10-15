@@ -35,7 +35,7 @@ function add(){
 				'$this->pista_ID_Pista',
 				'NO'
 				)
-			";echo $sql;
+			"; ;
 	if (!$this->mysqli->query($sql)) { 
 		return 'Error al insertar';//Devuelve mensaje de error
 	}

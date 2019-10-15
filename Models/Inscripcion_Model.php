@@ -26,7 +26,7 @@ function add(){
 				'$this->torneos_ID_Torneo'
 				)
 			";
-echo $sql;
+
 	if (!$this->mysqli->query($sql)) { 
 		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
 	}
@@ -163,6 +163,10 @@ function PuedeApuntarse($login)
 				WHERE (usuarios_login = '".$login."' OR usuarios_login1 = '".$login."')
 				AND torneos_ID_Torneo = '".$this->torneos_ID_Torneo."')
 			";
+			
+			
+			
+			
 
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
@@ -173,25 +177,99 @@ function PuedeApuntarse($login)
 	}
 }
 
-function PuedeApuntarPareja()
+function Apuntados()
 {	
-    $sql = "SELECT *
-			FROM parejas_has_torneos
-			WHERE ((`parejas_usuarios_login` = '$this->parejas_usuarios_login1' OR
-			`parejas_usuarios_login1` = '$this->parejas_usuarios_login1') AND `torneos_ID_Torneo` = '$this->torneos_ID_Torneo')"
-			;
-   
-    $result = $this->mysqli->query($sql);//Guarda el resultado
+    $sql = "SELECT `usuarios_login`
+			FROM `parejas` WHERE `ID_Pareja` IN
+										(SELECT `parejas_ID_Pareja`
+										FROM parejas_has_torneos
+										WHERE `torneos_ID_Torneo` = '".$this->torneos_ID_Torneo."')";
+										 ;
+	
+	$result = $this->mysqli->query($sql);//Guarda el resultado
     
-	if ($result->num_rows == 0){
-		return true;
-	}else{
-		return false;
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado;//Se devuelve el resultado de la consulta
 	}
     
 
 }
 
+function Apuntados1()
+{	
+    $sql = "SELECT `usuarios_login1`
+			FROM `parejas` WHERE `ID_Pareja` IN
+										(SELECT `parejas_ID_Pareja`
+										FROM parejas_has_torneos
+										WHERE `torneos_ID_Torneo` = '".$this->torneos_ID_Torneo."')";
+										 ;
+	
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado;//Se devuelve el resultado de la consulta
+	}
+}
+
+function DevolverClasificacion()
+{	
+    $sql = "SELECT `torneos_ID_Torneo`,`nombre`,`edicion`,`parejas_ID_Pareja`,`usuarios_login`,`usuarios_login1`,`PJ`,`PG`,`PP`,`Ptos`
+			FROM `parejas_has_torneos` p,`parejas` par,`torneo` t
+			WHERE (p.`parejas_ID_Pareja` = par.`ID_Pareja`) AND (p.`torneos_ID_Torneo` = t.`ID_Torneo`) AND (p.`torneos_ID_Torneo` = '".$this->torneos_ID_Torneo."') ";
+										 ;
+	
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado;//Se devuelve el resultado de la consulta
+	}
+}
+
+function DevolverParejas($idtorneo)
+{	
+    $sql = "SELECT `parejas_ID_Pareja`,`usuarios_login`,`usuarios_login1`
+			FROM `parejas_has_torneos` p,`parejas` par
+			WHERE (p.`parejas_ID_Pareja` = par.`ID_Pareja`) AND (p.`torneos_ID_Torneo` = '$idtorneo') ";
+
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado;//Se devuelve el resultado de la consulta
+	}
+}
+
+function DevolverIDParejas($idtorneo)
+{	
+    $sql = "SELECT `parejas_ID_Pareja`
+			FROM `parejas_has_torneos` p,`parejas` par
+			WHERE (p.`parejas_ID_Pareja` = par.`ID_Pareja`) AND (p.`torneos_ID_Torneo` = '$idtorneo') ";
+	echo $sql;
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado;//Se devuelve el resultado de la consulta
+	}
+}
 
 function DevolverIDPareja() 
 {	
@@ -209,22 +287,24 @@ function DevolverIDPareja()
 	}
 }
 
-
-function DevolverPareja() 
+function DevolverParejasTorneo($idtorneo)
 {	
-	
-    $sql = "SELECT pareja_usuarios_login1
-			FROM parejas_has_torneos
-			WHERE (`parejas_ID_Pareja` = '$this->parejas_ID_Pareja')";
-   
+    $sql = "SELECT `parejas_ID_Pareja`,`usuarios_login`,`usuarios_login1`
+			FROM `parejas_has_torneos` p,`parejas` par
+			WHERE (p.`parejas_ID_Pareja` = par.`ID_Pareja`) AND (p.`torneos_ID_Torneo` = '$idtorneo') ";
+
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
     if (!($resultado = $this->mysqli->query($sql))){
-		return 'No existe'; //Devuelve mensaje de error
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
 	}
-    else{//Devuelve el resultado
-		$result = $resultado;
-		return $result;
+    else{ 
+		return $resultado;//Se devuelve el resultado de la consulta
 	}
 }
+
+
 
 }
 ?>

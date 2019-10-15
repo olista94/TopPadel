@@ -41,7 +41,7 @@ function add(){
 				'$this->edicion',
 				'$this->nivel')
 			";
-echo $sql;
+
 	if (!$this->mysqli->query($sql)) { 
 		return 'Error al insertar';//Devuelve mensaje de error
 	}
@@ -89,7 +89,7 @@ function searchPorCategoria(){
 					
     				)";
 			
-				echo $sql;
+				
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda'; //Devuelve mensaje de error
 	
@@ -126,7 +126,7 @@ function rellenadatos()
 {	
 	
     $sql = "SELECT * FROM torneo WHERE (`ID_Torneo` = '$this->ID_Torneo')";
-   
+   echo $sql;
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'No existe'; //Devuelve mensaje de error
 	}
@@ -198,6 +198,46 @@ function BuscarID_Torneo(){
 		
 		return $result;//Se devuelve el resultado de la consulta
 	}
+}
+
+function TorneoShowCompleto(){
+	$sql = "SELECT `torneos_ID_Torneo`,`nombre`,`edicion`,`parejas_ID_Pareja`,`usuarios_login`,`usuarios_login1`,`PJ`,`PG`,`PP`,`Ptos`
+			FROM `parejas_has_torneos` p,`parejas` par,`torneo` t
+			WHERE p.`parejas_ID_Pareja` = par.`ID_Pareja` AND p.`torneos_ID_Torneo` = t.`ID_Torneo` ";
+					
+	
+	
+	if (!($resultado = $this->mysqli->query($sql))){
+		return 'No existe'; //Devuelve mensaje de error
+	}
+    else{ 
+		$result = $resultado->fetch_array()[0];//Se guarda el resultado de la consulta sql
+		
+		return $result;//Se devuelve el resultado de la consulta
+	}
+}
+
+function partidosPareja($idparejalocal,$idparejavisitante){
+	
+	//Sentencia sql para insertar
+	$sql = "SELECT * FROM parejas_has_partidos WHERE `ID_ParejaLocal` = '".$idparejalocal."' or `ID_ParejaVisitante` = '".$idparejavisitante."'
+			";
+
+
+	if (!$this->mysqli->query($sql)) { 
+		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
+	}
+	else{ 
+		return 'Insercion correcta'; //Devuelve mensaje de exito	
+	}
+}
+
+function ResultadosPartidosPareja($idpartido,$idparejalocal,$idparejavisitante){
+	$sql = "SELECT par.usuarios_login,par.usuarios_login1,par1.usuarios_login,par1.usuarios_login1,part.Sets_Local,part.Sets_Visitante
+			FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph
+			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido AND
+			part.ID_Partido = ".$idpartido." AND par.ID_Pareja = ".$idparejalocal." AND par1.ID_Pareja = ".$idparejavisitante;
+	
 }
  
 }

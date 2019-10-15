@@ -26,7 +26,7 @@ function add(){
 				'$this->usuarios_login'
 				)
 			";
-echo $sql;
+ ;
 	if (!$this->mysqli->query($sql)) { 
 		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
 	}
@@ -74,7 +74,7 @@ function searchPorCategoria(){
 					
     				)";
 			
-				echo $sql;
+				 ;
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda'; //Devuelve mensaje de error
 	
@@ -163,7 +163,7 @@ function PuedeApuntarse($login)
 				WHERE (usuarios_login = '".$login."' OR usuarios_login1 = '".$login."')
 				AND torneos_ID_Torneo = '".$this->torneos_ID_Torneo."')
 			";
-   echo $sql;
+    ;
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
 	if ($result->num_rows == 0){
