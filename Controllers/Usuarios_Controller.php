@@ -30,21 +30,116 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Views/Usuarios_SHOWCURRENT_View.php";
 			include_once "../Views/Usuarios_DELETE_View.php";
 			include_once "../Views/Socios_Home_View.php";
+			include_once "../Views/Socios_ADD_View.php";
+			
 
 			/* RECOGE LOS DATOS DEL FORMULARIO */
 			function getDataForm(){
-				$login = $_REQUEST['login']; //login
-				$password = $_REQUEST['password'];//pas
-				$dni = $_REQUEST['dni'];//dni
-				$nombre = $_REQUEST['nombre'];//nombre
-				$apellidos = $_REQUEST['apellidos'];//apellidos
-				$telefono = $_REQUEST['telefono'];//telefono
-				$email = $_REQUEST['email'];//email
-				$fechanacimiento = $_REQUEST['fecha'];//fecha de nacimiento
-				$sexo = $_REQUEST['sexo'];//sexo
-				$tipo = $_REQUEST['tipo']; //tipo de usuario
+			if(isset($_REQUEST['login'])){
+				$login = $_REQUEST['login'];//Identificador de la Inscripcion
 				
-				$usuario = new Usuarios_Model ($login,$password,$dni,$nombre,$apellidos,$telefono,$email,$fechanacimiento,$sexo,$tipo); //creamos el objeto usuario
+			}
+			else{
+				$login = $_SESSION['login'];
+			}
+
+			if(isset($_REQUEST['password'])){
+				$password = $_REQUEST['password'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$password = "";
+			}
+				
+			if(isset($_REQUEST['dni'])){
+				$dni = $_REQUEST['dni'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$dni = "";
+			}
+			
+			if(isset($_REQUEST['nombre'])){
+				$nombre = $_REQUEST['nombre'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$nombre = "";
+			}
+
+			if(isset($_REQUEST['apellidos'])){
+				$apellidos = $_REQUEST['apellidos'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$apellidos = "";
+			}
+			
+			if(isset($_REQUEST['telefono'])){
+				$telefono = $_REQUEST['telefono'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$telefono = "";
+			}
+				
+			if(isset($_REQUEST['email'])){
+				$email = $_REQUEST['email'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$email = "";
+			}
+				
+			if(isset($_REQUEST['fechanacimiento'])){
+				$fechanacimiento = $_REQUEST['fechanacimiento'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$fechanacimiento = "";
+			}
+				
+			if(isset($_REQUEST['sexo'])){
+				$sexo = $_REQUEST['sexo'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$sexo = "";
+			}
+			
+			if(isset($_REQUEST['tipo'])){
+				$tipo = $_REQUEST['tipo'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$tipo = "";
+			}
+			if(isset($_REQUEST['socio'])){
+				$socio = $_REQUEST['socio'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$socio = "";
+			}
+			
+			if(isset($_REQUEST['IBAN'])){
+				$IBAN = $_REQUEST['IBAN'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$IBAN = "";
+			}
+			
+			if(isset($_REQUEST['cuenta'])){
+				$cuenta = $_REQUEST['cuenta'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$cuenta = "";
+			}
+			
+				
+				$usuario = new Usuarios_Model ($login,$password,$dni,$nombre,$apellidos,$telefono,$email,$fechanacimiento,$sexo,$tipo,$socio,$IBAN,$cuenta); //creamos el objeto usuario
 				
 				return $usuario; //devolvemos el objeto usuario
 			}
@@ -82,7 +177,7 @@ if(isset($_SESSION['tipo'])){
 				case 'Confirmar_EDIT':
 					//Si no le pasamos datos desde formulario
 					if(count($_REQUEST) < 4 ){
-						$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','',''); //Creamos el objeto usuario
+						$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','','',''); //Creamos el objeto usuario
 						$datos = $usuario->rellenadatos(); //Rellenamos con los datos del usuario
 						new Usuarios_EDIT($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista para editar un usuario
 					//Si le pasamos datos desde formulario
@@ -108,14 +203,14 @@ if(isset($_SESSION['tipo'])){
 
 				//Si queremos borrar un usuario
 				case 'Confirmar_DELETE1':					
-					$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','','');//Creamos el objeto usuario
+					$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','','','');//Creamos el objeto usuario
 					$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
 					new Usuarios_DELETE($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista para borrar un usuario
 				break;
 				
 				//Si queremos confirmar el borrado de un usuario
 				case 'Confirmar_DELETE2':						
-					$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','','');//Creamos el objeto usuario
+					$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','','','');//Creamos el objeto usuario
 					$mensaje = $usuario-> delete(); //Borramos el usuario y guardamos el mensaje
 					new MESSAGE($mensaje,'../Controllers/Usuarios_Controller.php');	//Mostramos el mensaje					
 				break;
@@ -124,7 +219,7 @@ if(isset($_SESSION['tipo'])){
 				case 'Confirmar_SHOWCURRENT':
 					//Si no le pasamos datos desde formulario
 					if(count($_REQUEST) < 4 ){
-						$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','','');//Creamos el objeto usuario
+						$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','','','','','');//Creamos el objeto usuario
 						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
 						new Usuarios_SHOWCURRENT($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
 					}
@@ -133,14 +228,14 @@ if(isset($_SESSION['tipo'])){
 				case 'Confirmar_SHOWCURRENT1':
 					//Si no le pasamos datos desde formulario
 					
-						$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','');//Creamos el objeto usuario
+						$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','');//Creamos el objeto usuario
 						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
 						new Usuarios_SHOWCURRENT($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
 					
 				break;
 
 				default: /*PARA EL SHOWALL */
-					$usuario = new Usuarios_Model('','','','','','','','','','');//Creamos el objeto usuario
+					$usuario = new Usuarios_Model('','','','','','','','','','','','','');//Creamos el objeto usuario
 					$datos = $usuario -> search();//Buscamos todos los usuarios
 					$respuesta = new Usuarios_SHOWALL($datos,'../Controllers/Usuarios_Controller.php'); //Mostramos los usuarios en el showall
 			}
@@ -149,16 +244,32 @@ if(isset($_SESSION['tipo'])){
 	
 	else{
 		if($_REQUEST['action'] == 'Confirmar_SHOWCURRENT1'){
-			$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','');//Creamos el objeto usuario
+			$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');//Creamos el objeto usuario
 						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
 						new Usuarios_SHOWCURRENT($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
 		}
 
 		else if($_REQUEST['action'] == 'Hacerse_Socio1'){
-			$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','');
+			$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
 						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
 									new Socios_Home($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+		}							
+		else if($_REQUEST['action'] == 'Hacerse_Socio2'){
+									$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
+										$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
+											new Socios_ADD($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+				
+		
+		}	
+		else if($_REQUEST['action'] == 'Confirmar_Socio'){
+									$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
+									$usuario = getDataForm();
+
+										$mensaje = $usuario->addSocio();//Rellenamos con los datos del usuario
+											new MESSAGE($mensaje,'../Controllers/Usuarios_Controller.php');			
+		
 		}
+		
 		else{
 			new MESSAGE('No puedes ver esto si no eres administrador', '../Controllers/Index_Controller.php'); //muestra el mensaje
 		}
