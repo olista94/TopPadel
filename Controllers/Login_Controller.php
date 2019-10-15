@@ -38,7 +38,7 @@ function getDataForm(){
 	$tipo = $_REQUEST['tipo'];//tipo
 	
 	
-	$usuario = new USUARIOS_Model ($login,$password,$dni,$nombre,$apellidos,$telefono,$email,$fecha,$sexo,$tipo);//creamos objeto usuario
+	$usuario = new USUARIOS_Model ($login,$password,$dni,$nombre,$apellidos,$telefono,$email,$fecha,$sexo,$tipo,'','','');//creamos objeto usuario
 	
 	return $usuario;//devolvemos objeto usuario
 }
@@ -61,7 +61,7 @@ switch ($_REQUEST['action']){
 	
 	//Queremos hacer login
 	case 'Confirmar_LOGIN':	
-		$usuario = new Usuarios_Model($_REQUEST['login'],$_REQUEST['password'],'','','','','','','',''); //Creamos el objeto usuario con el login y pass
+		$usuario = new Usuarios_Model($_REQUEST['login'],$_REQUEST['password'],'','','','','','','','','','',''); //Creamos el objeto usuario con el login y pass
 		$respuesta = $usuario->login(); //Hacemos login y guardamos respuesta
 
 		//Si la respuesta es afirmativa

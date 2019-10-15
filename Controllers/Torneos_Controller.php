@@ -136,9 +136,7 @@ if(!IsAuthenticated()){
 				
 				$inscripcion = new Inscripcion_Model('',$idtorneo);
 				$clasificacion = $inscripcion -> DevolverClasificacion();
-				
-				
-				
+			
 				$apuntados = new Inscripcion_Model('','');
 				$apuntados1 = $apuntados -> DevolverParejasTorneo($idtorneo);
 				

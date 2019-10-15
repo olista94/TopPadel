@@ -31,7 +31,6 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Views/Usuarios_DELETE_View.php";
 			include_once "../Views/Socios_Home_View.php";
 			include_once "../Views/Socios_ADD_View.php";
-			
 
 			/* RECOGE LOS DATOS DEL FORMULARIO */
 			function getDataForm(){
@@ -177,7 +176,7 @@ if(isset($_SESSION['tipo'])){
 				case 'Confirmar_EDIT':
 					//Si no le pasamos datos desde formulario
 					if(count($_REQUEST) < 4 ){
-						$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','','',''); //Creamos el objeto usuario
+						$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','','','','',''); //Creamos el objeto usuario
 						$datos = $usuario->rellenadatos(); //Rellenamos con los datos del usuario
 						new Usuarios_EDIT($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista para editar un usuario
 					//Si le pasamos datos desde formulario
@@ -203,14 +202,14 @@ if(isset($_SESSION['tipo'])){
 
 				//Si queremos borrar un usuario
 				case 'Confirmar_DELETE1':					
-					$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','','','');//Creamos el objeto usuario
+					$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','','','','','');//Creamos el objeto usuario
 					$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
 					new Usuarios_DELETE($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista para borrar un usuario
 				break;
 				
 				//Si queremos confirmar el borrado de un usuario
 				case 'Confirmar_DELETE2':						
-					$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','','','');//Creamos el objeto usuario
+					$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','','','','','');//Creamos el objeto usuario
 					$mensaje = $usuario-> delete(); //Borramos el usuario y guardamos el mensaje
 					new MESSAGE($mensaje,'../Controllers/Usuarios_Controller.php');	//Mostramos el mensaje					
 				break;
@@ -228,14 +227,14 @@ if(isset($_SESSION['tipo'])){
 				case 'Confirmar_SHOWCURRENT1':
 					//Si no le pasamos datos desde formulario
 					
-						$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','');//Creamos el objeto usuario
+						$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');//Creamos el objeto usuario
 						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
 						new Usuarios_SHOWCURRENT($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
 					
 				break;
 
 				default: /*PARA EL SHOWALL */
-					$usuario = new Usuarios_Model('','','','','','','','','','','','','');//Creamos el objeto usuario
+					$usuario = new Usuarios_Model('','','','','','','','','','','','','','','','');//Creamos el objeto usuario
 					$datos = $usuario -> search();//Buscamos todos los usuarios
 					$respuesta = new Usuarios_SHOWALL($datos,'../Controllers/Usuarios_Controller.php'); //Mostramos los usuarios en el showall
 			}
@@ -266,10 +265,9 @@ if(isset($_SESSION['tipo'])){
 									$usuario = getDataForm();
 
 										$mensaje = $usuario->addSocio();//Rellenamos con los datos del usuario
-											new MESSAGE($mensaje,'../Controllers/Usuarios_Controller.php');			
+											new MESSAGE($mensaje,'../Controllers/Torneos_Controller.php');			
 		
 		}
-		
 		else{
 			new MESSAGE('No puedes ver esto si no eres administrador', '../Controllers/Index_Controller.php'); //muestra el mensaje
 		}
