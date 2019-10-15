@@ -190,8 +190,8 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$array = $datos -> fetch_array();
 				
 				$pistas = new Pistas_Model($array['pista_ID_Pista'],"","","");
-				
 				$p = $pistas -> searchById();
+				
 				$datos = $reserva -> rellenadatos();
 				
 				new Reservas_SHOWCURRENT($datos,$p,'../Controllers/Reservas_Controller.php'); //Creamos una vista de delete con los datos obtenidos
@@ -222,7 +222,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 					$pistas = new Pistas_Model("","","",""); //Construye el objeto pistas llamando al modelo
 					$p = $pistas -> search(); //Busca las pistas
 					       
-					$datos = $reserva -> search1();//Recuperamos todas las reservas y las guardamos en datos						
+					$datos = $reserva -> ReservasShowAllNormal();//Recuperamos todas las reservas y las guardamos en datos						
 					
 					
 					//Creamos una vista de todas las reservas completas con los datos

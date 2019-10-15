@@ -71,20 +71,52 @@ if(isset($_SESSION['tipo'])){
 			$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
 			$ins = $inscripcion -> PuedeApuntarse($_SESSION['login']);
 			
+			
 			if($ins == true){
 			
-			if( ($cat == 'Masculina' && $sexo == 'Masculina') || ($cat == 'Mixta' && $sexo == 'Femenina') ){
+				if( ($cat == 'Masculina' && $sexo == 'Masculina') || ($cat == 'Mixta' && $sexo == 'Femenina') ){
+					
+					$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
+					
+					$todos = $usuario -> BuscarHombre();
+					$apuntados = $inscripcion -> Apuntados();
+					$apuntados1 = $inscripcion -> Apuntados1();
 				
-				$u = $usuario -> BuscarHombre();
-				new Inscripcion_ADD($u,$torneo,$id_torneo,'../Controllers/Inscripcions_Controller.php');
+					$todosArray = Array();
+					$apuntadosArray = Array ();//Compañero1
+					$apuntadosArray1 = Array ();//Compañero2
 				
-			}
-			else if( ($cat == 'Mixta' && $sexo == 'Masculina') || ($cat == 'Femenina' && $sexo == 'Femenina') ){
-				$u = $usuario -> BuscarMujer();
-				new Inscripcion_ADD($u,$torneo,$id_torneo,'../Controllers/Inscripcions_Controller.php');
-			}
-			}
-			new MESSAGE('Ya estas apuntado a este campeonato','../Controllers/Torneos_Controller.php');
+					while($t = $todos->fetch_array()[0]){
+						array_push($todosArray,$t);					
+					}
+					
+					
+					while($a = $apuntados->fetch_array()[0]){
+						array_push($apuntadosArray,$a);					
+					}
+					
+					
+					while($a = $apuntados1->fetch_array()[0]){
+						array_push($apuntadosArray1,$a);					
+					}
+				
+
+					$disponibles = array_diff($todosArray, $apuntadosArray);
+					
+					
+					$disponibles1 = array_diff($disponibles, $apuntadosArray1);
+					
+					
+					new Inscripcion_ADD($torneo,$id_torneo,$disponibles1,'../Controllers/Inscripcions_Controller.php');					
+				}
+				else if( ($cat == 'Mixta' && $sexo == 'Masculina') || ($cat == 'Femenina' && $sexo == 'Femenina') ){
+						$u = $usuario -> BuscarMujer();
+						new Inscripcion_ADD($u,$torneo,$id_torneo,'../Controllers/Inscripcions_Controller.php');
+					}
+				}
+				else{
+					new MESSAGE('Ya estas apuntado a este campeonato','../Controllers/Torneos_Controller.php');
+				}
 			
 			break;
 			//Confirma el ADD de Inscripcion tras rellenar el form ADD

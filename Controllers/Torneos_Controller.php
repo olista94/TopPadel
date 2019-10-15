@@ -18,7 +18,11 @@ if(!IsAuthenticated()){
 	include_once "../Views/Torneos_SEARCH_View.php";
 	include_once "../Views/Torneos_EDIT_View.php";
 	include_once "../Views/Torneos_SHOWCURRENT_View.php";
+	include_once "../Views/Torneos_SHOWTORNEO_View.php";
 	include_once "../Views/Torneos_DELETE_View.php";
+	include_once "../Models/Inscripcion_Model.php";
+	include_once "../Models/Partidos_Model.php";
+	include_once "../Models/Parejas_has_Partidos_Model.php";
 
 	/* RECOGE LOS DATOS DEL FORMULARIO */
 	function getDataForm(){
@@ -52,6 +56,7 @@ if(!IsAuthenticated()){
 	}
 
 	//Accioneas a realizar según la acción que venga de la vista
+	
 	switch ($_REQUEST['action']){
 		//Añadir un torneo desde el showall
 		case 'Confirmar_ADD':
@@ -122,7 +127,105 @@ if(!IsAuthenticated()){
 				new Torneos_SHOWCURRENT($datos,'../Controllers/Torneos_Controller.php'); //Se muestran los datos en una vista SHOWCURRENT
 			}
 		break;
+		
+		case 'Confirmar_SHOWTORNEO':
+			
+			$idtorneo = $_REQUEST['ID_Torneo'];
+				$torneo = new Torneos_Model($idtorneo,'','','','',''); //Se construye el objeto torneo con el email
+				$datos = $torneo->rellenadatos();
+				
+				$inscripcion = new Inscripcion_Model('',$idtorneo);
+				$clasificacion = $inscripcion -> DevolverClasificacion();
+				
+				
+				
+				$apuntados = new Inscripcion_Model('','');
+				$apuntados1 = $apuntados -> DevolverParejasTorneo($idtorneo);
+				
 
+				new Torneos_SHOWTORNEO($datos,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php'); //Se muestran los datos en una vista SHOWCURRENT
+			
+		break;
+		
+		case 'Generar_Calendario':
+			
+			$idtorneo = $_REQUEST['ID_Torneo'];
+				$torneo = new Torneos_Model($_REQUEST['ID_Torneo'],'','','','','');
+				$datos = $torneo->rellenadatos();//DEVUELVE LOS DATOS DE UN TORNEO
+				
+				
+				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
+				$clasificacion = $inscripcion -> DevolverClasificacion();//DEVUELVE LA CLASIFICACION DE UN TORNEO
+				
+				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
+				$apuntados1 = $inscripcion -> DevolverIDParejas($_REQUEST['ID_Torneo']);//DEVUELVE LOS IDS DE LAS PAREJAS APUNTADAS A UN TORNEO
+				
+				$partido = new Partidos_Model('','','','','','','','','','','','','','','');
+				$enfrentamiento = new Parejas_has_partidos_Model('','','','');
+					
+
+				$parejasArray = Array();//ARRAY DE PAREJAS (NO SE PARA QUE)
+				
+				while($apun = $apuntados1->fetch_array()[0]){
+					array_push($parejasArray,$apun);
+			
+				}
+					
+				print_r($parejasArray);
+				
+					$longitud = count($parejasArray);
+				
+				for ($i = 0; $i < $longitud; $i++) {
+					for ($j = $i+1; $j < $longitud; $j++) {
+						//echo "$parejasArray[$i] vs $parejasArray[$j] --";
+						$mensaje = $partido -> add();
+						$partido1 = new Partidos_Model('','','','','','','','','','','','','','','');
+						$idpartido = $partido1 -> DevolverID();
+						echo $idtorneo;
+						$mensaje1 = $enfrentamiento -> add($idpartido,$idtorneo,$parejasArray[$i],$parejasArray[$j]);
+						//$mensaje1 = $enfrentamiento -> add($idpartido,$parejasArray[$j]);
+						
+					}
+				} 
+				
+				/* $torneo1 = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],'','');
+				$p = $torneo1 -> partidosPareja();//DEVUELVE LOS PARTIDOS DE UNA PAREJA EN UN TORNEO */
+				
+				new MESSAGE('hEGSF','../Controllers/Torneos_Controller.php?action=Confirmar_SHOWTORNEO'); //Devuelve el mensaje de la inserción
+			
+				
+
+				//new Torneos_SHOWTORNEO($datos,$parejasArray1,$apuntados1,'','../Controllers/Torneos_Controller.php'); //Se muestran los datos en una vista SHOWCURRENT
+			
+		break;
+				
+		case 'Ver_Partidos_Pareja':
+				$idtorneo = $_REQUEST['ID_Torneo'];
+				
+				$torneo = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],$_REQUEST['ID_Pareja'],$_REQUEST['ID_Pareja']); 
+				$datos1 = $torneo->partidosPareja($_REQUEST['ID_Pareja'],$_REQUEST['ID_Pareja']);
+				
+				
+				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
+				$clasificacion = $inscripcion -> DevolverClasificacion();//DEVUELVE LA CLASIFICACION DE UN TORNEO
+				
+				//$p = $torneo -> partidosPareja();
+				$apuntados = new Inscripcion_Model('','');
+				$apuntados1 = $apuntados -> DevolverParejasTorneo($idtorneo);
+				
+				/* $torneo1 = new Torneos_Model('','','','','','');
+				$resultados = Array();
+				
+				while($fila = $datos1 -> fetch_array()){
+					array_push($resultados,$torneo1 -> ResultadosPartidosPareja($fila['ID_Torneo'],$fila['ID_ParejaLocal'],$fila['ID_ParejaVisitante'])[0]);	
+				} */
+
+				
+				
+				new Torneos_SHOWTORNEO($datos1,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php'); 
+				//new MESSAGE('HOLAS','../Controllers/Torneos_Controller.php'); 
+				
+		break;
 		//Accion por defecto cuando no hay ninguna accion
 		default: /*PARA EL SHOWALL */
 		if(isset($_SESSION['tipo'])){
