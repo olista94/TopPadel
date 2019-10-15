@@ -3,10 +3,10 @@
 Fecha: 21/12/2018 */
 
 .flags1{
-		display:inline-flex;
-		float:right;
-		padding:10px;
-    width: auto;
+   display:inline-flex;
+   float:right;
+   padding:10px;
+   width: auto;
 }
   
 .flags1 form{
