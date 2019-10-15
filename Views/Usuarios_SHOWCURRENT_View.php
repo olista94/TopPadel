@@ -84,13 +84,27 @@ Fecha: 20/12/2018-->
                     <th><?php echo $strings['Tipo']; ?></th>
                     <td><?php echo $this -> fila['tipo']; ?></td>
                 </tr>
-				
+				<!--Campo sexo del usuario-->
 				<tr>
                     <th><?php echo $strings['Sexo']; ?></th>
                     <td><?php if($this -> fila['sexo'] == 'Masculina') echo $strings['Hombre'];
 					else echo $strings['Mujer']; ?></td>
                 </tr>
-                                                                        
+                <!--Campo es socio-->
+                <tr>
+                    <th><?php echo $strings['Socio']; ?></th>
+                    <td><?php echo $this -> fila['socio']; ?></td>
+                </tr>
+                <!--Campo de IBAN -->
+                <tr>
+                    <th><?php echo $strings['IBAN']; ?></th>
+                    <td><?php echo $this -> fila['IBAN']; ?></td>
+                </tr>
+                <!--Campo de nº de cuenta -->
+                <tr>
+                    <th><?php echo $strings['Numero de Cuenta']; ?></th>
+                    <td><?php echo $this -> fila['cuenta']; ?></td>
+                </tr>                                                           
             </table>
 
         </div>

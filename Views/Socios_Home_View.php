@@ -22,31 +22,38 @@ Fecha: -->
 //Archivo del idioma
   include '../Locales/Strings_'. $_SESSION['idioma'] .'.php'; 
 	 	 
-?>
+?>		
 
-<!--Formulario para añadir categoria
-  <form name="Form" id="registerForm" action="../Controllers/Pistas_Controller.php" method="post" onsubmit="return comprobarCategoria(this);" >
-    <legend><?php echo $strings['Añadir pista']; ?>
-	<!--Boton para volver atrás
-    <button type="button" onclick="location.href='../Controllers/Pistas_Controller.php';" class="volver"></button>
-    </legend>-->
-	
-	
-<!--Campo nombre de la pista-->
-    <div>	
-      <p>
-      	Si eres un apasionado de la fotografía, si eres un amante de la naturaleza o te preocupa su conservación, tienes un sitio en AEFONA. La Asociación se creó para compartir, divulgar y promover la fotografía de naturaleza.
-      </p>
-      <p>
-      	AEFONA te ofrece la oportunidad de conocer, compartir y disfrutar de una afición con más auge cada día. Conocer a más fotógrafos con tus mismos gustos, compartir conocimientos y experiencias de campo y disfrutar viendo buenas fotos de naturaleza. Desde la Asociación representamos tu trabajo y lo promovemos a nivel internacional desde nuestra web y publicaciones.
-      </p>
+<!--Texto de ventajas de ser socio-->
+    <div  >	
+      <head >
+        <h1 class="promosociotitulo">TopSocio</h1>
+      </head>
+      <body class="estilosocio">
+        <article class="textosocio">
+         <p>Ser socio de TopPadel tiene premio, si eres un amante del padel , este es tu sitio. </p>
+         <p>TopPadel te ofrece una serie de ventajas por ser socio: </p>
+         <p>
+           <u>
+             <li type="circle">Descuentos en la compra de material deportivo. </li>
+             <li type="circle">Descuentos en empresas colaboradoras asociadas. </li>
+             <li type="circle">Reserva por teléfono. </li>
+             <li type="circle">Primera consumición gratuita en las instalaciones. </li>
+           </u>
+           <br>¡Y muchas más ventajas! <em class="palabranegrita">¡Descúbrelas!</em>
+        </p>
+        </article>
+      </body>
 
       
     </div>
-    <!--Boton de confirmar inserción-->
-    <button type="submit" name="action" value="Confirmar_ADD2" class="aceptar"></button>
-	<!--Boton de borrado de texto-->
-    <button type="reset" value="Reset" class="cancelar"></button>
+
+    <!--Formulario para añadir socio-->
+  <form name="Form" class="formsocio" action="../Controllers/Usuarios_Controller.php" method="post" onsubmit="return comprobarCategoria(this);" >
+
+    <!--Boton para acceder a formulario de socio-->
+	
+    <button  type="submit" name="action" value="Hacerse_Socio2" class="botonsocio"></button>
 
 	</form>
  
