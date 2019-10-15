@@ -51,6 +51,7 @@ function __construct($login,$password,$dni,$nombre,$apellidos,$telefono,$email,$
 	$this->mysqli = ConnectDB();
 }
 
+
 //Funcion para hacer login
 function login(){
 	//Sentencia sql para buscar el usuario
@@ -165,7 +166,7 @@ function edit()
 					`tipo` = '$this->tipo'
 
 				WHERE (`login` = '$this->login')";
-echo $sql;
+ ;
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación';//Devuelve mensaje de error	
 		}
@@ -196,11 +197,11 @@ function search(){
 					(`tipo` LIKE '%$this->tipo%') &&
 					(`socio` LIKE '%$this->socio%') &&
 					(`IBAN` LIKE '%$this->IBAN%') &&
-					(`cuenta` LIKE '%$this->cuenta%') 
-
+					(`cuenta` LIKE '%$this->cuenta%')
+					
     				)";
 				
-   
+
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda';//Devuelve mensaje de error	
 		
@@ -266,7 +267,7 @@ function DevolverSexo()
 function BuscarHombre()
 {	
     $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Masculina' AND `login` <> '".$_SESSION['login']."' AND `login` <> 'admin')";
-    echo $sql;
+   
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){
@@ -281,7 +282,7 @@ function BuscarHombre()
 function BuscarMujer()
 {	
     $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Femenina' AND `login` <> '".$_SESSION['login']."' AND `login` <> 'admin' )";
-    echo $sql;
+     ;
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){
@@ -293,7 +294,6 @@ function BuscarMujer()
 	}
 
 }
-
 
 function addSocio(){
 
