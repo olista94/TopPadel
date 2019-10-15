@@ -26,16 +26,16 @@ Fecha: -->
   <form name="Form" id="registerForm" action="../Controllers/Usuarios_Controller.php" method="post" enctype="multipart/form-data" >
     <legend><?php echo $strings['Añadir socio']; ?> 
 	<!--Boton para volver atrás -->
-    <!-- <button type="button" onclick="location.href='../Controllers/Usuarios_Controller.php';" class="volver"></button>
-    </legend>-->
+    <button type="button" onclick="location.href='../Controllers/Torneos_Controller.php';" class="volver"></button>
+    </legend>
 
     <div>	
 		 
 		  <label for="IBAN"><?php echo $strings['IBAN']; ?></label>
-		  <input type="text" name="IBAN" id="nombre" size="40"  onblur=" return !comprobarVacio(this) && comprobarTexto(this,45);"/>
+		  <input type="text" name="IBAN" id="IBAN" size="10"  onblur=" return !comprobarVacio(this) && comprobarTexto(this,45);"/>
 		  
-		  <label for="Nº_Cuenta"><?php echo $strings['Nº_Cuenta']; ?></label>
-		  <input type="text" name="cuenta" id="nombre" size="15"  onblur=" return !comprobarVacio(this) && comprobarTexto(this,18);"/>	 
+		  <label for="cuenta"><?php echo $strings['Cuenta']; ?></label>
+		  <input type="text" name="cuenta" id="cuenta" size="20"  onblur=" return !comprobarVacio(this) && comprobarTexto(this,18);"/>	 
 		  
       
     </div>

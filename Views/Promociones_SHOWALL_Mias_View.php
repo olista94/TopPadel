@@ -76,7 +76,7 @@ include_once '../Views/Header.php';
 		//Mientras haya filas en la bd
 		
 			while($fila = $this ->datos->fetch_array()){      
-		
+			
 		?>
 			<tr>
 				<form action="../Controllers/Promociones_Controller.php" method="post" name="action" >

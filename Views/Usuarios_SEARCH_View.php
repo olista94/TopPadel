@@ -78,7 +78,7 @@ Fecha: 20/12/2018-->
 		<option value="NORMAL"><?php echo $strings['Normal']; ?></option>
 	  </select>
 	  </div>
-		   <!--Campo sexo del usuario (hombre o mujer)-->
+		   
 		   <div class="form-group">
 		   <label for="sexo"><?php echo $strings['Sexo']; ?></label>
 	  <select name="sexo" id="sexo">
@@ -87,27 +87,27 @@ Fecha: 20/12/2018-->
 		<option value="Femenina"><?php echo $strings['Mujer']; ?></option>
 	  </select>
 	  </div>
-           <!--Campo socio (SI o NO)-->
-           <div class="form-group">
-           <label for="socio"><?php echo $strings['Socio']; ?></label>
-      <select name="socio" id="socio">
-        <option value=""></option selected>
-        <option value="SI"><?php echo $strings['SI']; ?></option>
-        <option value="NO"><?php echo $strings['NO']; ?></option>
-      </select>
-      </div>
-
-            <!--Campo de IBAN-->
-            <div class="form-group">
+	  
+			<div class="form-group">
+				<label for="socio"><?php echo $strings['Socio']; ?></label>
+					<select name="socio" id="socio">
+						<option value=""></option selected>
+						<option value="SI"><?php echo $strings['SI']; ?></option>
+						<option value="NO"><?php echo $strings['NO']; ?></option>
+					</select>
+			</div>
+			<br>
+	   <div class="form-group">
                 <label for="IBAN"><?php echo $strings['IBAN']; ?></label>
                 <input type="text" id="IBAN" name="IBAN" maxlength="11"/>
-            </div>  
-            <!--Campo de Nº de cuenta-->
-            <div class="form-group">
-                <label for="cuenta"><?php echo $strings['Numero de Cuenta']; ?></label>
-                <input type="text" id="cuenta" name="cuenta" maxlength="11"/>
-            </div>  
-	  
+            </div>	
+			
+			 <div class="form-group">
+                <label for="cuenta"><?php echo $strings['Cuenta']; ?></label>
+                <input type="text" id="cuenta" name="cuenta" maxlength="20"/>
+            </div>	
+			<br>
+			
 		   <!--Boton de confirmar busqueda-->
             <button type="submit" name="action" value="Confirmar_SEARCH" class="buscar"></button>
 

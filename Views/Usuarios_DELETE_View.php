@@ -92,6 +92,22 @@ Fecha: 20/12/2018-->
                     <td><?php if($this -> fila['sexo'] == 'Masculina') echo $strings['Hombre'];
 					else echo $strings['Mujer']; ?></td>
                 </tr>
+				
+				<tr>
+                    <th><?php echo $strings['Socio']; ?></th>
+                    <td><?php if($this -> fila['socio'] == 'SI') echo $strings['SI'];
+					else echo $strings['NO']; ?></td>
+                </tr>
+				
+				<tr>
+                    <th><?php echo $strings['IBAN']; ?></th>
+                    <td><?php echo $this -> fila['IBAN']; ?></td>
+                </tr>
+				
+				<tr>
+                    <th><?php echo $strings['Cuenta']; ?></th>
+                    <td><?php echo $this -> fila['cuenta']; ?></td>
+                </tr>
 
 				<tr>
 				<!--Confirmar borrado-->

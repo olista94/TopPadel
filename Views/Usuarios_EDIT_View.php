@@ -74,6 +74,9 @@ Fecha: 20/12/2018-->
 				<option value="Masculina" <?php if($this -> fila['sexo'] == 'Masculina') echo "selected"; ?>><?php echo $strings['Hombre']; ?></option>
 				<option value="Femenina" <?php if($this -> fila['sexo'] == 'Femenina') echo "selected"; ?>><?php echo $strings['Mujer']; ?></option>
 			</select>  
+			
+			
+			
     </div>
 	<!--Boton para confirmar editar-->
     <button type="submit" name="action" value="Confirmar_EDIT" class="aceptar"></button>

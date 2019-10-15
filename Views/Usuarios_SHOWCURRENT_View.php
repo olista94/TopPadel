@@ -37,7 +37,7 @@ Fecha: 20/12/2018-->
 
                 <tr><th class="title" colspan="4"><?php echo $strings['Detalles del usuario']; ?>
                    <!--Boton para volver atras-->
-				   <button onclick="location.href='../Controllers/Usuarios_Controller.php';" class="volver"></button></th>
+				   <button onclick="location.href='../Controllers/Torneos_Controller.php';" class="volver"></button></th>
                 </tr>
 				<!--Campo login del usuario-->
                 <tr>
@@ -84,27 +84,29 @@ Fecha: 20/12/2018-->
                     <th><?php echo $strings['Tipo']; ?></th>
                     <td><?php echo $this -> fila['tipo']; ?></td>
                 </tr>
-				<!--Campo sexo del usuario-->
+				
 				<tr>
                     <th><?php echo $strings['Sexo']; ?></th>
                     <td><?php if($this -> fila['sexo'] == 'Masculina') echo $strings['Hombre'];
 					else echo $strings['Mujer']; ?></td>
                 </tr>
-                <!--Campo es socio-->
-                <tr>
+				
+				<tr>
                     <th><?php echo $strings['Socio']; ?></th>
-                    <td><?php echo $this -> fila['socio']; ?></td>
+                    <td><?php if($this -> fila['socio'] == 'SI') echo $strings['SI'];
+					else echo $strings['NO']; ?></td>
                 </tr>
-                <!--Campo de IBAN -->
-                <tr>
+				
+				<tr>
                     <th><?php echo $strings['IBAN']; ?></th>
                     <td><?php echo $this -> fila['IBAN']; ?></td>
                 </tr>
-                <!--Campo de nº de cuenta -->
-                <tr>
-                    <th><?php echo $strings['Numero de Cuenta']; ?></th>
+				
+				<tr>
+                    <th><?php echo $strings['Cuenta']; ?></th>
                     <td><?php echo $this -> fila['cuenta']; ?></td>
-                </tr>                                                           
+                </tr>
+                                                                        
             </table>
 
         </div>

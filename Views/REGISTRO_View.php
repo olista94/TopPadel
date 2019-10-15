@@ -25,15 +25,7 @@ Fecha:03/01/2019-->
   include '../Locales/Strings_'. $_SESSION['idioma'] .'.php'; 
 	 	 
 ?>
-  <div  class="slider">
-	<figure>
-		<img src="../Views/img/padel11.jpg" >
-		<img src="../Views/img/padel22.jpg">
-		<img src="../Views/img/padel33.jpg">
-		<img src="../Views/img/padel44.jpg">
-		<img src="../Views/img/padel55.jpg">
-	</figure>	
-  </div>
+
 
 
   <div class="welcome">		
