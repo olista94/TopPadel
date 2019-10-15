@@ -22,10 +22,15 @@ class USUARIOS_Model {
 	//Sexo
 	var $sexo;
 	//Tipo de usuario (admin o normal)
+	var $socio;
 	var $tipo;
+	//IBAN
+	var $IBAN;
+	//Numero de Cuenta
+	var $cuenta;
 
 //Constructor de la clase
-function __construct($login,$password,$dni,$nombre,$apellidos,$telefono,$email,$fecha,$sexo,$tipo){
+function __construct($login,$password,$dni,$nombre,$apellidos,$telefono,$email,$fecha,$sexo,$tipo,$socio,$IBAN,$cuenta){
 	$this->login = $login;
 	$this->password = $password;
 	$this->dni = $dni;
@@ -36,6 +41,9 @@ function __construct($login,$password,$dni,$nombre,$apellidos,$telefono,$email,$
 	$this->fecha = $fecha;
 	$this->sexo = $sexo;
 	$this->tipo = $tipo;
+	$this->socio = $socio;
+	$this->IBAN = $IBAN;
+	$this->cuenta = $cuenta;
 
 	//Incluimos el archivo de acceso a la bd
 	include_once 'Access_DB.php';
@@ -185,8 +193,11 @@ function search(){
 					(`email` LIKE '%$this->email%') &&
 					(`fecha` LIKE '%$this->fecha%') &&
 					(`sexo` LIKE '%$this->sexo%') &&
-					(`tipo` LIKE '%$this->tipo%')
-					
+					(`tipo` LIKE '%$this->tipo%') &&
+					(`socio` LIKE '%$this->socio%') &&
+					(`IBAN` LIKE '%$this->IBAN%') &&
+					(`cuenta` LIKE '%$this->cuenta%') 
+
     				)";
 				
    
@@ -282,6 +293,29 @@ function BuscarMujer()
 	}
 
 }
+
+
+function addSocio(){
+
+		//Sentencia sql para insertar	
+		$sql = "UPDATE usuarios SET 
+					`socio`='SI',
+					`IBAN` = '$this->IBAN',
+					`cuenta` = '$this->cuenta'
+
+				WHERE (`login` = '$this->login')";
+					echo $sql;
+			
+		if (!$this->mysqli->query($sql)) {
+			
+			return 'Error al insertar';//Devuelve mensaje de error	
+		}
+		else{
+			
+			return  'Insercion correcta'; //operacion de insertado correcta
+		}		
+	}
+
 }//fin de clase
 
 ?> 
