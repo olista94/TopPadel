@@ -17,6 +17,15 @@ array(
 	'El login no existe' => 'El login no existe',
 	'Volver' => 'Volver',
 
+	'Ser socio de TopPadel tiene premio. Si eres un amante del padel, este es tu sitio.' => 'Ser socio de TopPadel tiene premio. Si eres un amante del padel, este es tu sitio.',
+	'TopPadel te ofrece una serie de ventajas por ser socio:' => 'TopPadel te ofrece una serie de ventajas por ser socio:',
+	'Descuentos en material deportivo.' => 'Descuentos en material deportivo.',
+	'Descuentos en empresas colaboradoras asociadas.' => 'Descuentos en empresas colaboradoras asociadas.',
+	'Reserva por teléfono.' => 'Reserva por teléfono.',
+	'Descuento en servicios de fisioterapia.' => 'Descuento en servicios de fisioterapia.',
+	'¡Y muchas más ventajas!'=> '¡Y muchas más ventajas!',
+	'¡Descúbrelas!'=>'¡Descúbrelas!',
+
 
 	'Torneos' => 'Torneos',
 	'Torneo' => 'Torneo',
