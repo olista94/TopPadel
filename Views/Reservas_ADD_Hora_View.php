@@ -8,17 +8,17 @@ class Reservas_ADD_Hora{
 
 
 	//Descripcion de la tarea a la que pertenece la fase a añadir
-	var $pista;
-	var $fecha_reserva;
 	var $horasLibres;
+	var $fecha_reserva;
+	
 	//Variable con el enlace al form de ADD fase
 	var $enlace;	
 	//Constructor de la clase
-	function __construct($pista,$fecha_reserva,$horasLibres,$enlace){
+	function __construct($horasLibres,$fecha_reserva,$enlace){
 				
-		$this -> pista = $pista;
-		$this -> fecha_reserva = $fecha_reserva;
 		$this -> horasLibres = $horasLibres;
+		$this -> fecha_reserva = $fecha_reserva;
+	
 		$this -> enlace = $enlace;		
 		$this -> mostrar();
 	}
@@ -47,15 +47,18 @@ class Reservas_ADD_Hora{
 				
 				<label>
 					<?php echo $strings['Hora']; ?></label>
-					<select name = "hora_inicio">
-					
+					<select name="hora_inicio">
 						<?php
-						foreach ($this->horasLibres as $horas){
-							echo "<option value = '".$horas."'>".$horas."</option>";
-						}
-						?>
+							while($horasLibres=$this->horasLibres->fetch_array()){
 
-				</select>
+						?>
+								<option value="<?php echo $horasLibres[0];?>"><?php echo $horasLibres[0];?>
+
+								</option>
+						<?php
+							}
+						?>
+					</select>
 
 				</div>
 				

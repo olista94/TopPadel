@@ -9,14 +9,16 @@ class Reservas_ADD_Pista{
 	//Descripcion de la tarea a la que pertenece la fase a añadir
 	var $pistasLibres;
 	var $fecha_reserva;
+	var $hora_inicio;
 	//Variable con el enlace al form de ADD fase
 	var $enlace;	
 	//Constructor de la clase
-	function __construct($pistasLibres,$fecha_reserva,$enlace){
+	function __construct($pistasLibres,$fecha_reserva,$hora_inicio,$enlace){
 				
 
 		$this -> pistasLibres = $pistasLibres;
 		$this -> fecha_reserva = $fecha_reserva;
+		$this -> hora_inicio = $hora_inicio;
 		$this -> enlace = $enlace;		
 		$this -> mostrar();
 	}
@@ -34,6 +36,7 @@ class Reservas_ADD_Pista{
 
 			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Reservas_Controller.php" enctype="multipart/form-data">
 				<input type = "hidden" name = "fecha_reserva" value = '<?php echo $this->fecha_reserva; ?>'>
+				<input type = "hidden" name = "hora_inicio" value = '<?php echo $this->hora_inicio; ?>'>
 				<legend><?php echo $strings['Añadir reserva'];?>
 				
 				</legend>
