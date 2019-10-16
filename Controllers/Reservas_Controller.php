@@ -81,36 +81,35 @@ if (!IsAuthenticated()){ //si no está autenticado
 			
 			case 'Confirmar_ADD_Fecha':
 					
-				$reservas = new Reservas_Model("","",$_REQUEST['fecha_reserva'],"","");
-				$pistasLibres = $reservas -> pistaLibreDia();
-				
-				
-				new Reservas_ADD_Pista($pistasLibres,$_REQUEST['fecha_reserva'],'../Controllers/Reservas_Controller.php');
-				
-				
-			break;
-			
-			case 'Confirmar_ADD_Pista':
-				$reservas = new Reservas_Model("",$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],"","");
-				$horasOcupadas = $reservas -> BuscarHorasOcupadas();
-				
-				$array = Array ('08:00:00','09:30:00','11:00:00','12:30:00','14:00:00','15:30:00','17:00:00','18:30:00','20:00:00','21:30:00');
+				$reservas = new Reservas_Model("","",$_REQUEST['fecha_reserva'],"");
+				$horasLibres = $reservas -> BuscarHorasLibres();
+				print_r($horasLibres);
+				//$array = Array ('08:00:00','09:30:00','11:00:00','12:30:00','14:00:00','15:30:00','17:00:00','18:30:00','20:00:00','21:30:00');
 				
 		
-				$ocup = Array();
+				//$ocup = Array();
 				
-				while($h = $horasOcupadas->fetch_array()[0]){
+				/*while($h = $horasOcupadas->fetch_array()[0]){
 					array_push($ocup,$h);
 					
 				}
 				
-				$resultado = array_diff($array, $ocup);
+				$resultado = array_diff($array, $ocup);*/
 
 				
-				new Reservas_ADD_Hora($_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$resultado,'../Controllers/Reservas_Controller.php');	//Crea la vista de añadir
+				new Reservas_ADD_Hora($horasLibres,$_REQUEST['fecha_reserva'],'../Controllers/Reservas_Controller.php');	//Crea la vista de añadir
+				
+				
 			break;
 			
 			case 'Confirmar_ADD_Hora':
+				$reservas = new Reservas_Model("","",$_REQUEST['fecha_reserva'],"");
+				$pistasLibres = $reservas -> pistaLibreDia();
+
+				new Reservas_ADD_Pista($pistasLibres,$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],'../Controllers/Reservas_Controller.php');
+			break;
+			
+			case 'Confirmar_ADD_Pista':
 			print_r($_REQUEST);
 				$reserva = getDataForm();
 				//Asigna los datos obtenidos al objeto reserva		
