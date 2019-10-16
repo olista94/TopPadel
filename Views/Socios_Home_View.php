@@ -31,16 +31,16 @@ Fecha: -->
       </head>
       <body class="estilosocio">
         <article class="textosocio">
-         <p>Ser socio de TopPadel tiene premio, si eres un amante del padel , este es tu sitio. </p>
-         <p>TopPadel te ofrece una serie de ventajas por ser socio: </p>
+         <p><?php echo $strings['Ser socio de TopPadel tiene premio. Si eres un amante del padel, este es tu sitio.']; ?></p>
+         <p><?php echo $strings['TopPadel te ofrece una serie de ventajas por ser socio:']; ?> </p>
          <p>
            <u>
-             <li type="circle">Descuentos en material deportivo. </li>
-             <li type="circle">Descuentos en empresas colaboradoras asociadas. </li>
-             <li type="circle">Reserva por teléfono. </li>
-             <li type="circle">Descuento en servicios de fisioterapia. </li>
+             <li type="circle"><?php echo $strings['Descuentos en material deportivo.']; ?> </li>
+             <li type="circle"><?php echo $strings['Descuentos en empresas colaboradoras asociadas.']; ?> </li>
+             <li type="circle"><?php echo $strings['Reserva por teléfono.']; ?> </li>
+             <li type="circle"><?php echo $strings['Descuento en servicios de fisioterapia.']; ?> </li>
            </u>
-           <br>¡Y muchas más ventajas! <em class="palabranegrita">¡Descúbrelas!</em>
+           <br><?php echo $strings['¡Y muchas más ventajas!']; ?> <em class="palabranegrita"><?php echo $strings['¡Descúbrelas!']; ?></em>
         </p>
         </article>
       </body>
