@@ -35,10 +35,10 @@ Fecha: -->
          <p>TopPadel te ofrece una serie de ventajas por ser socio: </p>
          <p>
            <u>
-             <li type="circle">Descuentos en la compra de material deportivo. </li>
+             <li type="circle">Descuentos en material deportivo. </li>
              <li type="circle">Descuentos en empresas colaboradoras asociadas. </li>
              <li type="circle">Reserva por teléfono. </li>
-             <li type="circle">Primera consumición gratuita en las instalaciones. </li>
+             <li type="circle">Descuento en servicios de fisioterapia. </li>
            </u>
            <br>¡Y muchas más ventajas! <em class="palabranegrita">¡Descúbrelas!</em>
         </p>
