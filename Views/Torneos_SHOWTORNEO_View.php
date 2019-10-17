@@ -89,6 +89,7 @@ include_once '../Functions/Authentication.php';
 			
 		<?php
 				}
+				
 	
 			
 		?>                    
@@ -141,16 +142,24 @@ include_once '../Functions/Authentication.php';
 		
 		?>
 			<tr>
-				<form action="../Controllers/Promociones_Controller.php" method="post" name="action" >
+			<form action="../Controllers/Partidos_Controller.php" method="post" name="action" >
 					
 					<input type="hidden" name="ID_Partido" value="<?php echo $datos['ID_Partido']; ?>">
 					<!--Datos-->
 					<td><?php echo "$datos[0]-$datos[1]" ; ?></td>
 					<td><?php echo "$datos[2]-$datos[3]" ; ?></td>
 					<td><?php echo "$datos[4]-$datos[5]" ; ?></td>
-				
+					
+				<td style="text-align:right">
+					<!--Botones para editar,borrar o ver en detalle-->
+						<button class="manos" name="action" value="Cerrar_Partido" type="submit"></button>
+						<button class="add" name="action" value="Confirmar_SHOWCURRENT1" type="submit"></button>
+						<button class="acta" name="action" value="Acta_Partido" type="submit"></button>
+						
+					</td>				
 				
 			</tr>
+			
 		<?php
 			}
 		?>                    

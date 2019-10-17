@@ -3,7 +3,7 @@ CREADO POR:
 Fecha: -->
   <?php
  //Declaracion de la clase 
- class Socios_Home{	 
+ class Socios_Home_Delete{	 
 	
 	//Variable con el enlace al form de ADD pista
 	var $enlace;	
@@ -53,7 +53,7 @@ Fecha: -->
 
     <!--Boton para acceder a formulario de socio-->
 	
-    <button  type="submit" name="action" value="Hacerse_Socio2" class="botonsocio"></button>
+    <button  type="submit" name="action" value="Borrar_Socio" class="botonsocioborrar">Ya no quiero ser socio</button>
 
 	</form>
  

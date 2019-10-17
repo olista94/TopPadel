@@ -5,7 +5,6 @@ Fecha: 26/12/2018-->
 <?php
  //Declaracion de la clase 
 class Reservas_ADD_Pista{
-
 	//Descripcion de la tarea a la que pertenece la fase a añadir
 	var $pistasLibres;
 	var $fecha_reserva;
@@ -15,7 +14,6 @@ class Reservas_ADD_Pista{
 	//Constructor de la clase
 	function __construct($pistasLibres,$fecha_reserva,$hora_inicio,$enlace){
 				
-
 		$this -> pistasLibres = $pistasLibres;
 		$this -> fecha_reserva = $fecha_reserva;
 		$this -> hora_inicio = $hora_inicio;
@@ -38,20 +36,18 @@ class Reservas_ADD_Pista{
 				<input type = "hidden" name = "fecha_reserva" value = '<?php echo $this->fecha_reserva; ?>'>
 				<input type = "hidden" name = "hora_inicio" value = '<?php echo $this->hora_inicio; ?>'>
 				<legend><?php echo $strings['Añadir reserva'];?>
-				
+
 				</legend>
 
 				<div>
-				<!--Campo descripcion de la fase-->
-					
-				<!--Campo para seleccionar (o no) los contactos de la fase-->
+
 					<label>
 					<?php echo $strings['Pista']; ?></label>
 					<select name="pista_ID_Pista">
 						<?php
-							while($pista=$this->pistasLibres->fetch_array()){
+							while($pistasLibres=$this->pistasLibres->fetch_array()){
 						?>
-								<option value="<?php echo $pista[0];?>"><?php echo $pista[1];?>
+								<option value="<?php echo $pistasLibres[0];?>"><?php echo $pistasLibres[1];?>
 
 								</option>
 						<?php
@@ -70,4 +66,4 @@ class Reservas_ADD_Pista{
 <?php
 	}
 }
-?>
+?> 

@@ -99,12 +99,14 @@ Fecha: 20/12/2018-->
 				
 				<tr>
                     <th><?php echo $strings['IBAN']; ?></th>
-                    <td><?php echo $this -> fila['IBAN']; ?></td>
+                    <td><?php if($this -> fila['IBAN'] == '') echo $strings['No es socio'];
+					else echo $this -> fila['IBAN']; ?></td>
                 </tr>
 				
 				<tr>
                     <th><?php echo $strings['Cuenta']; ?></th>
-                    <td><?php echo $this -> fila['cuenta']; ?></td>
+                    <td><?php if($this -> fila['cuenta'] == '') echo $strings['No es socio'];
+					else echo $this -> fila['cuenta']; ?></td>
                 </tr>
                                                                         
             </table>
