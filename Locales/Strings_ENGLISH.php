@@ -19,10 +19,10 @@ array(
 	'Ser socio de TopPadel tiene premio. Si eres un amante del padel, este es tu sitio.' => 'Being a member of TopPadel has its rewards. If you are a paddle lover, this is your place.',
 	'TopPadel te ofrece una serie de ventajas por ser socio:' => 'TopPadel offers you a series of advantages for being a member:',
 	'Descuentos en material deportivo.' => 'Discounts on sports equipment.',
-	'Descuentos en empresas colaboradoras asociadas.' => 'Discounts in partner partner companies.',
-	'Reserva por teléfono.' => 'Book by phone.',
+	'Descuentos en empresas colaboradoras asociadas.' => 'Discounts in partner companies.',
+	'Reserva por teléfono.' => 'Booking by phone.',
 	'Descuento en servicios de fisioterapia.' => 'Physiotherapy services discount.',
-	'¡Y muchas más ventajas!'=> 'And many more advantages!',
+	'¡Y muchas más ventajas!'=> 'And a lot more!',
 	'¡Descúbrelas!'=>'Discover them!',
 	
 	'Torneos' => 'Championships',
