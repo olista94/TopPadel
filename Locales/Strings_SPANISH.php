@@ -17,15 +17,6 @@ array(
 	'El login no existe' => 'El login no existe',
 	'Volver' => 'Volver',
 
-	'Ser socio de TopPadel tiene premio. Si eres un amante del padel, este es tu sitio.' => 'Ser socio de TopPadel tiene premio. Si eres un amante del padel, este es tu sitio.',
-	'TopPadel te ofrece una serie de ventajas por ser socio:' => 'TopPadel te ofrece una serie de ventajas por ser socio:',
-	'Descuentos en material deportivo.' => 'Descuentos en material deportivo.',
-	'Descuentos en empresas colaboradoras asociadas.' => 'Descuentos en empresas colaboradoras asociadas.',
-	'Reserva por teléfono.' => 'Reserva por teléfono.',
-	'Descuento en servicios de fisioterapia.' => 'Descuento en servicios de fisioterapia.',
-	'¡Y muchas más ventajas!'=> '¡Y muchas más ventajas!',
-	'¡Descúbrelas!'=>'¡Descúbrelas!',
-
 
 	'Torneos' => 'Torneos',
 	'Torneo' => 'Torneo',
@@ -103,6 +94,20 @@ array(
 	'IBAN' => 'IBAN',
 	'Cuenta' => 'Cuenta',
 	'Socio' => 'Socio',
+	'Borrar socio' => 'Borrar socio',
+	'No es socio' => 'No es socio',
+	'Acta del partido' => 'Acta del partido',
+	'Set 1' => 'Set 1',
+	'Set 2' => 'Set 2',
+	'Set 3' => 'Set 3',
+	'Ser socio de TopPadel tiene premio. Si eres un amante del padel, este es tu sitio.' => 'Ser socio de TopPadel tiene premio. Si eres un amante del padel, este es tu sitio.',
+	'TopPadel te ofrece una serie de ventajas por ser socio:' => 'TopPadel te ofrece una serie de ventajas por ser socio:',
+	'Descuentos en material deportivo.' => 'Descuentos en material deportivo.',
+	'Descuentos en empresas colaboradoras asociadas.' => 'Descuentos en empresas colaboradoras asociadas.',
+	'Reserva por teléfono.' => 'Reserva por teléfono.',
+	'Descuento en servicios de fisioterapia.' => 'Descuento en servicios de fisioterapia.',
+	'¡Y muchas más ventajas!'=> '¡Y muchas más ventajas!',
+	'¡Descúbrelas!'=>'¡Descúbrelas!',
 	
 	
 	'Registro' => 'Registro',
