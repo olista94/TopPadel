@@ -533,6 +533,34 @@ button {
   margin-bottom: 3px;
 }
 
+.manos{
+  background-image: url(../img/manos.png);
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  margin-top: 5px;
+  margin-right: 2px;
+  padding: 10px 15px;
+  margin-bottom: 3px;
+}
+
+.acta{
+  background-image: url(../img/archivo.png);
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  margin-top: 5px;
+  margin-right: 2px;
+  padding: 10px 15px;
+  margin-bottom: 3px;
+}
+
 .ver{
   background-image: url(../img/ver.png);
   background-color: Transparent;
@@ -1030,3 +1058,10 @@ nav a{
     box-shadow: none;
 
 }
+
+.botonsocioborrar{
+	
+	background-color: red;
+	margin-left:50%;
+}
+
