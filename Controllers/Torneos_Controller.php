@@ -130,7 +130,7 @@ if(!IsAuthenticated()){
 		
 		case 'Confirmar_SHOWTORNEO':
 			
-			$idtorneo = $_REQUEST['ID_Torneo'];
+				$idtorneo = $_REQUEST['ID_Torneo'];
 				$torneo = new Torneos_Model($idtorneo,'','','','',''); //Se construye el objeto torneo con el email
 				$datos = $torneo->rellenadatos();
 				
@@ -179,7 +179,7 @@ if(!IsAuthenticated()){
 						$mensaje = $partido -> add();
 						$partido1 = new Partidos_Model('','','','','','','','','','','','','','','');
 						$idpartido = $partido1 -> DevolverID();
-						echo $idtorneo;
+						
 						$mensaje1 = $enfrentamiento -> add($idpartido,$idtorneo,$parejasArray[$i],$parejasArray[$j]);
 						//$mensaje1 = $enfrentamiento -> add($idpartido,$parejasArray[$j]);
 						
@@ -189,7 +189,7 @@ if(!IsAuthenticated()){
 				/* $torneo1 = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],'','');
 				$p = $torneo1 -> partidosPareja();//DEVUELVE LOS PARTIDOS DE UNA PAREJA EN UN TORNEO */
 				
-				new MESSAGE('hEGSF','../Controllers/Torneos_Controller.php?action=Confirmar_SHOWTORNEO'); //Devuelve el mensaje de la inserción
+				new MESSAGE('hEGSF','../Controllers/Torneos_Controller.php'); //Devuelve el mensaje de la inserción
 			
 				
 

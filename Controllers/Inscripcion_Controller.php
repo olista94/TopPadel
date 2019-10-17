@@ -64,7 +64,7 @@ if(isset($_SESSION['tipo'])){
 			$id_torneo = $torneo -> BuscarID_Torneo();
 			$_SESSION['idtorneo'] = $_REQUEST['ID_Torneo'];
 			
-			$usuario = new Usuarios_Model('','','','','','','','',$_SESSION['sexo'],'');
+			$usuario = new Usuarios_Model('','','','','','','','',$_SESSION['sexo'],'','','','');
 			$sexo = $_SESSION['sexo'];
 			
 			
@@ -110,8 +110,39 @@ if(isset($_SESSION['tipo'])){
 					new Inscripcion_ADD($torneo,$id_torneo,$disponibles1,'../Controllers/Inscripcions_Controller.php');					
 				}
 				else if( ($cat == 'Mixta' && $sexo == 'Masculina') || ($cat == 'Femenina' && $sexo == 'Femenina') ){
-						$u = $usuario -> BuscarMujer();
-						new Inscripcion_ADD($u,$torneo,$id_torneo,'../Controllers/Inscripcions_Controller.php');
+					
+					$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
+					
+					$todas = $usuario -> BuscarMujer();
+					$apuntadas = $inscripcion -> Apuntados();
+					$apuntadas1 = $inscripcion -> Apuntados1();
+				
+					$todasArray = Array();
+					$apuntadasArray = Array ();//Compañera1
+					$apuntadasArray1 = Array ();//Compañera2
+				
+					while($t = $todas->fetch_array()[0]){
+						array_push($todasArray,$t);					
+					}
+					
+					
+					while($a = $apuntadas->fetch_array()[0]){
+						array_push($apuntadasArray,$a);					
+					}
+					
+					
+					while($a = $apuntadas1->fetch_array()[0]){
+						array_push($apuntadasArray1,$a);					
+					}
+				
+
+					$disponibles = array_diff($todasArray, $apuntadasArray);
+					
+					
+					$disponibles1 = array_diff($disponibles, $apuntadasArray1);
+					
+					
+					new Inscripcion_ADD($torneo,$id_torneo,$disponibles1,'../Controllers/Inscripcions_Controller.php');	
 					}
 				}
 				else{

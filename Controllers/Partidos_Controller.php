@@ -17,12 +17,12 @@ if (!IsAuthenticated()){ //si no está autenticado
 	
 		//Incluye la funciones que se encuentran en los siguientes ficheros:
 		include_once "../Models/Partidos_Model.php";
-		include_once "../Views/Partidos_SHOWALL_View.php";
+		//include_once "../Views/Partidos_SHOWALL_View.php";
 		include_once "../Views/Partidos_ADD_View.php";
-		include_once "../Views/Partidos_SEARCH_View.php";
-		include_once "../Views/Partidos_EDIT_View.php";
-		include_once "../Views/Partidos_SHOWCURRENT_View.php";
-		include_once "../Views/Partidos_DELETE_View.php";
+		//include_once "../Views/Partidos_SEARCH_View.php";
+		//include_once "../Views/Partidos_EDIT_View.php";
+		//include_once "../Views/Partidos_SHOWCURRENT_View.php";
+		//include_once "../Views/Partidos_DELETE_View.php";
 		include_once "../Views/MESSAGE.php";
 		include_once "../Functions/Authentication.php";
 
@@ -57,18 +57,16 @@ if (!IsAuthenticated()){ //si no está autenticado
 			
 			
 					
-			//Pulsa añadir pista en Partidos_SHOWALL
-			case 'Confirmar_ADD1':	
-			if(isset($_SESSION['tipo'])){
-				if($_SESSION['tipo']=='ADMIN'){			
-			//Muestra el form de ADD pista
+			
+			case 'Acta_Partido':	
+					
+					
+					
 				new Partidos_ADD('../Controllers/Partidos_Controller.php');
 				
-				}else{
-					new MESSAGE('No puedes ver esto si no eres administrador', '../Controllers/Partidos_Controller.php'); 
-				}
 				
-			}
+				
+			
 			break;
 			//Confirma el ADD de pista tras rellenar el form ADD
 			case 'Confirmar_ADD2':

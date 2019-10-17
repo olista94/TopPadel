@@ -30,6 +30,7 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Views/Usuarios_SHOWCURRENT_View.php";
 			include_once "../Views/Usuarios_DELETE_View.php";
 			include_once "../Views/Socios_Home_View.php";
+			include_once "../Views/Socios_Home_Delete_View.php";
 			include_once "../Views/Socios_ADD_View.php";
 
 			/* RECOGE LOS DATOS DEL FORMULARIO */
@@ -242,16 +243,30 @@ if(isset($_SESSION['tipo'])){
 	
 	
 	else{
+		$user = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
+		$socio = $user -> DevolverSocio();
+		
+		
 		if($_REQUEST['action'] == 'Confirmar_SHOWCURRENT1'){
+			
 			$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');//Creamos el objeto usuario
 						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
 						new Usuarios_SHOWCURRENT($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
 		}
 
 		else if($_REQUEST['action'] == 'Hacerse_Socio1'){
-			$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
+			if($socio == 'NO'){
+			
+						$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
 						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
-									new Socios_Home($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+						new Socios_Home($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+			}
+			else{
+						$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
+						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
+						new Socios_Home_Delete($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+			}
+			
 		}							
 		else if($_REQUEST['action'] == 'Hacerse_Socio2'){
 									$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
@@ -265,6 +280,15 @@ if(isset($_SESSION['tipo'])){
 									$usuario = getDataForm();
 
 										$mensaje = $usuario->addSocio();//Rellenamos con los datos del usuario
+											new MESSAGE($mensaje,'../Controllers/Torneos_Controller.php');			
+		
+		}
+		
+		else if($_REQUEST['action'] == 'Borrar_Socio'){
+									$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
+									$usuario = getDataForm();
+
+										$mensaje = $usuario->deleteSocio();//Rellenamos con los datos del usuario
 											new MESSAGE($mensaje,'../Controllers/Torneos_Controller.php');			
 		
 		}
