@@ -20,13 +20,13 @@ class Inscripcion_Model{
 function add(){
 	
 	//Sentencia sql para insertar
-	$sql = "INSERT INTO parejas_has_torneos
+	$sql = "INSERT INTO `parejas_has_torneos`(`parejas_ID_Pareja`, `torneos_ID_Torneo`) 
 			VALUES (
 				'$this->parejas_ID_Pareja',
 				'$this->torneos_ID_Torneo'
 				)
 			";
-
+echo $sql;
 	if (!$this->mysqli->query($sql)) { 
 		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
 	}
@@ -185,7 +185,7 @@ function Apuntados()
 										FROM parejas_has_torneos
 										WHERE `torneos_ID_Torneo` = '".$this->torneos_ID_Torneo."')";
 										 ;
-	
+	echo $sql;
 	$result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){
@@ -207,7 +207,7 @@ function Apuntados1()
 										FROM parejas_has_torneos
 										WHERE `torneos_ID_Torneo` = '".$this->torneos_ID_Torneo."')";
 										 ;
-	
+	echo $sql;
 	$result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){
@@ -259,7 +259,7 @@ function DevolverIDParejas($idtorneo)
     $sql = "SELECT `parejas_ID_Pareja`
 			FROM `parejas_has_torneos` p,`parejas` par
 			WHERE (p.`parejas_ID_Pareja` = par.`ID_Pareja`) AND (p.`torneos_ID_Torneo` = '$idtorneo') ";
-	echo $sql;
+	
 	$result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){

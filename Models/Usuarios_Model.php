@@ -105,7 +105,10 @@ function registrar(){
 			email,
 			fecha,
 			sexo,
-			tipo
+			tipo,
+			socio,
+			IBAN,
+			cuenta
 			) 
 				VALUES (
 					'$this->login',
@@ -117,7 +120,10 @@ function registrar(){
 					'$this->email',
 					'$this->fecha',
 					'$this->sexo',
-					'$this->tipo'
+					'$this->tipo',
+					'NO',
+					'',
+					''
 					)";
 			
 		if (!$this->mysqli->query($sql)) {
@@ -264,6 +270,20 @@ function DevolverSexo()
         return 'No existe';//Devuelve mensaje de error	
 } 
 
+function DevolverSocio()
+{	
+    $sql = "SELECT socio FROM usuarios WHERE (`login` = '$this->login')";
+   
+    $result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if ($result->num_rows == 1)
+    {    
+    	return $result -> fetch_array()[0];//Guarda el resultado (El tipo de usuario)
+    } 
+    else
+        return 'No existe';//Devuelve mensaje de error	
+}
+
 function BuscarHombre()
 {	
     $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Masculina' AND `login` <> '".$_SESSION['login']."' AND `login` <> 'admin')";
@@ -282,7 +302,7 @@ function BuscarHombre()
 function BuscarMujer()
 {	
     $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Femenina' AND `login` <> '".$_SESSION['login']."' AND `login` <> 'admin' )";
-     ;
+     ;echo $sql;
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){
@@ -304,7 +324,28 @@ function addSocio(){
 					`cuenta` = '$this->cuenta'
 
 				WHERE (`login` = '$this->login')";
-					echo $sql;
+					
+			
+		if (!$this->mysqli->query($sql)) {
+			
+			return 'Error al insertar';//Devuelve mensaje de error	
+		}
+		else{
+			
+			return  'Insercion correcta'; //operacion de insertado correcta
+		}		
+	}
+	
+	function deleteSocio(){
+
+		//Sentencia sql para insertar	
+		$sql = "UPDATE usuarios SET 
+					`socio`='NO',
+					`IBAN` = '',
+					`cuenta` = ''
+
+				WHERE (`login` = '$this->login')";
+					
 			
 		if (!$this->mysqli->query($sql)) {
 			

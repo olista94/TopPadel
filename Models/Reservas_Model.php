@@ -37,7 +37,7 @@ function add(){
 
 				)
 			";
-echo $sql;
+
 	if (!$this->mysqli->query($sql)) { 
 		return 'Error al insertar';//Devuelve mensaje de error
 	}
@@ -46,16 +46,14 @@ echo $sql;
 	}
 } 
 
-function pistaLibreDia(){
+function pistasLibres(){
 
-	 $sql = "SELECT *
-			from pista
-			where ID_Pista NOT IN (SELECT `pista_ID_Pista`
-								FROM reservas
-								where `fecha_reserva` = '$this->fecha_reserva'
-								GROUP by `pista_ID_Pista`
-								HAVING COUNT(*) = 10)";
-echo $sql;
+	 $sql = "SELECT `ID_Pista`,`Nombre_Pista`
+			FROM pista
+			WHERE `ID_Pista` NOT IN 
+							(SELECT `ID_Pista` FROM reservas r,pista p 
+							WHERE `fecha_reserva` = '$this->fecha_reserva' AND `hora_inicio` = '$this->hora_inicio' AND `pista_ID_Pista` = `ID_Pista`)";
+
 	$resultado = $this->mysqli->query($sql);
 	
 	if (!$resultado) { 
@@ -66,37 +64,14 @@ echo $sql;
 	}
 }	
 
-function horasLibreDia(){
+function BuscarHorasOcupadas(){
 
-	 $sql = "SELECT *
-			from pista
-			where ID_Pista NOT IN (SELECT `pista_ID_Pista`
-								FROM reservas
-								where `hora_inicio` = '$this->hora_inicio'
-								GROUP by `pista_ID_Pista`
-								HAVING COUNT(*) = 10)";
-echo $sql;
-	$resultado = $this->mysqli->query($sql);
+	 $sql = "SELECT `hora_inicio`,COUNT(*) AS Num_Reservas
+			FROM reservas,pista 
+			WHERE `fecha_reserva` = '$this->fecha_reserva' and pista_ID_Pista = ID_Pista GROUP BY `hora_inicio` HAVING COUNT(*) >= (SELECT COUNT(ID_Pista) FROM pista)
+			";
 	
-	if (!$resultado) { 
-		return 'No hay pistas este dia';//Devuelve mensaje de error
-	}
-	else{ 
-		return $resultado; //Devuelve mensaje de exito	
-	}
-}	
 
-function BuscarHorasLibres(){
-
-	 $sql = "SELECT `hora_inicio`
-			FROM reservas
-			where `hora_inicio` NOT IN (SELECT `hora_inicio`
-								FROM reservas
-								where `fecha_reserva` = '$this->fecha_reserva')
-								";
-			
-	
-echo $sql;
 	$resultado = $this->mysqli->query($sql);
 	
 	if (!$resultado) { 

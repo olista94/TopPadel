@@ -126,7 +126,7 @@ function rellenadatos()
 {	
 	
     $sql = "SELECT * FROM torneo WHERE (`ID_Torneo` = '$this->ID_Torneo')";
-   echo $sql;
+   
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'No existe'; //Devuelve mensaje de error
 	}

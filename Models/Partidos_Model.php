@@ -52,7 +52,7 @@ function add(){
 			//Sentencia sql que insetara la categoria
 		$sql = "INSERT INTO partidos (
 			ronda,
-			grupo,
+			
 			pista_ID_Pista
 
 			) 
@@ -60,11 +60,11 @@ function add(){
 					
 					'Grupos',
 					
-					'A',
+					
 					NULL
 					
 					)";
-			
+			 echo $sql;
 			//Si ya se han insertado la PK o FK
 		if (!$this->mysqli->query($sql)) {
 			
@@ -80,7 +80,7 @@ function add(){
 	$sql = "SELECT MAX(ID_Partido) FROM partidos";
 
 	$result = $this->mysqli->query($sql);//Guarda el resultado
-    
+   
 	if ($result->num_rows == 1){
 		return $result -> fetch_array()[0];
 	}else{

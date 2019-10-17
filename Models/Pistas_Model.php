@@ -133,6 +133,20 @@ function searchById(){
 	}
 }
 
+function DevolverTodasLasPistas(){ 
+	$sql = "SELECT `ID_Pista`,`Nombre_Pista`
+			  FROM pista	   
+			   ";
+		//No la encuentra   
+	if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';
+		
+	}
+	else{ //Busqueda positiva
+		return $resultado;
+	}
+}
+
 //Funcion de borrado de una pista
 function delete()
 {	

@@ -25,14 +25,14 @@ function add($ID_Partido,$ID_Torneo,$ID_ParejaLocal,$ID_ParejaVisitante){
 	//Sentencia sql para insertar
 	$sql = "INSERT INTO parejas_has_partidos
 			VALUES (
-			'".$idparejalocal."'
+			
 				'".$ID_Partido."',
 				'".$ID_Torneo."',
 				'".$ID_ParejaLocal."',
 				'".$ID_ParejaVisitante."'
 				)
 			";
-echo $sql;
+
 	if (!$this->mysqli->query($sql)) { 
 		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
 	}
@@ -49,7 +49,7 @@ function partidosPareja(){
 
 			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido
 			AND (`ID_ParejaLocal` = '$this->ID_ParejaLocal' OR `ID_ParejaVisitante` = '$this->ID_ParejaVisitante')
-			"; echo $sql;
+			"; 
 
 	if (!$resultado = $this->mysqli->query($sql)) { 
 		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
