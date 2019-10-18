@@ -98,6 +98,8 @@ array(
 	'Descuento en servicios de fisioterapia.' => 'Desconto en servicios de fisioterapia.',
 	'¡Y muchas más ventajas!'=> '¡E moitas máis vantaxes!',
 	'¡Descúbrelas!'=>'¡Descúbreas!',
+	'Fecha partido' => 'Data partido',
+	'Hora partido' => 'Hora partido',
 	
 
 	'Ediciones' => 'Edicións',

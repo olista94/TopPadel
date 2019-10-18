@@ -105,6 +105,8 @@ array(
 	'Descuento en servicios de fisioterapia.' => 'Physiotherapy services discount.',
 	'¡Y muchas más ventajas!'=> 'And a lot more!',
 	'¡Descúbrelas!'=>'Discover them!',
+	'Fecha partido' => 'Match day',
+	'Hora partido' => 'Game time',
 	
 	
 	'Volver' => 'Back',
