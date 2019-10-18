@@ -15,6 +15,8 @@ if (!IsAuthenticated()){ //si no está autenticado
 	include_once "../Views/Promociones_SHOWALL_Todas_View.php";
 	include_once "../Views/Promociones_SHOWALL_Mias_View.php";
 	include_once "../Views/Promociones_ADD_View.php";
+	include_once "../Views/Promociones_ADD_Fecha_View.php";
+	include_once "../Views/Promociones_ADD_Hora_View.php";
 	include_once "../Views/Promociones_SEARCH_View.php";
 	include_once "../Views/Promociones_DELETE_View.php";
 	include_once "../Views/Promociones_SHOWCURRENT_View.php";
@@ -50,9 +52,15 @@ if (!IsAuthenticated()){ //si no está autenticado
 		}else{
 			$pista_ID_Pista = ""; //Si no, se pone como vacío
 		}
+		
+		if(isset($_REQUEST['socio'])){
+			$socio = $_REQUEST['socio'];//Si el campo se le ha pasado se le asigna
+		}else{
+			$socio = ""; //Si no, se pone como vacío
+		}
 		//Construye el objeto promocion con los parámetros
 		$promocion = new Promociones_Model ($ID_Promo, $fecha, $hora_inicio, $usuarios_login,
-			$pista_ID_Pista);
+			$pista_ID_Pista,$socio);
 		
 		//Devuelve el objeto promocion
 		return $promocion;
@@ -65,13 +73,95 @@ if (!IsAuthenticated()){ //si no está autenticado
 	switch ($_REQUEST['action']){
 		//Añadir una promocion desde el showall
 		case 'Confirmar_ADD1':
-
-				$pistas = new Pistas_Model("","","",""); //Construye el objeto categorias llamando al modelo
-				$p = $pistas -> search(); //Busca las categorias
 				
-				new Promociones_ADD($p,'../Controllers/Promociones_Controller.php');	//Crea la vista de añadir
-			//Si se le pasan datos entonces los recoge
+			new Promociones_ADD_Fecha('../Controllers/Promociones_Controller.php');	//Crea la vista de añadir
 		break;
+
+		case 'Confirmar_ADD_Fecha':
+					
+				$promociones = new Promociones_Model("",$_REQUEST['fecha'],"","","","");
+				
+				$horasOcupadas = $promociones -> BuscarHorasOcupadas();
+				
+				$array = Array ('08:00:00','09:30:00','11:00:00','12:30:00','14:00:00','15:30:00','17:00:00','18:30:00','20:00:00','21:30:00');
+				
+		
+				$ocup = Array();
+				
+				while($h = $horasOcupadas->fetch_array()[0]){
+					array_push($ocup,$h);
+					
+				}
+				
+				$resultado = array_diff($array, $ocup);
+				
+				new Promociones_ADD_Hora($resultado,$_REQUEST['fecha'],'../Controllers/Promociones_Controller.php');	//Crea la vista de añadir
+				
+				
+			break;
+
+			case 'Confirmar_ADD_Hora':
+				/*$promociones = new Promociones_Model("",$_REQUEST['fecha'],$_REQUEST['hora_inicio'],"","","");
+				$pistasLibres = $promociones -> pistasLibres();*/
+				
+				/* $pista = new Pistas_Model("","","","");
+				$pistasTotales = $pista->DevolverTodasLasPistas();
+				
+				$arrayIDsOcupadas = Array();
+				$arrayIDsTotales = Array();
+				$arrayNombresOcupadas = Array();
+				$arrayNombresTotales = Array();
+				
+				while($i = $pistasOcupadas->fetch_array()[0]){
+					array_push($arrayIDsOcupadas,$i);
+				}
+				
+				while($j = $pistasTotales->fetch_array()[0]){
+					array_push($arrayIDsTotales,$j);
+				}
+				
+				while($i = $pistasOcupadas->fetch_array()[1]){
+					array_push($arrayNombresOcupadas,$i);
+				}
+				
+				while($j = $pistasTotales->fetch_array()[1]){
+					array_push($arrayNombresTotales,$j);
+				}
+				
+				$IDsLibres = array_diff($arrayIDsTotales, $arrayIDsOcupadas);
+				$NombresLibres = array_diff($arrayNombresTotales, $arrayNombresOcupadas); */
+
+				//Vaina de Iago
+				if(isset($_SESSION['tipo'])){
+				if($_SESSION['tipo']=='ADMIN'){	
+				$promocion = getDataForm();	//Asigna los datos obtenidos al objeto promocion		
+				$mensaje = $promocion-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
+				
+				$idpromo = $promocion -> DevolverIDPromo();
+				echo $idpromo;
+				$apuntar = new Promociones_has_Usuarios_Model($idpromo,"");
+				$a = $apuntar -> add();
+				
+				
+				//Si el insertado es correcto
+				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');	
+				}
+				else{
+					$promocion = getDataForm();	//Asigna los datos obtenidos al objeto promocion	
+					$mensaje = $promocion-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
+				
+					$idpromo = $promocion -> DevolverIDPromo();
+				
+					$apuntar = new Promociones_has_Usuarios_Model($idpromo,$_SESSION['login']);
+					$a = $apuntar -> add();
+				
+				
+				//Si el insertado es correcto
+				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');	
+				}
+			}
+			break;
+
 		case 'Confirmar_ADD2':	
 		
 			if(isset($_SESSION['tipo'])){
@@ -107,7 +197,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 		
 		case 'Confirmar_INSCRIPCION1':
 		
-				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","");
+				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","");
 				
 				$ins = $promocion -> PuedeApuntarse();
 				
@@ -157,18 +247,18 @@ if (!IsAuthenticated()){ //si no está autenticado
 		case 'Confirmar_SEARCH2':
 			//Si el usuario es de tipo admin puede buscar entre todas las tareas
 			
-			$promocion = new Promociones_Model('','','','','');				
+			$promocion = new Promociones_Model('','','','','','');				
 			$promocion = getDataForm(); 
 					
 			$datos = $promocion-> searchAdmin(); 
 			$usuarios = $promocion -> ContarUsuarios();
-			new Promociones_SHOWALL($datos,$usuarios,'../Controllers/Promociones_Controller.php'); 		
+			new Promociones_SHOWALL_Todas($datos,$usuarios,'../Controllers/Promociones_Controller.php'); 		
 			
 		break;
 		//Si se le da a borrar desde la vista del showall
 		case 'Confirmar_DELETE1':		
 				
-				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","");
+				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","");
 				
 				$datos = $promocion -> rellenadatos();
 				$array = $datos -> fetch_array();
@@ -183,13 +273,13 @@ if (!IsAuthenticated()){ //si no está autenticado
 		
 		// Si queremos borrar desde la vista de borrar
 		case 'Confirmar_DELETE2':		
-			$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","");
+			$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","");
 			$mensaje = $promocion-> delete(); //Llamamos a delete y guardamos el mensaje que devuelve
 			new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php'); //Mostramos el mensaje	
 		break;
 		//Si queremos mostrar los datos de una tarea en concreto
 		case 'Confirmar_SHOWCURRENT':
-			$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","");
+			$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","");
 				
 				$datos = $promocion -> rellenadatos();
 				$array = $datos -> fetch_array();
@@ -207,7 +297,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 			if(isset($_SESSION['tipo'])){
 				//Si el usuario es de tipo admin
 				if($_SESSION['tipo']=='ADMIN'){		   
-					$promocion = new Promociones_Model('','','','','');//Creamos un objeto promocion
+					$promocion = new Promociones_Model('','','','','','');//Creamos un objeto promocion
 					
 					$datos = $promocion -> PromocionesShowAllTodas();
 					$usuarios = $promocion -> ContarUsuarios();
@@ -219,7 +309,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 					switch ($_REQUEST['action']){
 		
 					case 'Mostrar_Todas':
-						$promocion = new Promociones_Model('','','','','');//Creamos un objeto promocion
+						$promocion = new Promociones_Model('','','','','','');//Creamos un objeto promocion
 						
 						$datos = $promocion -> PromocionesShowAllTodas();
 						$usuarios = $promocion -> ContarUsuarios();
@@ -229,7 +319,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 					
 					default:
 						
-						$promocion = new Promociones_Model('','','','','');//Creamos un objeto promocion
+						$promocion = new Promociones_Model('','','','','','');//Creamos un objeto promocion
 						
 						$datos = $promocion -> PromocionesShowAllMias();
 						$usuarios = $promocion -> ContarUsuarios();

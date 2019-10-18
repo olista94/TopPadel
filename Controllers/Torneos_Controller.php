@@ -1,8 +1,6 @@
 <?php
 
-//Variable de sesion
 session_start();
-
 //Incluye la funciones que se encuentran en los siguientes ficheros:
 include_once "../Views/MESSAGE.php";
 include_once "../Functions/Authentication.php";
@@ -131,8 +129,10 @@ if(!IsAuthenticated()){
 		case 'Confirmar_SHOWTORNEO':
 			
 				$idtorneo = $_REQUEST['ID_Torneo'];
-				$torneo = new Torneos_Model($idtorneo,'','','','',''); //Se construye el objeto torneo con el email
-				$datos = $torneo->rellenadatos();
+				$torneo = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],'',''); 
+				$datos1 = $torneo->partidosPareja();
+				
+				
 				
 				$inscripcion = new Inscripcion_Model('',$idtorneo);
 				$clasificacion = $inscripcion -> DevolverClasificacion();
@@ -141,7 +141,7 @@ if(!IsAuthenticated()){
 				$apuntados1 = $apuntados -> DevolverParejasTorneo($idtorneo);
 				
 
-				new Torneos_SHOWTORNEO($datos,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php'); //Se muestran los datos en una vista SHOWCURRENT
+				new Torneos_SHOWTORNEO($datos1,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php'); //Se muestran los datos en una vista SHOWCURRENT
 			
 		break;
 		
@@ -201,7 +201,7 @@ if(!IsAuthenticated()){
 				$idtorneo = $_REQUEST['ID_Torneo'];
 				
 				$torneo = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],$_REQUEST['ID_Pareja'],$_REQUEST['ID_Pareja']); 
-				$datos1 = $torneo->partidosPareja($_REQUEST['ID_Pareja'],$_REQUEST['ID_Pareja']);
+				$datos1 = $torneo->partidosPareja();
 				
 				
 				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
@@ -224,6 +224,8 @@ if(!IsAuthenticated()){
 				//new MESSAGE('HOLAS','../Controllers/Torneos_Controller.php'); 
 				
 		break;
+		
+		
 		//Accion por defecto cuando no hay ninguna accion
 		default: /*PARA EL SHOWALL */
 		if(isset($_SESSION['tipo'])){
