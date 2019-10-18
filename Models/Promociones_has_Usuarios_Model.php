@@ -20,12 +20,13 @@ class Promociones_has_Usuarios_Model{
 function add(){
 	
 	//Sentencia sql para insertar
-	$sql = "INSERT INTO Promociones_has_Usuarios
+	$sql = "INSERT INTO Promociones_has_Usuarios (`promociones_ID_Promo`, `usuarios_login`) 
 			VALUES (
 				'$this->promociones_ID_Promo',
 				'$this->usuarios_login'
 				)
 			";
+			
  ;
 	if (!$this->mysqli->query($sql)) { 
 		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error

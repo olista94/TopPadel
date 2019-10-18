@@ -10,14 +10,16 @@ class Promociones_Model {
 	var $hora_inicio;
 	var $usuarios_login_usuario;
 	var $pista_ID_Pista;
+	var $socio;
 	
 //Constructor de la clase
-function __construct($ID_Promo, $fecha, $hora_inicio, $usuarios_login_usuario, $pista_ID_Pista){
+function __construct($ID_Promo, $fecha, $hora_inicio, $usuarios_login_usuario, $pista_ID_Pista, $socio){
 	$this->ID_Promo = $ID_Promo;
 	$this->fecha = $fecha;
 	$this->hora_inicio = $hora_inicio;
 	$this->usuarios_login_usuario = $usuarios_login_usuario;
 	$this->pista_ID_Pista = $pista_ID_Pista;
+	$this->socio = $socio;
 		//Incluimos el archivo de acceso a la bd
 		include_once 'Access_DB.php';
 		//Funcion de conexion a la bd
@@ -32,10 +34,10 @@ function add(){
 				'$this->fecha',
 				'$this->hora_inicio',
 				'$this->usuarios_login_usuario',
-				'$this->pista_ID_Pista',
+				NULL,
 				'NO'
 				)
-			"; ;
+			";
 	if (!$this->mysqli->query($sql)) { 
 		return 'Error al insertar';//Devuelve mensaje de error
 	}
@@ -60,17 +62,15 @@ function search1(){
 //Funcion para buscar todas las promociones si es ADMIN
 function searchAdmin(){ 
 	$sql = "
-			  SELECT promo.ID_Promo,fecha,hora_inicio,usuarios_login_usuario,Nombre_Pista,pista_ID_Pista
-			   FROM promociones promo,pista p
-			   WHERE (`pista_ID_Pista`=`ID_Pista`) 
-			   && (
+			  SELECT promo.ID_Promo,fecha,hora_inicio,usuarios_login_usuario,pista_ID_Pista
+			   FROM promociones promo
+			   WHERE 
+			    (
 					(`usuarios_login_usuario` LIKE '%$this->usuarios_login_usuario%') &&
-	 				(`pista_ID_Pista` LIKE '%$this->pista_ID_Pista%') &&
 					(`fecha` LIKE '%$this->fecha%') &&
 					(`hora_inicio` LIKE '%$this->hora_inicio%') &&
 					(`ID_Promo` LIKE '%$this->ID_Promo%')
 			)";  
-
 	if (!($resultado = $this->mysqli->query($sql))){
 	return 'Error en la búsqueda';//Devuelve mensaje de error
 	
@@ -89,9 +89,12 @@ function delete()
     if ($result->num_rows == 1)
     {
     	//Sentencia sql para borrar
+		$sql1 = "DELETE FROM `promociones_has_usuarios` WHERE `promociones_ID_Promo` = '$this->ID_Promo'";
         $sql = "DELETE FROM promociones WHERE (`ID_Promo` = '$this->ID_Promo')";
-        
-        $this->mysqli->query($sql);//Guarda el resultado
+        echo $sql1;
+		
+        $this->mysqli->query($sql1);
+		$this->mysqli->query($sql);//Guarda el resultado
         
     	return 'Borrado correctamente';//Devuelve mensaje de exito
     } 
@@ -116,9 +119,9 @@ function rellenadatos() {
 //Funcion que devuelve todas las promociones
 function PromocionesShowAllTodas(){
 	$sql = "SELECT ID_Promo,fecha,hora_inicio,usuarios_login_usuario,
-			pista_ID_Pista,p.Nombre_Pista
-			FROM promociones promo,pista p
-			WHERE promo.`pista_ID_Pista`= p.ID_Pista";
+			pista_ID_Pista
+			FROM promociones promo
+			";
 	
 
 	if (!($resultado = $this->mysqli->query($sql))){
@@ -132,9 +135,10 @@ function PromocionesShowAllTodas(){
 
 function PromocionesShowAllMias(){
 	$sql = "SELECT ID_Promo,fecha,hora_inicio,usuarios_login_usuario,
-			pista_ID_Pista,p.Nombre_Pista
-			FROM promociones promo,pista p
-			WHERE promo.`pista_ID_Pista`= p.ID_Pista AND `usuarios_login_usuario` = '".$_SESSION['login']."'";
+			pista_ID_Pista
+			FROM promociones promo
+			WHERE `usuarios_login_usuario` = '".$_SESSION['login']."'
+			";
 	
 
 	if (!($resultado = $this->mysqli->query($sql))){
@@ -159,6 +163,24 @@ function DevolverIDPromo()
 		return $result -> fetch_array()[0];
 	}else{
 		return false;
+	}
+}
+
+function BuscarHorasOcupadas(){
+
+	 $sql = "SELECT `hora_inicio`,COUNT(*) AS Num_Reservas
+			FROM promociones,pista 
+			WHERE `fecha` = '$this->fecha' and pista_ID_Pista = ID_Pista GROUP BY `hora_inicio` HAVING COUNT(*) >= (SELECT COUNT(ID_Pista) FROM pista)
+			";
+	echo $sql;
+
+	$resultado = $this->mysqli->query($sql);
+	
+	if (!$resultado) { 
+		return 'No hay horas disponibles';//Devuelve mensaje de error
+	}
+	else{ 
+		return $resultado; //Devuelve mensaje de exito	
 	}
 }
 

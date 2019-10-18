@@ -44,7 +44,8 @@ function add($ID_Partido,$ID_Torneo,$ID_ParejaLocal,$ID_ParejaVisitante){
 function partidosPareja(){
 	
 	//Sentencia sql para insertar
-	$sql = "SELECT par.usuarios_login as Local1,par.usuarios_login1 as Local2,par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2,part.Sets_Local,part.Sets_Visitante
+	$sql = "SELECT part.ID_Partido as ID_Partido,par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2,
+			par1.ID_Pareja as ID_ParejaVisitante,par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2,part.Sets_Local,part.Sets_Visitante
 			FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph
 
 			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido
@@ -58,8 +59,6 @@ function partidosPareja(){
 		return $resultado; ; //Devuelve mensaje de exito	
 	}
 }
-
-
 
 //Funcion sql que buscara las categorias que correspondan
 function search(){ 

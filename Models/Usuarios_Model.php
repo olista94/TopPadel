@@ -302,7 +302,7 @@ function BuscarHombre()
 function BuscarMujer()
 {	
     $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Femenina' AND `login` <> '".$_SESSION['login']."' AND `login` <> 'admin' )";
-     ;echo $sql;
+     ;
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){

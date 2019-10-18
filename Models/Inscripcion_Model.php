@@ -26,7 +26,7 @@ function add(){
 				'$this->torneos_ID_Torneo'
 				)
 			";
-echo $sql;
+
 	if (!$this->mysqli->query($sql)) { 
 		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
 	}
@@ -185,7 +185,7 @@ function Apuntados()
 										FROM parejas_has_torneos
 										WHERE `torneos_ID_Torneo` = '".$this->torneos_ID_Torneo."')";
 										 ;
-	echo $sql;
+	
 	$result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){
@@ -207,7 +207,7 @@ function Apuntados1()
 										FROM parejas_has_torneos
 										WHERE `torneos_ID_Torneo` = '".$this->torneos_ID_Torneo."')";
 										 ;
-	echo $sql;
+	
 	$result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){
@@ -223,8 +223,9 @@ function DevolverClasificacion()
 {	
     $sql = "SELECT `torneos_ID_Torneo`,`nombre`,`edicion`,`parejas_ID_Pareja`,`usuarios_login`,`usuarios_login1`,`PJ`,`PG`,`PP`,`Ptos`
 			FROM `parejas_has_torneos` p,`parejas` par,`torneo` t
-			WHERE (p.`parejas_ID_Pareja` = par.`ID_Pareja`) AND (p.`torneos_ID_Torneo` = t.`ID_Torneo`) AND (p.`torneos_ID_Torneo` = '".$this->torneos_ID_Torneo."') ";
-										 ;
+			WHERE (p.`parejas_ID_Pareja` = par.`ID_Pareja`) AND (p.`torneos_ID_Torneo` = t.`ID_Torneo`) AND (p.`torneos_ID_Torneo` = '".$this->torneos_ID_Torneo."') 
+			ORDER BY `Ptos` DESC";
+										 
 	
 	$result = $this->mysqli->query($sql);//Guarda el resultado
     
