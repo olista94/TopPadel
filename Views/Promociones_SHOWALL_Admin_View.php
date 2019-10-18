@@ -57,7 +57,7 @@ include_once '../Views/Header.php';
 			<tr>
 				<th><?php echo $strings['Usuario']; ?></th>
 				<th><?php echo $strings['Fecha']; ?></th>
-				<th><?php echo $strings['Pista']; ?></th>
+				<th><?php echo $strings['Hora']; ?></th>
 				<th><?php echo $strings['Anotados']; ?></th>
 				<th></th>
 			</tr>
@@ -74,7 +74,7 @@ include_once '../Views/Header.php';
 					<!--Datos-->
 					<td><?php echo $fila['usuarios_login_usuario']; ?></td>
 					<td><?php echo $fila['fecha']; ?></td>
-					<td><?php echo $fila['Nombre_Pista'] ?></td>
+					<td><?php echo $fila['hora_inicio'] ?></td>
 					<td>
 						 <!--Muestra el numero de usuarios-->
 						<?php

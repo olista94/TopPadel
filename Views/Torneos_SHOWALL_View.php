@@ -2,7 +2,7 @@
 //Comprobamos que está autenticado
 include_once '../Functions/Authentication.php';
 //Header
-include '../Views/Header.php';
+include_once '../Views/Header.php';
 
 
  //Declaracion de la clase 

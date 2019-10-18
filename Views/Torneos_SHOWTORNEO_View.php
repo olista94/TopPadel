@@ -115,7 +115,7 @@ include_once '../Functions/Authentication.php';
 								
 						?>
 								
-								<option value="<?php echo $apuntados1[0];?>"><?php echo "$apuntados1[1]-$apuntados1[2]" ;?>
+								<option value="<?php echo $apuntados1[0];?>"> <?php echo "$apuntados1[1]-$apuntados1[2]" ;?> 
 								
 								</option>
 						<?php
@@ -123,7 +123,7 @@ include_once '../Functions/Authentication.php';
 						?>
 					</select>
 				<button type="submit" name="action" value="Ver_Partidos_Pareja" value="Submit" class="aceptar"></button>
-				<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
+				
 					</div>
 					
 				</form>
@@ -143,12 +143,14 @@ include_once '../Functions/Authentication.php';
 		?>
 			<tr>
 			<form action="../Controllers/Partidos_Controller.php" method="post" name="action" >
-					
+					<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
 					<input type="hidden" name="ID_Partido" value="<?php echo $datos['ID_Partido']; ?>">
+					<input type="hidden" name="ID_ParejaLocal" value="<?php echo $datos['ID_ParejaLocal']; ?>">
+					<input type="hidden" name="ID_ParejaVisitante" value="<?php echo $datos['ID_ParejaVisitante']; ?>">
 					<!--Datos-->
-					<td><?php echo "$datos[0]-$datos[1]" ; ?></td>
 					<td><?php echo "$datos[2]-$datos[3]" ; ?></td>
-					<td><?php echo "$datos[4]-$datos[5]" ; ?></td>
+					<td><?php echo "$datos[5]-$datos[6]" ; ?></td>
+					<td><?php echo "$datos[7]-$datos[8]" ; ?></td>
 					
 				<td style="text-align:right">
 					<!--Botones para editar,borrar o ver en detalle-->
@@ -156,8 +158,8 @@ include_once '../Functions/Authentication.php';
 						<button class="add" name="action" value="Confirmar_SHOWCURRENT1" type="submit"></button>
 						<button class="acta" name="action" value="Acta_Partido" type="submit"></button>
 						
-					</td>				
-				
+				</td>				
+			</form>
 			</tr>
 			
 		<?php
