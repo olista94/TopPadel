@@ -1065,3 +1065,12 @@ nav a{
 	margin-left:50%;
 }
 
+.generar-cal-form{
+	padding : 0px;
+	margin: 0px;
+}
+
+#generar-cal-form
+{
+	padding = 0px;
+}
