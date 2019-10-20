@@ -107,6 +107,18 @@ array(
 	'¡Descúbrelas!'=>'Discover them!',
 	'Fecha partido' => 'Match day',
 	'Hora partido' => 'Game time',
+	'Detalles del partido' => 'Game details',
+	'Grupo' => 'Group',
+	'1º Set' => '1º Set',
+	'2º Set' => '2º Set',
+	'3º Set' => '3º Set',
+	'No disputado' => 'Not disputed',
+	'No puedes tener mas de 5 reservas activas a la vez' => 'You can´t have more than 5 bookings at the same time',
+	'No puedes cancelar una reserva que se dispute hoy' => 'You can´t delete a booking in the same day',
+	'Apuntados' => 'Listed',
+	'No puedes reservar partidos que no juegas' => 'You can´t book games that you don´t take part in',
+	
+	
 	
 	
 	'Volver' => 'Back',

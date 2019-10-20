@@ -100,7 +100,16 @@ array(
 	'¡Descúbrelas!'=>'¡Descúbreas!',
 	'Fecha partido' => 'Data partido',
 	'Hora partido' => 'Hora partido',
-	
+	'Detalles del partido' => 'Detalles do partido',
+	'Grupo' => 'Grupo',
+	'1º Set' => '1º Set',
+	'2º Set' => '2º Set',
+	'3º Set' => '3º Set',
+	'No disputado' => 'Non disputado',
+	'No puedes tener mas de 5 reservas activas a la vez' => 'Non podes ter mais de 5 reservas activas á vez',
+	'No puedes cancelar una reserva que se dispute hoy' => 'Non podes cancelar unha reserva que se dispute hoxe',
+	'Apuntados' => 'Apuntados',
+	'No puedes reservar partidos que no juegas' => 'Non podes reservar partidos que non xogas',
 
 	'Ediciones' => 'Edicións',
 	'Edicion' => 'Edición',
