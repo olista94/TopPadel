@@ -43,7 +43,7 @@ function add($ID_Partido,$ID_Torneo,$ID_ParejaLocal,$ID_ParejaVisitante){
 
 function partidosPareja(){
 	
-	//Sentencia sql para insertar
+	
 	$sql = "SELECT part.ID_Partido as ID_Partido,par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2,
 			par1.ID_Pareja as ID_ParejaVisitante,par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2,part.Sets_Local,part.Sets_Visitante
 			FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph
@@ -88,71 +88,8 @@ function search(){
 
 
 
-//Funcion de borrado de un torneo
-function delete()
-{	
-    $sql = "SELECT * FROM torneo WHERE (`ID_Torneo` = '$this->ID_Torneo')";
-    
-    $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
-    
-    if ($result->num_rows == 1)
-    {
-    	//Sentencia sql para borrar
-        $sql = "DELETE FROM torneo WHERE (`ID_Torneo` = '$this->ID_Torneo')";
-        
-        $this->mysqli->query($sql);//Guarda el resultado
-        
-    	return 'Borrado correctamente';//Devuelve mensaje de exito
-    } 
-    else
-        return 'No existe';//Devuelve mensaje de error
-}
-
-
-//Funcion que obtiene todos los datos de un torneo especifico
-function rellenadatos() 
-{	
-	
-    $sql = "SELECT * FROM torneo WHERE (`ID_Torneo` = '$this->ID_Torneo')";
-   
-    if (!($resultado = $this->mysqli->query($sql))){
-		return 'No existe'; //Devuelve mensaje de error
-	}
-    else{//Devuelve el resultado
-		$result = $resultado;
-		return $result;
-	}
-} 
-//Funcion para editar torneo
-function edit()
-{
-	
-    $sql = "SELECT * FROM torneo WHERE (ID_Torneo = '$this->ID_Torneo')";
-    
-    $result = $this->mysqli->query($sql);//Guarda el resultado
-    
-    if ($result->num_rows == 1)
-    {	
-		//Sentencia sql para editar
-		$sql = "UPDATE torneo SET
-					`nombre` = '$this->nombre',
-					`categoria` = '$this->categoria',
-					`edicion` = '$this->edicion',
-					`fecha` = '$this->fecha',
-					`nivel` = '$this->nivel'
-
-				WHERE (`ID_Torneo` = '$this->ID_Torneo')";
-
-        if (!($resultado = $this->mysqli->query($sql))){
-			return 'Error en la modificación';//Devuelve mensaje de error
-		}
-		else{ 
-			return 'Modificado correctamente'; //Devuelve mensaje de exito
-		}
-    }
-    else 
-    	return 'No existe';//Devuelve mensaje de error
-} 
+ 
+ 
 
 
 

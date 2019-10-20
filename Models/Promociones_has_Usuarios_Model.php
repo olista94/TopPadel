@@ -108,11 +108,11 @@ function delete()
 
 
 //Funcion que obtiene todos los datos de un torneo especifico
-function rellenadatos() 
+function apuntadosPromo() 
 {	
 	
-    $sql = "SELECT * FROM torneo WHERE (`ID_Torneo` = '$this->ID_Torneo')";
-   
+    $sql = "SELECT usuarios_login FROM Promociones_has_Usuarios WHERE (`promociones_ID_Promo` = '".$this->promociones_ID_Promo."')";
+  
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'No existe'; //Devuelve mensaje de error
 	}
@@ -120,36 +120,6 @@ function rellenadatos()
 		$result = $resultado;
 		return $result;
 	}
-} 
-//Funcion para editar torneo
-function edit()
-{
-	
-    $sql = "SELECT * FROM torneo WHERE (ID_Torneo = '$this->ID_Torneo')";
-    
-    $result = $this->mysqli->query($sql);//Guarda el resultado
-    
-    if ($result->num_rows == 1)
-    {	
-		//Sentencia sql para editar
-		$sql = "UPDATE torneo SET
-					`nombre` = '$this->nombre',
-					`categoria` = '$this->categoria',
-					`edicion` = '$this->edicion',
-					`fecha` = '$this->fecha',
-					`nivel` = '$this->nivel'
-
-				WHERE (`ID_Torneo` = '$this->ID_Torneo')";
-
-        if (!($resultado = $this->mysqli->query($sql))){
-			return 'Error en la modificación';//Devuelve mensaje de error
-		}
-		else{ 
-			return 'Modificado correctamente'; //Devuelve mensaje de exito
-		}
-    }
-    else 
-    	return 'No existe';//Devuelve mensaje de error
 } 
 
 

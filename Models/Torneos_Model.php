@@ -166,6 +166,22 @@ function edit()
     else 
     	return 'No existe';//Devuelve mensaje de error
 }
+
+function comprobarGenerado()
+{	
+    $sql = "SELECT * FROM parejas_has_partidos WHERE (`ID_Torneo` = '$this->ID_Torneo')";
+   
+    $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
+    
+    if ($result->num_rows >= 1)
+    {
+		return true;//Devuelve mensaje de exito
+    } 
+	else{
+        return false;//Devuelve mensaje de error
+	}
+}
+
 function BuscarCategoria(){
 	$sql = "SELECT categoria
 			FROM torneo

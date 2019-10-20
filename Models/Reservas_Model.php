@@ -112,16 +112,18 @@ function search1(){
 
 //Funcion para buscar todas las tareas si es ADMIN
 function ReservasShowAll(){ 
-
+	
+	$fecha = date('Y-m-d', time());
+	
 	$sql = "
 			  SELECT fecha_reserva,hora_inicio,login,nombre_pista,pista_ID_Pista
 			   FROM reservas,pista,usuarios 
-			   WHERE `usuarios_login`= `login` && `pista_ID_Pista`=`ID_Pista` 
-				Order by 1
+			   WHERE `usuarios_login`= `login` && `pista_ID_Pista`=`ID_Pista` AND `fecha_reserva` >=  '$fecha'
+			   Order by 1
 	
-	
+
 	";		   
-	
+		
 	if (!($resultado = $this->mysqli->query($sql))){
 	return 'Error en la búsqueda';//Devuelve mensaje de error
 	
@@ -133,10 +135,12 @@ function ReservasShowAll(){
 
 function ReservasShowAllNormal(){ 
 
+	$fecha = date('Y-m-d', time());
+	
 	$sql = "
 			  SELECT fecha_reserva,hora_inicio,login,nombre_pista,pista_ID_Pista
 			   FROM reservas,pista,usuarios 
-			   WHERE `usuarios_login`= `login` && `pista_ID_Pista`=`ID_Pista` && `usuarios_login` = '".$_SESSION['login']."'
+			   WHERE `usuarios_login`= `login` && `pista_ID_Pista`=`ID_Pista` && `usuarios_login` = '".$_SESSION['login']."' AND `fecha_reserva` >=  '$fecha'
 				Order by 1
 	
 	
@@ -199,6 +203,57 @@ function delete()
     } 
     else
         return 'No existe';//Devuelve mensaje de error
+}
+
+function borrarAntiguas()
+{	
+   
+		$fecha = date('Y-m-d', time());
+    	//Sentencia sql para borrar
+        $sql = "DELETE FROM reservas WHERE (`fecha_reserva` < '$fecha'
+										)";
+        
+        $this->mysqli->query($sql);
+        
+    	return 'Borrado correctamente';
+    
+}
+
+function contarReservasUsuario(){
+
+	 $sql = "SELECT `usuarios_login`,COUNT(*) as Num_Reservas FROM `reservas` WHERE `usuarios_login` = '".$_SESSION['login']."' GROUP by `usuarios_login`
+			";
+	
+
+	$resultado = $this->mysqli->query($sql);
+	
+	if (!$resultado) { 
+		return 'No hay horas disponibles';//Devuelve mensaje de error
+	}
+	else{ 
+		return $resultado; //Devuelve mensaje de exito	
+	}
+}
+
+	function puedeBorrarReserva()
+{
+	$fecha = date('Y-m-d', time());
+	
+    $sql = "SELECT * FROM `reservas`  WHERE (`usuarios_login` = '$this->usuarios_login'
+										AND `pista_ID_Pista` = '$this->pista_ID_Pista'
+										AND `fecha_reserva` = '$this->fecha_reserva'
+										AND `hora_inicio` = '$this->hora_inicio'
+										)";
+    
+    $result = $this->mysqli->query($sql);
+    
+	
+    if ($fecha == $this->fecha_reserva)
+    {	
+		return false;
+    }
+    else 
+		return true;
 }
 
 //Funcion que devuelve los datos de una tarea
