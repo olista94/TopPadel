@@ -33,7 +33,7 @@
 				<input type="hidden" name="ID_Torneo" value= "<?php echo $this -> fila['ID_Torneo'] ?>">	
             	<table class="showU" style="margin-left: 30%;">	
 
-                <tr><th class="title" colspan="4"><?php echo $strings['Detalles del torneo']; ?>
+                <tr><th class="title" colspan="4"><?php echo $strings['Detalles del partido']; ?>
                    <!--Boton para volver atrás -->
 				   <button onclick="location.href='../Controllers/Torneos_Controller.php';" class="volver"></button></th>
                 </tr>
@@ -61,16 +61,22 @@
 				
 
                 <tr>
-                    <th><?php echo $strings['Sets Local']; ?></th>
-                    <td><?php echo $this -> fila['Sets_Local']; ?></td>
+                    <th><?php echo $strings['1º Set']; ?></th>
+                    <td><?php echo $this -> fila['JuegosSet1_Local'];echo "-";echo $this -> fila['JuegosSet1_Visitante']; ?></td>
                 </tr>
 
                 <tr>
-                    <th><?php echo $strings['Sets Visitante']; ?></th>
-                    <td><?php echo $this -> fila['Sets_Visitante']; ?></td>
+                    <th><?php echo $strings['2º Set']; ?></th>
+                    <td><?php echo $this -> fila['JuegosSet2_Local'];echo "-";echo $this -> fila['JuegosSet2_Visitante']; ?></td>
+                </tr>
+				
+				<tr>
+                    <th><?php echo $strings['3º Set']; ?></th>
+                    <td><?php if($this -> fila['JuegosSet3_Local'] == 0 && $this -> fila['JuegosSet3_Visitante'] == 0) echo $strings['No disputado'];
+					else{ echo $this -> fila['JuegosSet3_Local'];echo "-";echo $this -> fila['JuegosSet3_Visitante']; }?></td>
                 </tr>
 
-				   
+				  
                                                                         
             </table>
 

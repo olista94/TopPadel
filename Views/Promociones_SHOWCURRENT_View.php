@@ -12,14 +12,16 @@ Fecha: 26/12/2018-->
 	var $fila;
 	//Prioridad de la reserva
 	var $pista;
+	var $apuntados;
 	//Variable con el enlace a la tabla DELETE
 	var $enlace;
 	//Constructor de la clase	
-	function __construct($fila,$pista,$enlace){
+	function __construct($fila,$pista,$apuntados,$enlace){
 
 		$this -> fila = $fila -> fetch_array();
 
 		$this -> pista = $pista -> fetch_array();
+		$this -> apuntados = $apuntados -> fetch_array();
 		$this -> enlace = $enlace;
 
 		$this -> mostrar();
@@ -72,9 +74,7 @@ Fecha: 26/12/2018-->
                     <tr>
                         <th><?php echo $strings['Hora inicio']; ?></th>
                         <td><?php echo $this -> fila['hora_inicio']; ?></td>
-                    </tr>
-					
-                                                                            
+                    </tr>                                          
                 </table>
             </form>            
         </div>       
