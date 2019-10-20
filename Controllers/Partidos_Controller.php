@@ -26,6 +26,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 		//include_once "../Views/Partidos_EDIT_View.php";
 		include_once "../Views/Partidos_SHOWCURRENT_View.php";		
 		include_once "../Views/MESSAGE.php";
+		include_once "../Views/ALERT.php";
 		include_once "../Functions/Authentication.php";
 
 		/* RECOGE LOS DATOS DEL FORMULARIO */
@@ -161,7 +162,16 @@ if (!IsAuthenticated()){ //si no está autenticado
 			
 			case 'Cerrar_Partido':	
 					
+				$partido = new Partidos_Model($_REQUEST['ID_Partido'],"","","","","","","","","","","","","","");
+				$puedeCerrar = $partido -> puedeReservarPartido();
+				
+				if($puedeCerrar == true){
+					
 				new Partidos_ADD_Fecha($_REQUEST['ID_Partido'],$_REQUEST['ID_Torneo'],'../Controllers/Partidos_Controller.php');
+				}
+				else{
+					new MESSAGE('No puedes reservar partidos que no juegas','../Controllers/Torneos_Controller.php');
+				}
 			
 			break;
 			
@@ -216,8 +226,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 					$pL = $_REQUEST['ID_ParejaLocal'];
 					$pV = $_REQUEST['ID_ParejaVisitante'];
 					
-					$part1 -> getClasificacion($_REQUEST["ID_Torneo"],$pL);
-					$part1 -> getClasificacion($_REQUEST["ID_Torneo"],$pV);
+					
 					
 					$mensaje = $partido->addResultado();
 					$set3 = $part1 -> seJuega3Set();
@@ -229,6 +238,8 @@ if (!IsAuthenticated()){ //si no está autenticado
 						$partido1 = $partido -> comprobar3Set();
 					}
 					
+					$part1 -> getClasificacion($_REQUEST["ID_Torneo"],$pL);
+					$part1 -> getClasificacion($_REQUEST["ID_Torneo"],$pV);
 					
 				new MESSAGE($mensaje,'../Controllers/Torneos_Controller.php');
 			
@@ -320,7 +331,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 			case 'Confirmar_SHOWCURRENT1':
 
 				$partido = new Partidos_Model($_REQUEST['ID_Partido'],'','','','','','','','','','','','','','');
-				echo $_REQUEST['ID_Partido'];
+				
 				$datos = $partido -> rellenadatos();
 
 				//$array = $datos -> fech_array();

@@ -138,7 +138,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$mensaje = $promocion-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
 				
 				$idpromo = $promocion -> DevolverIDPromo();
-				echo $idpromo;
+				
 				$apuntar = new Promociones_has_Usuarios_Model($idpromo,"");
 				$a = $apuntar -> add();
 				
@@ -279,7 +279,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 		break;
 		//Si queremos mostrar los datos de una tarea en concreto
 		case 'Confirmar_SHOWCURRENT':
-			$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","");
+				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","");
 				
 				$datos = $promocion -> rellenadatos();
 				$array = $datos -> fetch_array();
@@ -289,7 +289,10 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$p = $pistas -> searchById();
 				$datos = $promocion -> rellenadatos();
 				
-				new Promociones_SHOWCURRENT($datos,$p,'../Controllers/Promociones_Controller.php'); //Creamos una vista de delete con los datos obtenidos
+				$apuntados = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],"");
+				$apunt = $apuntados -> apuntadosPromo();
+				
+				new Promociones_SHOWCURRENT($datos,$p,$apunt,'../Controllers/Promociones_Controller.php'); //Creamos una vista de delete con los datos obtenidos
 		break;
 		
 		default: /*PARA EL SHOWALL */

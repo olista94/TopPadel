@@ -67,8 +67,15 @@ if (!IsAuthenticated()){ //si no está autenticado
 	switch ($_REQUEST['action']){
 		//Añadir una reserva desde el showall
 		case 'Confirmar_ADD1':
-				
-				new Reservas_ADD_Fecha('../Controllers/Reservas_Controller.php');	//Crea la vista de añadir
+				$reserva = new Reservas_Model("","",'','');
+				$numReservas = $reserva->contarReservasUsuario()->fetch_array()[1];
+
+				if($numReservas >= 5){
+					new MESSAGE('No puedes tener mas de 5 reservas activas a la vez','../Controllers/Reservas_Controller.php');
+				}
+				else{
+					new Reservas_ADD_Fecha('../Controllers/Reservas_Controller.php');	//Crea la vista de añadir
+				}
 			break;
 			
 			case 'Confirmar_ADD_Fecha':
@@ -172,11 +179,10 @@ if (!IsAuthenticated()){ //si no está autenticado
 		case 'Confirmar_DELETE1':		
 			
 				
-				 //Construye el objeto categorias llamando al modelo
-				//$p = $pistas -> search(); 
-				
 				$reserva = new Reservas_Model($_REQUEST['usuarios_login'],$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],"");
+				$puedeBorrar = $reserva -> puedeBorrarReserva();
 				
+				if($puedeBorrar == true){
 				$datos = $reserva -> rellenadatos();
 				$array = $datos -> fetch_array();
 				
@@ -186,7 +192,10 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$datos = $reserva -> rellenadatos();
 				
 				new Reservas_DELETE($datos,$p,'../Controllers/Reservas_Controller.php'); //Creamos una vista de delete con los datos obtenidos
-			
+				}
+				else{
+					new MESSAGE('No puedes cancelar una reserva que se dispute hoy','../Controllers/Reservas_Controller.php');
+				}
 		break;
 		
 		// Si queremos borrar desde la vista de borrar
@@ -218,7 +227,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 				//Si el usuario es de tipo admin
 				if($_SESSION['tipo']=='ADMIN'){		   
 					$reserva = new Reservas_Model('','','','','','');//Creamos un objeto reserva
-				
+					$reserva -> borrarAntiguas();
 					$pistas = new Pistas_Model("","","",""); //Construye el objeto pistas llamando al modelo
 					$p = $pistas -> search(); //Busca las pistas
 					       
@@ -231,7 +240,8 @@ if (!IsAuthenticated()){ //si no está autenticado
 				}else{
 					
 					$reserva = new Reservas_Model('','','','','','');//Creamos un objeto reserva
-				
+					$reserva -> borrarAntiguas();
+					
 					$pistas = new Pistas_Model("","","",""); //Construye el objeto pistas llamando al modelo
 					$p = $pistas -> search(); //Busca las pistas
 					       

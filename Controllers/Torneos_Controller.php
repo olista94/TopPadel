@@ -17,6 +17,7 @@ if(!IsAuthenticated()){
 	include_once "../Views/Torneos_EDIT_View.php";
 	include_once "../Views/Torneos_SHOWCURRENT_View.php";
 	include_once "../Views/Torneos_SHOWTORNEO_View.php";
+	include_once "../Views/Torneos_SHOWTORNEO_Generado_View.php";
 	include_once "../Views/Torneos_DELETE_View.php";
 	include_once "../Models/Inscripcion_Model.php";
 	include_once "../Models/Partidos_Model.php";
@@ -127,22 +128,40 @@ if(!IsAuthenticated()){
 		break;
 		
 		case 'Confirmar_SHOWTORNEO':
-			
-				$idtorneo = $_REQUEST['ID_Torneo'];
-				$torneo = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],'',''); 
-				$datos1 = $torneo->partidosPareja();
+		
+				$torneo1 = new Torneos_Model($_REQUEST['ID_Torneo'],'','','','','');
+				$generado = $torneo1 -> comprobarGenerado();
 				
+				if($generado == true){
 				
-				
-				$inscripcion = new Inscripcion_Model('',$idtorneo);
-				$clasificacion = $inscripcion -> DevolverClasificacion();
-			
-				$apuntados = new Inscripcion_Model('','');
-				$apuntados1 = $apuntados -> DevolverParejasTorneo($idtorneo);
-				
+					$idtorneo = $_REQUEST['ID_Torneo'];
+					$torneo = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],'',''); 
+					$datos1 = $torneo->partidosPareja();
 
-				new Torneos_SHOWTORNEO($datos1,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php'); //Se muestran los datos en una vista SHOWCURRENT
-			
+					$inscripcion = new Inscripcion_Model('',$idtorneo);
+					$clasificacion = $inscripcion -> DevolverClasificacion();
+				
+					$apuntados = new Inscripcion_Model('','');
+					$apuntados1 = $apuntados -> DevolverParejasTorneo($idtorneo);
+					
+
+					new Torneos_SHOWTORNEO_Generado($datos1,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php'); //Se muestran los datos en una vista SHOWCURRENT
+				}
+				else{
+					$idtorneo = $_REQUEST['ID_Torneo'];
+					$torneo = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],'',''); 
+					$datos1 = $torneo->partidosPareja();
+					
+					$inscripcion = new Inscripcion_Model('',$idtorneo);
+					$clasificacion = $inscripcion -> DevolverClasificacion();
+				
+					$apuntados = new Inscripcion_Model('','');
+					$apuntados1 = $apuntados -> DevolverParejasTorneo($idtorneo);
+					
+
+					new Torneos_SHOWTORNEO($datos1,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php'); //Se muestran los datos en una vista SHOWCURRENT
+				}
+				
 		break;
 		
 		case 'Generar_Calendario':
@@ -198,6 +217,9 @@ if(!IsAuthenticated()){
 		break;
 				
 		case 'Ver_Partidos_Pareja':
+				$torneo1 = new Torneos_Model($_REQUEST['ID_Torneo'],'','','','','');
+				$generado = $torneo1 -> comprobarGenerado();
+				
 				$idtorneo = $_REQUEST['ID_Torneo'];
 				
 				$torneo = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],$_REQUEST['ID_Pareja'],$_REQUEST['ID_Pareja']); 
@@ -210,18 +232,12 @@ if(!IsAuthenticated()){
 				//$p = $torneo -> partidosPareja();
 				$apuntados = new Inscripcion_Model('','');
 				$apuntados1 = $apuntados -> DevolverParejasTorneo($idtorneo);
-				
-				/* $torneo1 = new Torneos_Model('','','','','','');
-				$resultados = Array();
-				
-				while($fila = $datos1 -> fetch_array()){
-					array_push($resultados,$torneo1 -> ResultadosPartidosPareja($fila['ID_Torneo'],$fila['ID_ParejaLocal'],$fila['ID_ParejaVisitante'])[0]);	
-				} */
 
 				
-				
-				new Torneos_SHOWTORNEO($datos1,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php'); 
-				//new MESSAGE('HOLAS','../Controllers/Torneos_Controller.php'); 
+				if($generado == true)
+					new Torneos_SHOWTORNEO_Generado($datos1,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php'); 
+				else
+					new Torneos_SHOWTORNEO($datos1,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php');
 				
 		break;
 		
