@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-10-2019 a las 00:05:57
+-- Tiempo de generación: 22-10-2019 a las 17:13:06
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.1.32
 
@@ -36,6 +36,8 @@ USE `todolist` ;
 -- -----------------------------------------------------
 
 GRANT ALL PRIVILEGES ON todolist.* TO todolist@localhost IDENTIFIED BY "todolist";
+
+-- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `parejas`
@@ -70,7 +72,9 @@ INSERT INTO `parejas` (`ID_Pareja`, `usuarios_login`, `usuarios_login1`) VALUES
 (34, 'olaya', 'mariana'),
 (35, 'xiana', 'rocio'),
 (36, 'ana', 'carmen'),
-(37, 'rosina', 'celia');
+(37, 'rosina', 'celia'),
+(38, 'ypgarcia', 'ana'),
+(39, 'belen', 'ypgarcia');
 
 -- --------------------------------------------------------
 
@@ -90,42 +94,87 @@ CREATE TABLE `parejas_has_partidos` (
 --
 
 INSERT INTO `parejas_has_partidos` (`ID_Partido`, `ID_Torneo`, `ID_ParejaLocal`, `ID_ParejaVisitante`) VALUES
-(1, 3, 29, 30),
-(2, 3, 29, 31),
-(3, 3, 29, 32),
-(4, 3, 29, 33),
-(5, 3, 29, 34),
-(6, 3, 29, 35),
-(7, 3, 29, 36),
-(8, 3, 29, 37),
-(9, 3, 30, 31),
-(10, 3, 30, 32),
-(11, 3, 30, 33),
-(12, 3, 30, 34),
-(13, 3, 30, 35),
-(14, 3, 30, 36),
-(15, 3, 30, 37),
-(16, 3, 31, 32),
-(17, 3, 31, 33),
-(18, 3, 31, 34),
-(19, 3, 31, 35),
-(20, 3, 31, 36),
-(21, 3, 31, 37),
-(22, 3, 32, 33),
-(23, 3, 32, 34),
-(24, 3, 32, 35),
-(25, 3, 32, 36),
-(26, 3, 32, 37),
-(27, 3, 33, 34),
-(28, 3, 33, 35),
-(29, 3, 33, 36),
-(30, 3, 33, 37),
-(31, 3, 34, 35),
-(32, 3, 34, 36),
-(33, 3, 34, 37),
-(34, 3, 35, 36),
-(35, 3, 35, 37),
-(36, 3, 36, 37);
+(300, 3, 29, 30),
+(301, 3, 29, 31),
+(302, 3, 29, 32),
+(303, 3, 29, 33),
+(304, 3, 29, 34),
+(305, 3, 29, 35),
+(306, 3, 29, 36),
+(307, 3, 29, 37),
+(308, 3, 30, 31),
+(309, 3, 30, 32),
+(310, 3, 30, 33),
+(311, 3, 30, 34),
+(312, 3, 30, 35),
+(313, 3, 30, 36),
+(314, 3, 30, 37),
+(315, 3, 31, 32),
+(316, 3, 31, 33),
+(317, 3, 31, 34),
+(318, 3, 31, 35),
+(319, 3, 31, 36),
+(320, 3, 31, 37),
+(321, 3, 32, 33),
+(322, 3, 32, 34),
+(323, 3, 32, 35),
+(324, 3, 32, 36),
+(325, 3, 32, 37),
+(326, 3, 33, 34),
+(327, 3, 33, 35),
+(328, 3, 33, 36),
+(329, 3, 33, 37),
+(330, 3, 34, 35),
+(331, 3, 34, 36),
+(332, 3, 34, 37),
+(333, 3, 35, 36),
+(334, 3, 35, 37),
+(335, 3, 36, 37),
+(336, 1, 8, 9),
+(337, 1, 8, 10),
+(338, 1, 8, 11),
+(339, 1, 8, 12),
+(340, 1, 8, 13),
+(341, 1, 8, 14),
+(342, 1, 8, 15),
+(343, 1, 8, 16),
+(344, 1, 8, 17),
+(345, 1, 9, 10),
+(346, 1, 9, 11),
+(347, 1, 9, 12),
+(348, 1, 9, 13),
+(349, 1, 9, 14),
+(350, 1, 9, 15),
+(351, 1, 9, 16),
+(352, 1, 9, 17),
+(353, 1, 10, 11),
+(354, 1, 10, 12),
+(355, 1, 10, 13),
+(356, 1, 10, 14),
+(357, 1, 10, 15),
+(358, 1, 10, 16),
+(359, 1, 10, 17),
+(360, 1, 11, 12),
+(361, 1, 11, 13),
+(362, 1, 11, 14),
+(363, 1, 11, 15),
+(364, 1, 11, 16),
+(365, 1, 11, 17),
+(366, 1, 12, 13),
+(367, 1, 12, 14),
+(368, 1, 12, 15),
+(369, 1, 12, 16),
+(370, 1, 12, 17),
+(371, 1, 13, 14),
+(372, 1, 13, 15),
+(373, 1, 13, 16),
+(374, 1, 13, 17),
+(375, 1, 14, 15),
+(376, 1, 14, 16),
+(377, 1, 14, 17),
+(378, 1, 15, 16),
+(379, 1, 15, 17),
+(380, 1, 16, 17);
 
 -- --------------------------------------------------------
 
@@ -147,8 +196,8 @@ CREATE TABLE `parejas_has_torneos` (
 --
 
 INSERT INTO `parejas_has_torneos` (`parejas_ID_Pareja`, `torneos_ID_Torneo`, `PJ`, `PG`, `PP`, `Ptos`) VALUES
-(8, 1, 0, 0, 0, 0),
-(9, 1, 0, 0, 0, 0),
+(8, 1, 1, 0, 1, 1),
+(9, 1, 1, 1, 0, 3),
 (10, 1, 0, 0, 0, 0),
 (11, 1, 0, 0, 0, 0),
 (12, 1, 0, 0, 0, 0),
@@ -157,15 +206,17 @@ INSERT INTO `parejas_has_torneos` (`parejas_ID_Pareja`, `torneos_ID_Torneo`, `PJ
 (15, 1, 0, 0, 0, 0),
 (16, 1, 0, 0, 0, 0),
 (17, 1, 0, 0, 0, 0),
-(29, 3, 8, 5, 3, 18),
-(30, 3, 8, 1, 7, 10),
-(31, 3, 8, 0, 8, 8),
-(32, 3, 8, 2, 6, 12),
-(33, 3, 8, 8, 0, 24),
-(34, 3, 8, 6, 2, 20),
-(35, 3, 8, 6, 2, 20),
-(36, 3, 8, 5, 3, 18),
-(37, 3, 8, 3, 5, 14);
+(29, 3, 2, 1, 1, 4),
+(30, 3, 1, 0, 1, 1),
+(31, 3, 1, 1, 0, 3),
+(32, 3, 0, 0, 0, 0),
+(33, 3, 0, 0, 0, 0),
+(34, 3, 0, 0, 0, 0),
+(35, 3, 0, 0, 0, 0),
+(36, 3, 0, 0, 0, 0),
+(37, 3, 0, 0, 0, 0),
+(38, 5, 0, 0, 0, 0),
+(39, 6, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -196,42 +247,87 @@ CREATE TABLE `partidos` (
 --
 
 INSERT INTO `partidos` (`ID_Partido`, `fecha`, `hora`, `ronda`, `jornada`, `grupo`, `pista_ID_Pista`, `Sets_Local`, `Sets_Visitante`, `JuegosSet1_Local`, `JuegosSet1_Visitante`, `JuegosSet2_Local`, `JuegosSet2_Visitante`, `JuegosSet3_Local`, `JuegosSet3_Visitante`) VALUES
-(1, '2019-10-31', '08:00:00', 'Grupos', '', '', NULL, 2, 0, 6, 1, 6, 1, 0, 0),
-(2, '2019-10-27', '21:30:00', 'Grupos', '', '', NULL, 2, 0, 6, 1, 6, 1, 0, 0),
-(3, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 2, 0, 6, 1, 6, 1, 0, 0),
-(4, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 1, 2, 5, 7, 6, 4, 5, 7),
-(5, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 1, 2, 6, 1, 1, 6, 1, 6),
-(6, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 1, 6, 1, 6, 0, 0),
-(7, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 2, 0, 6, 1, 6, 1, 0, 0),
-(8, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 2, 0, 6, 0, 6, 1, 0, 0),
-(9, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 2, 1, 1, 6, 6, 2, 6, 4),
-(10, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 3, 6, 0, 6, 0, 0),
-(11, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 1, 6, 5, 7, 0, 0),
-(12, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 0, 6, 2, 6, 0, 0),
-(13, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 3, 6, 5, 7, 0, 0),
-(14, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 4, 6, 0, 6, 0, 0),
-(15, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 3, 6, 3, 6, 0, 0),
-(16, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 1, 2, 3, 6, 7, 5, 5, 7),
-(17, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 2, 6, 1, 6, 0, 0),
-(18, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 1, 6, 2, 6, 0, 0),
-(19, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 2, 6, 1, 6, 0, 0),
-(20, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 0, 6, 4, 6, 0, 0),
-(21, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 3, 6, 1, 6, 0, 0),
-(22, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 0, 6, 1, 6, 0, 0),
-(23, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 0, 6, 2, 6, 0, 0),
-(24, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 3, 6, 2, 6, 0, 0),
-(25, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 2, 6, 4, 6, 0, 0),
-(26, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 3, 6, 0, 6, 0, 0),
-(27, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 2, 0, 6, 3, 6, 2, 0, 0),
-(28, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 2, 0, 6, 2, 6, 3, 0, 0),
-(29, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 2, 0, 6, 4, 6, 3, 0, 0),
-(30, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 2, 0, 6, 1, 6, 1, 0, 0),
-(31, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 2, 6, 3, 6, 0, 0),
-(32, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 2, 0, 6, 3, 6, 4, 0, 0),
-(33, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 2, 0, 6, 1, 7, 6, 0, 0),
-(34, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 0, 2, 4, 6, 4, 6, 0, 0),
-(35, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 2, 0, 6, 4, 6, 4, 0, 0),
-(36, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, 2, 1, 6, 2, 2, 6, 6, 3);
+(300, '2019-10-30', '20:00:00', 'Grupos', '', '', 2, 2, 0, 6, 1, 6, 3, 0, 0),
+(301, '2019-10-30', '20:00:00', 'Grupos', '', '', 5, 1, 2, 3, 6, 6, 3, 6, 7),
+(302, '2019-10-30', '20:00:00', 'Grupos', '', '', 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(303, '2019-10-30', '20:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(304, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(305, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(306, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(307, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(308, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(309, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(310, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(311, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(312, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(313, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(314, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(315, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(316, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(317, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(318, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(319, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(320, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(321, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(322, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(323, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(324, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(325, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(326, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(327, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(328, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(329, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(330, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(331, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(332, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(333, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(334, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(335, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(336, '2019-10-21', '20:00:00', 'Grupos', '', '', 1, 1, 2, 4, 6, 6, 3, 1, 6),
+(337, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(338, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(339, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(340, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(341, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(342, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(343, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(344, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(345, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(346, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(347, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(348, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(349, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(350, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(351, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(352, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(353, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(354, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(355, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(356, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(357, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(358, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(359, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(360, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(361, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(362, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(363, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(364, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(365, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(366, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(367, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(368, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(369, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(370, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(371, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(372, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(373, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(374, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(375, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(376, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(377, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(378, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(379, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(380, '0000-00-00', '00:00:00', 'Grupos', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -273,6 +369,13 @@ CREATE TABLE `promociones` (
   `cerrada` enum('SI','NO') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `promociones`
+--
+
+INSERT INTO `promociones` (`ID_Promo`, `fecha`, `hora_inicio`, `usuarios_login_usuario`, `pista_ID_Pista`, `cerrada`) VALUES
+(55, '2019-10-22', '17:00:00', 'ana', NULL, 'NO');
+
 -- --------------------------------------------------------
 
 --
@@ -283,6 +386,16 @@ CREATE TABLE `promociones_has_usuarios` (
   `promociones_ID_Promo` int(11) NOT NULL,
   `usuarios_login` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `promociones_has_usuarios`
+--
+
+INSERT INTO `promociones_has_usuarios` (`promociones_ID_Promo`, `usuarios_login`) VALUES
+(55, 'alfredo'),
+(55, 'ana'),
+(55, 'olista'),
+(55, 'ypgarcia');
 
 -- --------------------------------------------------------
 
@@ -302,18 +415,19 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`usuarios_login`, `pista_ID_Pista`, `fecha_reserva`, `hora_inicio`) VALUES
-('admin', 1, '2019-10-19', '08:00:00'),
-('admin', 1, '2019-10-19', '15:30:00'),
-('admin', 2, '2019-10-19', '08:00:00'),
-('admin', 2, '2019-10-19', '15:30:00'),
-('admin', 5, '2019-10-19', '08:00:00'),
-('admin', 5, '2019-10-19', '15:30:00'),
-('admin', 6, '2019-10-19', '08:00:00'),
-('admin', 6, '2019-10-19', '15:30:00'),
-('admin', 7, '2019-10-19', '08:00:00'),
-('admin', 7, '2019-10-19', '15:30:00'),
-('admin', 8, '2019-10-19', '08:00:00'),
-('admin', 8, '2019-10-19', '15:30:00');
+('admin', 5, '2019-10-23', '18:00:00'),
+('admin', 7, '2019-10-25', '17:00:00'),
+('admin', 7, '2019-10-30', '20:00:00'),
+('admin', 8, '2019-10-30', '20:00:00'),
+('agenor', 7, '2019-10-30', '18:00:00'),
+('rita', 1, '2019-10-30', '20:00:00'),
+('rita', 2, '2019-10-30', '20:00:00'),
+('rita', 5, '2019-10-30', '20:00:00'),
+('rita', 6, '2019-10-30', '20:00:00'),
+('ypgarcia', 2, '2019-10-25', '12:30:00'),
+('ypgarcia', 6, '2019-10-24', '15:30:00'),
+('ypgarcia', 7, '2019-11-06', '14:00:00'),
+('ypgarcia', 8, '2019-10-23', '21:30:00');
 
 -- --------------------------------------------------------
 
@@ -337,10 +451,10 @@ CREATE TABLE `torneo` (
 INSERT INTO `torneo` (`ID_Torneo`, `nombre`, `categoria`, `fecha`, `edicion`, `nivel`) VALUES
 (1, 'Roland Garros', 'Masculina', '2019-05-22', 2019, 1),
 (2, 'Wimbledon', 'Masculina', '2019-07-01', 2019, 1),
-(3, 'US Open', 'Femenina', '2019-09-12', 2019, 5),
+(3, 'US Open', 'Femenina', '2019-09-12', 2019, 2),
 (4, 'Australia Open', 'Femenina', '2019-01-14', 2019, 3),
-(5, 'Portonovo Open', 'Mixta', '2019-10-22', 2019, 4),
-(6, 'Ourense Tour', 'Mixta', '2019-12-25', 2019, 7);
+(5, 'Portonovo Open', 'Mixta', '2019-10-22', 2019, 3),
+(6, 'Ourense Tour', 'Mixta', '2019-12-25', 2019, 2);
 
 -- --------------------------------------------------------
 
@@ -508,13 +622,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `parejas`
 --
 ALTER TABLE `parejas`
-  MODIFY `ID_Pareja` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `ID_Pareja` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `partidos`
 --
 ALTER TABLE `partidos`
-  MODIFY `ID_Partido` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `ID_Partido` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=381;
 
 --
 -- AUTO_INCREMENT de la tabla `pista`
@@ -526,7 +640,7 @@ ALTER TABLE `pista`
 -- AUTO_INCREMENT de la tabla `promociones`
 --
 ALTER TABLE `promociones`
-  MODIFY `ID_Promo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `ID_Promo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT de la tabla `torneo`
