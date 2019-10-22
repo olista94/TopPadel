@@ -340,6 +340,23 @@ function puedeReservarPartido()//Busca si es uno de los 4 usuarios que juegan un
     else 
 		return false;
 }
+
+function insertarGrupo($ID_Pareja,$grupo)
+{
+	
+		$sql = "INSERT INTO parejas_has_grupos VALUES
+					('".$ID_Pareja."', '".$grupo."')
+				";
+
+        if (!($resultado = $this->mysqli->query($sql))){
+			return 'Error en la modificación';//Devuelve mensaje de error
+		}
+		else{ 
+			return 'Modificado correctamente'; //Devuelve mensaje de exito
+		}
+    
+   
+}
  
 }//fin de clase
 ?> 
