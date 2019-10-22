@@ -101,12 +101,50 @@ function add(){
 			`hora` = '$this->hora'
 			
 			WHERE (`ID_Partido` = '$this->ID_Partido')";
-			 echo $sql;
+			 
 			 
 			//Si ya se han insertado la PK o FK
 		if (!$this->mysqli->query($sql)) {
 			
 			return 'Error al insertar';
+		}
+		//operacion de insertado correcta
+		else{
+			return  'Insercion correcta'; 
+		}		
+	}
+	
+	function pistasLibres(){
+
+	 $sql = "SELECT `ID_Pista`,`Nombre_Pista`
+			FROM pista
+			WHERE `ID_Pista` NOT IN 
+							(SELECT `ID_Pista` FROM reservas r,pista p 
+							WHERE `fecha_reserva` = '$this->fecha' AND `hora_inicio` = '$this->hora' AND `pista_ID_Pista` = `ID_Pista`)";
+
+	$resultado = $this->mysqli->query($sql);
+	
+	if (!$resultado) { 
+		return 'No hay pistas este dia';//Devuelve mensaje de error
+	}
+	else{ 
+		return $resultado; //Devuelve mensaje de exito	
+	}
+}	
+	
+	
+	
+	function addPista($idpista){//Inserta una pista al azar
+			//Sentencia sql que insetara la categoria
+		$sql = "UPDATE partidos SET
+			`pista_ID_Pista` = '".$idpista."'		
+			WHERE (`ID_Partido` = '$this->ID_Partido')";
+			 
+			 
+			//Si ya se han insertado la PK o FK
+		if (!$this->mysqli->query($sql)) {
+			
+			return 'No hay pistas libres ese dia,a esa hora.Por favor,escoge otra fecha';
 		}
 		//operacion de insertado correcta
 		else{

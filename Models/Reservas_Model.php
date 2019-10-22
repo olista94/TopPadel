@@ -46,6 +46,27 @@ function add(){
 	}
 } 
 
+function addReservaPartido($idpista,$fecha,$hora){//Hace una reserva de un campeonato
+
+	//Sentencia sql para insertar
+	$sql = "INSERT INTO reservas
+			VALUES (
+				'".$_SESSION['login']."',
+				'".$idpista."',
+				'".$fecha."',
+				'".$hora."'
+
+				)
+			";
+
+	if (!$this->mysqli->query($sql)) { 
+		return 'No hay pistas disponibles ese dia a esa hora';//Devuelve mensaje de error
+	}
+	else{ 
+		return 'Insercion correcta'; //Devuelve mensaje de exito	
+	}
+} 
+
 function pistasLibres(){
 
 	 $sql = "SELECT `ID_Pista`,`Nombre_Pista`
@@ -53,7 +74,7 @@ function pistasLibres(){
 			WHERE `ID_Pista` NOT IN 
 							(SELECT `ID_Pista` FROM reservas r,pista p 
 							WHERE `fecha_reserva` = '$this->fecha_reserva' AND `hora_inicio` = '$this->hora_inicio' AND `pista_ID_Pista` = `ID_Pista`)";
-
+echo $sql;
 	$resultado = $this->mysqli->query($sql);
 	
 	if (!$resultado) { 
