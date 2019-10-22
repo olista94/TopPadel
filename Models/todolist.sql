@@ -22,6 +22,27 @@ SET time_zone = "+00:00";
 -- Base de datos: `todolist`
 --
 
+--
+-- Drops aqui
+--
+
+DROP SCHEMA IF EXISTS `todolist` ;
+
+-- -----------------------------------------------------
+-- Schema todolist
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `todolist` DEFAULT CHARACTER SET utf8 ;
+USE `todolist` ;
+
+-- --------------------------------------------------------
+
+-- -----------------------------------------------------
+-- User todolist
+-- -----------------------------------------------------
+
+GRANT ALL PRIVILEGES ON todolist.* TO todolist@localhost IDENTIFIED BY "todolist";
+
+-- --------------------------------------------------------
 -- --------------------------------------------------------
 
 --
