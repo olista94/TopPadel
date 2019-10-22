@@ -47,6 +47,56 @@ if(!IsAuthenticated()){
 		//Devuelve el objeto torneo
 		return $torneo;
 	}
+	
+	function numeroGrupos($numParejas){
+		$min = 99;
+		$resultados = Array();
+		$cocienteMenor = 99;
+		
+		if($numParejas < 8){
+			echo "No se ha llegado al minimo";
+		}
+		else if($numParejas == 13 || $numParejas == 14 || $numParejas == 15){
+			return 1;
+		}
+		else{
+			for($i = 8; $i < 13; $i++){
+				$cociente = $numParejas / $i;
+				$resto = $numParejas % $i;
+					if($resto + $i <= 12 && $cociente + $resto < $min && $cociente <= $cocienteMenor){
+						$min = $cociente + $resto;
+						$cocienteMenor = $cociente;
+						array_push($resultados,$cociente);
+					}
+			}
+			return $cocienteMenor;
+		}
+		
+	}
+	
+	function generarGrupos($parejasApuntadas,$partido){
+		print_r($parejasApuntadas);
+		$numGrupos = numeroGrupos(count($parejasApuntadas));
+		echo count($parejasApuntadas);
+		$tope = count($parejasApuntadas);
+		$apuntados = $tope;
+		$contInicio = 0;
+		$contFin = ($apuntados/$numGrupos);
+
+		for($i = 0; $i < $numGrupos; $i++){
+			
+			//echo $numGrupos;
+			for($j = $contInicio; $j < $contFin; $j++){
+				$partido -> insertarGrupo($parejasApuntadas[$j],$i);
+				//unset($parejasApuntadas[$j]);
+
+			}
+				$contInicio = $contFin;
+				$contFin = $contFin + ($apuntados/$numGrupos);
+		}
+
+		//echo $numGrupos;
+	}
 
 
 	//Comprueba si hay una accion seleccionada desde la vista
@@ -183,14 +233,17 @@ if(!IsAuthenticated()){
 
 				$parejasArray = Array();//ARRAY DE PAREJAS (NO SE PARA QUE)
 				
+				//$torneo = numeroGrupos(33);
+				
 				while($apun = $apuntados1->fetch_array()[0]){
 					array_push($parejasArray,$apun);
 			
 				}
-					
-				print_r($parejasArray);
 				
-					$longitud = count($parejasArray);
+				$longitud = count($parejasArray);
+				$partido = new Partidos_Model("","","","","","","","","","","","","","","");
+				$torneo = generarGrupos($parejasArray,$partido);
+				
 				
 				for ($i = 0; $i < $longitud; $i++) {
 					for ($j = $i+1; $j < $longitud; $j++) {
