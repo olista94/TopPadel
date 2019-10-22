@@ -117,6 +117,7 @@ array(
 	'No puedes cancelar una reserva que se dispute hoy' => 'You can´t delete a booking in the same day',
 	'Apuntados' => 'Listed',
 	'No puedes reservar partidos que no juegas' => 'You can´t book games that you don´t take part in',
+	'No hay pistas libres ese dia,a esa hora.Por favor,escoge otra fecha' => 'No free courts this day,at this time.Please,chose another date',
 	
 	
 	

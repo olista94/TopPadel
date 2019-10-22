@@ -90,7 +90,7 @@ array(
 	'Set 1' => 'Set 1',
 	'Set 2' => 'Set 2',
 	'Set 3' => 'Set 3',
-	  'Ser socio de TopPadel tiene premio. Si eres un amante del padel, este es tu sitio.' => 'Ser socio de TopPadel ten premio. Se eres amante do padel, este é teu sitio.',
+	'Ser socio de TopPadel tiene premio. Si eres un amante del padel, este es tu sitio.' => 'Ser socio de TopPadel ten premio. Se eres amante do padel, este é teu sitio.',
 	'TopPadel te ofrece una serie de ventajas por ser socio:' => 'TopPadel ofréceche una serie de vantaxes por ser socio:',
 	'Descuentos en material deportivo.' => 'Descontos en material deportivo.',
 	'Descuentos en empresas colaboradoras asociadas.' => 'Descontos en empresas colaboradoras asociadas.',
@@ -110,6 +110,8 @@ array(
 	'No puedes cancelar una reserva que se dispute hoy' => 'Non podes cancelar unha reserva que se dispute hoxe',
 	'Apuntados' => 'Apuntados',
 	'No puedes reservar partidos que no juegas' => 'Non podes reservar partidos que non xogas',
+	'No hay pistas libres ese dia,a esa hora.Por favor,escoge otra fecha' => 'Non hai pistas dispoñibles ese dia,a esa hora.Por favor,escolle outra data',
+	
 
 	'Ediciones' => 'Edicións',
 	'Edicion' => 'Edición',

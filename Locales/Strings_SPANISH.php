@@ -121,6 +121,9 @@ array(
 	'No puedes cancelar una reserva que se dispute hoy' => 'No puedes cancelar una reserva que se dispute hoy',
 	'Apuntados' => 'Apuntados',
 	'No puedes reservar partidos que no juegas' => 'No puedes reservar partidos que no juegas',
+	'No hay pistas libres ese dia,a esa hora.Por favor,escoge otra fecha' => 'No hay pistas libres ese dia,a esa hora.Por favor,escoge otra fecha',
+	
+	
 	
 	'Registro' => 'Registro',
 	'Inserción realizada con éxito' => 'Inserción realizada con éxito',
