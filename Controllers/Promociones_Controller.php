@@ -231,6 +231,15 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$apuntar = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login']);
 				$mensaje = $apuntar -> add();
 				
+				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","");
+				$promo = $promocion -> ContarUsuarios1();
+				
+				if($promo->fetch_array()[0] == 4){
+					$promocion -> cerrarPromocion();
+				}
+				
+				//echo $promo->fetch_array()[0];
+				
 				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');//Mostramos el mensaje				
 
 				
