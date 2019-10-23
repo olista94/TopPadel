@@ -3,7 +3,6 @@
 <?php
 //Declaracion de la clase
 class Partidos_Model {
-
 	var $ID_Partido;
 	var $fecha;
 	var $hora;
@@ -46,7 +45,6 @@ function __construct($ID_Partido,$fecha,$hora,$ronda,$jornada,$grupo,
 	//Funcion de conexion a la bd
 	$this->mysqli = ConnectDB();
 }
-
 //Funcion para insertar pistas
 function add(){
 			//Sentencia sql que insetara la categoria
@@ -69,7 +67,6 @@ function add(){
 			return  'Insercion correcta'; 
 		}		
 	}
-
 	function addResultado(){
 			//Sentencia sql que insetara la categoria
 		$sql = "UPDATE partidos SET
@@ -115,13 +112,12 @@ function add(){
 	}
 	
 	function pistasLibres(){
-
 	 $sql = "SELECT `ID_Pista`,`Nombre_Pista`
 			FROM pista
 			WHERE `ID_Pista` NOT IN 
 							(SELECT `ID_Pista` FROM reservas r,pista p 
 							WHERE `fecha_reserva` = '$this->fecha' AND `hora_inicio` = '$this->hora' AND `pista_ID_Pista` = `ID_Pista`)";
-
+							echo $sql;
 	$resultado = $this->mysqli->query($sql);
 	
 	if (!$resultado) { 
@@ -196,13 +192,11 @@ function add(){
 	}
 	
 	function BuscarHorasOcupadas(){
-
 	 $sql = "SELECT `hora`,COUNT(*) AS Num_Reservas
 			FROM partidos,pista 
 			WHERE `fecha` = '$this->fecha' and pista_ID_Pista = ID_Pista GROUP BY `hora` HAVING COUNT(*) >= (SELECT COUNT(ID_Pista) FROM pista)
 			";
-	echo $sql;
-
+	
 	$resultado = $this->mysqli->query($sql);
 	
 	if (!$resultado) { 
@@ -275,7 +269,6 @@ function add(){
 	
 	function DevolverID(){
 	$sql = "SELECT MAX(ID_Partido) FROM partidos";
-
 	$result = $this->mysqli->query($sql);//Guarda el resultado
    
 	if ($result->num_rows == 1){
@@ -284,18 +277,15 @@ function add(){
 		return false;
 	}
 }
-
 function DevolverParejasPartido(){
 	
 	//Sentencia sql para insertar
 	$sql = "SELECT  part.ID_Partido as ID_Partido,par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2,
 			par1.ID_Pareja as ID_ParejaVisitante,par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2,part.Sets_Local,part.Sets_Visitante
 			FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph
-
 			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido
 			AND (part.`ID_Partido` = '$this->ID_Partido')
 			"; 
-
 	if (!$resultado = $this->mysqli->query($sql)) { 
 		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
 	}
@@ -307,7 +297,7 @@ function DevolverParejasPartido(){
 	function rellenadatos() 
 {	
     $sql = "SELECT * FROM partidos WHERE (`ID_Partido` = '$this->ID_Partido')";
-	echo $sql;
+	
    //Si no existe
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'No existe'; 
@@ -318,7 +308,6 @@ function DevolverParejasPartido(){
 		return $result;
 	}
 }
-
 function puedeReservarPartido()//Busca si es uno de los 4 usuarios que juegan un partido.True si lo es y puede acordar una fecha y hora para el partido
 {
 	
@@ -341,18 +330,51 @@ function puedeReservarPartido()//Busca si es uno de los 4 usuarios que juegan un
 		return false;
 }
 
-function insertarGrupo($ID_Pareja,$grupo)
+function insertarGrupo($ID_Pareja,$grupo,$idtorneo)
 {
 	
 		$sql = "INSERT INTO parejas_has_grupos VALUES
-					('".$ID_Pareja."', '".$grupo."')
+					('".$ID_Pareja."', '".$grupo."','".$idtorneo."')
 				";
-
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación';//Devuelve mensaje de error
 		}
 		else{ 
 			return 'Modificado correctamente'; //Devuelve mensaje de exito
+		}
+    
+   
+}
+
+function borrarParejaSobrante($ID_Pareja)
+{
+	
+		$sql = "DELETE FROM parejas WHERE `ID_Pareja` = '".$ID_Pareja."'
+					
+				";
+        if (!($resultado = $this->mysqli->query($sql))){
+			return 'Error en la modificación';//Devuelve mensaje de error
+		}
+		else{ 
+			return 'Modificado correctamente'; //Devuelve mensaje de exito
+		}
+    
+   
+}
+ 
+ function parejasCadaGrupo($idtorneo,$grupo)
+{
+	
+		$sql = "SELECT `ID_Pareja` FROM parejas_has_grupos WHERE `ID_Torneo` = '".$idtorneo."' and `grupo` = '".$grupo."'
+					
+				";echo $sql;
+        if (!($resultado = $this->mysqli->query($sql))){
+			return 'Error en la modificación';//Devuelve mensaje de error
+		}
+		else{ 
+			$result = $resultado;//Se guarda el resultado de la consulta sql
+		
+			return $result;//Se devuelve el resultado de la consulta
 		}
     
    

@@ -255,6 +255,7 @@ function ResultadosPartidosPareja($idpartido,$idparejalocal,$idparejavisitante){
 			part.ID_Partido = ".$idpartido." AND par.ID_Pareja = ".$idparejalocal." AND par1.ID_Pareja = ".$idparejavisitante;
 	
 }
+
  
 }
 ?>

@@ -172,7 +172,7 @@ function BuscarHorasOcupadas(){
 			FROM promociones,pista 
 			WHERE `fecha` = '$this->fecha' and pista_ID_Pista = ID_Pista GROUP BY `hora_inicio` HAVING COUNT(*) >= (SELECT COUNT(ID_Pista) FROM pista)
 			";
-	echo $sql;
+	
 
 	$resultado = $this->mysqli->query($sql);
 	
@@ -209,7 +209,7 @@ function ContarUsuarios1()
 			WHERE (`promociones_ID_Promo` = '$this->ID_Promo')
 			GROUP BY `promociones_ID_Promo`
 			";
-    
+		
     $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
     
     if ($result)
@@ -236,6 +236,24 @@ function PuedeApuntarse()
 		return true;
 	}
 }
+
+function cerrarPromocion(){
+			//Sentencia sql que insetara la categoria
+		$sql = "UPDATE promociones SET
+			`cerrada` = 'SI'
+				WHERE (`ID_Promo` = '$this->ID_Promo')";
+			 
+			 
+			//Si ya se han insertado la PK o FK
+		if (!$this->mysqli->query($sql)) {
+			
+			return 'Error al insertar';
+		}
+		//operacion de insertado correcta
+		else{
+			return  'Insercion correcta'; 
+		}		
+	}
 
 
 

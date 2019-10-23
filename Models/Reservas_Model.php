@@ -74,7 +74,7 @@ function pistasLibres(){
 			WHERE `ID_Pista` NOT IN 
 							(SELECT `ID_Pista` FROM reservas r,pista p 
 							WHERE `fecha_reserva` = '$this->fecha_reserva' AND `hora_inicio` = '$this->hora_inicio' AND `pista_ID_Pista` = `ID_Pista`)";
-echo $sql;
+
 	$resultado = $this->mysqli->query($sql);
 	
 	if (!$resultado) { 
