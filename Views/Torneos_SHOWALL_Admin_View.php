@@ -6,7 +6,7 @@ include_once '../Views/Header.php';
 
 
  //Declaracion de la clase 
- class Torneos_SHOWALL{	 
+ class Torneos_SHOWALL_Admin{	 
 	//Datos de los contactos
 	var $datos;
 	//Variable con el enlace al showall
@@ -66,19 +66,15 @@ include_once '../Views/Header.php';
 					<td><?php echo $fila['nivel']; ?></td>	
 					
 					<td style="text-align:right">
-					
+					<!--Botones para editar,borrar o ver en detalle-->
+						<button class="editar" name="action" value="Confirmar_EDIT" type="submit"></button>
+						<button class="borrar" name="action" value="Confirmar_DELETE1" type="submit"></button>
 						<button class="add" name="action" value="Confirmar_SHOWCURRENT" type="submit"></button>
 						
 					</td>
 					
 				</form>
-				<form action="../Controllers/Inscripcion_Controller.php" method="post" name="action" >
-					<input type="hidden" name="ID_Torneo" value="<?php echo $fila['ID_Torneo']; ?>">
-					<td style="text-align:right">
-					<!--Botones para editar,borrar o ver en detalle-->
-						<button class="inscripcion" name="action" value="Confirmar_INSCRIPCION1" type="submit"></button>
-					</td>
-					</form>
+				
 			</tr>
 		<?php
 			}

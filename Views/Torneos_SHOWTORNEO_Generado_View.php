@@ -42,8 +42,21 @@ if(isset($_SESSION['tipo'])){
 		<table class="showAllUsers">
 			<tr><th class="title" colspan="4"><?php echo $strings['Clasificacion']; ?>
 			
-			
-			
+			<form class="tableActions" action="../Controllers/Torneos_Controller.php" method="post" name ="PartidosPareja" id="PartidosPareja">
+			<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
+			<input type="hidden" name="action" value="grupo">
+					<div>
+					<label class="lblSearch" for="action">
+					<?php echo $strings['Grupo']; ?>:</label>
+					<select class="slcSearch" name="ID_Pareja" >
+					
+					</select>
+				<button type="submit" name="action" value="Ver_Partidos_Pareja" value="Submit" class="aceptar"></button>
+				
+					</div>
+					
+				</form>
+			</th></tr>
 			<!--Botones para añadir o buscar-->
 
 			</form></th></tr>
