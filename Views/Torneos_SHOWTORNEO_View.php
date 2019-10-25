@@ -113,6 +113,7 @@ if(isset($_SESSION['tipo'])){
 		$this -> idtorneo = $idtorneo;
 		$this -> enlace = $enlace;
 		$this -> mostrar();
+		
 	}
 	//Funcion que "muestra" el contenido de la página
 	function mostrar(){

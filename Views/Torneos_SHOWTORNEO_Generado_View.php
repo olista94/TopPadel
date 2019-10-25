@@ -12,16 +12,21 @@ if(isset($_SESSION['tipo'])){
 	var $clasificacion;
 	var $apuntados1;
 	var $idtorneo;
+	var $grupos;
+	var $grupo;
 	//Variable con el enlace al showall
 	var $enlace;	
 	//Constructor de la clase
-	function __construct($datos,$clasificacion,$apuntados1,$idtorneo,$enlace){
+	function __construct($datos,$clasificacion,$apuntados1,$idtorneo,$grupos,$grupo,$enlace){
 		$this -> datos = $datos;
 		$this -> clasificacion = $clasificacion;
 		$this -> apuntados1 = $apuntados1;
 		$this -> idtorneo = $idtorneo;
+		$this -> grupos = $grupos;
+		$this -> grupo = $grupo;
 		$this -> enlace = $enlace;
 		$this -> mostrar();
+		
 	}
 	//Funcion que "muestra" el contenido de la página
 	function mostrar(){
@@ -42,25 +47,35 @@ if(isset($_SESSION['tipo'])){
 		<table class="showAllUsers">
 			<tr><th class="title" colspan="4"><?php echo $strings['Clasificacion']; ?>
 			
-			<form class="tableActions" action="../Controllers/Torneos_Controller.php" method="post" name ="PartidosPareja" id="PartidosPareja">
+			<form class="tableActions" action="../Controllers/Torneos_Controller.php" method="post">
 			<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
-			<input type="hidden" name="action" value="grupo">
+			<input type="hidden" name="grupo" value=<?php echo $this->grupo; ?>>
 					<div>
-					<label class="lblSearch" for="action">
+					<label class="lblSearch" >
 					<?php echo $strings['Grupo']; ?>:</label>
-					<select class="slcSearch" name="ID_Pareja" >
-					
+					<select class="slcSearch" name="grupo">
+					<option value="">---</option>
+						<?php
+						
+							while($grupos=$this->grupos->fetch_array()){
+								
+						?>
+								
+								<option value="<?php echo $grupos[0];?>"> <?php echo $grupos[0] ;?> 
+								
+								</option>
+						<?php
+							}
+						?>
 					</select>
-				<button type="submit" name="action" value="Ver_Partidos_Pareja" value="Submit" class="aceptar"></button>
+				<button type="submit" name="action" value="Ver_Grupos_Torneo" value="Submit" class="aceptar"></button>
 				
 					</div>
 					
 				</form>
 			</th></tr>
-			<!--Botones para añadir o buscar-->
-
-			</form></th></tr>
-	<!--Campos Categoria,nombre,Edicion,Fecha,Nivel -->
+		
+	
 			<tr>
 			
 				<th><?php echo $strings['Jugador 1']; ?></th>
@@ -118,11 +133,12 @@ if(isset($_SESSION['tipo'])){
 			<form class="tableActions" action="../Controllers/Torneos_Controller.php" method="post" name ="PartidosPareja" id="PartidosPareja">
 			<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
 			<input type="hidden" name="action" value="ID_Pareja">
+			<input type="hidden" name="grupo" value=<?php echo $this->grupo; ?>>
 					<div>
 					<label class="lblSearch" for="action">
 					<?php echo $strings['Pareja']; ?>:</label>
 					<select class="slcSearch" name="ID_Pareja" >
-					
+					<option value="">---</option>
 						<?php
 						
 							while($apuntados1=$this->apuntados1->fetch_array()){
@@ -196,19 +212,20 @@ if(isset($_SESSION['tipo'])){
 <?php
 	}else{
 		 class Torneos_SHOWTORNEO_Generado{	 
-	//Datos de los contactos
+
 	var $datos;
 	var $clasificacion;
 	var $apuntados1;
 	var $idtorneo;
-	//Variable con el enlace al showall
+	var $grupos;
 	var $enlace;	
-	//Constructor de la clase
-	function __construct($datos,$clasificacion,$apuntados1,$idtorneo,$enlace){
+
+	function __construct($datos,$clasificacion,$apuntados1,$idtorneo,$grupos,$enlace){
 		$this -> datos = $datos;
 		$this -> clasificacion = $clasificacion;
 		$this -> apuntados1 = $apuntados1;
 		$this -> idtorneo = $idtorneo;
+		$this -> grupos = $grupos;
 		$this -> enlace = $enlace;
 		$this -> mostrar();
 	}
@@ -232,10 +249,33 @@ if(isset($_SESSION['tipo'])){
 			<tr><th class="title" colspan="4"><?php echo $strings['Clasificacion']; ?>
 			
 			
-			
-			<!--Botones para añadir o buscar-->
-
-			</form></th></tr>
+		<form class="tableActions" action="../Controllers/Torneos_Controller.php" method="post">
+			<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
+			<input type="hidden" name="grupo" value="grupo">
+					<div>
+					<label class="lblSearch" >
+					<?php echo $strings['Grupo']; ?>:</label>
+					<select class="slcSearch" name="grupo" >
+					<option value="">---</option>
+						<?php
+						
+							while($grupos=$this->grupos->fetch_array()){
+								
+						?>
+								
+								<option value="<?php echo $grupos[0];?>"> <?php echo $grupos[0] ;?> 
+								
+								</option>
+						<?php
+							}
+						?>
+					</select>
+				<button type="submit" name="action" value="Ver_Grupos_Torneo" value="Submit" class="aceptar"></button>
+				
+					</div>
+					
+				</form>
+			</th></tr>
 	<!--Campos Categoria,nombre,Edicion,Fecha,Nivel -->
 			<tr>
 			
@@ -332,22 +372,24 @@ if(isset($_SESSION['tipo'])){
 		
 		?>
 			<tr>
-			<form action="../Controllers/Partidos_Controller.php" method="post" name="action" >
-					<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
-					<input type="hidden" name="ID_Partido" value="<?php echo $datos['ID_Partido']; ?>">
-					<input type="hidden" name="ID_ParejaLocal" value="<?php echo $datos['ID_ParejaLocal']; ?>">
-					<input type="hidden" name="ID_ParejaVisitante" value="<?php echo $datos['ID_ParejaVisitante']; ?>">
+			
 					<!--Datos-->
 					<td><?php echo "$datos[2]-$datos[3]" ; ?></td>
 					<td><?php echo "$datos[5]-$datos[6]" ; ?></td>
 					<td><?php echo "$datos[7]-$datos[8]" ; ?></td>
 					
 				<td style="text-align:right">
+				<form class="aaa" action="../Controllers/Partidos_Controller.php" method="post" name="action" >
+					<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
+					<input type="hidden" name="ID_Partido" value="<?php echo $datos['ID_Partido']; ?>">
+					<input type="hidden" name="ID_ParejaLocal" value="<?php echo $datos['ID_ParejaLocal']; ?>">
+					<input type="hidden" name="ID_ParejaVisitante" value="<?php echo $datos['ID_ParejaVisitante']; ?>">
 					<!--Botones para editar,borrar o ver en detalle-->
 						<button class="manos" name="action" value="Cerrar_Partido" type="submit"></button>
 						<button class="add" name="action" value="Confirmar_SHOWCURRENT1" type="submit"></button>	
-				</td>				
-			</form>
+					</form>
+			</td>				
+			
 			</tr>
 			
 		<?php

@@ -3,14 +3,16 @@
  class Partidos_SHOWCURRENT{
 	//Datos del torneo
 	var $datos;
+	var $idtorneo;
 	//Variable con el enlace al DELETE torneo
 	var $enlace;
 	var $fila;
 	
 	//Constructor de la clase
-	function __construct($datos,$enlace){
+	function __construct($datos,$idtorneo,$enlace){
 		
 		$this -> datos = $datos;
+		$this -> idtorneo = $idtorneo;
 		$this -> enlace = $enlace;
 		$this -> fila = $this -> datos -> fetch_array();
 		$this -> mostrar();
@@ -28,14 +30,18 @@
               <!--Tabla con los datos del torneo--> 
 			<div class="show-half">
 			
-				<form class="formShow" enctype="multipart/form-data" action="../Controllers/Torneos_Controller.php">
+				
             	<!--Clave del torneo que se pasa como hidden al model-->
-				<input type="hidden" name="ID_Torneo" value= "<?php echo $this -> fila['ID_Torneo'] ?>">	
+				
             	<table class="showU" style="margin-left: 30%;">	
-
+	
                 <tr><th class="title" colspan="4"><?php echo $strings['Detalles del partido']; ?>
                    <!--Boton para volver atrás -->
-				   <button onclick="location.href='../Controllers/Torneos_Controller.php';" class="volver"></button></th>
+				   
+				   <form class="formShow" enctype="multipart/form-data" action="../Controllers/Torneos_Controller.php">
+				   <input type="hidden" name="ID_Torneo" value= "<?php echo $this -> idtorneo ?>">	
+				   <button name = "action" value="Confirmar_SHOWTORNEO"  class="volver"></button></form></th>
+				   
                 </tr>
 				 <!--Campo ID_Torneo del torneo-->
                 <tr>
