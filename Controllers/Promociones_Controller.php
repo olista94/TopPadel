@@ -235,13 +235,24 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$promo = $promocion -> ContarUsuarios1();
 				
 				if($promo->fetch_array()[0] == 4){
-					$promocion -> cerrarPromocion();
+					
+					$datos = $promocion -> rellenadatos()->fetch_array();
+					$p = new Promociones_Model($_REQUEST['ID_Promo'],$datos['fecha'],$datos['hora_inicio'],"",$datos['pista_ID_Pista'],"");
+					$pista = $p -> buscarPistasLibresPromo(); //Devuelve la 1º pista libre
+					if(!is_numeric($pista)){
+						
+						new MESSAGE('No hay pistas disponibles','../Controllers/Promociones_Controller.php');//Mostramos el mensaje
+					}
+					else{
+						$mensaje = $promocion -> cerrarPromocion($pista);
+					new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');//Mostramos el mensaje
+					}
 				}
-				
+				else{
 				//echo $promo->fetch_array()[0];
 				
 				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');//Mostramos el mensaje				
-
+				}
 				
 		break;
 		

@@ -352,7 +352,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 
 				//$array = $datos -> fech_array();
 
-				new Partidos_SHOWCURRENT($datos,'../Controllers/Partidos_Controller.php');
+				new Partidos_SHOWCURRENT($datos,$_REQUEST['ID_Torneo'],'../Controllers/Partidos_Controller.php');
 				
 			break;
 

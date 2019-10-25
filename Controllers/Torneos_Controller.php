@@ -238,10 +238,10 @@ if(!IsAuthenticated()){
 		break;
 		
 		case 'Confirmar_SHOWTORNEO':
-		
+				print_r($_REQUEST);
 				$torneo1 = new Torneos_Model($_REQUEST['ID_Torneo'],'','','','','');
 				$generado = $torneo1 -> comprobarGenerado();
-				
+				echo $_REQUEST['ID_Torneo'];
 				if($generado == true){
 				
 					$idtorneo = $_REQUEST['ID_Torneo'];
@@ -249,13 +249,13 @@ if(!IsAuthenticated()){
 					$datos1 = $torneo->partidosPareja();
 
 					$inscripcion = new Inscripcion_Model('',$idtorneo);
-					$clasificacion = $inscripcion -> DevolverClasificacion();
+					$clasificacion = $inscripcion -> DevolverClasificacionInicial();
 				
 					$apuntados = new Inscripcion_Model('','');
 					$apuntados1 = $apuntados -> DevolverParejasTorneo($idtorneo);
-					
+					$grupos = $apuntados ->DevolverGruposTorneo($idtorneo);
 
-					new Torneos_SHOWTORNEO_Generado($datos1,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php'); //Se muestran los datos en una vista SHOWCURRENT
+					new Torneos_SHOWTORNEO_Generado($datos1,$clasificacion,$apuntados1,$idtorneo,$grupos,'','../Controllers/Torneos_Controller.php'); //Se muestran los datos en una vista SHOWCURRENT
 				}
 				else{
 					$idtorneo = $_REQUEST['ID_Torneo'];
@@ -329,29 +329,53 @@ if(!IsAuthenticated()){
 				//new Torneos_SHOWTORNEO($datos,$parejasArray1,$apuntados1,'','../Controllers/Torneos_Controller.php'); //Se muestran los datos en una vista SHOWCURRENT
 			
 		break;
+		
+		case 'Ver_Grupos_Torneo':
+				$torneo1 = new Torneos_Model($_REQUEST['ID_Torneo'],'','','','','');
+				/* $generado = $torneo1 -> comprobarGenerado(); */
+				
+				$idtorneo = $_REQUEST['ID_Torneo'];
+				$grupo = $_REQUEST['grupo'];
+				
+				$torneo = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],'',''); 
+				$datos1 = $torneo->partidosPareja();
+				
+				
+				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
+				$clasificacion = $inscripcion -> DevolverClasificacion($grupo);//DEVUELVE LA CLASIFICACION DE UN TORNEO
+				
+				//$p = $torneo -> partidosPareja();
+				$apuntados = new Inscripcion_Model('','');
+				$apuntados1 = $apuntados -> DevolverParejasGrupo($idtorneo,$grupo);
+				$grupos = $apuntados ->DevolverGruposTorneo($idtorneo);
+				
+					new Torneos_SHOWTORNEO_Generado($datos1,$clasificacion,$apuntados1,$idtorneo,$grupos,$grupo,'../Controllers/Torneos_Controller.php'); 
+				
+				
+				
+		break;
 				
 		case 'Ver_Partidos_Pareja':
 				$torneo1 = new Torneos_Model($_REQUEST['ID_Torneo'],'','','','','');
-				$generado = $torneo1 -> comprobarGenerado();
+				//$generado = $torneo1 -> comprobarGenerado();
 				
 				$idtorneo = $_REQUEST['ID_Torneo'];
-				
+				$grupo = $_REQUEST['grupo'];
+				echo $_REQUEST['grupo'];
 				$torneo = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],$_REQUEST['ID_Pareja'],$_REQUEST['ID_Pareja']); 
 				$datos1 = $torneo->partidosPareja();
 				
 				
 				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
-				$clasificacion = $inscripcion -> DevolverClasificacion();//DEVUELVE LA CLASIFICACION DE UN TORNEO
+				$clasificacion = $inscripcion -> DevolverClasificacion($grupo);//DEVUELVE LA CLASIFICACION DE UN TORNEO
 				
 				//$p = $torneo -> partidosPareja();
 				$apuntados = new Inscripcion_Model('','');
-				$apuntados1 = $apuntados -> DevolverParejasTorneo($idtorneo);
-
+				$apuntados1 = $apuntados -> DevolverParejasGrupo($idtorneo,$grupo);
+				$grupos = $apuntados ->DevolverGruposTorneo($idtorneo);
 				
-				if($generado == true)
-					new Torneos_SHOWTORNEO_Generado($datos1,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php'); 
-				else
-					new Torneos_SHOWTORNEO($datos1,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php');
+					new Torneos_SHOWTORNEO_Generado($datos1,$clasificacion,$apuntados1,$idtorneo,$grupos,$grupo,'../Controllers/Torneos_Controller.php'); 
+			
 				
 		break;
 		
