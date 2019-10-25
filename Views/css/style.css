@@ -244,6 +244,11 @@ form {
   box-shadow: 2px 3px 18px -5px rgba(0,0,0,0.75);
 }
 
+form.aaa{
+	margin:0;
+	padding:0;
+}
+
 legend {
 	font-size:24px;
   font-weight:bold;
