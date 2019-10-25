@@ -237,13 +237,14 @@ function PuedeApuntarse()
 	}
 }
 
-function cerrarPromocion(){
+function cerrarPromocion($pista){
 			//Sentencia sql que insetara la categoria
 		$sql = "UPDATE promociones SET
-			`cerrada` = 'SI'
-				WHERE (`ID_Promo` = '$this->ID_Promo')";
+			`cerrada` = 'SI',
+			`pista_ID_Pista` = $pista
+			WHERE (`ID_Promo` = '$this->ID_Promo')";
 			 
-			 
+			 echo $sql;
 			//Si ya se han insertado la PK o FK
 		if (!$this->mysqli->query($sql)) {
 			
@@ -255,7 +256,26 @@ function cerrarPromocion(){
 		}		
 	}
 
-
+function buscarPistasLibresPromo(){
+			//Sentencia sql que insetara la categoria
+		$sql = "SELECT ID_Pista FROM `pista`
+				WHERE ID_Pista not in
+				(SELECT pista_ID_Pista from reservas where fecha_reserva = '".$this->fecha."' AND hora_inicio = '".$this->hora_inicio."')
+				AND ID_Pista not in (SELECT pista_ID_Pista from promociones where fecha = '".$this->fecha."' AND hora_inicio = '".$this->hora_inicio."' AND cerrada = 'SI')
+				LIMIT 1
+				";
+			 echo $sql;
+			$result = $this->mysqli->query($sql); 
+			//Si ya se han insertado la PK o FK
+		if (!$result) {
+			
+			return 'No hay pistas disponibles';
+		}
+		//operacion de insertado correcta
+		else{
+			return  $result -> fetch_array()[0]; 
+		}		
+	}
 
 
 
