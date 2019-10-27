@@ -111,8 +111,13 @@ array(
 	'Apuntados' => 'Apuntados',
 	'No puedes reservar partidos que no juegas' => 'Non podes reservar partidos que non xogas',
 	'No hay pistas libres ese dia,a esa hora.Por favor,escoge otra fecha' => 'Non hai pistas dispoñibles ese dia,a esa hora.Por favor,escolle outra data',
+	'Campeonato generado con exito' => 'Campeonato xerado con éxito',
+	'No hay pistas disponibles' => 'Non hai pistas dispoñibles',
+	'No puedes anotarte a un campeonato ya iniciado' => 'Non podes anotarte a un campeonato xa iniciado',
+	'Fecha limite' => 'Data limite',
+	'No se ha llegado al minimo de parejas' => 'Non se chegou ao minimo de parellas',
 	
-
+	
 	'Ediciones' => 'Edicións',
 	'Edicion' => 'Edición',
 	'Masculina' => 'Masculina',

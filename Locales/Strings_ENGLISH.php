@@ -118,8 +118,11 @@ array(
 	'Apuntados' => 'Listed',
 	'No puedes reservar partidos que no juegas' => 'You can´t book games that you don´t take part in',
 	'No hay pistas libres ese dia,a esa hora.Por favor,escoge otra fecha' => 'No free courts this day,at this time.Please,chose another date',
-	
-	
+	'Campeonato generado con exito' => 'Championship successfully generated',
+	'No hay pistas disponibles' => 'No free courts',
+	'No puedes anotarte a un campeonato ya iniciado' => 'You can´t participate in a championship in progress',
+	'Fecha limite' => 'Deadline',
+	'No se ha llegado al minimo de parejas' => 'Less than 8 couples',
 	
 	
 	'Volver' => 'Back',
