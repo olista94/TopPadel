@@ -60,6 +60,7 @@ if(isset($_SESSION['tipo'])){
 			//Muestra el form de ADD Inscripcion
 			$torneo = new Torneos_Model($_REQUEST['ID_Torneo'],"","","","","");
 			$cat = $torneo -> BuscarCategoria();
+			$generado = $torneo -> comprobarGenerado();
 			
 			$id_torneo = $torneo -> BuscarID_Torneo();
 			$_SESSION['idtorneo'] = $_REQUEST['ID_Torneo'];
@@ -71,7 +72,7 @@ if(isset($_SESSION['tipo'])){
 			$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
 			$ins = $inscripcion -> PuedeApuntarse($_SESSION['login']);
 			
-			
+		if($generado == false){
 			if($ins == true){
 			
 				if( ($cat == 'Masculina' && $sexo == 'Masculina') || ($cat == 'Mixta' && $sexo == 'Femenina') ){
@@ -148,6 +149,9 @@ if(isset($_SESSION['tipo'])){
 				else{
 					new MESSAGE('Ya estas apuntado a este campeonato','../Controllers/Torneos_Controller.php');
 				}
+		}else{
+					new MESSAGE('No puedes anotarte a un campeonato ya iniciado','../Controllers/Torneos_Controller.php');
+		}
 			
 			break;
 			//Confirma el ADD de Inscripcion tras rellenar el form ADD

@@ -136,7 +136,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 			break;
 			
 			case 'Confirmar_ADD_Pista':
-			//print_r($_REQUEST);
+			
 				$reserva = getDataForm();
 				//Asigna los datos obtenidos al objeto reserva		
 				$mensaje = $reserva-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE

@@ -81,10 +81,10 @@ if(!IsAuthenticated()){
 
 		$numGrupos = numeroGrupos(count($parejasApuntadas));
 		$tam = count($parejasApuntadas);
-		echo $numGrupos;
+		
 
 		if ($numGrupos==-1) {
-			echo "No se ha llegado al minimo de parejas";
+			return -1;
 		}
 		else if($tam >= 8 && $tam <=12) {
 				for ($i=0; $i < $tam; $i++) { 
@@ -238,10 +238,10 @@ if(!IsAuthenticated()){
 		break;
 		
 		case 'Confirmar_SHOWTORNEO':
-				print_r($_REQUEST);
+				
 				$torneo1 = new Torneos_Model($_REQUEST['ID_Torneo'],'','','','','');
 				$generado = $torneo1 -> comprobarGenerado();
-				echo $_REQUEST['ID_Torneo'];
+				
 				if($generado == true){
 				
 					$idtorneo = $_REQUEST['ID_Torneo'];
@@ -263,7 +263,7 @@ if(!IsAuthenticated()){
 					$datos1 = $torneo->partidosPareja();
 					
 					$inscripcion = new Inscripcion_Model('',$idtorneo);
-					$clasificacion = $inscripcion -> DevolverClasificacion();
+					$clasificacion = $inscripcion -> DevolverClasificacionInicial();
 				
 					$apuntados = new Inscripcion_Model('','');
 					$apuntados1 = $apuntados -> DevolverParejasTorneo($idtorneo);
@@ -282,7 +282,7 @@ if(!IsAuthenticated()){
 				
 				
 				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
-				$clasificacion = $inscripcion -> DevolverClasificacion();//DEVUELVE LA CLASIFICACION DE UN TORNEO
+				$clasificacion = $inscripcion -> DevolverClasificacionInicial();//DEVUELVE LA CLASIFICACION DE UN TORNEO
 				
 				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
 				$apuntados1 = $inscripcion -> DevolverIDParejas($_REQUEST['ID_Torneo']);//DEVUELVE LOS IDS DE LAS PAREJAS APUNTADAS A UN TORNEO
@@ -291,9 +291,8 @@ if(!IsAuthenticated()){
 				$enfrentamiento = new Parejas_has_partidos_Model('','','','');
 					
 
-				$parejasArray = Array();//ARRAY DE PAREJAS (NO SE PARA QUE)
-				
-				//$torneo = numeroGrupos(28);
+				$parejasArray = Array();
+			
 				
 				 while($apun = $apuntados1->fetch_array()[0]){
 					array_push($parejasArray,$apun);
@@ -302,32 +301,15 @@ if(!IsAuthenticated()){
 				
 				
 				$partido = new Partidos_Model("","","","","","","","","","","","","","","");
-				$torneo = generarGrupos($parejasArray,$partido,$_REQUEST['ID_Torneo']);
+				$torneo1 = generarGrupos($parejasArray,$partido,$_REQUEST['ID_Torneo']);
 				$torneo = generarEnfrentamientos($parejasArray,$_REQUEST['ID_Torneo'],$partido,$enfrentamiento);
 				
-				/* $longitud = count($parejasArray);
-				for ($i = 0; $i < $longitud; $i++) {
-					for ($j = $i+1; $j < $longitud; $j++) {
-						//echo "$parejasArray[$i] vs $parejasArray[$j] --";
-						$mensaje = $partido -> add();
-						$partido1 = new Partidos_Model('','','','','','','','','','','','','','','');
-						$idpartido = $partido1 -> DevolverID();
-						
-						$mensaje1 = $enfrentamiento -> add($idpartido,$idtorneo,$parejasArray[$i],$parejasArray[$j]);
-						//$mensaje1 = $enfrentamiento -> add($idpartido,$parejasArray[$j]);
-						
-					}
-				}  */
+				if($torneo1 == -1){
+					new MESSAGE('No se ha llegado al minimo de parejas','../Controllers/Torneos_Controller.php'); 
+				}else{
 				
-				/* $torneo1 = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],'','');
-				$p = $torneo1 -> partidosPareja();//DEVUELVE LOS PARTIDOS DE UNA PAREJA EN UN TORNEO */
-				
-				new MESSAGE('hEGSF','../Controllers/Torneos_Controller.php'); //Devuelve el mensaje de la inserción
-			
-				
-
-				//new Torneos_SHOWTORNEO($datos,$parejasArray1,$apuntados1,'','../Controllers/Torneos_Controller.php'); //Se muestran los datos en una vista SHOWCURRENT
-			
+				new MESSAGE('Campeonato generado con exito','../Controllers/Torneos_Controller.php'); 
+				}
 		break;
 		
 		case 'Ver_Grupos_Torneo':
@@ -361,7 +343,7 @@ if(!IsAuthenticated()){
 				
 				$idtorneo = $_REQUEST['ID_Torneo'];
 				$grupo = $_REQUEST['grupo'];
-				echo $_REQUEST['grupo'];
+				
 				$torneo = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],$_REQUEST['ID_Pareja'],$_REQUEST['ID_Pareja']); 
 				$datos1 = $torneo->partidosPareja();
 				

@@ -257,7 +257,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 					$part1 -> getClasificacion($_REQUEST["ID_Torneo"],$pL);
 					$part1 -> getClasificacion($_REQUEST["ID_Torneo"],$pV);
 					
-				new MESSAGE($mensaje,'../Controllers/Torneos_Controller.php');
+				new MESSAGE($mensaje,'../Controllers/Torneos_Controller.php?ID_Torneo=1&action=Confirmar_SHOWTORNEO');
 			
 			break;
 			
@@ -348,7 +348,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 
 				$partido = new Partidos_Model($_REQUEST['ID_Partido'],'','','','','','','','','','','','','','');
 				
-				$datos = $partido -> rellenadatos();
+				$datos = $partido -> ShowCurrentPartidos();
 
 				//$array = $datos -> fech_array();
 
@@ -359,7 +359,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 			//Por defecto al seleccionar la seccion de Partidos en el menu se mostrara el SHOWALL
 			default: /*PARA EL SHOWALL */
 			//Busca todas las pistas
-				$pista = new Partidos_Model('','','','');
+				$pista = new Partidos_Model('','','','','','','','');
 				$datos = $pista -> search();
 				//Las muestra en una tabla
 				$respuesta = new Partidos_SHOWALL($datos,'../Controllers/Partidos_Controller.php');
