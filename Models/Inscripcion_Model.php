@@ -219,7 +219,7 @@ function Apuntados1()
 	}
 }
 
-function DevolverClasificacion()
+function DevolverClasificacionInicial()
 {	
     $sql = "SELECT `torneos_ID_Torneo`,`nombre`,`edicion`,`parejas_ID_Pareja`,`usuarios_login`,`usuarios_login1`,`PJ`,`PG`,`PP`,`Ptos`
 			FROM `parejas_has_torneos` p,`parejas` par,`torneo` t
@@ -237,6 +237,28 @@ function DevolverClasificacion()
 		return $resultado;//Se devuelve el resultado de la consulta
 	}
 }
+
+function DevolverClasificacion($grupo)
+{	
+    $sql = "SELECT `torneos_ID_Torneo`,`nombre`,`edicion`,`parejas_ID_Pareja`,`usuarios_login`,`usuarios_login1`,`PJ`,`PG`,`PP`,`Ptos`
+			FROM `parejas_has_torneos` p,`parejas` par,`torneo` t,`parejas_has_grupos` pg
+			WHERE (p.`parejas_ID_Pareja` = par.`ID_Pareja`) AND (p.`torneos_ID_Torneo` = t.`ID_Torneo`) AND (p.`torneos_ID_Torneo` = '".$this->torneos_ID_Torneo."')
+			AND (pg.`ID_Pareja` = par.`ID_Pareja`) AND (pg.`ID_Torneo` = '".$this->torneos_ID_Torneo."') AND (pg.`grupo` = '".$grupo."')
+			ORDER BY `Ptos` DESC";
+									 
+	
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado;//Se devuelve el resultado de la consulta
+	}
+}
+
+
 
 function DevolverParejas($idtorneo)
 {	
@@ -304,7 +326,37 @@ function DevolverParejasTorneo($idtorneo)
 		return $resultado;//Se devuelve el resultado de la consulta
 	}
 }
+function DevolverParejasGrupo($idtorneo,$grupo)
+{	
+    $sql = "SELECT `parejas_ID_Pareja`,`usuarios_login`,`usuarios_login1`
+			FROM `parejas_has_torneos` p,`parejas` par,`parejas_has_grupos` pg
+			WHERE (p.`parejas_ID_Pareja` = par.`ID_Pareja`) AND (p.`torneos_ID_Torneo` = '$idtorneo') AND (pg.`ID_Pareja` = par.`ID_Pareja`)
+			AND (pg.`ID_Torneo` = '".$idtorneo."') AND (pg.`grupo` = '".$grupo."') ";
 
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado;//Se devuelve el resultado de la consulta
+	}
+}
+function DevolverGruposTorneo($idtorneo)
+{	
+    $sql = "SELECT DISTINCT `grupo` FROM `parejas_has_grupos` WHERE `ID_Torneo` = '".$idtorneo."'";
+
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado;//Se devuelve el resultado de la consulta
+	}
+}
 
 
 }

@@ -117,7 +117,7 @@ function add(){
 			WHERE `ID_Pista` NOT IN 
 							(SELECT `ID_Pista` FROM reservas r,pista p 
 							WHERE `fecha_reserva` = '$this->fecha' AND `hora_inicio` = '$this->hora' AND `pista_ID_Pista` = `ID_Pista`)";
-							echo $sql;
+							
 	$resultado = $this->mysqli->query($sql);
 	
 	if (!$resultado) { 
@@ -180,7 +180,7 @@ function add(){
 			$puntos = ($ganados*3) + $perdidos;
 			
 			$sql3 = "UPDATE `parejas_has_torneos` SET `PJ`='".$jugados."',`PG`='".$ganados."',`PP`='".$perdidos."',`Ptos`='".$puntos."' WHERE parejas_ID_Pareja = '".$pareja."'";
-			echo $sql3;
+			
 			if (!$this->mysqli->query($sql3)) {
 			
 				return 'Error al insertar';
@@ -296,7 +296,7 @@ function DevolverParejasPartido(){
 //Funcion que obtiene todos los datos de una pista especifica	
 	function rellenadatos() 
 {	
-    $sql = "SELECT * FROM partidos WHERE (`ID_Partido` = '$this->ID_Partido')";
+    $sql = "SELECT p.*,pis.Nombre_Pista FROM partidos p,pista pis WHERE (`ID_Partido` = '$this->ID_Partido') AND `pista_ID_Pista` = ID_Pista";
 	
    //Si no existe
     if (!($resultado = $this->mysqli->query($sql))){
@@ -336,6 +336,7 @@ function insertarGrupo($ID_Pareja,$grupo,$idtorneo)
 		$sql = "INSERT INTO parejas_has_grupos VALUES
 					('".$ID_Pareja."', '".$grupo."','".$idtorneo."')
 				";
+				
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación';//Devuelve mensaje de error
 		}
@@ -367,7 +368,7 @@ function borrarParejaSobrante($ID_Pareja)
 	
 		$sql = "SELECT `ID_Pareja` FROM parejas_has_grupos WHERE `ID_Torneo` = '".$idtorneo."' and `grupo` = '".$grupo."'
 					
-				";echo $sql;
+				";
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación';//Devuelve mensaje de error
 		}
@@ -378,6 +379,28 @@ function borrarParejaSobrante($ID_Pareja)
 		}
     
    
+}
+
+function ShowCurrentPartidos(){
+	
+	
+	$sql = "SELECT part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.pista_ID_pista as ID_Pista,pis.Nombre_Pista,part.ronda as ronda,
+			par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2,
+			par1.ID_Pareja as ID_ParejaVisitante,par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2,
+			part.Sets_Local,part.Sets_Visitante,part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante,
+			part.JuegosSet2_Local as JuegosSet2_Local,part.JuegosSet2_Visitante as JuegosSet2_Visitante,
+			part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+			FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,pista pis 
+			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido AND part.pista_ID_Pista = pis.ID_Pista 
+			AND (part.`ID_Partido` = '$this->ID_Partido' )
+			"; 
+
+	if (!$resultado = $this->mysqli->query($sql)) { 
+		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
+	}
+	else{ 
+		return $resultado; ; //Devuelve mensaje de exito	
+	}
 }
  
 }//fin de clase

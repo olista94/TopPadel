@@ -91,7 +91,7 @@ function delete()
     	//Sentencia sql para borrar
 		$sql1 = "DELETE FROM `promociones_has_usuarios` WHERE `promociones_ID_Promo` = '$this->ID_Promo'";
         $sql = "DELETE FROM promociones WHERE (`ID_Promo` = '$this->ID_Promo')";
-        echo $sql1;
+      
 		
         $this->mysqli->query($sql1);
 		$this->mysqli->query($sql);//Guarda el resultado
@@ -244,7 +244,7 @@ function cerrarPromocion($pista){
 			`pista_ID_Pista` = $pista
 			WHERE (`ID_Promo` = '$this->ID_Promo')";
 			 
-			 echo $sql;
+			 
 			//Si ya se han insertado la PK o FK
 		if (!$this->mysqli->query($sql)) {
 			
@@ -264,7 +264,7 @@ function buscarPistasLibresPromo(){
 				AND ID_Pista not in (SELECT pista_ID_Pista from promociones where fecha = '".$this->fecha."' AND hora_inicio = '".$this->hora_inicio."' AND cerrada = 'SI')
 				LIMIT 1
 				";
-			 echo $sql;
+			 
 			$result = $this->mysqli->query($sql); 
 			//Si ya se han insertado la PK o FK
 		if (!$result) {
