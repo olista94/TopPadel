@@ -36,7 +36,6 @@ class Reservas_ADD_Pista{
 				<input type = "hidden" name = "fecha_reserva" value = '<?php echo $this->fecha_reserva; ?>'>
 				<input type = "hidden" name = "hora_inicio" value = '<?php echo $this->hora_inicio; ?>'>
 				<legend><?php echo $strings['Añadir reserva'];?>
-
 				</legend>
 
 				<div>
@@ -58,8 +57,7 @@ class Reservas_ADD_Pista{
 
 				<!--Boton para finalizar-->
 				<button type="submit" name="action" value="Confirmar_ADD_Pista" value="Submit" class="aceptar"></button>
-				<!--Boton de borrado de texto-->
-				<button type="reset" value="Reset" class="cancelar"></button>
+				
 
 			</form> 
 		</div> 

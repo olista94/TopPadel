@@ -62,15 +62,13 @@ Fecha:03/01/2019-->
       <input type="text" id="email" name="email" size="65"  onblur=" return !comprobarVacio(this) && comprobarEmail(this,60);" />	
 	<!--Campo fecha de nacimiento del usuario-->
       <label for="fecha"><?php echo $strings['Fecha de nacimiento']; ?></label>
-      <input id="fecha" type="text" name="FechaNacimiento" size="28" class="tcal" value="" onblur=" return comprobarFecha(this)" readonly/>
+	  <input type="date" name="FechaNacimiento" size="18" class="tcal" value=""  onblur=" return comprobarFecha(this)" >
 	  
 	   <label for="sexo"><?php echo $strings['Sexo']; ?></label>
 	  <select name="sexo" id="sexo">
 		<option value="Masculina"><?php echo $strings['Hombre']; ?></option>
 		<option value="Femenina"><?php echo $strings['Mujer']; ?></option>
 	  </select>
-	  
-	  
 	  
 	  <!--Campo tipo del usuario (en el registro solo puede ser normal)-->
 	  <label for="tipo"><?php echo $strings['Tipo']; ?></label>

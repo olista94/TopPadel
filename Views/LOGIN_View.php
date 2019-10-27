@@ -31,7 +31,7 @@ Fecha: 27/12/2018-->
 			<!--Form del login-->	
 		<form class="login_form" name = 'FormLogin' action='../Controllers/Login_Controller.php' method='post'>
 			
-				<legend><?php echo $strings['Inicia sesión']; ?>
+				<legend><?php echo $strings['Iniciar sesion']; ?>
 				<!--Boton para loguearse-->
 				<button type="submit" value="Confirmar_LOGIN" name="action" class="aceptar1" onclick="if (validarLogin(document.forms['FormLogin'])) document.forms['FormLogin'].submit();else return false;"></button>
 				<!--Boton para registrar un usuario nuevo-->

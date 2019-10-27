@@ -30,7 +30,7 @@ class Reservas_ADD_Fecha{
 
 			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Reservas_Controller.php" enctype="multipart/form-data">
 				<legend><?php echo $strings['Añadir reserva'];?>
-				
+				<button type="button" type="button" onClick="history.go(-1);" class="volver"></button>
 				</legend>
 
 				<div>
@@ -39,7 +39,7 @@ class Reservas_ADD_Fecha{
 				
 
 				<label for="fecha_reserva"><?php echo $strings['Fecha']; ?></label>
-				<input type="date" name="fecha_reserva" size="18" class="tcal" value=""  onblur=" return comprobarFecha(this)">
+				<input type="date" name="fecha_reserva" size="18" class="tcal" value=""  onblur=" return comprobarFecha(this)" >
 					
 				</div>
 				

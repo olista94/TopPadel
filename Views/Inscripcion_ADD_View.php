@@ -56,8 +56,7 @@ class Inscripcion_ADD{
 				</div>
 				<!--Boton para añadir la tarea y pasar a añadir fases-->
 				<button type="submit" name="action" value="Confirmar_INSCRIPCION2" value="Submit" class="aceptar"></button>
-				<!--Boton de borrado de texto-->
-				<button type="reset" value="Reset" class="cancelar"></button>
+				
 
 			</form> 
 		</div> 

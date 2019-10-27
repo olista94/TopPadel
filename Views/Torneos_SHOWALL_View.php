@@ -47,7 +47,7 @@ include_once '../Views/Header.php';
 				<th><?php echo $strings['Nombre']; ?></th>
 				<th><?php echo $strings['Categoria']; ?></th>
 				<th><?php echo $strings['Edicion']; ?></th>
-				<th><?php echo $strings['Fecha']; ?></th>
+				<th><?php echo $strings['Fecha limite']; ?></th>
 				<th><?php echo $strings['Nivel']; ?></th>
 				<th></th>
 			</tr>

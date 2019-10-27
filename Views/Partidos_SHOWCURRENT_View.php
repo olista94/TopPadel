@@ -35,13 +35,16 @@
 				
             	<table class="showU" style="margin-left: 30%;">	
 	
-                <tr><th class="title" colspan="4"><?php echo $strings['Detalles del partido']; ?>
-                   <!--Boton para volver atrás -->
+                <tr><th class="titlepartidos" colspan="4"><?php echo $this-> fila['Local1']; echo "-";echo $this-> fila['Local2']; ?>
+													<?php echo "<br>" ?>
+													<?php echo "VS" ?>
+													<?php echo "<br>" ?>
+													<?php echo $this-> fila['Visitante1']; echo "-";echo $this-> fila['Visitante2']; ?>
 				   
 				   <form class="formShow" enctype="multipart/form-data" action="../Controllers/Torneos_Controller.php">
 				   <input type="hidden" name="ID_Torneo" value= "<?php echo $this -> idtorneo ?>">	
 				   <button name = "action" value="Confirmar_SHOWTORNEO"  class="volver"></button></form></th>
-				   
+				
                 </tr>
 				 <!--Campo ID_Torneo del torneo-->
                 <tr>
@@ -61,10 +64,9 @@
 				<!--Campo telefono del torneo-->
 				
 				<tr>
-                    <th><?php echo $strings['Grupo']; ?></th>
-                    <td><?php echo $this -> fila['grupo']; ?></td>
+                    <th><?php echo $strings['Pista']; ?></th>
+                    <td><?php echo $this -> fila['Nombre_Pista']; ?></td>
                 </tr>
-				
 
                 <tr>
                     <th><?php echo $strings['1º Set']; ?></th>
@@ -78,7 +80,7 @@
 				
 				<tr>
                     <th><?php echo $strings['3º Set']; ?></th>
-                    <td><?php if($this -> fila['JuegosSet3_Local'] == 0 && $this -> fila['JuegosSet3_Visitante'] == 0) echo $strings['No disputado'];
+                    <td><?php if($this -> fila['JuegosSet3_Local'] == 0 && $this -> fila['JuegosSet3_Visitante'] == 0) echo "-";
 					else{ echo $this -> fila['JuegosSet3_Local'];echo "-";echo $this -> fila['JuegosSet3_Visitante']; }?></td>
                 </tr>
 

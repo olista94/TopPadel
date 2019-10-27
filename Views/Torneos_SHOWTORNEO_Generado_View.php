@@ -68,7 +68,7 @@ if(isset($_SESSION['tipo'])){
 							}
 						?>
 					</select>
-				<button type="submit" name="action" value="Ver_Grupos_Torneo" value="Submit" class="aceptar"></button>
+				<button type="submit" name="action" value="Ver_Grupos_Torneo" value="Submit" class="buscar-little"></button>
 				
 					</div>
 					
@@ -152,7 +152,7 @@ if(isset($_SESSION['tipo'])){
 							}
 						?>
 					</select>
-				<button type="submit" name="action" value="Ver_Partidos_Pareja" value="Submit" class="aceptar"></button>
+				<button type="submit" name="action" value="Ver_Partidos_Pareja" value="Submit" class="buscar-little"></button>
 				
 					</div>
 					
@@ -218,14 +218,16 @@ if(isset($_SESSION['tipo'])){
 	var $apuntados1;
 	var $idtorneo;
 	var $grupos;
+	var $grupo;
 	var $enlace;	
 
-	function __construct($datos,$clasificacion,$apuntados1,$idtorneo,$grupos,$enlace){
+	function __construct($datos,$clasificacion,$apuntados1,$idtorneo,$grupos,$grupo,$enlace){
 		$this -> datos = $datos;
 		$this -> clasificacion = $clasificacion;
 		$this -> apuntados1 = $apuntados1;
 		$this -> idtorneo = $idtorneo;
 		$this -> grupos = $grupos;
+		$this -> grupo = $grupo;
 		$this -> enlace = $enlace;
 		$this -> mostrar();
 	}
@@ -251,7 +253,7 @@ if(isset($_SESSION['tipo'])){
 			
 		<form class="tableActions" action="../Controllers/Torneos_Controller.php" method="post">
 			<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
-			<input type="hidden" name="grupo" value="grupo">
+			<input type="hidden" name="grupo" value=<?php echo $this->grupo; ?>>
 					<div>
 					<label class="lblSearch" >
 					<?php echo $strings['Grupo']; ?>:</label>
@@ -270,7 +272,7 @@ if(isset($_SESSION['tipo'])){
 							}
 						?>
 					</select>
-				<button type="submit" name="action" value="Ver_Grupos_Torneo" value="Submit" class="aceptar"></button>
+				<button type="submit" name="action" value="Ver_Grupos_Torneo" value="Submit" class="buscar-little"></button>
 				
 					</div>
 					
@@ -334,11 +336,12 @@ if(isset($_SESSION['tipo'])){
 			<form class="tableActions" action="../Controllers/Torneos_Controller.php" method="post" name ="PartidosPareja" id="PartidosPareja">
 			<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
 			<input type="hidden" name="action" value="ID_Pareja">
+			<input type="hidden" name="grupo" value=<?php echo $this->grupo; ?>>
 					<div>
 					<label class="lblSearch" for="action">
 					<?php echo $strings['Pareja']; ?>:</label>
 					<select class="slcSearch" name="ID_Pareja" >
-					
+					<option value="">---</option>
 						<?php
 						
 							while($apuntados1=$this->apuntados1->fetch_array()){
@@ -352,7 +355,7 @@ if(isset($_SESSION['tipo'])){
 							}
 						?>
 					</select>
-				<button type="submit" name="action" value="Ver_Partidos_Pareja" value="Submit" class="aceptar"></button>
+				<button type="submit" name="action" value="Ver_Partidos_Pareja" value="Submit" class="buscar-little"></button>
 				
 					</div>
 					

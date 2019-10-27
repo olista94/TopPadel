@@ -16,7 +16,6 @@ class Partidos_ADD{
 		$this -> idtorneo = $idtorneo;
 		$this -> enlace = $enlace;
 		$this -> fila = $this -> datos -> fetch_array();
-		print_r($this->fila);
 		$this -> mostrar();
 	}
 	//Funcion que "muestra" el contenido de la página

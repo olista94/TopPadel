@@ -59,7 +59,7 @@
                 </tr>
 				
 				<tr>
-                    <th><?php echo $strings['Fecha']; ?></th>
+                    <th><?php echo $strings['Fecha limite']; ?></th>
                     <td><?php echo $this -> fila['fecha']; ?></td>
                 </tr>
 				
