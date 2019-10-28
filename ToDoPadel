@@ -1,10 +1,10 @@
 [] Mostrar solo siete dias en el calendario
-[] Revisar showtorneo
-[] Traducir Promos_Controler
-[] Botones volver atras
+[x] Revisar showtorneo
+[x] Traducir Promos_Controler
+[x] Botones volver atras
 [] css form partidos
-[] fechas limite campeonatos
-[] no apuntarse en campeonato generado
+[x] fechas limite campeonatos
+[x] no apuntarse en campeonato generado
 [] comprobar vistas admin-deportistas
 [] usar alert.php?
 [] usuario normal puede hacer usuarios showcurrent
