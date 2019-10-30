@@ -113,6 +113,7 @@ array(
 	'Detalles del partido' => 'Detalles del partido',
 	'Ronda' => 'Ronda',
 	'Grupo' => 'Grupo',
+	'Grupos' => 'Grupos',
 	'1º Set' => '1º Set',
 	'2º Set' => '2º Set',
 	'3º Set' => '3º Set',
@@ -124,6 +125,10 @@ array(
 	'No hay pistas libres ese dia,a esa hora.Por favor,escoge otra fecha' => 'No hay pistas libres ese dia,a esa hora.Por favor,escoge otra fecha',
 	'Campeonato generado con exito' => 'Campeonato generado con éxito',
 	'No hay pistas disponibles' => 'No hay pistas disponibles',
+	'Soci@s' => 'Soci@s',
+	'Deportista' => 'Deportista',
+	'No es socio' => 'No es socio',
+	
 	
 	'Registro' => 'Registro',
 	'Inserción realizada con éxito' => 'Inserción realizada con éxito',

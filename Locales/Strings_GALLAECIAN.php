@@ -64,8 +64,8 @@ array(
 	'Suelo' => 'Chan',
 	'Interior' => 'Interior',
 	'Exterior' => 'Exterior',
-	'Dura'=>'Dura',
-	'Blanda'=>'Blanda',
+	'Dura'=>'Duro',
+	'Blanda'=>'Blando',
 	'Jugador 1' => 'Xogador 1',
 	'Jugador 2' => 'Xogador 2',
 	'Parejas'=>'Parellas',
@@ -120,6 +120,10 @@ array(
 	'No puedes anotarte a un campeonato ya iniciado' => 'Non podes anotarte a un campeonato xa iniciado',
 	'Fecha limite' => 'Data limite',
 	'No se ha llegado al minimo de parejas' => 'Non se chegou ao minimo de parellas',
+	'Soci@s' => 'Soci@s',
+	'Deportista' => 'Deportista',
+	'No es socio' => 'Non é socio',
+	'Grupos' => 'Grupos',
 	
 	
 	'Ediciones' => 'Edicións',
@@ -130,6 +134,7 @@ array(
 	'Añadir torneo' => 'Engadir torneo',
 	'Borrar torneo' => 'Borrar torneo',
 	'ID Torneo' => 'ID Torneo',
+	'Ronda' => 'Ronda',
 	
 	'Registro' => 'Rexistro',
 	'Inserción realizada con éxito' => 'Inserción realizada con éxito',

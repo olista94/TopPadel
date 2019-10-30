@@ -57,7 +57,7 @@ array(
 	'Borrar promocion' => 'Delete promo',
 	'Detalles de la pista' => 'Court details',
 	'Detalles de la reserva' => 'Booking details',
-	'¿Apuntarse a esta promocion?' => '¿Join this promo?',
+	'¿Apuntarse a esta promocion?' => 'Join this promo?',
 	'Anotados' => 'Listed',
 	'Esta promocion esta cerrada' => 'This promo is closed',
 	'Ya estas apuntado a este campeonato' => 'You are aleready listed for this championship',
@@ -127,6 +127,11 @@ array(
 	'No puedes anotarte a un campeonato ya iniciado' => 'You can´t participate in a championship in progress',
 	'Fecha limite' => 'Deadline',
 	'No se ha llegado al minimo de parejas' => 'Less than 8 couples',
+	'Soci@s' => 'Members',
+	'Deportista' => 'Athlete',
+	'No es socio' => 'Not a member',
+	'Ronda' => 'Round',
+	'Grupos' => 'Groups',
 	
 	
 	'Volver' => 'Back',
