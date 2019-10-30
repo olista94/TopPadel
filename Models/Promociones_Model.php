@@ -101,6 +101,23 @@ function delete()
     else
         return 'No existe';//Devuelve mensaje de error
 }
+
+function borrarAntiguas()
+{	
+   
+		$fecha = date('Y-m-d', time());
+    	//Sentencia sql para borrar
+		$sql1 = "DELETE FROM promociones_has_usuarios WHERE promociones_ID_Promo in (SELECT ID_Promo FROM promociones WHERE `fecha` < '$fecha')";
+        $sql = "DELETE FROM promociones WHERE (`fecha` < '$fecha')
+		";
+       
+        $this->mysqli->query($sql1);
+		$this->mysqli->query($sql);
+        
+    	return 'Borrado correctamente';
+    
+}
+
 //Funcion que devuelve los datos de una promocion
 function rellenadatos() {	
 	$sql = "SELECT * FROM promociones WHERE (`ID_Promo` = '$this->ID_Promo')";

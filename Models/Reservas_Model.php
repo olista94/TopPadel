@@ -118,7 +118,7 @@ function search1(){
 			   (`usuarios_login` = '".$_SESSION['login']."') &&
 			   
 			   (p.ID_Pista LIKE '%$this->pista_ID_Pista%')
-	
+				order by 1
 	
 	";		   
 
@@ -141,9 +141,7 @@ function ReservasShowAll(){
 			   FROM reservas,pista,usuarios 
 			   WHERE `usuarios_login`= `login` && `pista_ID_Pista`=`ID_Pista` AND `fecha_reserva` >=  '$fecha'
 			   Order by 1
-	
-
-	";		   
+	";		  
 		
 	if (!($resultado = $this->mysqli->query($sql))){
 	return 'Error en la búsqueda';//Devuelve mensaje de error
@@ -187,7 +185,9 @@ function SearchAdmin(){
 	 				(`pista_ID_Pista` LIKE '%$this->pista_ID_Pista%') &&
 					(`fecha_reserva` LIKE '%$this->fecha_reserva%') &&
 					(`hora_inicio` LIKE '%$this->hora_inicio%')
-			)";
+			) 
+			ORDER BY 1
+			";
   
 	if (!($resultado = $this->mysqli->query($sql))){
 	return 'Error en la búsqueda';//Devuelve mensaje de error

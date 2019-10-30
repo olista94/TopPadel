@@ -218,8 +218,9 @@ function Apuntados1()
 function DevolverClasificacionInicial()
 {	
     $sql = "SELECT `torneos_ID_Torneo`,`nombre`,`edicion`,`parejas_ID_Pareja`,`usuarios_login`,`usuarios_login1`,`PJ`,`PG`,`PP`,`Ptos`,`PJ`,`PG`,`PP`,`Ptos`,`SF`,`SC`,`JF`,`JC`
-			FROM `parejas_has_torneos` p,`parejas` par,`torneo` t
-			WHERE (p.`parejas_ID_Pareja` = par.`ID_Pareja`) AND (p.`torneos_ID_Torneo` = t.`ID_Torneo`) AND (p.`torneos_ID_Torneo` = '".$this->torneos_ID_Torneo."') 
+			FROM `parejas_has_torneos` p,`parejas` par,`torneo` t,`parejas_has_grupos` pg
+			WHERE (p.`parejas_ID_Pareja` = par.`ID_Pareja`) AND (p.`torneos_ID_Torneo` = t.`ID_Torneo`) AND (p.`torneos_ID_Torneo` = '".$this->torneos_ID_Torneo."')
+			AND (pg.`grupo` = '0') AND (pg.`ID_Pareja` = par.`ID_Pareja`) AND (pg.`ID_Torneo` = '".$this->torneos_ID_Torneo."')
 			ORDER BY `Ptos` DESC,`SF` DESC,`SC` ASC,`JF` DESC,`JC` ASC
 			";
 										 
@@ -255,7 +256,6 @@ function DevolverClasificacion($grupo)
 		return $resultado;//Se devuelve el resultado de la consulta
 	}
 }
-
 
 
 function DevolverParejas($idtorneo)
