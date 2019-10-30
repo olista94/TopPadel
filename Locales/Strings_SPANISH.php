@@ -78,7 +78,11 @@ array(
 	'PJ' => 'PJ',
 	'PG' => 'PG',
 	'PP' => 'PP',
-	'Ptos' => 'Puntos',
+	'Ptos' => 'Ptos',
+	'SF' => 'SF',
+	'SC' => 'SC',
+	'JF' => 'JF',
+	'JC' => 'JC',
 	'Clasificacion' => 'Clasificación',
 	'Partidos' => 'Partidos',
 	'Pareja' => 'Pareja',
@@ -245,6 +249,7 @@ array(
 	'No puedes anotarte a un campeonato ya iniciado' => 'No puedes anotarte a un campeonato ya iniciado',
 	'Fecha limite' => 'Fecha limite',
 	'No se ha llegado al minimo de parejas' => 'No se ha llegado al minimo de parejas',
+	
 	
 	'No puedes ver esto si no eres administrador' => 'No puedes ver esto si no eres administrador',
 	'No se puede borrar el usuario admin' => 'No se puede borrar el usuario admin',
