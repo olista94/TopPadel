@@ -239,7 +239,7 @@ function partidosPareja($idparejalocal,$idparejavisitante){
 	$sql = "SELECT * FROM parejas_has_partidos WHERE `ID_ParejaLocal` = '".$idparejalocal."' or `ID_ParejaVisitante` = '".$idparejavisitante."'
 			";
 
-echo $sql;
+
 	if (!$this->mysqli->query($sql)) { 
 		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
 	}

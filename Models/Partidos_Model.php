@@ -7,8 +7,6 @@ class Partidos_Model {
 	var $fecha;
 	var $hora;
 	var $ronda;
-	var $jornada;
-	var $grupo;
 	var $pista_ID_Pista;
 	var $Sets_Local;
 	var $Sets_Visitante;
@@ -20,7 +18,7 @@ class Partidos_Model {
 	var $JuegosSet3_Visitante;
 	
 //Constructor de la clase
-function __construct($ID_Partido,$fecha,$hora,$ronda,$jornada,$grupo,
+function __construct($ID_Partido,$fecha,$hora,$ronda,
 					$pista_ID_Pista,$Sets_Local,$Sets_Visitante,$JuegosSet1_Local,
 					$JuegosSet1_Visitante,$JuegosSet2_Local,$JuegosSet2_Visitante,
 					$JuegosSet3_Local,$JuegosSet3_Visitante){
@@ -29,8 +27,6 @@ function __construct($ID_Partido,$fecha,$hora,$ronda,$jornada,$grupo,
 	$this->fecha = $fecha;
 	$this->hora = $hora;
 	$this->ronda = $ronda;
-	$this->jornada = $jornada;
-	$this->grupo = $grupo;
 	$this->pista_ID_Pista = $pista_ID_Pista;
 	$this->Sets_Local = $Sets_Local;
 	$this->Sets_Visitante = $Sets_Visitante;
@@ -150,23 +146,81 @@ function add(){
 	
 	function getClasificacion($idtorneo,$pareja){
 			//Sentencia sql que insetara la categoria
-		$sql = "SELECT COUNT(*) FROM `partidos` p WHERE Sets_Local = 2 AND ID_Partido IN 
+			$sql = "SELECT COUNT(*) FROM `partidos` p WHERE Sets_Local = 2 AND ID_Partido IN 
 												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
 												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaLocal = '".$pareja."'))";
 		
 			 
 			$resultado = $this->mysqli->query($sql);
 			
-		$sql1 = "SELECT COUNT(*) FROM `partidos` p WHERE Sets_Visitante = 2 AND ID_Partido IN 
+			$sqlSFL = "SELECT COALESCE (SUM(Sets_Local),0) as SetsFavorLocal FROM `partidos` p WHERE ID_Partido IN 
+												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
+												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaLocal = '".$pareja."'))";
+		
+			
+			$SFL = $this->mysqli->query($sqlSFL);
+			
+			$sqlSCL = "SELECT COALESCE (SUM(Sets_Visitante),0) as SetsContraLocal FROM `partidos` p WHERE ID_Partido IN 
+												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
+												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaLocal = '".$pareja."'))";
+		
+			
+			$SCL = $this->mysqli->query($sqlSCL);
+			
+			$sqlJFL = "SELECT COALESCE (SUM(JuegosSet1_Local+JuegosSet2_Local+JuegosSet3_Local),0) as JuegosFavorLocal FROM `partidos` p WHERE ID_Partido IN 
+												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
+												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaLocal = '".$pareja."'))";
+		
+			
+			$JFL = $this->mysqli->query($sqlJFL);
+			
+			$sqlJCL = "SELECT COALESCE (SUM(`JuegosSet1_Visitante`+`JuegosSet2_Visitante`+`JuegosSet3_Visitante`),0) as JuegosContraLocal FROM `partidos` p WHERE ID_Partido IN 
+												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
+												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaLocal = '".$pareja."'))";
+		
+	
+			$JCL = $this->mysqli->query($sqlJCL);
+			
+			$sql1 = "SELECT COUNT(*) FROM `partidos` p WHERE Sets_Visitante = 2 AND ID_Partido IN 
 												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
 												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaVisitante = '".$pareja."'))";
 			 
 			
 			$resultado1 = $this->mysqli->query($sql1);
 			
+			$sqlSFV = "SELECT COALESCE (SUM(Sets_Visitante),0) as SetsFavorVisitante FROM `partidos` p
+						WHERE ID_Partido IN (SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
+												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaVisitante = '".$pareja."'))";
+		
+			
+			$SFV = $this->mysqli->query($sqlSFV);
+			
+			$sqlSCV = "SELECT COALESCE (SUM(Sets_Local),0) as SetsContraVisitante FROM `partidos` p WHERE ID_Partido IN 
+												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
+												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaVisitante = '".$pareja."'))";
+		
+			
+			$SCV = $this->mysqli->query($sqlSCV);
+			
+			$sqlJFV = "SELECT COALESCE (SUM(`JuegosSet1_Visitante`+`JuegosSet2_Visitante`+`JuegosSet3_Visitante`),0) as JuegosFavorVisitante FROM `partidos` p WHERE ID_Partido IN 
+												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
+												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaVisitante = '".$pareja."'))";
+		
+			
+			$JFV = $this->mysqli->query($sqlJFV);
+			
+			$sqlJCV = "SELECT COALESCE (SUM(JuegosSet1_Local+JuegosSet2_Local+JuegosSet3_Local),0) as JuegosContraVistante FROM `partidos` p WHERE ID_Partido IN 
+												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
+												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaVisitante = '".$pareja."'))";
+		
+			
+			$JCV = $this->mysqli->query($sqlJCV);
 			
 			$ganados = $resultado -> fetch_array()[0] + $resultado1 -> fetch_array()[0];
-			
+			$setsFavor = $SFL -> fetch_array()[0] + $SFV -> fetch_array()[0];
+			$setsContra = $SCL -> fetch_array()[0] + $SCV -> fetch_array()[0];
+			$juegosFavor = $JFL -> fetch_array()[0] + $JFV -> fetch_array()[0];
+			$juegosContra = $JCL -> fetch_array()[0] + $JCV -> fetch_array()[0];
 			
 			$sql2 = "SELECT COUNT(*) FROM `parejas_has_partidos` ph,`partidos` p
 					 WHERE (ID_ParejaLocal = '".$pareja."' OR ID_ParejaVisitante= '".$pareja."') and ID_Torneo = '".$idtorneo."'
@@ -179,7 +233,9 @@ function add(){
 		
 			$puntos = ($ganados*3) + $perdidos;
 			
-			$sql3 = "UPDATE `parejas_has_torneos` SET `PJ`='".$jugados."',`PG`='".$ganados."',`PP`='".$perdidos."',`Ptos`='".$puntos."' WHERE parejas_ID_Pareja = '".$pareja."'";
+			$sql3 = "UPDATE `parejas_has_torneos` SET `PJ`='".$jugados."',`PG`='".$ganados."',`PP`='".$perdidos."',`Ptos`='".$puntos."', `SF` = '".$setsFavor."',`SC` = '".$setsContra."' ,
+			`JF` = '".$juegosFavor."' ,`JC` = '".$juegosContra."' 
+			WHERE parejas_ID_Pareja = '".$pareja."'";
 			
 			if (!$this->mysqli->query($sql3)) {
 			

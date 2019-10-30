@@ -125,7 +125,6 @@ function registrar(){
 					'',
 					''
 					)";
-			
 		if (!$this->mysqli->query($sql)) {
 			
 			return 'Error al insertar';//Devuelve mensaje de error	
@@ -139,7 +138,7 @@ function registrar(){
 	function rellenadatos() 
 {	
     $sql = "SELECT * FROM usuarios WHERE (`login` = '$this->login')";
-   
+
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'No existe'; //Devuelve mensaje de error	
 	}
@@ -172,7 +171,7 @@ function edit()
 					`tipo` = '$this->tipo'
 
 				WHERE (`login` = '$this->login')";
- ;
+ ;echo $sql;
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación';//Devuelve mensaje de error	
 		}
