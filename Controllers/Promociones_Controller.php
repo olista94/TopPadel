@@ -321,6 +321,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 				//Si el usuario es de tipo admin
 				if($_SESSION['tipo']=='ADMIN'){		   
 					$promocion = new Promociones_Model('','','','','','');//Creamos un objeto promocion
+					$promocion->borrarAntiguas();
 					
 					$datos = $promocion -> PromocionesShowAllTodas();
 					$usuarios = $promocion -> ContarUsuarios();
@@ -333,6 +334,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 		
 					case 'Mostrar_Todas':
 						$promocion = new Promociones_Model('','','','','','');//Creamos un objeto promocion
+						$promocion->borrarAntiguas();
 						
 						$datos = $promocion -> PromocionesShowAllTodas();
 						$usuarios = $promocion -> ContarUsuarios();
@@ -343,6 +345,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 					default:
 						
 						$promocion = new Promociones_Model('','','','','','');//Creamos un objeto promocion
+						$promocion->borrarAntiguas();
 						
 						$datos = $promocion -> PromocionesShowAllMias();
 						$usuarios = $promocion -> ContarUsuarios();

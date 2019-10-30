@@ -252,7 +252,7 @@ if(!IsAuthenticated()){
 					$clasificacion = $inscripcion -> DevolverClasificacionInicial();
 				
 					$apuntados = new Inscripcion_Model('','');
-					$apuntados1 = $apuntados -> DevolverParejasTorneo($idtorneo);
+					$apuntados1 = $apuntados -> DevolverParejasGrupo($idtorneo,0);
 					$grupos = $apuntados ->DevolverGruposTorneo($idtorneo);
 
 					new Torneos_SHOWTORNEO_Generado($datos1,$clasificacion,$apuntados1,$idtorneo,$grupos,'','../Controllers/Torneos_Controller.php'); //Se muestran los datos en una vista SHOWCURRENT
@@ -266,7 +266,7 @@ if(!IsAuthenticated()){
 					$clasificacion = $inscripcion -> DevolverClasificacionInicial();
 				
 					$apuntados = new Inscripcion_Model('','');
-					$apuntados1 = $apuntados -> DevolverParejasTorneo($idtorneo);
+					$apuntados1 = $apuntados -> DevolverParejasGrupo($idtorneo,0);
 					
 
 					new Torneos_SHOWTORNEO($datos1,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php'); //Se muestran los datos en una vista SHOWCURRENT

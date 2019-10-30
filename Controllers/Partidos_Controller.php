@@ -247,16 +247,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 			
 			break;
 			
-			//Confirma el ADD de pista tras rellenar el form ADD
-			case 'Confirmar_ADD2':
-			//Recoge los datos
-				$pista = getDataForm();
-				//LLama a la funcion sql para insertar pista
-				$mensaje = $pista-> add();
-				//Crea un nuevo objeto de tipo MESSAGE que muestra por pantalla el texto de la respuesta y hace un enlace para permitir la vuelta hacia atrás (hacia el controlador)
-				new MESSAGE($mensaje,'../Controllers/Partidos_Controller.php');
-				
-			break;
+			
 			
 			
 			//Confirma el SHOWCURRENT de pista
@@ -265,7 +256,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$partido = new Partidos_Model($_REQUEST['ID_Partido'],'','','','','','','','','','','','');
 				
 				$datos = $partido -> ShowCurrentPartidos();
-	print_r($datos);
+	
 				//$array = $datos -> fech_array();
 
 				new Partidos_SHOWCURRENT($datos,$_REQUEST['ID_Torneo'],'../Controllers/Partidos_Controller.php');
