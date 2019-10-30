@@ -73,7 +73,7 @@ Fecha:03/01/2019-->
 	  <!--Campo tipo del usuario (en el registro solo puede ser normal)-->
 	  <label for="tipo"><?php echo $strings['Tipo']; ?></label>
       <select name="tipo" id="tipo">
-		<option value="NORMAL"><?php echo $strings['Normal']; ?></option>
+		<option value="NORMAL"><?php echo $strings['Deportista']; ?></option>
 	  </select>
 	  
 	 

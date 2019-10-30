@@ -66,7 +66,7 @@ Fecha: 20/12/2018-->
 			<label ><?php echo $strings['Tipo']; ?></label>
 				<select name="tipo" id="tipo">
 				<option value="ADMIN" <?php if($this -> fila['tipo'] == 'ADMIN') echo "selected"; ?>><?php echo $strings['Admin']; ?></option>
-				<option value="NORMAL" <?php if($this -> fila['tipo'] == 'NORMAL') echo "selected"; ?>><?php echo $strings['Normal']; ?></option>
+				<option value="NORMAL" <?php if($this -> fila['tipo'] == 'NORMAL') echo "selected"; ?>><?php echo $strings['Deportista']; ?></option>
 			</select>  
 	
 			<label ><?php echo $strings['Sexo']; ?></label>

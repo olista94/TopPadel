@@ -50,7 +50,12 @@
 				 <!--Campo descripcion del torneo-->				
 				<tr>
                     <th><?php echo $strings['Categoria']; ?></th>
-                    <td><?php echo $this -> fila['categoria']; ?></td>
+                    <td><?php if($this ->fila['categoria'] == 'Masculina')
+								echo $strings['Masculina'];
+							else if($this ->fila['categoria'] == 'Femenina')
+								echo $strings['Femenina'];
+							else echo $strings['Mixta'];
+							?></td>
                 </tr>
 				<!--Campo telefono del torneo-->
 				<tr>

@@ -38,7 +38,7 @@ class Partidos_ADD{
 			<input type="hidden" name="ID_ParejaVisitante" value ="<?php echo $this->fila['ID_ParejaVisitante']; ?>">
 				<legend><?php echo $strings['Acta del partido'];?>
 				<!--Boton para volver atras-->
-				<button type="button" type="button" onclick="location.href='../Controllers/Torneos_Controller.php?action=Confirmar_SHOWTORNEO';" class="volver"></button>
+				
 				</legend>
 				<div style="display:inline-block;margin-right:25%">
 		

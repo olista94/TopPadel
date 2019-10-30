@@ -75,7 +75,7 @@ Fecha: 20/12/2018-->
 	  <select name="tipo" id="tipo">
 		<option value=""></option selected>
 		<option value="ADMIN"><?php echo $strings['Admin']; ?></option>
-		<option value="NORMAL"><?php echo $strings['Normal']; ?></option>
+		<option value="NORMAL"><?php echo $strings['Deportista']; ?></option>
 	  </select>
 	  </div>
 		   

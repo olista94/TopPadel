@@ -21,7 +21,7 @@ Fecha: 26/12/2018-->
 		$this -> fila = $fila -> fetch_array();
 
 		$this -> pista = $pista -> fetch_array();
-		$this -> apuntados = $apuntados -> fetch_array();
+		$this -> apuntados = $apuntados;
 		$this -> enlace = $enlace;
 
 		$this -> mostrar();
@@ -74,7 +74,19 @@ Fecha: 26/12/2018-->
                     <tr>
                         <th><?php echo $strings['Hora inicio']; ?></th>
                         <td><?php echo $this -> fila['hora_inicio']; ?></td>
-                    </tr>                                          
+                    </tr>
+
+					<tr>
+                        <th><?php echo $strings['Apuntados']; ?></th>
+                        <td><?php while($fila = $this ->apuntados->fetch_array()){
+						if($fila['usuarios_login'] == null )
+							echo "-";
+						else echo $fila['usuarios_login'];echo "-";
+						}?></td>
+                    </tr> 
+					
+					
+					
                 </table>
             </form>            
         </div>       

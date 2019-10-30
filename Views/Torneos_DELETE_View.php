@@ -50,7 +50,12 @@
 				 <!--Campo descripcion del torneo-->				
 				<tr>
                     <th><?php echo $strings['Categoria']; ?></th>
-                    <td><?php echo $this -> fila['categoria']; ?></td>
+                    <td><?php if($this ->fila['categoria'] == 'Masculina')
+								echo $strings['Masculina'];
+							else if($this ->fila['categoria'] == 'Femenina')
+								echo $strings['Femenina'];
+							else echo $strings['Mixta'];
+							?></td>
                 </tr>
 				<!--Campo telefono del torneo-->
 				<tr>
@@ -59,7 +64,7 @@
                 </tr>
 				
 				<tr>
-                    <th><?php echo $strings['Fecha']; ?></th>
+                    <th><?php echo $strings['Fecha limite']; ?></th>
                     <td><?php echo $this -> fila['fecha']; ?></td>
                 </tr>
 				
@@ -71,8 +76,7 @@
 				<tr>
 				<!--Confirmar borrado-->
 					<th><button class="borrar-si" type="submit" name="action" value="Confirmar_DELETE2"></button></th>
-				<!--Cancelar borrado-->	
-					<td><button class="borrar-no" type="submit" name="action" value=""></button></td>
+				
                 </tr>   
                                                                         
             </table>

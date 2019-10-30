@@ -84,7 +84,8 @@ Fecha: 20/12/2018-->
 				<!--Campo tipo del usuario (ADMIN O NORMAL)-->
 				<tr>
                     <th><?php echo $strings['Tipo']; ?></th>
-                    <td><?php echo $this -> fila['tipo']; ?></td>
+                    <td><?php if($this -> fila['tipo'] == 'ADMIN') echo $strings['Admin'];
+					else echo $strings['Deportista']; ?></td>
                 </tr>
 				
 				<tr>

@@ -59,7 +59,8 @@
 				 <!--Campo descripcion del torneo-->				
 				<tr>
                     <th><?php echo $strings['Ronda']; ?></th>
-                    <td><?php echo $this -> fila['ronda']; ?></td>
+                    <td><?php if($this -> fila['ronda'] == 'Grupos')
+								echo $strings['Grupos']; ?></td>
                 </tr>
 				<!--Campo telefono del torneo-->
 				

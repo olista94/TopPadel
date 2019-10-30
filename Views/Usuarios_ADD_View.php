@@ -63,7 +63,7 @@ Fecha: 20/12/2018-->
 	  <label for="tipo"><?php echo $strings['Tipo']; ?></label>
 	  
       <select name="tipo" id="tipo">
-		<option value="NORMAL"><?php echo $strings['Normal']; ?></option>
+		<option value="NORMAL"><?php echo $strings['Deportista']; ?></option>
 		<option value="ADMIN"><?php echo $strings['Admin']; ?></option>
 	  </select>
       

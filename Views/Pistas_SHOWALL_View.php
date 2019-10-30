@@ -57,8 +57,14 @@ if(isset($_SESSION['tipo'])){
 					<form action="../Controllers/Pistas_Controller.php" method="post" name="action" >
 						<input type="hidden" name="ID_Pista" value="<?php echo $fila['ID_Pista']; ?>">
 						<td><?php echo $fila['Nombre_Pista']; ?></td>
-						<td><?php echo $fila['techo']; ?></td>
-						<td><?php echo $fila['suelo']; ?></td>						
+						<td><?php if($fila['techo']=='Interior')
+									echo $strings['Interior'];
+								else echo $strings ['Exterior'];
+						 ?></td>
+						<td><?php if($fila['suelo']=='Blanda')
+									echo $strings['Blanda'];
+								else echo $strings ['Dura'];
+						 ?></td>			
 						<td style="text-align:right">
 						<!--Botones para editar,borrar o ver en detalle-->
 							<button class="editar" name="action" value="Confirmar_EDIT1" type="submit"></button>
@@ -131,8 +137,14 @@ if(isset($_SESSION['tipo'])){
 					<form action="../Controllers/Pistas_Controller.php" method="post" name="action" >
 						<input type="hidden" name="ID_Pista" value="<?php echo $fila['ID_Pista']; ?>">
 						<td><?php echo $fila['Nombre_Pista']; ?></td>
-						<td><?php echo $fila['techo']; ?></td>
-						<td><?php echo $fila['suelo']; ?></td>						
+						<td><?php if($fila['techo']=='Interior')
+									echo $strings['Interior'];
+								else echo $strings ['Exterior'];
+						 ?></td>
+						<td><?php if($fila['suelo']=='Blanda')
+									echo $strings['Blanda'];
+								else echo $strings ['Dura'];
+						 ?></td>				
 						<td style="text-align:right">
 						<!--Botones para editar,borrar o ver en detalle-->
 							<button class="add" name="action" value="Confirmar_SHOWCURRENT" type="submit"></button>

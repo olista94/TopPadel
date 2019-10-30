@@ -53,16 +53,23 @@ include_once '../Views/Header.php';
 			</tr>
 		<?php 
 		//Mientras haya filas en la bd
-			while($fila = $this ->datos->fetch_array()){                        
+			while($fila = $this ->datos->fetch_array()){  
+			
 		?>
 			<tr>
 				<form action="../Controllers/Torneos_Controller.php" method="post" name="action" >
 					<input type="hidden" name="ID_Torneo" value="<?php echo $fila['ID_Torneo']; ?>">
 					<!--Datos-->
 					<td><button class="tarea" name="action" value="Confirmar_SHOWTORNEO"><?php echo $fila['nombre']; ?></button></td>
-					<td><?php echo $fila['categoria']; ?></td>
+					<td><?php if($fila['categoria'] == 'Masculina')
+								echo $strings['Masculina'];
+							else if($fila['categoria'] == 'Femenina')
+								echo $strings['Femenina'];
+							else echo $strings['Mixta'];
+							?></td>
 					<td><?php echo $fila['edicion']; ?></td>	
-					<td><?php echo $fila['fecha']; ?></td>
+					<td><?php echo $fila['fecha']; ?></td>	
+					
 					<td><?php echo $fila['nivel']; ?></td>	
 					
 					<td style="text-align:right">

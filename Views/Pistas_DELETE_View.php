@@ -56,12 +56,18 @@ Fecha: 20/12/2018-->
 				
 				<tr>
                     <th><?php echo $strings['Cubierta']; ?></th>
-                    <td><?php echo $this -> fila['techo']; ?></td>
+                    <td><?php if($this ->fila['techo']=='Interior')
+									echo $strings['Interior'];
+								else echo $strings ['Exterior'];
+						 ?></td>	
                 </tr>
 				
 				<tr>
                     <th><?php echo $strings['Suelo']; ?></th>
-                    <td><?php echo $this -> fila['suelo']; ?></td>
+                    <td><?php if($this ->fila['suelo']=='Blanda')
+									echo $strings['Blanda'];
+								else echo $strings ['Dura'];
+						 ?></td>
                 </tr>
                 
 
