@@ -5,7 +5,7 @@ Fecha: 20/12/2018-->
 
 <?php
  //Declaracion de la clase
- class Usuarios_SHOWCURRENT{
+ class Usuarios_SHOWCURRENT_Normal{
 	 //Datos del usuario
 	var $datos;
 	//Variable con el enlace al form para ADD usuaro
@@ -44,11 +44,7 @@ Fecha: 20/12/2018-->
                     <th><?php echo $strings['Login']; ?></th>
                     <td><?php echo $this -> fila['login']; ?></td>								
                 </tr>
-				<!--Campo password del usuario-->
-                <tr>
-                    <th><?php echo $strings['Contraseña']; ?></th>
-                    <td><?php echo $this -> fila['password']; ?></td>
-                </tr>
+			
 				<!--Campo nombre del usuario-->
                 <tr>
                     <th><?php echo $strings['Nombre']; ?></th>
@@ -59,11 +55,7 @@ Fecha: 20/12/2018-->
                     <th><?php echo $strings['Apellidos']; ?></th>
                     <td><?php echo $this -> fila['apellidos']; ?></td>
                 </tr>
-				<!--Campo DNI del usuario-->
-                <tr>
-                    <th><?php echo $strings['DNI']; ?></th>
-                    <td><?php echo $this -> fila['dni']; ?></td>
-                </tr>
+				
 				<!--Campo telefono del usuario-->
                 <tr>
                     <th><?php echo $strings['Teléfono']; ?></th>
@@ -74,40 +66,7 @@ Fecha: 20/12/2018-->
                     <th><?php echo $strings['Email']; ?></th>
                     <td><?php echo $this -> fila['email']; ?></td>
                 </tr>     
-				<!--Campo fecha de nacimiento del usuario-->				
-				<tr>
-                    <th><?php echo $strings['Fecha de nacimiento']; ?></th>
-                    <td><?php echo $this -> fila['fecha']; ?></td>
-                </tr>
-				<!--Campo tipo del usuario (ADMIN O NORMAL)-->
-				<tr>
-                    <th><?php echo $strings['Tipo']; ?></th>
-                    <td><?php echo $this -> fila['tipo']; ?></td>
-                </tr>
-				
-				<tr>
-                    <th><?php echo $strings['Sexo']; ?></th>
-                    <td><?php if($this -> fila['sexo'] == 'Masculina') echo $strings['Hombre'];
-					else echo $strings['Mujer']; ?></td>
-                </tr>
-				
-				<tr>
-                    <th><?php echo $strings['Socio']; ?></th>
-                    <td><?php if($this -> fila['socio'] == 'SI') echo $strings['SI'];
-					else echo $strings['NO']; ?></td>
-                </tr>
-				
-				<tr>
-                    <th><?php echo $strings['IBAN']; ?></th>
-                    <td><?php if($this -> fila['IBAN'] == '') echo $strings['No es socio'];
-					else echo $this -> fila['IBAN']; ?></td>
-                </tr>
-				
-				<tr>
-                    <th><?php echo $strings['Cuenta']; ?></th>
-                    <td><?php if($this -> fila['cuenta'] == '') echo $strings['No es socio'];
-					else echo $this -> fila['cuenta']; ?></td>
-                </tr>
+
                                                                         
             </table>
 

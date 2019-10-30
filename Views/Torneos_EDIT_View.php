@@ -51,15 +51,14 @@ class Torneos_EDIT{
 
 
       <label for="edicion"><?php echo $strings['Edicion']; ?></label>
-      <input type="text" name="edicion" id="edicion" value="<?php echo $this -> fila['edicion']; ?>" size="55" onblur=" return !comprobarVacio(this) && comprobarTexto(this,50);" />
+      <input type="text" name="edicion" id="edicion" value="<?php echo $this -> fila['edicion']; ?>" size="7" onblur=" return !comprobarVacio(this) && comprobarTexto(this,50);" />
 		
 		
       <label for="fecha"><?php echo $strings['Fecha']; ?></label>
-      <input id="fecha" type="text" name="fecha" value="<?php echo $this -> fila['fecha']; ?>" size="28" class="tcal" value="" onblur=" return comprobarFecha(this)"/>
-		  
+		<input type="date" name="fecha" size="18" value="<?php echo $this -> fila['fecha']; ?>" onblur=" return comprobarFecha(this)">
 		  
 		  <label for="nivel"><?php echo $strings['Nivel']; ?></label>
-      <input type="text" name="nivel" id="nivel" value="<?php echo $this -> fila['nivel']; ?>" size="5" onblur=" return !comprobarVacio(this) && comprobarTexto(this,50);" />
+      <input type="text" name="nivel" id="nivel" value="<?php echo $this -> fila['nivel']; ?>" size="3" onblur=" return !comprobarVacio(this) && comprobarTexto(this,50);" />
       
     </div>
 	

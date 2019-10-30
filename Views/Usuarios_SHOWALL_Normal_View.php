@@ -1,16 +1,20 @@
+<!-- TABLA QUE MUESTRA TODOS LOS USUARIOS
+CREADO POR: Los Cangrejas
+Fecha: 20/12/2018-->
+
 <?php
 //Comprobamos que está autenticado
 include_once '../Functions/Authentication.php';
 //Header
 include_once '../Views/Header.php';
 
-
  //Declaracion de la clase 
- class Torneos_SHOWALL{	 
-	//Datos de los contactos
+ class Usuarios_SHOWALL_Normal{	 
+	//Datos de los usuarios
 	var $datos;
 	//Variable con el enlace al showall
 	var $enlace;	
+	
 	//Constructor de la clase
 	function __construct($datos,$enlace){
 		
@@ -24,31 +28,25 @@ include_once '../Views/Header.php';
 		if(!isset($_SESSION['idioma'])){
 			$_SESSION['idioma'] = 'SPANISH';
 		}
-	//Archivo del idioma	
+		//Archivo del idioma	
 		include '../Locales/Strings_'. $_SESSION['idioma'] .'.php';  
 	 
-			
-		
 ?>
-
-<!--Tabla con los datos de los torneos-->
+<!--Tabla con los datos de los usuarios-->
 	<div class="showall">   
                                 
 		<table class="showAllUsers">
-			<tr><th class="title" colspan="4"><?php echo $strings['Torneos']; ?>
-			<form class="tableActions" action="../Controllers/Torneos_Controller.php" method="">
+			<tr><th class="title" colspan="4"><?php echo $strings['Usuarios']; ?>
+			<form class="tableActions" action="../Controllers/Usuarios_Controller.php" method="">
 			<!--Botones para añadir o buscar-->
 			<button class="buscar-little" name="action" value="Confirmar_SEARCH1" type="submit"></button>
-
-			</form></th></tr>
-	<!--Campos Categoria,nombre,Edicion,Fecha,Nivel -->
-			<tr>
 			
+			</form></th></tr>
+			<!--Campos a mostrar-->
+			<tr>
+				<th><?php echo $strings['Login']; ?></th>
 				<th><?php echo $strings['Nombre']; ?></th>
-				<th><?php echo $strings['Categoria']; ?></th>
-				<th><?php echo $strings['Edicion']; ?></th>
-				<th><?php echo $strings['Fecha limite']; ?></th>
-				<th><?php echo $strings['Nivel']; ?></th>
+				<th><?php echo $strings['Apellidos']; ?></th>
 				<th></th>
 			</tr>
 		<?php 
@@ -56,29 +54,17 @@ include_once '../Views/Header.php';
 			while($fila = $this ->datos->fetch_array()){                        
 		?>
 			<tr>
-				<form action="../Controllers/Torneos_Controller.php" method="post" name="action" >
-					<input type="hidden" name="ID_Torneo" value="<?php echo $fila['ID_Torneo']; ?>">
+				<form action="../Controllers/Usuarios_Controller.php" method="post" name="action" >
+					<input type="hidden" name="login" value="<?php echo $fila['login']; ?>">
 					<!--Datos-->
-					<td><button class="tarea" name="action" value="Confirmar_SHOWTORNEO"><?php echo $fila['nombre']; ?></button></td>
-					<td><?php echo $fila['categoria']; ?></td>
-					<td><?php echo $fila['edicion']; ?></td>	
-					<td><?php echo $fila['fecha']; ?></td>
-					<td><?php echo $fila['nivel']; ?></td>	
-					
-					<td style="text-align:right">
-					
-						<button class="add" name="action" value="Confirmar_SHOWCURRENT" type="submit"></button>
-						
-					</td>
-					
-				</form>
-				<form action="../Controllers/Inscripcion_Controller.php" method="post" name="action" >
-					<input type="hidden" name="ID_Torneo" value="<?php echo $fila['ID_Torneo']; ?>">
+					<td><?php echo $fila['login']; ?></td>
+					<td><?php echo $fila['nombre']; ?></td>
+					<td><?php echo $fila['apellidos']; ?></td>		
 					<td style="text-align:right">
 					<!--Botones para editar,borrar o ver en detalle-->
-						<button class="inscripcion" name="action" value="Confirmar_INSCRIPCION1" type="submit"></button>
+						<button class="add" name="action" value="Confirmar_SHOWCURRENT" type="submit"></button>
 					</td>
-					</form>
+				</form>
 			</tr>
 		<?php
 			}
@@ -90,7 +76,6 @@ include_once '../Views/Header.php';
     }
 }
 ?>
-
     
 <footer>
 <!--Pie de pagina-->

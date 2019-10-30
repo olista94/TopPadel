@@ -62,7 +62,7 @@ Fecha:03/01/2019-->
       <input type="text" id="email" name="email" size="65"  onblur=" return !comprobarVacio(this) && comprobarEmail(this,60);" />	
 	<!--Campo fecha de nacimiento del usuario-->
       <label for="fecha"><?php echo $strings['Fecha de nacimiento']; ?></label>
-	  <input type="date" name="FechaNacimiento" size="18" class="tcal" value=""  onblur=" return comprobarFecha(this)" >
+	  <input type="date" name="fecha" size="18" class="tcal" value=""  onblur=" return comprobarFecha(this)" >
 	  
 	   <label for="sexo"><?php echo $strings['Sexo']; ?></label>
 	  <select name="sexo" id="sexo">
