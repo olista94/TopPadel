@@ -147,7 +147,7 @@ if(!IsAuthenticated()){
 					for ($j = $i+1; $j < $longitud; $j++) {
 						//echo "$parejasArray[$i] vs $parejasArray[$j] --";
 						$mensaje = $partido -> add();
-						$partido1 = new Partidos_Model('','','','','','','','','','','','','','','');
+						$partido1 = new Partidos_Model('','','','','','','','','','','','','');
 						$idpartido = $partido1 -> DevolverID();
 						
 						$mensaje1 = $enfrentamiento -> add($idpartido,$idtorneo,$parejasArray[$i],$parejasArray[$j]);
@@ -287,7 +287,7 @@ if(!IsAuthenticated()){
 				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
 				$apuntados1 = $inscripcion -> DevolverIDParejas($_REQUEST['ID_Torneo']);//DEVUELVE LOS IDS DE LAS PAREJAS APUNTADAS A UN TORNEO
 				
-				$partido = new Partidos_Model('','','','','','','','','','','','','','','');
+				$partido = new Partidos_Model('','','','','','','','','','','','','');
 				$enfrentamiento = new Parejas_has_partidos_Model('','','','');
 					
 
@@ -300,7 +300,7 @@ if(!IsAuthenticated()){
 				} 
 				
 				
-				$partido = new Partidos_Model("","","","","","","","","","","","","","","");
+				$partido = new Partidos_Model("","","","","","","","","","","","","");
 				$torneo1 = generarGrupos($parejasArray,$partido,$_REQUEST['ID_Torneo']);
 				$torneo = generarEnfrentamientos($parejasArray,$_REQUEST['ID_Torneo'],$partido,$enfrentamiento);
 				

@@ -24,10 +24,12 @@ if(isset($_SESSION['tipo'])){
 			//Incluimos las vistas y modelo necesarios
 			include_once "../Models/Usuarios_Model.php";
 			include_once "../Views/Usuarios_SHOWALL_View.php";
+			include_once "../Views/Usuarios_SHOWALL_Normal_View.php";
 			include_once "../Views/Usuarios_ADD_View.php";
 			include_once "../Views/Usuarios_SEARCH_View.php";
 			include_once "../Views/Usuarios_EDIT_View.php";
 			include_once "../Views/Usuarios_SHOWCURRENT_View.php";
+			include_once "../Views/Usuarios_SHOWCURRENT_Normal_View.php";
 			include_once "../Views/Usuarios_DELETE_View.php";
 			include_once "../Views/Socios_Home_View.php";
 			include_once "../Views/Socios_Home_Delete_View.php";
@@ -91,12 +93,12 @@ if(isset($_SESSION['tipo'])){
 				$email = "";
 			}
 				
-			if(isset($_REQUEST['fechanacimiento'])){
-				$fechanacimiento = $_REQUEST['fechanacimiento'];//Identificador de la Inscripcion
+			if(isset($_REQUEST['fecha'])){
+				$fecha = $_REQUEST['fecha'];//Identificador de la Inscripcion
 				
 			}
 			else{
-				$fechanacimiento = "";
+				$fecha = "";
 			}
 				
 			if(isset($_REQUEST['sexo'])){
@@ -139,7 +141,7 @@ if(isset($_SESSION['tipo'])){
 			}
 			
 				
-				$usuario = new Usuarios_Model ($login,$password,$dni,$nombre,$apellidos,$telefono,$email,$fechanacimiento,$sexo,$tipo,$socio,$IBAN,$cuenta); //creamos el objeto usuario
+				$usuario = new Usuarios_Model ($login,$password,$dni,$nombre,$apellidos,$telefono,$email,$fecha,$sexo,$tipo,$socio,$IBAN,$cuenta); //creamos el objeto usuario
 				
 				return $usuario; //devolvemos el objeto usuario
 			}
@@ -249,11 +251,30 @@ if(isset($_SESSION['tipo'])){
 		
 		if($_REQUEST['action'] == 'Confirmar_SHOWCURRENT1'){
 			
-			$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');//Creamos el objeto usuario
+						$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');//Creamos el objeto usuario
 						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
 						new Usuarios_SHOWCURRENT($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
 		}
-
+		
+		else if($_REQUEST['action'] == 'Confirmar_SHOWCURRENT'){
+			
+						$usuario = new Usuarios_Model($_REQUEST['login'],'','','','','','','','','','','','');//Creamos el objeto usuario
+						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
+						new Usuarios_SHOWCURRENT_Normal($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+		}
+		
+		else if($_REQUEST['action'] == 'Confirmar_SEARCH1'){
+			
+						new Usuarios_SEARCH('../Controllers/Usuarios_Controller.php');
+		}
+		
+		else if($_REQUEST['action'] == 'Confirmar_SEARCH'){
+			
+						$usuario = getDataForm();//Obtenemos los datos del formulario y los guardamos
+						$datos = $usuario-> search();//Buscamos los usuarios
+						new Usuarios_SHOWALL_Normal($datos,'../Controllers/Usuarios_Controller.php'); 
+		}
+		
 		else if($_REQUEST['action'] == 'Hacerse_Socio1'){
 			if($socio == 'NO'){
 			
@@ -292,6 +313,12 @@ if(isset($_SESSION['tipo'])){
 											new MESSAGE($mensaje,'../Controllers/Torneos_Controller.php');			
 		
 		}
+		else if($_REQUEST['action'] == ''){	
+					$usuario = new Usuarios_Model('','','','','','','','','','','','','','','','');//Creamos el objeto usuario
+					$datos = $usuario -> search();//Buscamos todos los usuarios
+					$respuesta = new Usuarios_SHOWALL_Normal($datos,'../Controllers/Usuarios_Controller.php'); //Mostramos los usuarios en el showall
+		}
+		
 		else{
 			new MESSAGE('No puedes ver esto si no eres administrador', '../Controllers/Index_Controller.php'); //muestra el mensaje
 		}

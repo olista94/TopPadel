@@ -240,7 +240,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 					$p = new Promociones_Model($_REQUEST['ID_Promo'],$datos['fecha'],$datos['hora_inicio'],"",$datos['pista_ID_Pista'],"");
 					$pista = $p -> buscarPistasLibresPromo(); //Devuelve la 1º pista libre
 					if(!is_numeric($pista)){
-						
+						$promocion->delete();
 						new MESSAGE('No hay pistas disponibles','../Controllers/Promociones_Controller.php');//Mostramos el mensaje
 					}
 					else{
@@ -288,13 +288,13 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$p = $pistas -> searchById();
 				$datos = $promocion -> rellenadatos();
 				
-				new Promociones_DELETE($datos,$p,'../Controllers/Promociones_Controller.php'); //Creamos una vista de delete con los datos obtenidos
+				new Promociones_DELETE($datos,$p,'../Controllers/Promociones_Controller.php'); 
 		break;
 		
 		// Si queremos borrar desde la vista de borrar
 		case 'Confirmar_DELETE2':		
 			$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","");
-			$mensaje = $promocion-> delete(); //Llamamos a delete y guardamos el mensaje que devuelve
+			$mensaje = $promocion-> delete(); 
 			new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php'); //Mostramos el mensaje	
 		break;
 		//Si queremos mostrar los datos de una tarea en concreto
@@ -312,7 +312,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$apuntados = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],"");
 				$apunt = $apuntados -> apuntadosPromo();
 				
-				new Promociones_SHOWCURRENT($datos,$p,$apunt,'../Controllers/Promociones_Controller.php'); //Creamos una vista de delete con los datos obtenidos
+				new Promociones_SHOWCURRENT($datos,$p,$apunt,'../Controllers/Promociones_Controller.php'); 
 		break;
 		
 		default: /*PARA EL SHOWALL */
