@@ -148,6 +148,19 @@ function registrar(){
 	}
 }
 
+	function DatosSocio() 
+{	
+    $sql = "SELECT socio,IBAN,cuenta FROM usuarios WHERE (`login` = '$this->login')";
+
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'No existe'; //Devuelve mensaje de error	
+	}
+    else{ 
+		$result = $resultado;
+		return $result;//Se devuelve el resultado de la consulta
+	}
+}
+
 //Funcion que edita un usuario
 function edit()
 {
@@ -171,7 +184,7 @@ function edit()
 					`tipo` = '$this->tipo'
 
 				WHERE (`login` = '$this->login')";
- ;echo $sql;
+
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación';//Devuelve mensaje de error	
 		}
