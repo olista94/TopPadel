@@ -34,6 +34,7 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Views/Socios_Home_View.php";
 			include_once "../Views/Socios_Home_Delete_View.php";
 			include_once "../Views/Socios_ADD_View.php";
+			include_once "../Views/Socios_DELETE_View.php";
 
 			/* RECOGE LOS DATOS DEL FORMULARIO */
 			function getDataForm(){
@@ -307,12 +308,20 @@ if(isset($_SESSION['tipo'])){
 		
 		else if($_REQUEST['action'] == 'Borrar_Socio'){
 									$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
-									$usuario = getDataForm();
+									$u = $usuario -> DatosSocio();
 
-										$mensaje = $usuario->deleteSocio();//Rellenamos con los datos del usuario
-											new MESSAGE($mensaje,'../Controllers/Torneos_Controller.php');			
+										//$mensaje = $usuario->deleteSocio();//Rellenamos con los datos del usuario
+										new Socios_DELETE($u,'../Controllers/Usuarios_Controller.php');			
 		
 		}
+		
+		else if($_REQUEST['action'] == 'Borrar_Socio2'){
+			$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
+			$mensaje = $usuario->deleteSocio();//Rellenamos con los datos del usuario
+			new MESSAGE($mensaje,'../Controllers/Usuarios_Controller.php');			
+		
+		}
+		
 		else if($_REQUEST['action'] == ''){	
 					$usuario = new Usuarios_Model('','','','','','','','','','','','','','','','');//Creamos el objeto usuario
 					$datos = $usuario -> search();//Buscamos todos los usuarios
