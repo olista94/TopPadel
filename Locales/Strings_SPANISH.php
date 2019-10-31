@@ -128,7 +128,7 @@ array(
 	'Soci@s' => 'Soci@s',
 	'Deportista' => 'Deportista',
 	'No es socio' => 'No es socio',
-	
+	'Darme de baja' => 'Darme de baja',
 	
 	'Registro' => 'Registro',
 	'Inserción realizada con éxito' => 'Inserción realizada con éxito',

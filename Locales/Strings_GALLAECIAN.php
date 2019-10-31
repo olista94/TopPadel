@@ -124,6 +124,7 @@ array(
 	'Deportista' => 'Deportista',
 	'No es socio' => 'Non é socio',
 	'Grupos' => 'Grupos',
+	'Darme de baja' => 'Darme de baixa',
 	
 	
 	'Ediciones' => 'Edicións',

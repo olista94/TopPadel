@@ -132,6 +132,7 @@ array(
 	'No es socio' => 'Not a member',
 	'Ronda' => 'Round',
 	'Grupos' => 'Groups',
+	'Darme de baja' => 'Delete member',
 	
 	
 	'Volver' => 'Back',
