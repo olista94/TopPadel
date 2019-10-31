@@ -297,7 +297,9 @@ function comprobarEmail(campo,size){
 /* Función que comprueba si el campo fecha está o no vacío */
 function comprobarFecha(campo){
 	//Si está vacía
-	if(campo.value.length == 0){
+	alert("Hola");
+	
+	if(fecha_reserva.value.length == '0000-00-00'){
 		campo.style.border = "2px solid red";
 		return false;
 	}
@@ -308,8 +310,36 @@ function comprobarFecha(campo){
 	}
 }
 
+function controlFechas(finicio,ffin){
+	//creo dos nuevas variables para almacenar a objetos tipo fecha
+	var inicio = new Date(finicio.value).getTime();
+	var fin = new Date(ffin.value).getTime();
+	//Ahora puedo compararlas: si el inicio es menor o igual al fin retorno true
+	if(fin>=inicio){
+		return true;
+	}
+	else{
+		//sino retorno false y lanzo mensaje
+		//alert("<?php echo $strings['Rinoceronte']?>");
+		alert(traduce[idioma]['La fecha '] + finicio.value + traduce[idioma][' no puede ser posterior a la fecha '] + ffin.value + '.');
+		return false;
+	}
+}
 
 
+function comprobarFechaReserva(formReservaFecha){
+	
+	//Comprueba que la fecha no esté vacia
+	else if(comprobarFecha(formReservaFecha.fecha_reserva) == false){
+		alert(traduce[idioma]['El campo fecha no puede estar vacío']);
+		return false;
+	}
+	
+	
+	else{//Si todo está correcto
+		return true;
+	}
+}
 
 //Se comprueba que los campos de registrar usuario son correctos
 function comprobarRegistro(formAdd){
@@ -577,6 +607,8 @@ function comprobarTarea(formu){//Comprueba añadir y editar tarea y fase
 	
 	
 }
+
+
 
 //Comprueba que ni el login,ni la password del login esten vacíos
  function validarLogin(formLogin){
