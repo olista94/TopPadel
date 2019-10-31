@@ -53,7 +53,7 @@ Fecha: -->
 
     <!--Boton para acceder a formulario de socio-->
 	
-    <button  type="submit" name="action" value="Borrar_Socio" class="botonsocioborrar">Ya no quiero ser socio</button>
+    <button  type="submit" name="action" value="Borrar_Socio" class="botonsocioborrar"><?php echo $strings['Darme de baja']; ?></button>
 
 	</form>
  

@@ -24,7 +24,7 @@ Fecha: 20/12/2018-->
   }
 //Archivo del idioma
   include '../Locales/Strings_'. $_SESSION['idioma'] .'.php'; 
-	 	 
+
 ?>
  <!--Form para registrar un nuevo usuario-->
   <form name="Form" id="registerForm" action="../Controllers/Usuarios_Controller.php" method="post" enctype="multipart/form-data" onsubmit="return comprobarUsuario(this)">

@@ -4,11 +4,12 @@ Fecha: -->
 <?php
   //Declaracion de la clase
  class Socios_DELETE{	 
-//Variable con el enlace al form de ADD Socio
+	var $datos;
 	var $enlace;	
 	//Constructor de la clase
-	function __construct($enlace){
-		
+	function __construct($datos,$enlace){
+		$this -> datos = $datos;
+		$this -> fila = $this -> datos -> fetch_array();
 		$this -> enlace = $enlace;
 		$this -> mostrar();
 	}
@@ -23,14 +24,19 @@ Fecha: -->
 	 	 
 ?>
 <!--Formulario para añadir socio-->
-  <form name="Form" id="registerForm" action="../Controllers/Usuarios_Controller.php" method="post" enctype="multipart/form-data" >
-    <legend><?php echo $strings['Borrar socio']; ?> 
-	<!--Boton para volver atrás -->
-    <button type="button" onclick="location.href='../Controllers/Torneos_Controller.php';" class="volver"></button>
-    </legend>
+  
+   
 
-    <div>	
-		 
+     <div class="show-half">	
+	 <form class="formShow" enctype="multipart/form-data" action="../Controllers/Usuarios_Controller.php">
+            <table class="showU" style="margin-left: 30%;">	
+			
+			<tr><th class="title" colspan="4"><?php echo $strings['Borrar socio']; ?>
+                   <!--Boton para volver atras-->
+				   <button onclick="location.href='../Controllers/Usuarios_Controller.php';" class="volver"></button></th>
+                </tr>
+			
+			
 		  <th><?php echo $strings['Socio']; ?></th>
                     <td><?php if($this -> fila['socio'] == 'SI') echo $strings['SI'];
 					else echo $strings['NO']; ?></td>
@@ -47,15 +53,19 @@ Fecha: -->
                     <td><?php if($this -> fila['cuenta'] == '') echo $strings['No es socio'];
 					else echo $this -> fila['cuenta']; ?></td>
                 </tr>
-		  
-      
+				
+				<tr>
+				<!--Confirmar borrado-->
+					<th><button class="borrar-si" type="submit" name="action" value="Borrar_Socio2"></button></th>
+					<!--Cancelar borrado-->
+					<td><button class="borrar-no" type="submit" name="action" value=""></button></td>
+                </tr> 
+				
+		</table>
     </div>
-    <!--Boton de confirmar inserción-->
-    <button type="submit" name="action" value="Confirmar_Socio" class="aceptar"></button>
-    <!--Boton de borrado de texto-->
-	<button type="reset" value="Reset" class="cancelar"></button>
+  
 
-	</form>
+	
  
  
  <?php

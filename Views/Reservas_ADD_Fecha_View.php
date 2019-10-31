@@ -27,8 +27,8 @@ class Reservas_ADD_Fecha{
 ?>	 
 <!--Formulario para añadir fase-->
 		<div class="form">
-
-			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Reservas_Controller.php" enctype="multipart/form-data">
+ 
+			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Reservas_Controller.php" enctype="multipart/form-data" onsubmit="return comprobarFechaReserva(this)">
 				<legend><?php echo $strings['Añadir reserva'];?>
 				<button type="button" type="button" onClick="history.go(-1);" class="volver"></button>
 				</legend>
@@ -39,12 +39,12 @@ class Reservas_ADD_Fecha{
 				
 
 				<label for="fecha_reserva"><?php echo $strings['Fecha']; ?></label>
-				<input type="date" name="fecha_reserva" size="18" class="tcal" value=""  onblur=" return comprobarFecha(this)" >
+				<input type="date" id="fecha_reserva" name="fecha_reserva" size="18" onblur=" return comprobarFecha(this)" >
 					
 				</div>
 				
 				<!--Boton para finalizar-->
-				<button type="submit" name="action" value="Confirmar_ADD_Fecha" value="Submit" class="aceptar"></button>
+				<button type="submit" name="action" value="Confirmar_ADD_Fecha" class="aceptar"></button>
 				<!--Boton de borrado de texto-->
 				<button type="reset" value="Reset" class="cancelar"></button>
 
