@@ -20,7 +20,7 @@
 	 	 
 ?>
 <!--Formulario para añadir torneo-->
-  <form name="Form" id="registerForm" action="../Controllers/Torneos_Controller.php" method="post" enctype="multipart/form-data" >
+  <form name="Form" id="registerForm" action="../Controllers/Torneos_Controller.php" method="post" enctype="multipart/form-data" onsubmit="return comprobarTorneo(this)">
     <legend><?php echo $strings['Añadir torneo']; ?>
 	<!--Boton para volver atrás -->
     <button type="button" onclick="location.href='../Controllers/Torneos_Controller.php';" class="volver"></button>
@@ -29,7 +29,7 @@
     <div>	
 		 
 		  <label for="nombre"><?php echo $strings['Nombre']; ?></label>
-		  <input type="text" name="nombre" id="nombre" size="40"  onblur=" return !comprobarVacio(this) && comprobarTexto(this,45);"/>
+		  <input type="text" name="nombre" id="nombre" size="48"  onblur=" return !comprobarVacio(this) && comprobarTextoyNumeros(this,45);"/>
 		  
 		  <label for="categoria"><?php echo $strings['Categoria']; ?></label>
 		<select name="categoria" id="categoria">
@@ -39,13 +39,13 @@
 		</select>
 		  
 		  <label for="edicion"><?php echo $strings['Edicion']; ?></label>
-		  <input type="text" name="edicion" id="edicion" size="7"  onblur=" return !comprobarVacio(this) && comprobarEntero(this,0,9999);" />
+		  <input type="number" name="edicion" id="edicion"  style="width: 75px;" onblur=" return !comprobarVacio(this) && comprobarEntero(this,0,9999);" />
 		  
 		  <label for="fecha"><?php echo $strings['Fecha']; ?></label>
-		  <input type="date" name="fecha" size="18" value="" onblur=" return comprobarFecha(this)">
+		  <input type="date" name="fecha" value="" onblur=" return comprobarFecha(this)">
 		  
 		  <label for="nivel"><?php echo $strings['Nivel']; ?></label>
-		  <input type="nivel" id="nivel" name="nivel" size="5" onblur=" return !comprobarVacio(this) && comprobarEntero(this,0,99);"/>
+		  <input type="number" min="1" max="3" id="nivel" name="nivel" style="width: 75px;" onblur=" return !comprobarVacio(this) && comprobarEntero(this,1,3);"/>
 		  
 		  
       

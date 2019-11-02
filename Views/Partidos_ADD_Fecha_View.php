@@ -30,7 +30,7 @@ class Partidos_ADD_Fecha{
 <!--Formulario para añadir fase-->
 		<div class="form">
 
-			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Partidos_Controller.php" enctype="multipart/form-data">
+			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Partidos_Controller.php" enctype="multipart/form-data" onsubmit="return comprobarFechaPromo(this)">
 			<input type = "hidden" name ="ID_Partido" value ="<?php echo $this->idpartido; ?>">
 			<input type = "hidden" name ="ID_Torneo" value ="<?php echo $this->idtorneo; ?>">			
 				<legend><?php echo $strings['Fecha partido'];?>

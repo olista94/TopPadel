@@ -80,14 +80,14 @@ if(isset($_SESSION['tipo'])){
 			
 				<th><?php echo $strings['Jugador 1']; ?></th>
 				<th><?php echo $strings['Jugador 2']; ?></th>
-				<th><?php echo $strings['PJ']; ?></th>
-				<th><?php echo $strings['PG']; ?></th>
-				<th><?php echo $strings['PP']; ?></th>
-				<th><?php echo $strings['Ptos']; ?></th>
-				<th title = "<?php echo $strings['SF']; ?>"><?php echo $strings['SF']; ?></th>
-				<th><?php echo $strings['SC']; ?></th>
-				<th><?php echo $strings['JF']; ?></th>
-				<th><?php echo $strings['JC']; ?></th>
+				<th title = "<?php echo $strings['Partidos jugados']; ?>"><?php echo $strings['PJ']; ?></th>
+				<th title = "<?php echo $strings['Partidos ganados']; ?>"><?php echo $strings['PG']; ?></th>
+				<th title = "<?php echo $strings['Partidos perdidos']; ?>"><?php echo $strings['PP']; ?></th>
+				<th title = "<?php echo $strings['Puntos']; ?>"><?php echo $strings['Ptos']; ?></th>
+				<th title = "<?php echo $strings['Sets a favor']; ?>"><?php echo $strings['SF']; ?></th>
+				<th title = "<?php echo $strings['Sets en contra']; ?>"><?php echo $strings['SC']; ?></th>
+				<th title = "<?php echo $strings['Juegos a favor']; ?>"><?php echo $strings['JF']; ?></th>
+				<th title = "<?php echo $strings['Juegos en contra']; ?>"><?php echo $strings['JC']; ?></th>
 				<th></th>
 			</tr>
 		<?php 
@@ -291,10 +291,14 @@ if(isset($_SESSION['tipo'])){
 			
 				<th><?php echo $strings['Jugador 1']; ?></th>
 				<th><?php echo $strings['Jugador 2']; ?></th>
-				<th><?php echo $strings['PJ']; ?></th>
-				<th><?php echo $strings['PG']; ?></th>
-				<th><?php echo $strings['PP']; ?></th>
-				<th><?php echo $strings['Ptos']; ?></th>
+				<th title = "<?php echo $strings['Partidos jugados']; ?>"><?php echo $strings['PJ']; ?></th>
+				<th title = "<?php echo $strings['Partidos ganados']; ?>"><?php echo $strings['PG']; ?></th>
+				<th title = "<?php echo $strings['Partidos perdidos']; ?>"><?php echo $strings['PP']; ?></th>
+				<th title = "<?php echo $strings['Puntos']; ?>"><?php echo $strings['Ptos']; ?></th>
+				<th title = "<?php echo $strings['Sets a favor']; ?>"><?php echo $strings['SF']; ?></th>
+				<th title = "<?php echo $strings['Sets en contra']; ?>"><?php echo $strings['SC']; ?></th>
+				<th title = "<?php echo $strings['Juegos a favor']; ?>"><?php echo $strings['JF']; ?></th>
+				<th title = "<?php echo $strings['Juegos en contra']; ?>"><?php echo $strings['JC']; ?></th>
 				<th></th>
 			</tr>
 		<?php 
@@ -316,7 +320,10 @@ if(isset($_SESSION['tipo'])){
 					<td><?php echo $clasificacion['PG']; ?></td>
 					<td><?php echo $clasificacion['PP']; ?></td>
 					<td><?php echo $clasificacion['Ptos']; ?></td>
-					
+					<td><?php echo $clasificacion['SF']; ?></td>
+					<td><?php echo $clasificacion['SC']; ?></td>
+					<td><?php echo $clasificacion['JF']; ?></td>
+					<td><?php echo $clasificacion['JC']; ?></td>
 					<td style="text-align:right">
 					<!--Botones para editar,borrar o ver en detalle-->
 						

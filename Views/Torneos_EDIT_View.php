@@ -27,7 +27,7 @@ class Torneos_EDIT{
 	 	 
 ?>
 <!--Formulario para editar torneo-->
-	<form name="Form" id="registerForm" action="../Controllers/Torneos_Controller.php" method="post" enctype="multipart/form-data">
+	<form name="Form" id="registerForm" action="../Controllers/Torneos_Controller.php" method="post" enctype="multipart/form-data" onsubmit="return comprobarTorneo(this)">
     	<legend><?php echo $strings['Editar torneo']; ?>
     	<!--Boton para volver atrás -->
 		<button type="button" onclick="location.href='../Controllers/Torneos_Controller.php';" class="volver"></button>
@@ -39,7 +39,7 @@ class Torneos_EDIT{
 		 
 		 <!--Campo nombre del torneo-->
       <label for="nombre"><?php echo $strings['Nombre']; ?></label>
-      <input type="text" name="nombre" id="nombre" value="<?php echo $this -> fila['nombre']; ?>" size="40"  onblur=" return !comprobarVacio(this) && comprobarTexto(this,30);" />
+      <input type="text" name="nombre" id="nombre" value="<?php echo $this -> fila['nombre']; ?>" size="48"  onblur=" return !comprobarVacio(this) && comprobarTextoyNumeros(this,45);">
 		  
 		  <label ><?php echo $strings['Categoria']; ?></label>
 				<select name="categoria" id="categoria">
@@ -51,14 +51,14 @@ class Torneos_EDIT{
 
 
       <label for="edicion"><?php echo $strings['Edicion']; ?></label>
-      <input type="text" name="edicion" id="edicion" value="<?php echo $this -> fila['edicion']; ?>" size="7" onblur=" return !comprobarVacio(this) && comprobarTexto(this,50);" />
+      <input type="number" name="edicion" id="edicion" value="<?php echo $this -> fila['edicion']; ?>" style="width: 75px;" onblur=" return !comprobarVacio(this) && comprobarEntero(this,0,9999);" />
 		
 		
       <label for="fecha"><?php echo $strings['Fecha']; ?></label>
 		<input type="date" name="fecha" size="18" value="<?php echo $this -> fila['fecha']; ?>" onblur=" return comprobarFecha(this)">
 		  
 		  <label for="nivel"><?php echo $strings['Nivel']; ?></label>
-      <input type="text" name="nivel" id="nivel" value="<?php echo $this -> fila['nivel']; ?>" size="3" onblur=" return !comprobarVacio(this) && comprobarTexto(this,50);" />
+      <input type="number" min="1" max="3" name="nivel" id="nivel" value="<?php echo $this -> fila['nivel']; ?>" style="width: 75px;" onblur=" return !comprobarVacio(this) && comprobarEntero(this,1,3);" />
       
     </div>
 	

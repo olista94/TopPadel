@@ -28,7 +28,7 @@ class Promociones_ADD_Fecha{
 <!--Formulario para añadir fase-->
 		<div class="form">
 
-			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Promociones_Controller.php" enctype="multipart/form-data">
+			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Promociones_Controller.php" enctype="multipart/form-data" onsubmit="return comprobarFechaPromo(this)">
 				<legend><?php echo $strings['Añadir promocion'];?>
 				
 				</legend>

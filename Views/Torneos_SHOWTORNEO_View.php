@@ -45,15 +45,11 @@ if(isset($_SESSION['tipo'])){
 					
 				</form>	               
 		<table class="showAllUsers">
-			<tr><th class="title" colspan="4"><?php echo $strings['Clasificacion']; ?>
+			<tr><th class="title" colspan="4"><?php echo $strings['Apuntados']; ?>
 			<tr>
 			
 				<th><?php echo $strings['Jugador 1']; ?></th>
 				<th><?php echo $strings['Jugador 2']; ?></th>
-				<th><?php echo $strings['PJ']; ?></th>
-				<th><?php echo $strings['PG']; ?></th>
-				<th><?php echo $strings['PP']; ?></th>
-				<th><?php echo $strings['Ptos']; ?></th>
 				<th></th>
 			</tr>
 		<?php 
@@ -68,11 +64,7 @@ if(isset($_SESSION['tipo'])){
 					<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
 
 					<td><?php echo $clasificacion['usuarios_login']; ?></td>
-					<td><?php echo $clasificacion['usuarios_login1']; ?></td>
-					<td><?php echo $clasificacion['PJ']; ?></td>
-					<td><?php echo $clasificacion['PG']; ?></td>
-					<td><?php echo $clasificacion['PP']; ?></td>
-					<td><?php echo $clasificacion['Ptos']; ?></td>					
+					<td><?php echo $clasificacion['usuarios_login1']; ?></td>				
 				</form>	
 			</tr>
 			
@@ -131,15 +123,11 @@ if(isset($_SESSION['tipo'])){
 <!--Tabla con los datos de los torneos-->
 	<div class="showall">                 
 		<table class="showAllUsers">
-			<tr><th class="title" colspan="4"><?php echo $strings['Clasificacion']; ?>
+			<tr><th class="title" colspan="4"><?php echo $strings['Apuntados']; ?>
 			<tr>
 			
 				<th><?php echo $strings['Jugador 1']; ?></th>
 				<th><?php echo $strings['Jugador 2']; ?></th>
-				<th><?php echo $strings['PJ']; ?></th>
-				<th><?php echo $strings['PG']; ?></th>
-				<th><?php echo $strings['PP']; ?></th>
-				<th><?php echo $strings['Ptos']; ?></th>
 				<th></th>
 			</tr>
 		<?php 
@@ -154,11 +142,7 @@ if(isset($_SESSION['tipo'])){
 					<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
 
 					<td><?php echo $clasificacion['usuarios_login']; ?></td>
-					<td><?php echo $clasificacion['usuarios_login1']; ?></td>
-					<td><?php echo $clasificacion['PJ']; ?></td>
-					<td><?php echo $clasificacion['PG']; ?></td>
-					<td><?php echo $clasificacion['PP']; ?></td>
-					<td><?php echo $clasificacion['Ptos']; ?></td>					
+					<td><?php echo $clasificacion['usuarios_login1']; ?></td>		
 				</form>	
 			</tr>
 			

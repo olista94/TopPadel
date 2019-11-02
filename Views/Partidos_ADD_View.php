@@ -31,7 +31,7 @@ class Partidos_ADD{
 <!--Formulario para añadir tarea-->
 		<div class="form">
 
-			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Partidos_Controller.php" enctype="multipart/form-data">
+			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Partidos_Controller.php" enctype="multipart/form-data" onsubmit="return comprobarPartido(this)">
 			<input type="hidden" name="ID_Partido" value ="<?php echo $this->idpartido; ?>">
 			<input type="hidden" name="ID_Torneo" value ="<?php echo $this->idtorneo; ?>">
 			<input type="hidden" name="ID_ParejaLocal" value ="<?php echo $this->fila['ID_ParejaLocal']; ?>">
@@ -46,10 +46,10 @@ class Partidos_ADD{
 					<?php echo $strings['Set 1']; ?></legend></h2></b>
 					<label>
 					<?php echo $this->fila[2];echo "-"; echo $this->fila[3]; ?></label>
-					<input type="number" name="JuegosSet1_Local" min="0" max="7">
+					<input type="number" id= "JuegosSet1_Local" name="JuegosSet1_Local" min="0" max="7" onblur=" return !comprobarVacio(this) && comprobarEntero(this,0,7);">
 					<label>
 					<?php echo $this->fila[5];echo "-"; echo $this->fila[6]; ?></label>
-					<input type="number" name="JuegosSet1_Visitante" min="0" max="7">
+					<input type="number" id= "JuegosSet1_Visitante" name="JuegosSet1_Visitante" min="0" max="7" onblur=" return !comprobarVacio(this) && comprobarEntero(this,0,7);">
 					
 					
 				</div>
@@ -60,10 +60,10 @@ class Partidos_ADD{
 					<?php echo $strings['Set 2']; ?></legend></h2></b>
 					<label>
 					<?php echo $this->fila[2];echo "-"; echo $this->fila[3]; ?></label>
-					<input type="number" name="JuegosSet2_Local" min="0" max="7">
+					<input type="number" id= "JuegosSet2_Local" name="JuegosSet2_Local" min="0" max="7" onblur=" return !comprobarVacio(this) && comprobarEntero(this,0,7);">
 					<label>
 					<?php echo $this->fila[5];echo "-"; echo $this->fila[6]; ?></label>
-					<input type="number" name="JuegosSet2_Visitante" min="0" max="7">
+					<input type="number" id= "JuegosSet2_Visitante" name="JuegosSet2_Visitante" min="0" max="7" onblur=" return !comprobarVacio(this) && comprobarEntero(this,0,7);">
 					
 					
 				</div>

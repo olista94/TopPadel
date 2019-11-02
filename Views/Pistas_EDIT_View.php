@@ -33,7 +33,7 @@ class Pistas_EDIT{
 <!--Formulario para editar categoria-->
 		<div class="form">
 
-			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Pistas_Controller.php" enctype="multipart/form-data" onsubmit="return comprobarCategoria(this);">
+			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Pistas_Controller.php" enctype="multipart/form-data" onsubmit="return comprobarPista(this);">
 				<legend><?php echo $strings['Editar pista'];?>
 				<!--Boton para volver atrás -->
 				<button type="button" onclick="location.href='../Controllers/Pistas_Controller.php';" class="volver"></button>
@@ -43,7 +43,7 @@ class Pistas_EDIT{
 <!--Campo nombre de la categoria-->
 				<div>	
 				  <label ><?php echo $strings['Nombre de la pista']; ?></label>
-				  <input type="text" id="Nombre_Pista" name="Nombre_Pista" size="50" value="<?php echo $this -> fila['Nombre_Pista']; ?>" onblur=" return !comprobarVacio(this) && comprobarTexto(this,45);">
+				  <input type="text" id="Nombre_Pista" name="Nombre_Pista" size="50" value="<?php echo $this -> fila['Nombre_Pista']; ?>" onblur=" return !comprobarVacio(this) && comprobarTextoyNumeros(this,45);">
 				
 				
 				<label ><?php echo $strings['Cubierta']; ?></label>

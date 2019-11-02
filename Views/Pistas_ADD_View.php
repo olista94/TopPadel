@@ -26,7 +26,7 @@ Fecha: 20/12/2018-->
 ?>
 
 <!--Formulario para añadir categoria-->
-  <form name="Form" id="registerForm" action="../Controllers/Pistas_Controller.php" method="post" onsubmit="return comprobarCategoria(this);" >
+  <form name="Form" id="registerForm" action="../Controllers/Pistas_Controller.php" method="post" onsubmit="return comprobarPista(this)" >
     <legend><?php echo $strings['Añadir pista']; ?>
 	<!--Boton para volver atrás -->
     <button type="button" onclick="location.href='../Controllers/Pistas_Controller.php';" class="volver"></button>
@@ -36,7 +36,7 @@ Fecha: 20/12/2018-->
 <!--Campo nombre de la pista-->
     <div>	
       <label ><?php echo $strings['Nombre de la pista']; ?></label>
-      <input type="text" id="Nombre_Pista" name="Nombre_Pista" size="40" onblur=" return !comprobarVacio(this) && comprobarTexto(this,45);">
+      <input type="text" id="Nombre_Pista" name="Nombre_Pista" size="50" onblur=" return !comprobarVacio(this) && comprobarTextoyNumeros(this,45);">
       
       <label for="techo"><?php echo $strings['Cubierta']; ?></label>
 	  <select name="techo" id="techo">
