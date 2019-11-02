@@ -25,7 +25,14 @@ traduce['SPANISH']['Formato del campo telefono erróneo (Ej:34668952356)']='Form
 traduce['SPANISH']['El formato del campo email es erróneo (ejemplo@ejemplo.com)']='El formato del campo email es erróneo (ejemplo@ejemplo.com)';
 traduce['SPANISH']['El campo fecha no puede estar vacío']='El campo fecha no puede estar vacío';
 traduce['SPANISH']['El campo nivel solo puede llevar numeros']='El campo nivel solo puede llevar números';
-
+traduce['SPANISH']['El campo nombre no puede empezar con un espacio en blanco']='El campo fecha no puede estar vacío';
+traduce['SPANISH']['El campo nombre solo puede tener letras y/o números']='El campo nombre solo puede tener letras y/o números';
+traduce['SPANISH']['El formato del campo edicion es incorrecto']='El formato del campo edición es incorrecto';
+traduce['SPANISH']['El tamaño del campo edicion es incorrecto']='El tamaño del campo edición es incorrecto';
+traduce['SPANISH']['Campo juegos set 1 local esta vacio']='Campo juegos set 1 local está vacío';
+traduce['SPANISH']['Campo juegos set 1 visitante esta vacio']='Campo juegos set 1 visitante está vacío';
+traduce['SPANISH']['Campo juegos set 2 local esta vacio']='Campo juegos set 2 local está vacío';
+traduce['SPANISH']['Campo juegos set 2 visitante esta vacio']='Campo juegos set 1 visitante está vacío';
 //Traducción al gallego
 traduce['GALLAECIAN']=new Array();
 traduce['GALLAECIAN']['El tamaño del campo nombre es incorrecto']='O tamaño do campo nome é incorrecto';
@@ -46,6 +53,14 @@ traduce['GALLAECIAN']['Formato del campo telefono erróneo (Ej:34668952356)']='F
 traduce['GALLAECIAN']['El formato del campo email es erróneo (ejemplo@ejemplo.com)']='O formato do campo email é erróneo (exemplo@exemplo.com)';
 traduce['GALLAECIAN']['El campo fecha no puede estar vacío']='O campo data non pode ir baleiro';
 traduce['GALLAECIAN']['El campo nivel solo puede llevar numeros']='O campo nivel só pode levar números';
+traduce['GALLAECIAN']['El campo nombre no puede empezar con un espacio en blanco']='O campo nome non pode empezar cun espazo en branco';
+traduce['GALLAECIAN']['El campo nombre solo puede tener letras y/o números']='O campo nome só pode ter letras e/ou números';
+traduce['GALLAECIAN']['El formato del campo edicion es incorrecto']='O formato do campo edición é incorrecto';
+traduce['GALLAECIAN']['El tamaño del campo edicion es incorrecto']='O tamaño do campo edición é incorrecto';
+traduce['GALLAECIAN']['Campo juegos set 1 local esta vacio']='Campo xogos set 1 local está baleiro';
+traduce['GALLAECIAN']['Campo juegos set 1 visitante esta vacio']='Campo xogos set 1 visitante está baleiro';
+traduce['GALLAECIAN']['Campo juegos set 2 local esta vacio']='Campo xogos set 2 local está baleiro';
+traduce['GALLAECIAN']['Campo juegos set 2 visitante esta vacio']='Campo xogos set 2 visitante está baleiro';
 
 //Traducción al inglés
 traduce['ENGLISH']=new Array();
@@ -65,8 +80,16 @@ traduce['ENGLISH']['Formato o letra del campo DNI erróneo (Ej:44657079K)']='Inc
 traduce['ENGLISH']['El campo apellidos solo puede llevar texto o empezar por una letra']='Surnames field can only have text or starts by a letter';
 traduce['ENGLISH']['Formato del campo telefono erróneo (Ej:34668952356)']='Incorrect format at phone number field (Ex:34668952356)';
 traduce['ENGLISH']['El formato del campo email es erróneo (ejemplo@ejemplo.com)']='Incorrect format at email field (example@example.com)';
-traduce['ENGLISH']['El campo fecha no puede estar vacío']='Date field can´t be null';
+traduce['ENGLISH']['El campo fecha no puede estar vacío']='Date field can´t be empty';
 traduce['ENGLISH']['El campo nivel solo puede llevar numeros']='Level field can only have numbers';
+traduce['ENGLISH']['El campo nombre no puede empezar con un espacio en blanco']='Name field can´t start with blank';
+traduce['ENGLISH']['El campo nombre solo puede tener letras y/o números']='Name field only can have text or numbers';
+traduce['ENGLISH']['El formato del campo edicion es incorrecto']='Incorrect format at edition field';
+traduce['ENGLISH']['El tamaño del campo edicion es incorrecto']='Incorrect size at edition field';
+traduce['ENGLISH']['Campo juegos set 1 local esta vacio']='Games set 1 host is empty';
+traduce['ENGLISH']['Campo juegos set 1 visitante esta vacio']='Games set 1 visitor is empty';
+traduce['ENGLISH']['Campo juegos set 2 local esta vacio']='Games set 2 host is empty';
+traduce['ENGLISH']['Campo juegos set 2 visitante esta vacio']='Games set 2 visitor is empty';
 
 /* Función que comprueba si un campo que se le pasa como parámetro está o no vacío.True si lo está,false en caso contrario. */
 function comprobarVacio(campo){
@@ -75,26 +98,26 @@ function comprobarVacio(campo){
 	
 	if(campo.value.length == 0){
 		/* Si el valor introducido es erróneo,mostrará el campo con un borde rojo */
-		campo.style.border = "2px solid red";
+		campo.style.border = "1px solid red";
 		return true;
 	}
 	
 	/* Si el valor introducido es correcto,mostrará el campo con un borde verde */
-	campo.style.border = "2px solid green"; 
+	campo.style.border = "1px solid green"; 
 	return false;
 }
 
-//Comprueba el tamaño de un campo que acepta cualquie expresion regular (descriciones)
+//Comprueba el tamaño de un campo que acepta cualquie expresion regular (descripciones)
 function comprobarTamano(campo,size){
 	//Comprobamos el tamaño del dato introducido en el campo
 	if(campo.value.length > size){
 		/* Si el valor introducido es erróneo,mostrará el campo con un borde rojo */
-		campo.style.border = "2px solid red";
+		campo.style.border = "1px solid red";
 		return false;
 	}
 	
 	/* Si el valor introducido es correcto,mostrará el campo con un borde verde */
-	campo.style.border = "2px solid green"; 
+	campo.style.border = "1px solid green"; 
 	return true;
 }
 
@@ -103,11 +126,11 @@ function comprobarTexto(campo,size){
 	//Size será la variable que determine el tamaño máximo del valor introducido en el campo
 	/* Comprobamos con la funcion comprobarExpresionRegular que al menos,el valor del campo,contiene una letra */
 	if(comprobarExpresionRegular(campo,'^[a-zA-ZáéíóúÁÉÍÓÚÑñ]+[ a-zA-ZáéíóúÁÉÍÓÚÑñ ]*$',size)){
-		campo.style.border = "2px solid green";
+		campo.style.border = "1px solid green";
 		return true;
 	}
 	else{
-		campo.style.border = "2px solid red";
+		campo.style.border = "1px solid red";
 		return false;
 	}
 }
@@ -118,7 +141,7 @@ function comprobarExpresionRegular(campo,exprreg,size){
 	//Exprreg será la variable que represente la expresión regular que debe cumplir el valor del campo
 	/* Comprueba que el valor se ajuste al tamaño del campo */
 	if(campo.value.length > size){
-		campo.style.border = "2px solid red";
+		campo.style.border = "1px solid red";
 		return false;
 	}
 	else{
@@ -128,10 +151,10 @@ function comprobarExpresionRegular(campo,exprreg,size){
 	
 	/* Comprueba que la variable patron (donde se guarda una expresión regular) coincide con el valor del campo */
 	if(patron.test(campo.value)){		
-		campo.style.border = "2px solid green";
+		campo.style.border = "1px solid green";
 		return true;
 	}	
-	campo.style.border = "2px solid red";
+	campo.style.border = "1px solid red";
 	return false;
 	}
 }
@@ -142,15 +165,29 @@ function comprobarAlfabetico(campo,size){
 	
 	/* Comprueba que el valor contenga cualquier caracter de la expresión,excepto el espacio en blanco */
 	if(comprobarExpresionRegular(campo,'^[0-9a-zA-ZáéíóúÁÉÍÓÚÑñ.,\/#!$%\^&\*;:{}=\-_`~()]+$',size)){
-		campo.style.border = "2px solid green";
+		campo.style.border = "1px solid green";
 		return true;
 	}
 	else{
-	campo.style.border = "2px solid red";
+	campo.style.border = "1px solid red";
 	return false;
 	}
 }
 
+/* Función que comprueba si un campo que se le pasa como parámetro es cualquier cadena alfanumérica con espacios (sin caracteres especiales)*/
+function comprobarTextoyNumeros(campo,size){
+	
+	/* Comprueba que el valor contenga cualquier caracter de la expresión*/
+	if(comprobarExpresionRegular(campo,'^[0-9a-zA-ZáéíóúÁÉÍÓÚÑñ ]+$',size)){
+		
+		campo.style.border = "1px solid green";
+		return true;
+	}
+	else{
+		campo.style.border = "1px solid red";
+		return false;
+	}
+}
 
 /* Función que comprueba si un campo que se le pasa como parámetro es un número entero comprendido entre "valormenor" y "valormayor" */
 function comprobarEntero(campo,valormenor,valormayor){
@@ -159,13 +196,13 @@ function comprobarEntero(campo,valormenor,valormayor){
 	
 	/* Comprueba que el valor sea un entero */
 	if((campo.value % 1) != 0){
-		campo.style.border = "2px solid red";
+		campo.style.border = "1px solid red";
 		return false;
 	}
 	
 	/* Comprueba que el valor sea mayor que "valormenor" y menor que "valormayor" */
 	if(parseInt(campo.value) >= valormenor && parseInt(campo.value) <= valormayor){
-		campo.style.border = "2px solid green";
+		campo.style.border = "1px solid green";
 		return true;
 	}
 	if(campo.value.length == 0){
@@ -173,7 +210,7 @@ function comprobarEntero(campo,valormenor,valormayor){
 		return true;
 	}
 	else{
-		campo.style.border = "2px solid red";
+		campo.style.border = "1px solid red";
 		return false;
 	}
 }
@@ -185,7 +222,7 @@ function comprobarReal(campo,numero_decimales,valormenor,valormayor){
 	//Numero_decimales será el número de decimales que tendrá que llevar el valor del campo
 	/* Comprueba que el valor del campo sea un número */
 	if(isNaN(campo.value)){
-		campo.style.border = "2px solid red";
+		campo.style.border = "1px solid red";
 		return false;
 	}
 	
@@ -198,23 +235,23 @@ function comprobarReal(campo,numero_decimales,valormenor,valormayor){
 	
 	/* Comprueba que el número introducido no sea un entero */
 	if((campo.value % 1) == 0){
-		campo.style.border = "2px solid red";
+		campo.style.border = "1px solid red";
 		return false;
 	}
 	
 	/* Comprueba que el número de decimales sea el indicado en la variable numero_decimales */
 	if( partes[1].length != numero_decimales){
-		campo.style.border = "2px solid red";
+		campo.style.border = "1px solid red";
 		return false;
 	}
 	
 	/* Comprueba que el valor sea mayor que "valormenor" y menor que "valormayor" */
 	if(parseFloat(campo.value) >= valormenor && parseFloat(campo.value) <= valormayor){
-			campo.style.border = "2px solid green";
+			campo.style.border = "1px solid green";
 			return true;
 	}
 	else{
-		campo.style.border = "2px solid red";
+		campo.style.border = "1px solid red";
 		return false;
 	}
 }
@@ -225,7 +262,7 @@ function comprobarDni(campo){
 	
 	/* Comprueba que el valor tenga un formato de 8 dígitos y una letra mayúscula o minúscula,sin separadores */
 	if(!comprobarExpresionRegular(campo,'^[0-9]{8}[A-Za-z]$',9)){
-		campo.style.border = "2px solid red";
+		campo.style.border = "1px solid red";
 		return false;
 	}
 	
@@ -239,11 +276,11 @@ function comprobarDni(campo){
 	/* Comprobamos que la letra es la correcta */
 	var indice = parseInt(numeros)%23;
 	if(letras.charAt(indice) == letra.toUpperCase()){
-		campo.style.border = "2px solid green";
+		campo.style.border = "1px solid green";
 		return true;
 	}
 
-	campo.style.border = "2px solid red";
+	campo.style.border = "1px solid red";
 	return false;
 }
 
@@ -262,7 +299,7 @@ function comprobarTelf(campo){
 	}
 	
 	else{
-		campo.style.border = "2px solid red";
+		campo.style.border = "1px solid red";
 		return false;
 	}
 }
@@ -272,7 +309,7 @@ function comprobarTelf(campo){
 function comprobarEmail(campo,size){
 	
 	if(campo.value.length > size){
-		campo.style.border = "2px solid red";
+		campo.style.border = "1px solid red";
 		return false;
 	}
 	else{
@@ -281,15 +318,15 @@ function comprobarEmail(campo,size){
 		
 		/* Comprobamos que el valor coincide con la expresión */
 		if (patron1 = regex.test(campo.value))  {
-			campo.style.border = "2px solid green";
+			campo.style.border = "1px solid green";
 			return true;
 		}
 		else{
-			campo.style.border = "2px solid red";
+			campo.style.border = "1px solid red";
 			return false;
 		}		
 	}
-	campo.style.border = "2px solid red";
+	campo.style.border = "1px solid red";
 	return false;
 }
 
@@ -297,20 +334,19 @@ function comprobarEmail(campo,size){
 /* Función que comprueba si el campo fecha está o no vacío */
 function comprobarFecha(campo){
 	//Si está vacía
-	alert("Hola");
 	
-	if(fecha_reserva.value.length == '0000-00-00'){
-		campo.style.border = "2px solid red";
+	if(campo.value.length == 0){
+		campo.style.border = "1px solid red";
 		return false;
 	}
 	//Si se ha insertado
 	else{
-		campo.style.border = "2px solid green";
+		campo.style.border = "1px solid green";
 		return true;
 	}
 }
-
-function controlFechas(finicio,ffin){
+/* 
+ function controlFechas(finicio,ffin){
 	//creo dos nuevas variables para almacenar a objetos tipo fecha
 	var inicio = new Date(finicio.value).getTime();
 	var fin = new Date(ffin.value).getTime();
@@ -320,26 +356,12 @@ function controlFechas(finicio,ffin){
 	}
 	else{
 		//sino retorno false y lanzo mensaje
-		//alert("<?php echo $strings['Rinoceronte']?>");
 		alert(traduce[idioma]['La fecha '] + finicio.value + traduce[idioma][' no puede ser posterior a la fecha '] + ffin.value + '.');
 		return false;
 	}
-}
+}  */
 
 
-function comprobarFechaReserva(formReservaFecha){
-	
-	//Comprueba que la fecha no esté vacia
-	else if(comprobarFecha(formReservaFecha.fecha_reserva) == false){
-		alert(traduce[idioma]['El campo fecha no puede estar vacío']);
-		return false;
-	}
-	
-	
-	else{//Si todo está correcto
-		return true;
-	}
-}
 
 //Se comprueba que los campos de registrar usuario son correctos
 function comprobarRegistro(formAdd){
@@ -411,7 +433,8 @@ function comprobarRegistro(formAdd){
 	}
 	
 	//Comprueba que la fecha no esté vacia
-	else if(comprobarFecha(formAdd.FechaNacimiento) == false){
+	else if(formAdd.fecha.value.length == 0){
+		
 		alert(traduce[idioma]['El campo fecha no puede estar vacío']);
 		return false;
 	}
@@ -422,18 +445,18 @@ function comprobarRegistro(formAdd){
 	}
 }
 
-function comprobarCategoria(formu){//Comprueba añadir y editar categoria (submit)
+function comprobarPista(formu){//Comprueba añadir y editar categoria (submit)
 	
 	/* En cada campo comprobrará,primero su tamaño y si es incorrecto mostrará una ventana de error */
-	if(formu.nombre.value.length == 0 || formu.nombre.value.length > 45){
+	if(formu.Nombre_Pista.value.length == 0 || formu.Nombre_Pista.value.length > 45){
 		alert(traduce[idioma]['El tamaño del campo nombre es incorrecto']);
 		
 		return false;
 	}
 	/* Y además comprobará que el formato introducido sea el correcto (mostrando una ventana en caso contrario) */
-	else if(comprobarTexto(formu.nombre) ==  false){
+	else if(comprobarTextoyNumeros(formu.Nombre_Pista) ==  false){
 		
-		alert(traduce[idioma]['El campo nombre solo puede llevar texto o empezar por una letra']);
+		alert(traduce[idioma]['El campo nombre solo puede tener letras y/o números']);
 		return false;
 	}
 	
@@ -444,40 +467,48 @@ function comprobarCategoria(formu){//Comprueba añadir y editar categoria (submi
 	
 }
 
-function comprobarContacto(formu){//Comprueba añadir y editar contacto
+function comprobarTorneo(formu){//Comprueba añadir y editar categoria (submit)
 	
 	/* En cada campo comprobrará,primero su tamaño y si es incorrecto mostrará una ventana de error */
 	if(formu.nombre.value.length == 0 || formu.nombre.value.length > 45){
 		alert(traduce[idioma]['El tamaño del campo nombre es incorrecto']);
+		
 		return false;
 	}
 	/* Y además comprobará que el formato introducido sea el correcto (mostrando una ventana en caso contrario) */
-	else if(comprobarTexto(formu.nombre) ==  false){
-		alert(traduce[idioma]['El campo nombre solo puede llevar texto o empezar por una letra']);
-		return false;
-	}
-	//Comprueba el tamaño
-	else if(formu.descripcion.value.length == 0 || formu.descripcion.value.length > 45){
-		alert(traduce[idioma]['El tamaño del campo descripcion es incorrecto']);
-		return false;
-	}
+	else if(comprobarTextoyNumeros(formu.nombre) ==  false){
 		
-	//Comprueba el tamaño
-	else if(formu.telefono.value.length == 0 || formu.telefono.value.length > 11){
-		alert(traduce[idioma]['El tamaño del campo telefono es incorrecto']);
-		return false;
-	}/* Y además comprobará que el formato introducido sea el correcto (mostrando una ventana en caso contrario) */
-	else if(comprobarTelf(formu.telefono) ==  false){
-		alert(traduce[idioma]['Formato del campo telefono erróneo (Ej:34668952356)']);
+		alert(traduce[idioma]['El campo nombre solo puede tener letras y/o números']);
 		return false;
 	}
-	//Comprueba el tamaño
-	else if(formu.email.value.length == 0 || formu.email.value.length > 60){
-		alert(traduce[idioma]['El tamaño del campo email es incorrecto']);
+	
+	else if(formu.edicion.value.length == 0 || formu.edicion.value.length > 4){
+		alert(traduce[idioma]['El tamaño del campo edicion es incorrecto']);
+		
 		return false;
-	}/* Y además comprobará que el formato introducido sea el correcto (mostrando una ventana en caso contrario) */
-	else if(comprobarEmail(formu.email) ==  false){
-		alert(traduce[idioma]['El formato del campo email es erróneo (ejemplo@ejemplo.com)']);
+	}
+	/* Y además comprobará que el formato introducido sea el correcto (mostrando una ventana en caso contrario) */
+	else if(comprobarEntero(formu.edicion,0,9999) ==  false){
+		
+		alert(traduce[idioma]['El formato del campo edicion es incorrecto']);
+		return false;
+	}
+	
+	else if(formu.fecha.value.length == 0){
+		
+		alert(traduce[idioma]['El campo fecha no puede estar vacío']);
+		return false;
+	}
+	
+	else if(formu.nivel.value.length == 0 || formu.nivel.value.length > 4){
+		alert(traduce[idioma]['El tamaño del campo nivel es incorrecto']);
+		
+		return false;
+	}
+	/* Y además comprobará que el formato introducido sea el correcto (mostrando una ventana en caso contrario) */
+	else if(comprobarEntero(formu.nivel,1,3) ==  false){
+		
+		alert(traduce[idioma]['El campo nivel solo puede llevar numeros']);
 		return false;
 	}
 	
@@ -485,9 +516,36 @@ function comprobarContacto(formu){//Comprueba añadir y editar contacto
 		return true;
 	}
 	
+	
 }
 
+function comprobarFechaReserva(formu){
+	
+	if(formu.fecha_reserva.value.length == 0){
+		
+		alert(traduce[idioma]['El campo fecha no puede estar vacío']);
+		return false;
+	}
+	
+	
+	else{//Si todo está correcto
+		return true;
+	}
+}
 
+function comprobarFechaPromo(formu){
+	
+	if(formu.fecha.value.length == 0){
+		
+		alert(traduce[idioma]['El campo fecha no puede estar vacío']);
+		return false;
+	}
+	
+	
+	else{//Si todo está correcto
+		return true;
+	}
+}
 
 function comprobarUsuario(formu){//Comprueba añadir y editar usuario en el submit
 	
@@ -569,45 +627,6 @@ function comprobarUsuario(formu){//Comprueba añadir y editar usuario en el subm
 	}
 }
 
-function comprobarPrioridad(formu){//Comprueba añadir y editar contacto
-	
-	/* En cada campo comprobrará,primero su tamaño y si es incorrecto mostrará una ventana de error */
-	if(formu.nivel.value.length == 0 || formu.nivel.value.length > 2){
-		alert(traduce[idioma]['El tamaño del campo nivel es incorrecto']);
-		return false;
-	}
-	/* Y además comprobará que el formato introducido sea el correcto (mostrando una ventana en caso contrario) */
-	else if(comprobarEntero(formu.nivel,1,99) ==  false){
-		alert(traduce[idioma]['El campo nivel solo puede llevar numeros']);
-		return false;
-	}
-	//Comprueba el tamaño
-	else if(formu.descripcion.value.length == 0 || formu.descripcion.value.length > 45){
-		alert(traduce[idioma]['El tamaño del campo descripcion es incorrecto']);
-		return false;
-	}
-		
-	else{//Si todo está correcto
-		return true;
-	}
-	
-	
-}
-
-function comprobarTarea(formu){//Comprueba añadir y editar tarea y fase
-	//Comprueba el tamaño
-	 if(formu.descripcion.value.length == 0 || formu.descripcion.value.length > 45){
-		alert(traduce[idioma]['El tamaño del campo descripcion es incorrecto']);
-		return false;
-	}
-		
-	else{//Si todo está correcto
-		return true;
-	}
-	
-	
-}
-
 
 
 //Comprueba que ni el login,ni la password del login esten vacíos
@@ -628,3 +647,35 @@ function comprobarTarea(formu){//Comprueba añadir y editar tarea y fase
 } 
 
 
+function comprobarPartido(formu){//Comprueba añadir y editar categoria (submit)
+	
+	if(formu.JuegosSet1_Local.value.length == 0 || formu.JuegosSet1_Local.value.length > 1){
+		alert(traduce[idioma]['Campo juegos set 1 local esta vacio']);
+		
+		return false;
+	}
+	
+	else if(formu.JuegosSet1_Visitante.value.length == 0 || formu.JuegosSet1_Visitante.value.length > 1){
+		alert(traduce[idioma]['Campo juegos set 1 visitante esta vacio']);
+		
+		return false;
+	}
+	
+	if(formu.JuegosSet2_Local.value.length == 0 || formu.JuegosSet2_Local.value.length > 1){
+		alert(traduce[idioma]['Campo juegos set 2 local esta vacio']);
+		
+		return false;
+	}
+	
+	else if(formu.JuegosSet2_Visitante.value.length == 0 || formu.JuegosSet2_Visitante.value.length > 1){
+		alert(traduce[idioma]['Campo juegos set 2 visitante esta vacio']);
+		
+		return false;
+	}
+	
+	else{//Si todo está correcto
+		return true;
+	}
+	
+	
+}
