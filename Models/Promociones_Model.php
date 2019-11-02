@@ -138,6 +138,7 @@ function PromocionesShowAllTodas(){
 	$sql = "SELECT ID_Promo,fecha,hora_inicio,usuarios_login_usuario,
 			pista_ID_Pista
 			FROM promociones promo
+			ORDER BY fecha ASC
 			";
 	
 
@@ -155,6 +156,7 @@ function PromocionesShowAllMias(){
 			pista_ID_Pista
 			FROM promociones promo
 			WHERE `usuarios_login_usuario` = '".$_SESSION['login']."'
+			ORDER BY fecha ASC
 			";
 	
 
