@@ -125,6 +125,15 @@ array(
 	'No es socio' => 'Non é socio',
 	'Grupos' => 'Grupos',
 	'Darme de baja' => 'Darme de baixa',
+	'Partidos jugados' => 'Partidos xogados',
+	'Partidos ganados' => 'Partidos gañados',
+	'Partidos perdidos' => 'Partidos perdidos',
+	'Puntos' => 'Puntos',
+	'Sets a favor' => 'Sets a favor',
+	'Sets en contra' => 'Sets en contra',
+	'Juegos a favor' => 'Xogos a favor',
+	'Juegos en contra' => 'Xogos en contra',
+	'Apuntados' => 'Apuntados',
 	
 	
 	'Ediciones' => 'Edicións',

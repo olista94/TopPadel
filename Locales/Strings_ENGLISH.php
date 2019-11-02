@@ -133,6 +133,15 @@ array(
 	'Ronda' => 'Round',
 	'Grupos' => 'Groups',
 	'Darme de baja' => 'Delete member',
+	'Partidos jugados' => 'Games played',
+	'Partidos ganados' => 'Wins',
+	'Partidos perdidos' => 'Losses',
+	'Puntos' => 'Points',
+	'Sets a favor' => 'Sets for',
+	'Sets en contra' => 'Sets against',
+	'Juegos a favor' => 'Games for',
+	'Juegos en contra' => 'Games against',
+	'Apuntados' => 'Listed',
 	
 	
 	'Volver' => 'Back',
