@@ -298,6 +298,7 @@ if(isset($_SESSION['tipo'])){
 		
 		}	
 		else if($_REQUEST['action'] == 'Confirmar_Socio'){
+			
 									$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
 									$usuario = getDataForm();
 
