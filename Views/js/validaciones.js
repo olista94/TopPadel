@@ -33,6 +33,11 @@ traduce['SPANISH']['Campo juegos set 1 local esta vacio']='Campo juegos set 1 lo
 traduce['SPANISH']['Campo juegos set 1 visitante esta vacio']='Campo juegos set 1 visitante está vacío';
 traduce['SPANISH']['Campo juegos set 2 local esta vacio']='Campo juegos set 2 local está vacío';
 traduce['SPANISH']['Campo juegos set 2 visitante esta vacio']='Campo juegos set 1 visitante está vacío';
+traduce['SPANISH']['El tamaño del campo IBAN es erróneo']='El tamaño del campo IBAN es erróneo';
+traduce['SPANISH']['El formato del campo IBAN es erróneo (Ej:ES40)']='El formato del campo IBAN es erróneo (Ej:ES40)';
+traduce['SPANISH']['El tamaño de la cuenta es erróneo']='El tamaño de la cuenta es erróneo';
+traduce['SPANISH']['El formato del campo cuenta es erróneo (20 números)']='El formato del campo cuenta es erróneo (20 números)';
+
 //Traducción al gallego
 traduce['GALLAECIAN']=new Array();
 traduce['GALLAECIAN']['El tamaño del campo nombre es incorrecto']='O tamaño do campo nome é incorrecto';
@@ -61,6 +66,10 @@ traduce['GALLAECIAN']['Campo juegos set 1 local esta vacio']='Campo xogos set 1 
 traduce['GALLAECIAN']['Campo juegos set 1 visitante esta vacio']='Campo xogos set 1 visitante está baleiro';
 traduce['GALLAECIAN']['Campo juegos set 2 local esta vacio']='Campo xogos set 2 local está baleiro';
 traduce['GALLAECIAN']['Campo juegos set 2 visitante esta vacio']='Campo xogos set 2 visitante está baleiro';
+traduce['GALLAECIAN']['El tamaño del campo IBAN es erróneo']='O tamaño do campo IBAN é erróneo';
+traduce['GALLAECIAN']['El formato del campo IBAN es erróneo (Ej:ES40)']='O formato do campo IBAN é erróneo (Ex:ES40)';
+traduce['GALLAECIAN']['El tamaño de la cuenta es erróneo']='O tamaño da conta é erróneo';
+traduce['GALLAECIAN']['El formato del campo cuenta es erróneo (20 números)']='O formato do campo conta é erróneo';
 
 //Traducción al inglés
 traduce['ENGLISH']=new Array();
@@ -90,6 +99,10 @@ traduce['ENGLISH']['Campo juegos set 1 local esta vacio']='Games set 1 host is e
 traduce['ENGLISH']['Campo juegos set 1 visitante esta vacio']='Games set 1 visitor is empty';
 traduce['ENGLISH']['Campo juegos set 2 local esta vacio']='Games set 2 host is empty';
 traduce['ENGLISH']['Campo juegos set 2 visitante esta vacio']='Games set 2 visitor is empty';
+traduce['ENGLISH']['El tamaño del campo IBAN es erróneo']='Incorrect size at IBAN field';
+traduce['ENGLISH']['El formato del campo IBAN es erróneo (Ej:ES40)']='Incorrect format at IBAN field (Ex:ES40)';
+traduce['ENGLISH']['El tamaño de la cuenta es erróneo']='Incorrect size at IBAN field';
+traduce['ENGLISH']['El formato del campo cuenta es erróneo (20 números)']='Incorrect format at account field (20 numbers)';
 
 /* Función que comprueba si un campo que se le pasa como parámetro está o no vacío.True si lo está,false en caso contrario. */
 function comprobarVacio(campo){
@@ -345,6 +358,35 @@ function comprobarFecha(campo){
 		return true;
 	}
 }
+
+function comprobarIBAN(campo,size){
+	
+	/* Comprueba que el valor contenga cualquier caracter de la expresión*/
+	if(comprobarExpresionRegular(campo,'[A-Z]{2}[0-9]{2}$',size)){
+		
+		campo.style.border = "1px solid green";
+		return true;
+	}
+	else{
+		campo.style.border = "1px solid red";
+		return false;
+	}
+}
+
+function comprobarCuenta(campo,size){
+	
+	/* Comprueba que el valor contenga cualquier caracter de la expresión*/
+	if(comprobarExpresionRegular(campo,'^[0-9]{20}$',size)){
+		
+		campo.style.border = "1px solid green";
+		return true;
+	}
+	else{
+		campo.style.border = "1px solid red";
+		return false;
+	}
+}
+
 /* 
  function controlFechas(finicio,ffin){
 	//creo dos nuevas variables para almacenar a objetos tipo fecha
@@ -670,6 +712,37 @@ function comprobarPartido(formu){//Comprueba añadir y editar categoria (submit)
 	else if(formu.JuegosSet2_Visitante.value.length == 0 || formu.JuegosSet2_Visitante.value.length > 1){
 		alert(traduce[idioma]['Campo juegos set 2 visitante esta vacio']);
 		
+		return false;
+	}
+	
+	else{//Si todo está correcto
+		return true;
+	}
+	
+	
+}
+
+function comprobarSocio(formu){//Comprueba añadir y editar categoria (submit)
+	
+	if(formu.IBAN.value.length == 0 || formu.IBAN.value.length > 4){
+		alert(traduce[idioma]['El tamaño del campo IBAN es erróneo']);
+		
+		return false;
+	}
+	
+	else if(comprobarIBAN(formu.IBAN) ==  false){
+		alert(traduce[idioma]['El formato del campo IBAN es erróneo (Ej:ES40)']);
+		return false;
+	}
+	
+	if(formu.cuenta.value.length == 0 || formu.cuenta.value.length > 20){
+		alert(traduce[idioma]['El tamaño de la cuenta es erróneo']);
+		
+		return false;
+	}
+	
+	else if(comprobarCuenta(formu.cuenta) ==  false){
+		alert(traduce[idioma]['El formato del campo cuenta es erróneo (20 números)']);
 		return false;
 	}
 	
