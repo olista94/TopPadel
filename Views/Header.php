@@ -144,7 +144,7 @@ else{//SI NO ES ADMIN
 					<ul><li>
 							<a href="../Controllers/Usuarios_Controller.php?action=Confirmar_SHOWCURRENT1"><?php echo $strings['Perfil']; ?></a>
 						</li>
-						<li style = "padding:5">
+						<li style = "padding-bottom:5">
 							<a href="../Controllers/Usuarios_Controller.php?action=Hacerse_Socio1"><?php echo $strings['Soci@s']; ?></a>
 						</li>
 						<li class="cerrar">

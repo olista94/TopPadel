@@ -23,26 +23,28 @@ Fecha: -->
 	 	 
 ?>
 <!--Formulario para añadir socio-->
-  <form name="Form" id="registerForm" action="../Controllers/Usuarios_Controller.php" method="post" enctype="multipart/form-data" >
-    <legend><?php echo $strings['Añadir socio']; ?> 
-	<!--Boton para volver atrás -->
-    <button type="button" onclick="location.href='../Controllers/Torneos_Controller.php';" class="volver"></button>
+  <form name="Form" id="registerForm" action="../Controllers/Usuarios_Controller.php" method="post" enctype="multipart/form-data" onsubmit="return comprobarSocio(this)">
+    <legend><?php echo $strings['Añadir socio']; ?>
+	<!--Boton para volver atras-->
+    <button type="button" onclick="location.href='../Controllers/Usuarios_Controller.php';" class="volver"></button>
     </legend>
 
     <div>	
-		 
-		  <label for="IBAN"><?php echo $strings['IBAN']; ?></label>
-		  <input type="text" name="IBAN" id="IBAN" size="10"  onblur=" return !comprobarVacio(this) && comprobarTexto(this,45);"/>
-		  
-		  <label for="cuenta"><?php echo $strings['Cuenta']; ?></label>
-		  <input type="text" name="cuenta" id="cuenta" size="20"  onblur=" return !comprobarVacio(this) && comprobarTexto(this,18);"/>	 
-		  
-      
+		
+      <label for="IBAN"><?php echo $strings['IBAN']; ?></label>
+      <input type="text" id="IBAN" name="IBAN" size="5"   onblur=" return !comprobarVacio(this) && comprobarIBAN(this,4);" />
+	
+     
+		
+      <label for="cuenta"><?php echo $strings['Cuenta']; ?></label>
+      <input type="text" id="cuenta" name="cuenta" size="22"  onblur=" return !comprobarVacio(this) && comprobarCuenta(this,20);" />
+       
+	  
     </div>
-    <!--Boton de confirmar inserción-->
+     <!--Boton para confirmar insercion-->
     <button type="submit" name="action" value="Confirmar_Socio" class="aceptar"></button>
-    <!--Boton de borrado de texto-->
-	<button type="reset" value="Reset" class="cancelar"></button>
+	<!--Boton para borrar texto-->
+    <button type="reset" value="Reset" class="cancelar"></button>
 
 	</form>
  
