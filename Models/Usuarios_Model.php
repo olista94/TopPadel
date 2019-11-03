@@ -365,7 +365,7 @@ function addSocio(){
 		}
 		else{
 			
-			return  'Insercion correcta'; //operacion de insertado correcta
+			return  'Borrado correctamente'; //operacion de insertado correcta
 		}		
 	}
 
