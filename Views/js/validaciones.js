@@ -8,7 +8,6 @@ var traduce = new Array();
 //Traducción al español
 traduce['SPANISH']=new Array();
 traduce['SPANISH']['El tamaño del campo nombre es incorrecto']='El tamaño del campo nombre es incorrecto';
-traduce['SPANISH']['El tamaño del campo descripcion es incorrecto']='El tamaño del campo descripción es incorrecto';
 traduce['SPANISH']['El tamaño del campo telefono es incorrecto']='El tamaño del campo telefono es incorrecto';
 traduce['SPANISH']['El tamaño del campo email es incorrecto']='El tamaño del campo email es incorrecto';
 traduce['SPANISH']['El tamaño del campo login es incorrecto']='El tamaño del campo login es incorrecto';
@@ -25,7 +24,6 @@ traduce['SPANISH']['Formato del campo telefono erróneo (Ej:34668952356)']='Form
 traduce['SPANISH']['El formato del campo email es erróneo (ejemplo@ejemplo.com)']='El formato del campo email es erróneo (ejemplo@ejemplo.com)';
 traduce['SPANISH']['El campo fecha no puede estar vacío']='El campo fecha no puede estar vacío';
 traduce['SPANISH']['El campo nivel solo puede llevar numeros']='El campo nivel solo puede llevar números';
-traduce['SPANISH']['El campo nombre no puede empezar con un espacio en blanco']='El campo fecha no puede estar vacío';
 traduce['SPANISH']['El campo nombre solo puede tener letras y/o números']='El campo nombre solo puede tener letras y/o números';
 traduce['SPANISH']['El formato del campo edicion es incorrecto']='El formato del campo edición es incorrecto';
 traduce['SPANISH']['El tamaño del campo edicion es incorrecto']='El tamaño del campo edición es incorrecto';
@@ -41,7 +39,6 @@ traduce['SPANISH']['El formato del campo cuenta es erróneo (20 números)']='El 
 //Traducción al gallego
 traduce['GALLAECIAN']=new Array();
 traduce['GALLAECIAN']['El tamaño del campo nombre es incorrecto']='O tamaño do campo nome é incorrecto';
-traduce['GALLAECIAN']['El tamaño del campo descripcion es incorrecto']='O tamaño do campo descrición é incorrecto';
 traduce['GALLAECIAN']['El tamaño del campo telefono es incorrecto']='O tamaño do campo telefono é incorrecto';
 traduce['GALLAECIAN']['El tamaño del campo email es incorrecto']='O tamaño do campo email é incorrecto';
 traduce['GALLAECIAN']['El tamaño del campo login es incorrecto']='O tamaño do campo login é incorrecto';
@@ -58,7 +55,6 @@ traduce['GALLAECIAN']['Formato del campo telefono erróneo (Ej:34668952356)']='F
 traduce['GALLAECIAN']['El formato del campo email es erróneo (ejemplo@ejemplo.com)']='O formato do campo email é erróneo (exemplo@exemplo.com)';
 traduce['GALLAECIAN']['El campo fecha no puede estar vacío']='O campo data non pode ir baleiro';
 traduce['GALLAECIAN']['El campo nivel solo puede llevar numeros']='O campo nivel só pode levar números';
-traduce['GALLAECIAN']['El campo nombre no puede empezar con un espacio en blanco']='O campo nome non pode empezar cun espazo en branco';
 traduce['GALLAECIAN']['El campo nombre solo puede tener letras y/o números']='O campo nome só pode ter letras e/ou números';
 traduce['GALLAECIAN']['El formato del campo edicion es incorrecto']='O formato do campo edición é incorrecto';
 traduce['GALLAECIAN']['El tamaño del campo edicion es incorrecto']='O tamaño do campo edición é incorrecto';
@@ -74,7 +70,6 @@ traduce['GALLAECIAN']['El formato del campo cuenta es erróneo (20 números)']='
 //Traducción al inglés
 traduce['ENGLISH']=new Array();
 traduce['ENGLISH']['El tamaño del campo nombre es incorrecto']='Incorrect size at name field';
-traduce['ENGLISH']['El tamaño del campo descripcion es incorrecto']='Incorrect size at description field';
 traduce['ENGLISH']['El tamaño del campo telefono es incorrecto']='Incorrect size at phone number field';
 traduce['ENGLISH']['El tamaño del campo email es incorrecto']='Incorrect size at email field';
 traduce['ENGLISH']['El tamaño del campo login es incorrecto']='Incorrect size at login field';
@@ -91,7 +86,6 @@ traduce['ENGLISH']['Formato del campo telefono erróneo (Ej:34668952356)']='Inco
 traduce['ENGLISH']['El formato del campo email es erróneo (ejemplo@ejemplo.com)']='Incorrect format at email field (example@example.com)';
 traduce['ENGLISH']['El campo fecha no puede estar vacío']='Date field can´t be empty';
 traduce['ENGLISH']['El campo nivel solo puede llevar numeros']='Level field can only have numbers';
-traduce['ENGLISH']['El campo nombre no puede empezar con un espacio en blanco']='Name field can´t start with blank';
 traduce['ENGLISH']['El campo nombre solo puede tener letras y/o números']='Name field only can have text or numbers';
 traduce['ENGLISH']['El formato del campo edicion es incorrecto']='Incorrect format at edition field';
 traduce['ENGLISH']['El tamaño del campo edicion es incorrecto']='Incorrect size at edition field';
@@ -120,19 +114,6 @@ function comprobarVacio(campo){
 	return false;
 }
 
-//Comprueba el tamaño de un campo que acepta cualquie expresion regular (descripciones)
-function comprobarTamano(campo,size){
-	//Comprobamos el tamaño del dato introducido en el campo
-	if(campo.value.length > size){
-		/* Si el valor introducido es erróneo,mostrará el campo con un borde rojo */
-		campo.style.border = "1px solid red";
-		return false;
-	}
-	
-	/* Si el valor introducido es correcto,mostrará el campo con un borde verde */
-	campo.style.border = "1px solid green"; 
-	return true;
-}
 
 /* Función que comprueba si un campo que se le pasa como parámetro tiene unicamente letras (con o sin espacios) */
 function comprobarTexto(campo,size){
@@ -221,47 +202,6 @@ function comprobarEntero(campo,valormenor,valormayor){
 	if(campo.value.length == 0){
 		campo.style.border = "1px solid grey";
 		return true;
-	}
-	else{
-		campo.style.border = "1px solid red";
-		return false;
-	}
-}
-
-
-/* Función que comprueba si un campo que se le pasa como parámetro es un número real comprendido entre "valormenor" y "valormayor",
-con el número de decimales indicado en "numero_decimales" */
-function comprobarReal(campo,numero_decimales,valormenor,valormayor){
-	//Numero_decimales será el número de decimales que tendrá que llevar el valor del campo
-	/* Comprueba que el valor del campo sea un número */
-	if(isNaN(campo.value)){
-		campo.style.border = "1px solid red";
-		return false;
-	}
-	
-	/* Array que separará la parte entera de la decimal (con un . como separador) */
-	var partes = campo.value.split(".");
-	
-	/* En izq guardamos la parte entera y en der guardamos la decimal */
-	var izq = partes[0];
-	var der = partes[1];
-	
-	/* Comprueba que el número introducido no sea un entero */
-	if((campo.value % 1) == 0){
-		campo.style.border = "1px solid red";
-		return false;
-	}
-	
-	/* Comprueba que el número de decimales sea el indicado en la variable numero_decimales */
-	if( partes[1].length != numero_decimales){
-		campo.style.border = "1px solid red";
-		return false;
-	}
-	
-	/* Comprueba que el valor sea mayor que "valormenor" y menor que "valormayor" */
-	if(parseFloat(campo.value) >= valormenor && parseFloat(campo.value) <= valormayor){
-			campo.style.border = "1px solid green";
-			return true;
 	}
 	else{
 		campo.style.border = "1px solid red";
@@ -689,7 +629,7 @@ function comprobarUsuario(formu){//Comprueba añadir y editar usuario en el subm
 } 
 
 
-function comprobarPartido(formu){//Comprueba añadir y editar categoria (submit)
+function comprobarPartido(formu){
 	
 	if(formu.JuegosSet1_Local.value.length == 0 || formu.JuegosSet1_Local.value.length > 1){
 		alert(traduce[idioma]['Campo juegos set 1 local esta vacio']);
@@ -722,7 +662,7 @@ function comprobarPartido(formu){//Comprueba añadir y editar categoria (submit)
 	
 }
 
-function comprobarSocio(formu){//Comprueba añadir y editar categoria (submit)
+function comprobarSocio(formu){
 	
 	if(formu.IBAN.value.length == 0 || formu.IBAN.value.length > 4){
 		alert(traduce[idioma]['El tamaño del campo IBAN es erróneo']);
