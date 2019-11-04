@@ -223,8 +223,7 @@ function DevolverClasificacionInicial()
 			AND (pg.`grupo` = '0') AND (pg.`ID_Pareja` = par.`ID_Pareja`) AND (pg.`ID_Torneo` = '".$this->torneos_ID_Torneo."')
 			ORDER BY `Ptos` DESC,`SF` DESC,`SC` ASC,`JF` DESC,`JC` ASC
 			";
-										 
-	
+										
 	$result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){
