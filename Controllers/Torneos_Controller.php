@@ -263,7 +263,7 @@ if(!IsAuthenticated()){
 					$datos1 = $torneo->partidosPareja();
 					
 					$inscripcion = new Inscripcion_Model('',$idtorneo);
-					$clasificacion = $inscripcion -> DevolverClasificacionInicial();
+					$clasificacion = $inscripcion -> DevolverParejas($_REQUEST['ID_Torneo']);
 				
 					$apuntados = new Inscripcion_Model('','');
 					$apuntados1 = $apuntados -> DevolverParejasGrupo($idtorneo,0);

@@ -71,7 +71,7 @@ if(isset($_SESSION['tipo'])){
 			
 			$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
 			$ins = $inscripcion -> PuedeApuntarse($_SESSION['login']);
-			echo $ins;
+			
 		if($generado == false){
 			if($ins == true){
 			
