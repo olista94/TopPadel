@@ -56,7 +56,11 @@ Fecha: 26/12/2018-->
 					
                     <tr>
                         <th><?php echo $strings['Pista']; ?></th>
-                        <td><?php echo $this -> pista['Nombre_Pista']; ?></td>
+                        <td><?php if($this -> fila['cerrada'] == 'NO')
+                                    echo "-";
+                                    else
+                                        echo $this -> pista['Nombre_Pista'];
+                         ?></td>
                     </tr>
 					
                     <tr>
