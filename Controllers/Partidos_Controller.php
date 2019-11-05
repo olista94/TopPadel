@@ -243,7 +243,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 					$part1 -> getClasificacion($_REQUEST["ID_Torneo"],$pL);
 					$part1 -> getClasificacion($_REQUEST["ID_Torneo"],$pV);
 					
-				new MESSAGE($mensaje,'../Controllers/Torneos_Controller.php?ID_Torneo=1&action=Confirmar_SHOWTORNEO');
+				new MESSAGE($mensaje,'../Controllers/Torneos_Controller.php');
 			
 			break;
 			
