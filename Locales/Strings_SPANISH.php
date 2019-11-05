@@ -1,6 +1,5 @@
 <!---ARCHIVO QUE REALIZARÁ LA TRADUCCIÓN AL CASTELLANO
- CREADO POR: Los Cangrejas
- Fecha: 22/12/2018-->
+
  <?php 
 //Traducciones al castellano
 $strings = 
