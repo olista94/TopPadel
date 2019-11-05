@@ -2,7 +2,6 @@
 [x] Revisar showtorneo
 [x] Traducir Promos_Controler
 [x] Botones volver atras
-[] css form partidos
 [x] fechas limite campeonatos
 [x] no apuntarse en campeonato generado
 [x] comprobar vistas admin-deportistas
@@ -14,7 +13,7 @@
 [x] ventana confirmar baja socio
 [x] JS
 [] mensajes/titles en generarCalendario, verTorneo y criteiros de desempate
-[] importar en phpmyadmin en libre acceso
+[x] importar en phpmyadmin en libre acceso
 [] cambiar nombre base de datos
 [x] traducciones js
 [x] traducciones locales
