@@ -1,4 +1,4 @@
-<!---ARCHIVO QUE REALIZARÁ LA TRADUCCIÓN AL INGLES
+<!---ARCHIVO QUE REALIZARÁ LA TRADUCCIÓN AL INGLES-->
 
 <?php 
 //Traducciones al inglés
