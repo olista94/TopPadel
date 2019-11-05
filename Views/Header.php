@@ -21,7 +21,10 @@ idioma = "<?php echo $_SESSION['idioma']; ?>"; //Variable global que permite pas
 <head>
 	<title>TopPadel</title>
 	
-	 <!--Archivos css,js...necesarios para el funcionamiento de la aplicacion-->
+	<!--icono pestaña-->
+	<link href="../Views/img/logo.png" rel="shortcut icon" type="image/x-icon" />
+	
+	<!--Archivos css,js...necesarios para el funcionamiento de la aplicacion-->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 	<link rel="stylesheet" type="text/css" href="../Views/css/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
