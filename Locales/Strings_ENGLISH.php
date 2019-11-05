@@ -266,6 +266,7 @@ array(
 	
 	'No puedes ver esto si no eres administrador' => 'You can´t see this if you aren´t an admin',
 	'No se puede borrar el usuario admin' => 'You can´t delete user admin',
+	'Criterios desempate:' => 'Tie break criteria',
 	'' => '',
 	'' => '',
 	'' => '',

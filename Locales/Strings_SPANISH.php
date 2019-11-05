@@ -266,6 +266,8 @@ array(
 	
 	'No puedes ver esto si no eres administrador' => 'No puedes ver esto si no eres administrador',
 	'No se puede borrar el usuario admin' => 'No se puede borrar el usuario admin',
+
+	'Criterios desempate:' => 'Criterios desempate',
 	'' => '',
 	'' => '',
 	'' => '',
