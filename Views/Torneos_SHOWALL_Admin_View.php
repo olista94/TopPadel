@@ -60,7 +60,8 @@ include_once '../Views/Header.php';
 				<form action="../Controllers/Torneos_Controller.php" method="post" name="action" >
 					<input type="hidden" name="ID_Torneo" value="<?php echo $fila['ID_Torneo']; ?>">
 					<!--Datos-->
-					<td><button class="tarea" name="action" value="Confirmar_SHOWTORNEO"><?php echo $fila['nombre']; ?></button></td>
+					<td><button title =	"<?php echo $strings['Pulsa para ver partidos']; ?>" 
+						class="tarea" name="action" value="Confirmar_SHOWTORNEO"><?php echo $fila['nombre']; ?></button></td>
 					<td><?php if($fila['categoria'] == 'Masculina')
 								echo $strings['Masculina'];
 							else if($fila['categoria'] == 'Femenina')
@@ -86,7 +87,8 @@ include_once '../Views/Header.php';
 		<?php
 			}
 		?>                    
-		</table>        
+		</table> 
+      
 	</div>           
         
 <?php   

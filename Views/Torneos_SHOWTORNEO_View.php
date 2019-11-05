@@ -40,7 +40,7 @@ if(isset($_SESSION['tipo'])){
 	<div class="showall">   
                  <form class="generar-cal-form" id="generar-cal-form" action="../Controllers/Torneos_Controller.php" method="post" name="action" >
 					<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
-					<button class="generar-cal" name="action" value="Generar_Calendario" type="submit"></button>
+					<button title =	"<?php echo $strings['Pulsa para generar calendario']; ?>" class="generar-cal" name="action" value="Generar_Calendario" type="submit"></button>
 					
 					
 				</form>	               
@@ -72,8 +72,13 @@ if(isset($_SESSION['tipo'])){
 				}	
 		?>    
 					
-		</table>        
-	</div>     	
+		</table>       
+				
+	</div>  
+
+	<div class="mensajes">
+		<?php echo $strings['Pulsa el caledario para generar la competicion']; ?>	
+	</div>   	
        
 <?php   
     }
