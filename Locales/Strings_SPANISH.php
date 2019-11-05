@@ -268,6 +268,9 @@ array(
 	'No se puede borrar el usuario admin' => 'No se puede borrar el usuario admin',
 
 	'Criterios desempate:' => 'Criterios desempate',
+	'Pulsa para ver partidos' => 'Pulsa para ver partidos',
+	'Pulsa para generar calendario' => 'Pulsa para generar calendario',
+	'Pulsa el caledario para generar la competicion' => 'Pulsa el caledario para generar la competicion',
 	'' => '',
 	'' => '',
 	'' => '',
