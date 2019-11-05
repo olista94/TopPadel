@@ -12,7 +12,7 @@
 [x] borrar promo al pasar fecha
 [x] ventana confirmar baja socio
 [x] JS
-[] mensajes/titles en generarCalendario, verTorneo y criteiros de desempate
+[] mensajes/titles en generarCalendario, verTorneo y criteiros de desempate. Falta criteriso de desmepate (normal)
 [x] importar en phpmyadmin en libre acceso
 [] cambiar nombre base de datos
 [x] traducciones js
