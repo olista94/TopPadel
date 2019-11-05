@@ -17,6 +17,6 @@
 [] importar en phpmyadmin en libre acceso
 [] cambiar nombre base de datos
 [x] traducciones js
-[] traducciones locales
+[x] traducciones locales
 [] responsive header
 [] mensajes en los models con las FK
