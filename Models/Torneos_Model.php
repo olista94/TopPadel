@@ -64,7 +64,8 @@ function search(){
 					(`fecha` LIKE '%$this->fecha%') &&
 					(`nivel` LIKE '%$this->nivel%')
 					
-    				)";
+    				)
+					order by fecha";
 
 				
     if (!($resultado = $this->mysqli->query($sql))){
