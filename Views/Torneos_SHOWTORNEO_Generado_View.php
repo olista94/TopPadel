@@ -43,9 +43,21 @@ if(isset($_SESSION['tipo'])){
 
 <!--Tabla con los datos de los torneos-->
 	<div class="showall">   
-                                
+         <button title = "<?php echo $strings ['Criterios desempate:'];
+         					echo "\n";
+         					 echo "+"; echo $strings ['Puntos'];?>
+         					 <?php echo "+"; echo $strings ['Sets a favor'];
+         					echo "\n";
+         					 echo "-";echo $strings ['Sets a favor'];?>
+         					 <?php echo "+"; echo $strings ['Juegos a favor'];
+         					echo "\n";
+         					 echo "-"; echo $strings ['Juegos en contra'];?>
+
+
+         	" type="submit" name="action" value="Submit" class="ayuda-ico"></button>                       
 		<table class="showAllUsers">
 			<tr><th class="title" colspan="4"><?php echo $strings['Clasificacion']; ?>
+
 			
 			<form class="tableActions" action="../Controllers/Torneos_Controller.php" method="post">
 			<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
@@ -70,9 +82,12 @@ if(isset($_SESSION['tipo'])){
 					</select>
 				<button type="submit" name="action" value="Ver_Grupos_Torneo" value="Submit" class="buscar-little"></button>
 				
+
 					</div>
 					
+
 				</form>
+
 			</th></tr>
 		
 	
