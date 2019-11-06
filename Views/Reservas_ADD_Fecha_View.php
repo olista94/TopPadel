@@ -11,8 +11,9 @@ class Reservas_ADD_Fecha{
 	var $enlace;	
 	//Constructor de la clase
 	function __construct($enlace){
-				
 
+	
+	 
 		$this -> enlace = $enlace;		
 		$this -> mostrar();
 	}
@@ -35,11 +36,15 @@ class Reservas_ADD_Fecha{
 
 				<div>
 				<!--Campo descripcion de la fase-->
-					
-				
+				<?php
+					$hoy = date('Y-m-d');
+					$date=date_create($hoy);
+					date_add($date,date_interval_create_from_date_string("7 days"));
+					$semana = date_format($date,"Y-m-d");
+				?>
 
 				<label for="fecha_reserva"><?php echo $strings['Fecha']; ?></label>
-				<input type="date" id="fecha_reserva" name="fecha_reserva" size="18" onblur=" return comprobarFecha(this)" >
+				<input type="date" id="fecha_reserva" name="fecha_reserva" min="<?php echo "$hoy";?>" max="<?php echo "$semana";?>" onblur=" return comprobarFecha(this)" >
 					
 				</div>
 				
