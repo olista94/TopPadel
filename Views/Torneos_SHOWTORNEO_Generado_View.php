@@ -45,13 +45,15 @@ if(isset($_SESSION['tipo'])){
 	<div class="showall">   
          <button title = "<?php echo $strings ['Criterios desempate:'];
          					echo "\n";
-         					 echo "+"; echo $strings ['Puntos'];?>
-         					 <?php echo "+"; echo $strings ['Sets a favor'];
+         					echo "+"; echo $strings ['Puntos'];
+							echo "\n";
+         					echo "+"; echo $strings ['Sets a favor'];
          					echo "\n";
-         					 echo "-";echo $strings ['Sets a favor'];?>
-         					 <?php echo "+"; echo $strings ['Juegos a favor'];
+         					echo "-";echo $strings ['Sets en contra'];
+							echo "\n";
+							echo "+"; echo $strings ['Juegos a favor'];
          					echo "\n";
-         					 echo "-"; echo $strings ['Juegos en contra'];?>
+							echo "-"; echo $strings ['Juegos en contra'];?>
 
 
          	" type="submit" name="action" value="Submit" class="ayuda-ico"></button>                       
@@ -269,7 +271,20 @@ if(isset($_SESSION['tipo'])){
 
 <!--Tabla con los datos de los torneos-->
 	<div class="showall">   
-                                
+                  <button title = "<?php echo $strings ['Criterios desempate:'];
+         					echo "\n";
+         					echo "+"; echo $strings ['Puntos'];
+							echo "\n";
+         					echo "+"; echo $strings ['Sets a favor'];
+         					echo "\n";
+         					echo "-";echo $strings ['Sets en contra'];
+							echo "\n";
+							echo "+"; echo $strings ['Juegos a favor'];
+         					echo "\n";
+							echo "-"; echo $strings ['Juegos en contra'];?>
+
+
+         	" type="submit" name="action" value="Submit" class="ayuda-ico"></button>               
 		<table class="showAllUsers">
 			<tr><th class="title" colspan="4"><?php echo $strings['Clasificacion']; ?>
 			
