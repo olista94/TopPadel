@@ -266,10 +266,18 @@ array(
 	
 	'No puedes ver esto si no eres administrador' => 'You can´t see this if you aren´t an admin',
 	'No se puede borrar el usuario admin' => 'You can´t delete user admin',
-	'Criterios desempate:' => 'Tie break criteria',
+	'Criterios desempate:' => 'Tie break criteria:',
 	'Pulsa para ver partidos' => 'Press to see matches',
 	'Pulsa para generar calendario' => 'Press to generate calendar',
 	'Pulsa el caledario para generar la competicion' => 'Press the calendar to generate the competition',
+	'Criterios desempate:
+												+Puntos
+												+Sets a favor
+												-Sets en contra
+												+Juegos a favor
+												-Juegos en contra' => 'Tiebreak criteria:+Points+Sets for-Sets against+Games for-Games against',
+	'Error al insertar.Ya existe una pista con ese nombre' => 'Add error.A court with that name already exists',
+	'Error al insertar.Ya existe un usuario con ese login' => 'Add error.A user with that login already exists',
 	'' => '',
 	'' => '',
 	'' => '',

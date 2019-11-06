@@ -267,10 +267,18 @@ array(
 	'No puedes ver esto si no eres administrador' => 'No puedes ver esto si no eres administrador',
 	'No se puede borrar el usuario admin' => 'No se puede borrar el usuario admin',
 
-	'Criterios desempate:' => 'Criterios desempate',
+	'Criterios desempate:' => 'Criterios desempate:',
 	'Pulsa para ver partidos' => 'Pulsa para ver partidos',
 	'Pulsa para generar calendario' => 'Pulsa para generar calendario',
 	'Pulsa el caledario para generar la competicion' => 'Pulsa el caledario para generar la competicion',
+	'Criterios desempate:
+												+Puntos
+												+Sets a favor
+												-Sets en contra
+												+Juegos a favor
+												-Juegos en contra' => 'Criterios desempate:+Puntos+Sets a favor-Sets en contra+Juegos a favor-Juegos en contra',
+	'Error al insertar.Ya existe una pista con ese nombre' => 'Error al insertar.Ya existe una pista con ese nombre',
+	'Error al insertar.Ya existe un usuario con ese login' => 'Error al insertar.Ya existe un usuario con ese login',
 	'' => '',
 	'' => '',
 	'' => '',
