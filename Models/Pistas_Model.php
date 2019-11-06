@@ -39,7 +39,7 @@ function add(){
 			//Si ya se han insertado la PK o FK
 		if (!$this->mysqli->query($sql)) {
 			
-			return 'Error al insertar';
+			return 'Error al insertar.Ya existe una pista con ese nombre';
 		}
 		//operacion de insertado correcta
 		else{

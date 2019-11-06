@@ -127,7 +127,7 @@ function registrar(){
 					)";
 		if (!$this->mysqli->query($sql)) {
 			
-			return 'Error al insertar';//Devuelve mensaje de error	
+			return 'Error al insertar.Ya existe un usuario con ese login';//Devuelve mensaje de error	
 		}
 		else{
 			
