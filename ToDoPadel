@@ -1,4 +1,4 @@
-[] Mostrar solo siete dias en el calendario
+[x] Mostrar solo siete dias en el calendario
 [x] Revisar showtorneo
 [x] Traducir Promos_Controler
 [x] Botones volver atras
@@ -12,22 +12,10 @@
 [x] borrar promo al pasar fecha
 [x] ventana confirmar baja socio
 [x] JS
-[] mensajes/titles en generarCalendario, verTorneo y criteiros de desempate. Falta criteriso de desmepate (normal)
+[x] mensajes/titles en generarCalendario, verTorneo y criteiros de desempate. Falta criteriso de desmepate (normal)
 [x] importar en phpmyadmin en libre acceso
 [] cambiar nombre base de datos
 [x] traducciones js
 [x] traducciones locales
 [] responsive header
 [] mensajes en los models con las FK
-
-<form action="/action_page.php">
-  Select a week:
-  <input type="date" name="year_week" min="2019-11-06" max="2019-11-13">
-  <input type="submit">
-</form>
-
-echo date('Y-m-d');
-
-$date=date_create($hoy);
-date_add($date,date_interval_create_from_date_string("7 days"));
-echo date_format($date,"Y-m-d");
