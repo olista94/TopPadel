@@ -19,3 +19,9 @@
 [x] traducciones locales
 [] responsive header
 [] mensajes en los models con las FK
+
+<form action="/action_page.php">
+  Select a week:
+  <input type="date" name="year_week" min="2019-11-06" max="2019-11-13">
+  <input type="submit">
+</form>
