@@ -38,12 +38,14 @@ class Partidos_ADD_Fecha{
 				</legend>
 
 				<div>
-				<!--Campo descripcion de la fase-->
-					
+				
+					<?php
+					$hoy = date('Y-m-d');
+				?>
 				
 
 				<label for="fecha"><?php echo $strings['Fecha']; ?></label>
-				<input type="date" name="fecha" size="18"  onblur=" return comprobarFecha(this)">
+				<input type="date" name="fecha" min="<?php echo "$hoy";?>" onblur=" return comprobarFecha(this)">
 					
 				</div>
 				
