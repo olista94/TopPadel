@@ -663,7 +663,7 @@ button {
 select{
   border: solid 2px #EEEEEE;
   margin: 2px 12px 2px 0px;
-  padding: 8px;
+  padding: 2px;
   border-radius: 5px;
   font-size: 1.1em;
   -webkit-appearance: none;
