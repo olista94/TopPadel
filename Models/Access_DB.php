@@ -1,4 +1,4 @@
-<!---ARCHIVO QUE REALIZAR� LA CONEXION CON LA BASE DE DATOS
+<!---ARCHIVO QUE REALIZARÁ LA CONEXION CON LA BASE DE DATOS
  CREADO POR: Los Cangrejas
  Fecha: 26/12/2018-->
 
@@ -12,7 +12,7 @@
 //Funcion para conectar con la BD
 function ConnectDB()
 {
-    $mysqli = new mysqli("localhost", "todolist", "todolist", "todolist");//Servidor,usuario,contraseña y nombre de la bd
+    $mysqli = new mysqli("localhost", "root", "", "toppadel");//Servidor,usuario,contraseÃ±a y nombre de la bd
     	
 	//Si se produce un error	
 	if ($mysqli->connect_errno) {
