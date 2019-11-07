@@ -79,7 +79,7 @@ function edit()
 				WHERE (`ID_Pista` = '$this->ID_Pista')";
 				//Si se realiza erroneamente la edicion
         if (!($resultado = $this->mysqli->query($sql))){
-			return 'Error en la modificación';
+			return 'Error en la modificación.Ya existe una pista con ese nombre';
 		}
 		else{ 
 			//Edit correcto
