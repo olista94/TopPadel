@@ -278,6 +278,7 @@ array(
 												-Juegos en contra' => 'Tiebreak criteria:+Points+Sets for-Sets against+Games for-Games against',
 	'Error al insertar.Ya existe una pista con ese nombre' => 'Add error.A court with that name already exists',
 	'Error al insertar.Ya existe un usuario con ese login' => 'Add error.A user with that login already exists',
+	'Error en la modificación.Ya existe una pista con ese nombre' =>  'Update error.A court with that name already exists',
 	'' => '',
 	'' => '',
 	'' => '',

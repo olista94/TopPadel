@@ -279,6 +279,7 @@ array(
 												-Juegos en contra' => 'Criterios desempate:+Puntos+Sets a favor-Sets en contra+Juegos a favor-Juegos en contra',
 	'Error al insertar.Ya existe una pista con ese nombre' => 'Error al insertar.Ya existe una pista con ese nombre',
 	'Error al insertar.Ya existe un usuario con ese login' => 'Error al insertar.Ya existe un usuario con ese login',
+	'Error en la modificación.Ya existe una pista con ese nombre' => 'Error en la modificación.Ya existe una pista con ese nombre',
 	'' => '',
 	'' => '',
 	'' => '',
