@@ -14,8 +14,8 @@
 [x] JS
 [x] mensajes/titles en generarCalendario, verTorneo y criteiros de desempate. Falta criteriso de desmepate (normal)
 [x] importar en phpmyadmin en libre acceso
-[] cambiar nombre base de datos
+[x] cambiar nombre base de datos
 [x] traducciones js
 [x] traducciones locales
 [] responsive header
-[] mensajes en los models con las FK
+[x] mensajes en los models con las FK
