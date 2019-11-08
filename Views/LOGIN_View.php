@@ -1,6 +1,4 @@
-<!-- VISTA DEL LOGIN
-CREADO POR: Los Cangrejas
-Fecha: 27/12/2018-->
+
 
 <?php
 
@@ -14,8 +12,8 @@ Fecha: 27/12/2018-->
 		function render(){
 			include_once '../Views/Header.php'; 
 ?>
-	
-			<div  class="slider">
+	<body class="loginfondo">
+			<!--<div class="slider">
 				<figure>
 					<img src="../Views/img/padel1.jpg" >
 					<img src="../Views/img/padel2.jpg">
@@ -23,7 +21,7 @@ Fecha: 27/12/2018-->
 					<img src="../Views/img/padel4.jpg">
 					<img src="../Views/img/padel5.jpg">
 				</figure>	
-			</div>
+			</div>-->
 				
 		<div class="welcome">		
 			<img src="../Views/img/logo.png" alt="Logo" width="90" height="90"> <h1>TopPadel</h1>
@@ -63,7 +61,8 @@ Fecha: 27/12/2018-->
 				<input type="hidden" name='idioma' value="GALLAECIAN" >
 				<input type="image"  src="../Views/img/galicia.png" width="35px">	
 			</form>
-		</div>				
+		</div>		
+
 <?php
 //Pie
 			include '../Views/Footer.php';
@@ -71,3 +70,4 @@ Fecha: 27/12/2018-->
 	} //fin Login
 
 ?>
+</body>		
