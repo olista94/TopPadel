@@ -1,6 +1,6 @@
-/* FICHERO EN EL QUE SE ESPECIFICAN LOS ESTILOS Y FORMATOS QUE SE APLICAN */
-/*-- CREADO POR: 
-Fecha: */
+/* FICHERO EN EL QUE SE ESPECIFICAN LOS ESTILOS Y FORMATOS QUE SE APLICAN A LAS VISTAS DE LA ET4*/
+/*-- CREADO POR: Los Cangrejas
+Fecha: 21/12/2018 */
 
 .flags1{
 		display:inline-flex;
@@ -66,7 +66,6 @@ body {
 
 /* Responsive navigation menu (for mobile devices) */
 @media screen and (max-width: 680px) {
-
   
   .alogo{
     display: none !important;
@@ -84,10 +83,10 @@ body {
     transform: none;
   }
 
-  .flags1{
+/*  .flags1{
     width: 80%;
   }
-
+*/
 }
 
 /********* Menu *********/
@@ -99,6 +98,8 @@ body {
   line-height: 100%;
   background: #8B8B8B;
   position: inherit;
+/*   min-width:300px;
+  min-height:100px; */
 }
 .menu-bar li {
   margin: 0px 0px 0px 0px;
@@ -137,7 +138,7 @@ body {
 
 @media screen and (max-width: 680px) {
   .menu-bar{
-    border-top: 270px solid #8B8B8B;
+    /*border-top: 270px solid #8B8B8B;*/
   }
   .menu-bar li:not(:first-child) {display: none;}
   .menu-bar a.icon {
@@ -153,6 +154,8 @@ body {
     right: 0;
     top: 0;
   }
+  
+
   .menu-bar.responsive li {
     float: none;
     display: block;
@@ -234,15 +237,14 @@ body {
 /*--------- Formulario--------*/
 
 form {	
- font-size:14px;
- color:#2b2b2b;
- width:50%;	
- margin-left:auto;
- margin-right:auto;	
- margin-top:50px;
- padding: 20px 40px 20px 20px;  
- box-shadow: 2px 3px 18px -5px rgba(0,0,0,0.75);
- background-color: whitesmoke;
+	font-size:14px;
+	color:#2b2b2b;
+	width:50%;	
+	margin-left:auto;
+	margin-right:auto;	
+  margin-top:50px;
+  padding: 20px 40px 20px 20px;  
+  box-shadow: 2px 3px 18px -5px rgba(0,0,0,0.75);
 }
 
 form.aaa{
@@ -664,7 +666,7 @@ button {
 select{
   border: solid 2px #EEEEEE;
   margin: 2px 12px 2px 0px;
-  padding: 2px;
+  padding: 8px;
   border-radius: 5px;
   font-size: 1.1em;
   -webkit-appearance: none;
@@ -958,11 +960,18 @@ nav a{
   background-image: url('../Views/img/spain.png');
 } */
 
+.loginfondo{
+	background-image: url(../img/padel5.jpg);
+	background-repeat:no-repeat;
+	background-size:100%;
+	height:500px;
+}
+
 .slider{
   overflow: hidden;
   z-index: -1;
   position: absolute;
-  background-size: cover;
+  
 }
 
 .slider figure img{
@@ -1103,4 +1112,24 @@ nav a{
   border-bottom: 1px solid rgba(114, 114, 114, 0.411);
   color:#39F;
   padding-bottom: 20px;
+}
+
+.mensajes{
+	background-color:#FED163;
+	margin-left:35%;
+	margin-right:35%;
+	text-align:center;
+	font-style:strong;
+}
+.alerta{
+  background-image: url(../img/alerta.png);
+  vertical-align: text-bottom;
+  margin-top: -0px;
+  margin-right: 5px;
+  margin-left: 33%;
+  padding: 10px 10px;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  width: 10px;
+  height: 10px;
 }
