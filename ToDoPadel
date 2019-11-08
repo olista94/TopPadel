@@ -5,7 +5,6 @@
 [x] fechas limite campeonatos
 [x] no apuntarse en campeonato generado
 [x] comprobar vistas admin-deportistas
-[] usar alert.php?
 [x] usuario normal puede hacer usuarios showcurrent
 [x] criterios desempate
 [x] cambiar tcal
@@ -17,5 +16,4 @@
 [x] cambiar nombre base de datos
 [x] traducciones js
 [x] traducciones locales
-[] responsive header
 [x] mensajes en los models con las FK
