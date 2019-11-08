@@ -75,9 +75,12 @@ if(isset($_SESSION['tipo'])){
 		</table>       
 				
 	</div>  
-
+<div>
+<button class="alerta" name="action" value="Generar_Calendario" type="submit"></button>
+</div>
 	<div class="mensajes">
-		<?php echo $strings['Pulsa el caledario para generar la competicion']; ?>	
+	
+		<b><?php echo $strings['Pulsa el caledario para generar la competicion']; ?></b>	
 	</div>   	
        
 <?php   
