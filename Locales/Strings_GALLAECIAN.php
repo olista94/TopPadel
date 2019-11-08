@@ -37,7 +37,7 @@ array(
 	'Reservas' => 'Reservas',
 	'Fecha reserva' => 'Data reserva',
 	'Hora inicio' => 'Hora inicio',
-	'Elegir pareja' => 'Escoller pareja',
+	'Elegir pareja' => 'Escoller parella',
 	'Jugadores' => 'Xogadores',
 	'Ya te has inscrito en este torneo' => 'Xa estas inscrito neste torneo',
 	'Hora' => 'Hora',
@@ -61,7 +61,7 @@ array(
 	'Perfil' => 'Perfil',
 	'Cerrar sesion' => 'Cerrar sesión',
 	'Hacerte socio' => 'Faite socio',
-	'¿Cerrada?' => '¿Pechada?',
+	'¿Cerrada?' => 'Pechada?',
 	'Ya estas apuntado' => 'Xa estás apuntado',
 	'Cubierta'=>'Cuberta',
 	'Suelo' => 'Chan',
@@ -123,7 +123,7 @@ array(
 	'No puedes reservar partidos que no juegas' => 'Non podes reservar partidos que non xogas',
 	'No hay pistas libres ese dia,a esa hora.Por favor,escoge otra fecha' => 'Non hai pistas dispoñibles ese dia,a esa hora.Por favor,escolle outra data',
 	'Campeonato generado con exito' => 'Campeonato xerado con éxito',
-	'No hay pistas disponibles' => 'No hay pistas dispoñibles',
+	'No hay pistas disponibles' => 'Non hai pistas dispoñibles',
 	'Soci@s' => 'Soci@s',
 	'Deportista' => 'Deportista',
 	'No es socio' => 'Non é socio',
@@ -152,7 +152,7 @@ array(
 	'Gallego' => 'Galego',
 
 	
-	'La password para este usuario no es correcta' => 'O contrasinal para este usuario non é correcta',
+	'La password para este usuario no es correcta' => 'O contrasinal para este usuario non é correcto',
 
 	'Usuarios' => 'Usuarios',
 	
@@ -170,7 +170,7 @@ array(
 	'Login' => 'Login',
 	'Password' => 'Contrasinal',
 	'Ingresa el login' => 'Ingresa o login',
-	'Ingresa la password' => 'Ingresa a password',
+	'Ingresa la password' => 'Ingresa o contrasinal',
 	'Loguear' => 'Loguear',
 	'Nuevo usuario' => 'Novo usuario',
 	'Registrarse' => 'Rexistrarse',
@@ -257,19 +257,19 @@ array(
 	'Iniciar sesion' => 'Iniciar sesión',
 	'Regístrate' => 'Rexístrate',
 	'Teléfono' => 'Teléfono',
-	'Correo electronico' => 'Correo electronico',
+	'Correo electronico' => 'Correo electrónico',
 	'Todas' => 'Todas',
 	'No puedes anotarte a un campeonato ya iniciado' => 'Non podes anotarte a un campeonato xa iniciado',
 	'Fecha limite' => 'Data limite',
-	'No se ha llegado al minimo de parejas' => 'Non se chegou ao minimo de parejas',
+	'No se ha llegado al minimo de parejas' => 'Non se chegou ao minimo de parellas',
 	
 	
 	'No puedes ver esto si no eres administrador' => 'Non podes ver esto se non eres administrador',
 	'No se puede borrar el usuario admin' => 'Non se pode borrar o usuario admin',
 	'Criterios desempate:' => 'Criterios desempate:',
 	'Pulsa para ver partidos' => 'Pulsa para ver partidos',
-	'Pulsa para generar calendario' => 'Pulsa para xenerar calendario',
-	'Pulsa el caledario para generar la competicion' => 'Pulsa o almanaque para xerar a competicion',
+	'Pulsa para generar calendario' => 'Pulsa para xerar calendario',
+	'Pulsa el caledario para generar la competicion' => 'Pulsa o calendario para xerar a competición',
 	'Criterios desempate:
 												+Puntos
 												+Sets a favor
