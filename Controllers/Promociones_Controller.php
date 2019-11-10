@@ -14,7 +14,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 	include_once "../Views/Promociones_SHOWALL_Admin_View.php";
 	include_once "../Views/Promociones_SHOWALL_Todas_View.php";
 	include_once "../Views/Promociones_SHOWALL_Mias_View.php";
-	include_once "../Views/Promociones_ADD_View.php";
+	/* include_once "../Views/Promociones_ADD_View.php"; */
 	include_once "../Views/Promociones_ADD_Fecha_View.php";
 	include_once "../Views/Promociones_ADD_Hora_View.php";
 	include_once "../Views/Promociones_SEARCH_View.php";
