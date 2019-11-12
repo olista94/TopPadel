@@ -1,5 +1,3 @@
-<!---MODELO DE LOS USUARIOS
- CREADO POR los Cangrejas EL 21/12/2018-->
 <?php
 //Declaracion de la clase
 class USUARIOS_Model {

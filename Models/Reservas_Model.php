@@ -1,5 +1,3 @@
-<!---MODELO DE LAS TAREAS
- CREADO POR los Cangrejas EL 21/12/2018-->
 <?php
 //Login del usuario conectado
 $login = $_SESSION['login'];

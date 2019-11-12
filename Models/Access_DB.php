@@ -1,7 +1,3 @@
-<!---ARCHIVO QUE REALIZARÁ LA CONEXION CON LA BASE DE DATOS
- CREADO POR: Los Cangrejas
- Fecha: 26/12/2018-->
-
 <?php
 
 //----------------------------------------------------
