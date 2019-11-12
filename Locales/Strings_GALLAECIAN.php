@@ -1,4 +1,4 @@
-<!---ARCHIVO QUE REALIZARÁ LA TRADUCCIÓN AL GALLEGO-->
+
 
  <?php 
 //Traducciones al gallego

@@ -1,4 +1,4 @@
-<!---ARCHIVO QUE REALIZARÁ LA TRADUCCIÓN AL CASTELLANO-->
+
 
  <?php 
 //Traducciones al castellano
