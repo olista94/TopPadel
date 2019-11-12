@@ -1,6 +1,4 @@
-<!---CONTROLADOR DE LOS USUARIOS
- Creado por: Los Cangrejas
- Fecha: 22/12/2018-->
+
 <?php
 
 //Creamos la sesion

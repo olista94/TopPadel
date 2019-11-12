@@ -1,7 +1,3 @@
-<!---CONTROLADOR DE LAS PISTAS
- Creado por: Los Cangrejas
- Fecha: 20/12/2018-->
- 
 <?php
 //Variable de sesion
 session_start();

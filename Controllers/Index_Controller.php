@@ -1,7 +1,3 @@
-<!---CONTROLADOR PARA MANEJAR EL INDEX
- Creado por: Los Cangrejas
- Fecha: 23/12/2018-->
-
 <?php
 
 //Creamos la session

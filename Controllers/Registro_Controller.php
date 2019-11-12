@@ -1,7 +1,3 @@
-<!---CONTROLADOR DEL REGISTRO DE USUARIOS
- Creado por: Los Cangrejas
- Fecha: 27/12/2018-->
-
 <?php
 //Creamos la sesion
 session_start();

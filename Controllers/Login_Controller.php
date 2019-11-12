@@ -1,7 +1,3 @@
-<!---CONTROLADOR DEL LOGIN
- Creado por: Los Cangrejas
- Fecha: 23/12/2018-->
-
 <?php
 
 //Creamos la sesion
