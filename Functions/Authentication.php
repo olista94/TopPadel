@@ -1,6 +1,4 @@
-<!---ARCHIVO CON LA FUNCION PARA VALIDAR SI EXISTE LA SESION LOGIN (SI ESTA O NO LOGUEADO)
- Creado por: Los Cangrejas
- Fecha: 20/12/2018-->
+
 <?php
 
 /*Si no existe la sesion login redirige a la pagina de login

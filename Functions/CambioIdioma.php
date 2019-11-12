@@ -1,6 +1,4 @@
-<!---ARCHIVO CON LA FUNCION PARA CAMBIAR EL IDIOMA
- Creado por: Los Cangrejas
- Fecha: 20/12/2018-->
+
 
 <?php
 
