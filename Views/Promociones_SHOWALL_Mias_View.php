@@ -1,6 +1,3 @@
-<!-- TABLA QUE MUESTRA TODAS LAS PROMOCIONES
-CREADO POR: Los Cangrejas
-Fecha: 26/12/2018-->
 
 <?php
 //Comprueba si esta autenticado

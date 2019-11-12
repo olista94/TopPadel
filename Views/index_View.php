@@ -1,6 +1,3 @@
-<!-- MOSTRARA LA VISTA POR DEFECTO
-CREADO POR: Los Cangrejas
-Fecha: 20/12/2018-->
 
 <?php
 

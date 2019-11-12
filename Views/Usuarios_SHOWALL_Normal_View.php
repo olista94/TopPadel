@@ -1,6 +1,4 @@
-<!-- TABLA QUE MUESTRA TODOS LOS USUARIOS
-CREADO POR: Los Cangrejas
-Fecha: 20/12/2018-->
+
 
 <?php
 //Comprobamos que está autenticado

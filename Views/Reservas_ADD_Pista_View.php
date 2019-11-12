@@ -1,17 +1,14 @@
-<!-- FORMULARIO PARA AÑADIR UNA FASE A UNA TAREA
-CREADO POR: Los Cangrejas
-Fecha: 26/12/2018-->
 
 <?php
  //Declaracion de la clase 
 class Reservas_ADD_Pista{
-	//Descripcion de la tarea a la que pertenece la fase a añadir
+
 	var $pistasLibres;
 	var $fecha_reserva;
 	var $hora_inicio;
-	//Variable con el enlace al form de ADD fase
+	
 	var $enlace;	
-	//Constructor de la clase
+
 	function __construct($pistasLibres,$fecha_reserva,$hora_inicio,$enlace){
 				
 		$this -> pistasLibres = $pistasLibres;

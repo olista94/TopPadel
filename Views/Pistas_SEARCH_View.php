@@ -1,6 +1,4 @@
-<!-- FORMULARIO PARA BUSCAR PISTAS
-CREADO POR: Los Cangrejas
-Fecha: 20/12/2018-->
+
 
 <?php
  //Declaracion de la clase 

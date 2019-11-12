@@ -1,6 +1,3 @@
- <!-- FORMULARIO PARA REGISTRAR UN NUEVO USUARIO
-CREADO POR: Los Cangrejas
-Fecha:03/01/2019-->
  
  <?php
  //Declaracion de la clase

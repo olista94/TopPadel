@@ -1,6 +1,4 @@
-<!-- TABLA QUE MUESTRA LOS DATOS DE UNA PISTA A BORRAR
-CREADO POR: Los Cangrejas
-Fecha: 20/12/2018-->
+
 
 <?php
 //Incluimos el archivo para comprobar la autenticacion del usuario

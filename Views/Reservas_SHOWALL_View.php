@@ -1,7 +1,3 @@
-<!-- TABLA QUE MUESTRA TODAS LAS TAREAS
-CREADO POR: Los Cangrejas
-Fecha: 26/12/2018-->
-
 <?php
 //Comprueba si esta autenticado
 include_once '../Functions/Authentication.php';

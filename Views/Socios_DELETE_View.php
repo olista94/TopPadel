@@ -1,6 +1,4 @@
-<!-- VISTA PARA AÑADIR UN NUEVO Socios_ADD
-CREADO POR:										 		
-Fecha: -->		  
+
 <?php
   //Declaracion de la clase
  class Socios_DELETE{	 

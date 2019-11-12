@@ -1,7 +1,3 @@
-<!-- TABLA QUE MUESTRA LOS DATOS DE UN USUARIO
-CREADO POR: Los Cangrejas
-Fecha: 20/12/2018-->
-
 
 <?php
  //Declaracion de la clase

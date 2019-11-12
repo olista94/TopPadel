@@ -1,6 +1,3 @@
-<!-- VISTA PARA PROMOCIONAR HACERSE SOCIO
-CREADO POR: 
-Fecha: -->
   <?php
  //Declaracion de la clase 
  class Socios_Home_Delete{	 

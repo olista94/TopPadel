@@ -1,7 +1,3 @@
-<!-- FORMULARIO PARA BUSCAR TAREAS
-CREADO POR: Los Cangrejas
-Fecha: 28/12/2018-->
-
 <?php
 
 if(isset($_SESSION['tipo'])){
