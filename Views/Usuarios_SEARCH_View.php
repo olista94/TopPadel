@@ -1,5 +1,7 @@
 
 <?php
+if(isset($_SESSION['tipo'])){
+    if($_SESSION['tipo']=='ADMIN'){
  //Declaracion de la clase
     class Usuarios_SEARCH {
 		
@@ -117,4 +119,82 @@
     
         }
     }
+    }
+    else{
+        class Usuarios_SEARCH {
+        
+//Variable con el enlace al form para SEARCH usuaro
+      var $enlace;
+
+//Constructor de la clase   
+      function __construct($enlace){
+
+        $this -> enlace = $enlace;
+        $this->pinta();
+
+      }
+//Funcion que "muestra" el contenido de la página
+      function pinta(){
+        //Variable de idioma 
+        if(!isset($_SESSION['idioma'])){
+            $_SESSION['idioma'] = 'SPANISH';
+        }
+//Archivo del idioma
+        include '../Locales/Strings_'. $_SESSION['idioma'] .'.php';
+
+        ?>
+         <!--Form para buscar un usuario-->
+        <form class="formB" id="searchForm" enctype="multipart/form-data" method="post" action="../Controllers/Usuarios_Controller.php">
+            <legend><?php echo $strings['Buscar usuario'];?>
+            <!--Boton para volver atras-->
+            <button onclick="location.href='../Controllers/Usuarios_Controller.php';" class="volver"></button>
+            </legend>
+
+            <input hidden type="text" id="password" name="password" maxlength="25" size="40"/>
+            <!--Campo login del usuario-->  
+            <div class="form-group">
+                <label for="login"><?php echo $strings['Login']; ?></label>
+                <input type="text" id="login" name="login" />
+            </div>  
+            <br>
+             <!--Campo nombre del usuario-->
+            <div class="form-group">
+                <label for="nombre"><?php echo $strings['Nombre']; ?></label>
+                <input type="text" id="nombre" name="nombre" maxlength="50" size="40"/>
+            </div>
+            <br>
+            <!--Campo apellidos del usuario-->
+            <div class="form-group">
+                <label for="apellidos"><?php echo $strings['Apellidos']; ?></label>
+                <input type="text" id="apellidos" name="apellidos" maxlength="25" size="40"/>
+            </div>
+           <br>
+
+           <div class="form-group">
+                 <label for="sexo"><?php echo $strings['Sexo']; ?></label>
+                     <select name="sexo" id="sexo">
+                        <option value=""></option selected>
+                        <option value="Masculina"><?php echo $strings['Hombre']; ?></option>
+                        <option value="Femenina"><?php echo $strings['Mujer']; ?></option>
+                    </select>
+           </div>
+           <br>
+            
+           <!--Boton de confirmar busqueda-->
+            <button type="submit" name="action" value="Confirmar_SEARCH" class="buscar"></button>
+
+        </form>
+            
+        </body>
+        </html>
+        
+        <?php
+    
+        }
+    }
+
+}
+
+}
+    
 ?>
