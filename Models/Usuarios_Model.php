@@ -280,9 +280,22 @@ function DevolverSexo()
         return 'No existe';//Devuelve mensaje de error	
 } 
 
-function DevolverSocio()
+function DevolverSocio()//Devuelve si es socio o no un usuario
 {	
     $sql = "SELECT socio FROM usuarios WHERE (`login` = '$this->login')";
+    $result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if ($result->num_rows == 1)
+    {    
+    	return $result -> fetch_array()[0];//Guarda el resultado (El tipo de usuario)
+    } 
+    else
+        return 'No existe';//Devuelve mensaje de error	
+}
+
+function DevolverSocioConectado()//Devuelve si es socio o no el usuario conectado
+{	
+    $sql = "SELECT socio FROM usuarios WHERE (`login` = '".$_SESSION['login']."')";
    
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
