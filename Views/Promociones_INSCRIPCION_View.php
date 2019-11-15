@@ -9,14 +9,17 @@
 	var $fila;
 	//Prioridad de la reserva
 	var $pista;
+	var $socio;
 	//Variable con el enlace a la tabla DELETE
 	var $enlace;
 	//Constructor de la clase	
-	function __construct($fila,$pista,$enlace){
+	function __construct($fila,$pista,$socio,$enlace){
 
 		$this -> fila = $fila -> fetch_array();
 
 		$this -> pista = $pista -> fetch_array();
+		
+		$this -> socio = $socio;
 		$this -> enlace = $enlace;
 
 		$this -> mostrar();
@@ -69,6 +72,17 @@
                         <th><?php echo $strings['Hora inicio']; ?></th>
                         <td><?php echo $this -> fila['hora_inicio']; ?></td>
                     </tr>
+					
+					<tr>
+                        <th><?php echo $strings['Precio']; ?></th>
+                        <td><?php if ($this -> socio == 'SI')
+								echo "10€";
+							else
+								echo "20€";
+
+						?></td>
+                    </tr>
+					
 					   <tr>
 					<!--Boton de confirmar borrado-->
                         <th><button class="aceptar" type="submit" name="action" value="Confirmar_INSCRIPCION2"></button></th>

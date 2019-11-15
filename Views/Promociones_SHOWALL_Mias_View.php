@@ -79,6 +79,7 @@ include_once '../Views/Header.php';
 				<form action="../Controllers/Promociones_Controller.php" method="post" name="action" >
 					
 					<input type="hidden" name="ID_Promo" value="<?php echo $fila['ID_Promo']; ?>">
+					<input type="hidden" name="login" value="<?php echo $fila['usuarios_login_usuario']; ?>">
 					<!--Datos-->
 					<td><?php echo $fila['usuarios_login_usuario']; ?></td>
 					<td><?php echo $fila['fecha']; ?></td>

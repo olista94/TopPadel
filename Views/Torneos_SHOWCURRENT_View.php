@@ -72,7 +72,16 @@
                     <th><?php echo $strings['Nivel']; ?></th>
                     <td><?php echo $this -> fila['nivel']; ?></td>
                 </tr>
-
+				
+				<tr>
+                    <th><?php echo $strings['Precio socios']; ?></th>
+                    <td><?php echo "7€" ?></td>
+                </tr>
+				
+				<tr>
+                    <th><?php echo $strings['Precio no socios']; ?></th>
+                    <td><?php echo "12€" ?></td>
+                </tr>
 				   
                                                                         
             </table>

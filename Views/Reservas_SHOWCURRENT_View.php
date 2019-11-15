@@ -2,21 +2,22 @@
 <?php
   	 //Comprueba que esta autenticado
 	include_once '../Functions/Authentication.php';
-  //Declaracion de la clase
- class Reservas_SHOWCURRENT{
+		 class Reservas_SHOWCURRENT{
 	
 //Datos de la reserva	
 	var $datos;
 	//Prioridad de la reserva
 	var $pista;
+	var $socio;
 	//Variable con el enlace a la tabla DELETE
 	var $enlace;
 	//Constructor de la clase	
-	function __construct($datos,$pista,$enlace){
+	function __construct($datos,$pista,$socio,$enlace){
 
 		$this -> fila = $datos -> fetch_array();
 
 		$this -> pista = $pista -> fetch_array();
+		$this -> socio = $socio;
 		$this -> enlace = $enlace;
 
 		$this -> mostrar();
@@ -69,13 +70,26 @@
                         <th><?php echo $strings['Hora inicio']; ?></th>
                         <td><?php echo $this -> fila['hora_inicio']; ?></td>
                     </tr>
+					
+					<tr>
+                        <th><?php echo $strings['Precio']; ?></th>
+                        <td><?php if ($this -> fila['usuarios_login'] == 'admin')
+								echo "1€";
+							else if ($this -> socio == 'SI')
+								echo "10€";
+							else if ($this -> socio == 'NO')
+								echo "20€";
 
+						?></td>
+                    </tr>
+					
                                                                             
                 </table>
             </form>            
         </div>       
         
 <?php    
-    }
-}
+			}
+		}
+
 ?>
