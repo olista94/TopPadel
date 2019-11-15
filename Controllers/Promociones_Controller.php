@@ -205,6 +205,8 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$inscritos = $promocion -> ContarUsuarios1();
 				$array = $inscritos -> fetch_array();
 				
+				$usuario = new Usuarios_Model($_REQUEST['login'],"","","","","","","","","","","","");
+				$socio = $usuario -> DevolverSocio();
 
 				if($array[0] < 4 || empty($array[0]) == true){
 					if($ins == true){
@@ -216,7 +218,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 						$p = $pistas -> searchById();
 						$datos = $promocion -> rellenadatos();
 				
-						new Promociones_INSCRIPCION($datos,$p,'../Controllers/Promociones_Controller.php');
+						new Promociones_INSCRIPCION($datos,$p,$socio,'../Controllers/Promociones_Controller.php');
 					}else{
 						new MESSAGE('Ya estas apuntado','../Controllers/Promociones_Controller.php');
 					}
@@ -288,7 +290,10 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$p = $pistas -> searchById();
 				$datos = $promocion -> rellenadatos();
 				
-				new Promociones_DELETE($datos,$p,'../Controllers/Promociones_Controller.php'); 
+				$usuario = new Usuarios_Model($_REQUEST['login'],"","","","","","","","","","","","");
+				$socio = $usuario -> DevolverSocio();
+				
+				new Promociones_DELETE($datos,$p,$socio,'../Controllers/Promociones_Controller.php'); 
 		break;
 		
 		// Si queremos borrar desde la vista de borrar
@@ -309,10 +314,13 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$p = $pistas -> searchById();
 				$datos = $promocion -> rellenadatos();
 				
+				$usuario = new Usuarios_Model($_REQUEST['login'],"","","","","","","","","","","","");
+				$socio = $usuario -> DevolverSocio();
+				
 				$apuntados = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],"");
 				$apunt = $apuntados -> apuntadosPromo();
 				
-				new Promociones_SHOWCURRENT($datos,$p,$apunt,'../Controllers/Promociones_Controller.php'); 
+				new Promociones_SHOWCURRENT($datos,$p,$apunt,$socio,'../Controllers/Promociones_Controller.php'); 
 		break;
 		
 		default: /*PARA EL SHOWALL */

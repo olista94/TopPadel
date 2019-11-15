@@ -191,7 +191,10 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$p = $pistas -> searchById();
 				$datos = $reserva -> rellenadatos();
 				
-				new Reservas_DELETE($datos,$p,'../Controllers/Reservas_Controller.php'); //Creamos una vista de delete con los datos obtenidos
+				$usuario = new Usuarios_Model($_REQUEST['usuarios_login'],"","","","","","","","","","","","");
+				$socio = $usuario -> DevolverSocio();
+				
+				new Reservas_DELETE($datos,$p,$socio,'../Controllers/Reservas_Controller.php'); //Creamos una vista de delete con los datos obtenidos
 				}
 				else{
 					new MESSAGE('No puedes cancelar una reserva que se dispute hoy','../Controllers/Reservas_Controller.php');
@@ -215,9 +218,12 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$pistas = new Pistas_Model($array['pista_ID_Pista'],"","","");
 				$p = $pistas -> searchById();
 				
+				$usuario = new Usuarios_Model($_REQUEST['usuarios_login'],"","","","","","","","","","","","");
+				$socio = $usuario -> DevolverSocio();
+				
 				$datos = $reserva -> rellenadatos();
 				
-				new Reservas_SHOWCURRENT($datos,$p,'../Controllers/Reservas_Controller.php'); //Creamos una vista de delete con los datos obtenidos
+				new Reservas_SHOWCURRENT($datos,$p,$socio,'../Controllers/Reservas_Controller.php'); //Creamos una vista de delete con los datos obtenidos
 			
 		break;
 		

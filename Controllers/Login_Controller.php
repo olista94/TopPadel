@@ -68,6 +68,8 @@ switch ($_REQUEST['action']){
 			$_SESSION['tipo'] = $tipo;//ADMIN o NORMAL
 			$sexo = $usuario -> DevolverSexo(); //Guardamos el sexo de user
 			$_SESSION['sexo'] = $sexo;
+			$socio = $usuario -> DevolverSocioConectado(); //Guardamos el socio de user
+			$_SESSION['socio'] = $socio;
 			
 			header('Location:../index.php'); //Vamos al index
 		}else{		
