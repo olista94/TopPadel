@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2019 a las 19:24:19
+-- Tiempo de generación: 19-11-2019 a las 12:07:47
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.1.32
 
@@ -758,7 +758,7 @@ INSERT INTO `promociones` (`ID_Promo`, `fecha`, `hora_inicio`, `usuarios_login_u
 (90, '2019-12-21', '12:30:00', 'admin', NULL, 'NO'),
 (91, '2019-11-26', '12:30:00', 'jfperez', NULL, 'NO'),
 (92, '2019-11-22', '15:30:00', 'olista', NULL, 'NO'),
-(93, '2019-11-27', '20:00:00', 'olista', NULL, 'NO'),
+(93, '2019-11-27', '20:00:00', 'olista', 1, 'SI'),
 (94, '2019-11-26', '17:00:00', 'robertotato', NULL, 'NO'),
 (95, '2019-11-30', '15:30:00', 'adrianblanco', NULL, 'NO'),
 (96, '2019-11-21', '17:00:00', 'adrianantolinez', NULL, 'NO'),
@@ -807,7 +807,11 @@ INSERT INTO `promociones_has_usuarios` (`promociones_ID_Promo`, `usuarios_login`
 (88, 'rosinafdez'),
 (89, 'rosinafdez'),
 (91, 'jfperez'),
+(92, 'dianacasanova'),
 (92, 'olista'),
+(93, 'danielceballos'),
+(93, 'dianacasanova'),
+(93, 'hugo_mejide'),
 (93, 'olista'),
 (94, 'adrianblanco'),
 (94, 'robertotato'),
@@ -847,7 +851,6 @@ INSERT INTO `reservas` (`usuarios_login`, `pista_ID_Pista`, `fecha_reserva`, `ho
 ('celiarodriguez', 1, '2019-12-04', '21:30:00'),
 ('jaimesalgado', 1, '2019-12-12', '14:00:00'),
 ('jaimesalgado', 1, '2019-12-20', '15:30:00'),
-('jfperez', 2, '2019-11-18', '17:00:00'),
 ('jorgepuertas', 1, '2019-12-05', '17:00:00'),
 ('jorgepuertas', 7, '2019-12-27', '08:00:00'),
 ('jorgesabucedo', 1, '2019-12-10', '11:00:00'),
