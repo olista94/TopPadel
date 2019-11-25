@@ -83,7 +83,9 @@
 				<tr>
                     <th><?php echo $strings['Tipo']; ?></th>
                     <td><?php if($this -> fila['tipo'] == 'ADMIN') echo $strings['Admin'];
-					else echo $strings['Deportista']; ?></td>
+								else if($this -> fila['tipo'] == 'NORMAL') echo $strings['Deportista'];
+								else echo $strings['Entrenador'];
+								?></td>
                 </tr>
 				
 				<tr>

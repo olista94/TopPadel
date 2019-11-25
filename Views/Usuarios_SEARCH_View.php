@@ -74,6 +74,7 @@
 	  <select name="tipo" id="tipo">
 		<option value=""></option selected>
 		<option value="ADMIN"><?php echo $strings['Admin']; ?></option>
+		<option value="ENTRENADOR"><?php echo $strings['Entrenador']; ?></option>
 		<option value="NORMAL"><?php echo $strings['Deportista']; ?></option>
 	  </select>
 	  </div>

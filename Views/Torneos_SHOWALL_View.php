@@ -78,7 +78,7 @@ include_once '../Views/Header.php';
 					
 				</form>
 
-								<form action="../Controllers/Inscripcion_Controller.php" method="post" name="action" >
+					<form action="../Controllers/Inscripcion_Controller.php" method="post" name="action" >
 					<input type="hidden" name="ID_Torneo" value="<?php echo $fila['ID_Torneo']; ?>">
 					<td style="text-align:right">
 					<!--Botones para editar,borrar o ver en detalle-->

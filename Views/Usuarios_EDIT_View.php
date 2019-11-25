@@ -64,6 +64,7 @@
 				<select name="tipo" id="tipo">
 				<option value="ADMIN" <?php if($this -> fila['tipo'] == 'ADMIN') echo "selected"; ?>><?php echo $strings['Admin']; ?></option>
 				<option value="NORMAL" <?php if($this -> fila['tipo'] == 'NORMAL') echo "selected"; ?>><?php echo $strings['Deportista']; ?></option>
+				<option value="ENTRENADOR" <?php if($this -> fila['tipo'] == 'ENTRENADOR') echo "selected"; ?>><?php echo $strings['Entrenador']; ?></option>
 			</select>  
 	
 			<label ><?php echo $strings['Sexo']; ?></label>

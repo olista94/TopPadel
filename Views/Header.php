@@ -108,17 +108,26 @@ if(isset($_SESSION['tipo'])){//Si se loguea como ADMIN
 		<li><a href="../Controllers/Pistas_Controller.php"><?php echo $strings['Pistas']; ?></a></li>
 		<li><a href="../Controllers/Reservas_Controller.php"><?php echo $strings['Reservas']; ?></a></li>
 		<li><a href="../Controllers/Promociones_Controller.php"><?php echo $strings['Promociones']; ?></a></li>
+		<li><a class="dropdownElm" onclick="dropdown()"><?php echo $strings['Clases']; ?></a>
+			<nav class="dropdownContent" id="myDropdown">
+				<a href="../Controllers/Clases_Particulares_Controller.php?action=default"><?php echo $strings['Particulares']; ?></a>
+				<a href="../Controllers/Clases_Grupales_Controller.php?action=default"><?php echo $strings['Escuelas']; ?></a>
+				<a href=""><?php echo $strings['Clinics']; ?></a>
+			</nav>		
+		</li>
+		
 		
 		<a href="javascript:void(0);" class="icon" onclick="responsiveMenu()">
 			<i class="fa fa-bars"></i>
 		</a>
+		
 	</div>
 
 </header>
 
 <?php
 }
-else{//SI NO ES ADMIN
+else if($_SESSION['tipo']=='NORMAL'){//SI ES DEPORTISTA
 	?>
 	<header id="main-header">	
 
@@ -194,6 +203,100 @@ else{//SI NO ES ADMIN
 		<li><a href="../Controllers/Pistas_Controller.php"><?php echo $strings['Pistas']; ?></a></li>
 		<li><a href="../Controllers/Reservas_Controller.php"><?php echo $strings['Reservas']; ?></a></li>
 		<li><a href="../Controllers/Promociones_Controller.php"><?php echo $strings['Promociones']; ?></a></li>
+		<li><a class="dropdownElm" onclick="dropdown()"><?php echo $strings['Clases']; ?></a>
+			<nav class="dropdownContent" id="myDropdown">
+				<a href="../Controllers/Clases_Particulares_Controller.php?action=default"><?php echo $strings['Particulares']; ?></a>
+				<a href="../Controllers/Clases_Grupales_Controller.php?action=default"><?php echo $strings['Escuelas']; ?></a>
+				<a href=""><?php echo $strings['Clinics']; ?></a>
+			</nav>
+		</li>
+				
+		<a href="javascript:void(0);" class="icon" onclick="responsiveMenu()">
+			<i class="fa fa-bars"></i>
+		</a>
+	</div>
+
+</header>
+<?php
+}else{
+	?>
+	<header id="main-header">	
+
+	<div class="fixednav">
+		<div class="topnav">
+			<div class="topnav-centered">
+				<a><h2>TopPadel</h2></a>
+			</div>
+
+			<a class="alogo"><button class="logo"></button></a>
+
+			<div class="topnav-right">
+			
+			
+			
+                <?php	
+                    if (IsAuthenticated()){//Si esta autenticado
+                ?>
+				 <!--Login del usuario conectado-->
+			<nav class="perfil"><ul>
+				<li><?php echo $_SESSION['login'];?></a>
+					
+					<ul><li>
+							<a href="../Controllers/Usuarios_Controller.php?action=Confirmar_SHOWCURRENT1"><?php echo $strings['Perfil']; ?></a>
+						</li>
+						<li style = "padding-bottom:5">
+							<a href="../Controllers/Usuarios_Controller.php?action=Hacerse_Socio1"><?php echo $strings['Soci@s']; ?></a>
+						</li>
+						<li class="cerrar">
+							<a href='../Functions/Desconectar.php'><?php echo $strings['Cerrar sesion']; ?></a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			</nav>				
+				
+
+                <?php                    
+                    }
+                    else{
+                ?>
+				 <!--Si no esta logueado muestra un boton para ir al registro-->
+                    <a href='../Controllers/Registro_Controller.php'><button class="registrar"></button></a>
+                <?php
+                    }	
+                ?>
+				 <!--Banderas para cambiar el idioma-->
+			</div>
+			 <!--Al ingles-->
+			<div class="flags1" >
+				<form name='idioma' action="../Functions/CambioIdioma.php" method="POST" style="display: inline-block; margin:0; padding:0;">
+					<input type="hidden" name='idioma' value="ENGLISH">
+					<input type="image" src="../Views/img/uk.png"  width="45px">
+				</form>
+				 <!--Al castellano-->
+				<form name='idioma' action="../Functions/CambioIdioma.php" method="POST" style="display: inline-block; margin:0; padding:0;">
+					<input type="hidden" name='idioma' value="SPANISH" >
+					<input type="image"  src="../Views/img/spain.png"  width="35px" >
+				</form>
+				 <!--Al gallego-->
+				<form name='idioma' action="../Functions/CambioIdioma.php" method="POST" style="display: inline-block; margin:0; padding:0;">
+					<input type="hidden" name='idioma' value="GALLAECIAN" >
+					<input type="image"  src="../Views/img/galicia.png" width="35px">	
+				</form>
+			</div>
+		
+	</div>
+ <!--Opciones del menu que puede gestionar si es NORMAL -->
+	<div class="menu-bar" id="menu-bar">
+		
+		<li><a href="../Controllers/Usuarios_Controller.php"><?php echo $strings['Usuarios']; ?></a></li>
+		<li><a class="dropdownElm" onclick="dropdown()"><?php echo $strings['Clases']; ?></a>
+			<nav class="dropdownContent" id="myDropdown">
+				<a href="../Controllers/Clases_Particulares_Controller.php?action=default"><?php echo $strings['Particulares']; ?></a>
+				<a href=""><?php echo $strings['Escuelas']; ?></a>
+				<a href=""><?php echo $strings['Clinics']; ?></a>
+			</nav>
+		</li>
 				
 		<a href="javascript:void(0);" class="icon" onclick="responsiveMenu()">
 			<i class="fa fa-bars"></i>

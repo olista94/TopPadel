@@ -78,8 +78,10 @@
 				<!--Campo tipo del usuario (ADMIN O NORMAL)-->
 				<tr>
                     <th><?php echo $strings['Tipo']; ?></th>
-                    <td><?php if($this -> fila['tipo'] == 'Admin') echo $strings['Admin'];
-					else echo $strings['Deportista']; ?></td>
+                    <td><?php if($this -> fila['tipo'] == 'ADMIN') echo $strings['Admin'];
+								else if($this -> fila['tipo'] == 'NORMAL') echo $strings['Deportista'];
+								else echo $strings['Entrenador'];
+								?></td>
                 </tr>
 				
 				<tr>

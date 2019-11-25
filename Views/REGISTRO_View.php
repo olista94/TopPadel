@@ -71,6 +71,7 @@
 	  <label for="tipo"><?php echo $strings['Tipo']; ?></label>
       <select name="tipo" id="tipo">
 		<option value="NORMAL"><?php echo $strings['Deportista']; ?></option>
+		<option value="ENTRENADOR"><?php echo $strings['Entrenador']; ?></option>
 	  </select>
 	  
 	 
