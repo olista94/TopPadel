@@ -125,7 +125,7 @@ function add(){
 	
 	
 	function addPista($idpista){//Inserta una pista al azar
-			//Sentencia sql que insetara la categoria
+			//Sentencia sql que insetara la psita
 		$sql = "UPDATE partidos SET
 			`pista_ID_Pista` = '".$idpista."'		
 			WHERE (`ID_Partido` = '$this->ID_Partido')";
