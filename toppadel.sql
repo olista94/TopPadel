@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2019 a las 12:07:47
+-- Tiempo de generación: 25-11-2019 a las 23:44:47
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.1.32
 
@@ -22,11 +22,78 @@ SET time_zone = "+00:00";
 -- Base de datos: `toppadel`
 --
 
-
 DROP SCHEMA IF EXISTS `toppadel`;
 
 CREATE DATABASE IF NOT EXISTS `toppadel` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `toppadel`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clases_grupales`
+--
+
+CREATE TABLE `clases_grupales` (
+  `ID_Clase` int(5) NOT NULL,
+  `login_entrenador` varchar(15) NOT NULL,
+  `tope` int(5) NOT NULL,
+  `tipo` enum('ESCUELAS','CLINICS') NOT NULL,
+  `descripcion` varchar(128) NOT NULL,
+  `invitado` varchar(50) NOT NULL,
+  `fecha_clase` date NOT NULL,
+  `hora_clase` time NOT NULL,
+  `ID_Pista` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `clases_grupales`
+--
+
+INSERT INTO `clases_grupales` (`ID_Clase`, `login_entrenador`, `tope`, `tipo`, `descripcion`, `invitado`, `fecha_clase`, `hora_clase`, `ID_Pista`) VALUES
+(1, 'mourinho', 25, 'CLINICS', 'Mejora del saque con Paquito Fernandez', 'Paquito Fernandez', '2019-12-16', '12:30:00', 1),
+(3, 'sisu', 30, 'ESCUELAS', 'Aprender a restar de reves', 'Rafa Nadal', '2019-11-30', '20:00:00', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clases_grupales_has_usuarios`
+--
+
+CREATE TABLE `clases_grupales_has_usuarios` (
+  `ID_Clase` int(5) NOT NULL,
+  `login_usuario` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `clases_grupales_has_usuarios`
+--
+
+INSERT INTO `clases_grupales_has_usuarios` (`ID_Clase`, `login_usuario`) VALUES
+(3, 'ypgarcia');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clases_particulares`
+--
+
+CREATE TABLE `clases_particulares` (
+  `ID_Clase` int(5) NOT NULL,
+  `login_usuario` varchar(15) NOT NULL,
+  `login_entrenador` varchar(15) NOT NULL,
+  `fecha_clase` date NOT NULL,
+  `hora_clase` time NOT NULL,
+  `ID_Pista` tinyint(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `clases_particulares`
+--
+
+INSERT INTO `clases_particulares` (`ID_Clase`, `login_usuario`, `login_entrenador`, `fecha_clase`, `hora_clase`, `ID_Pista`) VALUES
+(18, 'ypgarcia', 'mourinho', '2019-12-01', '21:30:00', 6),
+(21, 'olista', 'guardiola', '2019-11-27', '17:00:00', 1),
+(24, 'olista', 'sisu', '2019-11-29', '20:00:00', 7);
 
 -- --------------------------------------------------------
 
@@ -749,24 +816,18 @@ CREATE TABLE `promociones` (
 INSERT INTO `promociones` (`ID_Promo`, `fecha`, `hora_inicio`, `usuarios_login_usuario`, `pista_ID_Pista`, `cerrada`) VALUES
 (77, '2019-11-27', '21:30:00', 'ritaconde', NULL, 'NO'),
 (78, '2019-12-04', '12:30:00', 'dianacasanova', NULL, 'NO'),
-(80, '2019-11-22', '15:30:00', 'joseluis', NULL, 'NO'),
 (81, '2019-11-30', '14:00:00', 'joseluis', 1, 'SI'),
-(84, '2019-11-20', '20:00:00', 'teofilomartin', NULL, 'NO'),
 (87, '2019-12-20', '18:30:00', 'hugo_mejide', NULL, 'NO'),
 (88, '2019-11-26', '08:00:00', 'rosinafdez', 1, 'SI'),
-(89, '2019-11-21', '17:00:00', 'rosinafdez', NULL, 'NO'),
 (90, '2019-12-21', '12:30:00', 'admin', NULL, 'NO'),
 (91, '2019-11-26', '12:30:00', 'jfperez', NULL, 'NO'),
-(92, '2019-11-22', '15:30:00', 'olista', NULL, 'NO'),
 (93, '2019-11-27', '20:00:00', 'olista', 1, 'SI'),
 (94, '2019-11-26', '17:00:00', 'robertotato', NULL, 'NO'),
 (95, '2019-11-30', '15:30:00', 'adrianblanco', NULL, 'NO'),
-(96, '2019-11-21', '17:00:00', 'adrianantolinez', NULL, 'NO'),
 (97, '2019-11-28', '18:30:00', 'adrianantolinez', NULL, 'NO'),
 (98, '2019-12-04', '09:30:00', 'adrianantolinez', NULL, 'NO'),
 (99, '2019-11-26', '14:00:00', 'jfperez', NULL, 'NO'),
-(100, '2019-12-01', '17:00:00', 'jfperez', NULL, 'NO'),
-(101, '2019-11-22', '15:30:00', 'admin', NULL, 'NO');
+(100, '2019-12-01', '17:00:00', 'jfperez', NULL, 'NO');
 
 -- --------------------------------------------------------
 
@@ -790,25 +851,17 @@ INSERT INTO `promociones_has_usuarios` (`promociones_ID_Promo`, `usuarios_login`
 (78, 'admin'),
 (78, 'adrianblanco'),
 (78, 'dianacasanova'),
-(80, 'joseluis'),
-(80, 'xianagolpe'),
 (81, 'adrianblanco'),
 (81, 'fabioroson'),
 (81, 'joseluis'),
 (81, 'rosinafdez'),
-(84, 'admin'),
-(84, 'diegocurras'),
-(84, 'teofilomartin'),
 (87, 'hugo_mejide'),
 (87, 'jfperez'),
 (88, 'admin'),
 (88, 'jfperez'),
 (88, 'olista'),
 (88, 'rosinafdez'),
-(89, 'rosinafdez'),
 (91, 'jfperez'),
-(92, 'dianacasanova'),
-(92, 'olista'),
 (93, 'danielceballos'),
 (93, 'dianacasanova'),
 (93, 'hugo_mejide'),
@@ -816,8 +869,6 @@ INSERT INTO `promociones_has_usuarios` (`promociones_ID_Promo`, `usuarios_login`
 (94, 'adrianblanco'),
 (94, 'robertotato'),
 (95, 'adrianblanco'),
-(96, 'adrianantolinez'),
-(96, 'jfperez'),
 (97, 'admin'),
 (97, 'adrianantolinez'),
 (98, 'adrianantolinez'),
@@ -842,9 +893,6 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`usuarios_login`, `pista_ID_Pista`, `fecha_reserva`, `hora_inicio`) VALUES
-('admin', 1, '2019-11-20', '09:30:00'),
-('admin', 2, '2019-11-20', '11:00:00'),
-('admin', 5, '2019-11-20', '17:00:00'),
 ('alfredocasas', 8, '2019-12-27', '08:00:00'),
 ('carmenformoso', 2, '2019-12-06', '15:30:00'),
 ('celiarodriguez', 1, '2019-12-11', '12:30:00'),
@@ -867,9 +915,6 @@ INSERT INTO `reservas` (`usuarios_login`, `pista_ID_Pista`, `fecha_reserva`, `ho
 ('mariaboveda', 1, '2019-12-02', '15:30:00'),
 ('mariaboveda', 1, '2019-12-06', '15:30:00'),
 ('mariaboveda', 1, '2019-12-11', '20:00:00'),
-('olista', 2, '2019-11-20', '14:00:00'),
-('olista', 6, '2019-11-20', '18:30:00'),
-('olista', 7, '2019-11-22', '17:00:00'),
 ('olista', 8, '2019-11-23', '09:30:00'),
 ('ritaconde', 1, '2019-12-12', '12:30:00'),
 ('rosinafdez', 1, '2019-12-18', '08:00:00'),
@@ -963,6 +1008,7 @@ INSERT INTO `usuarios` (`login`, `password`, `dni`, `nombre`, `apellidos`, `tele
 ('fabioroson', 'fabioroson', '35924493B', 'Fabio', 'Roson Rosales', '674853223', 'rosonrosales@hotmail.com', '1985-04-15', 'Masculina', 'NORMAL', 'NO', '', ''),
 ('felixperez', 'felixperez', '70053511L', 'Felix', 'Perez Feliz', '984834272', 'felixfeliz@hotmail.com', '1972-01-26', 'Masculina', 'NORMAL', 'NO', '', ''),
 ('franciscobretal', 'franciscobretal', '13359330X', 'Francisco', 'Bretal Franco', '674582374', 'francobretal90@gmail.com', '1990-09-27', 'Masculina', 'NORMAL', 'NO', '', ''),
+('guardiola', 'guardiola', '31897064C', 'Josep', 'Guardiola i Sala', '669384473', 'josepguardiol@hotmail.com', '1971-01-18', 'Masculina', 'ENTRENADOR', 'NO', '', ''),
 ('guillermomtnez', 'guillermomtnez', '28875991C', 'Guillermo', 'Martinez Soria', '683742432', 'guille_1989@gmail.com', '1989-11-25', 'Masculina', 'NORMAL', 'NO', '', ''),
 ('hugo_mejide', 'hugo_mejide', '07814102J', 'Hugo', 'Mejide Perez', '657367423', 'mejidehugo1990_43@yahoo.com', '1990-02-04', 'Masculina', 'NORMAL', 'SI', 'ES94', '20805801101234567891'),
 ('isabelmata', 'isabelmata', '85038738X', 'Isabel', 'Mata Trillo', '694845332', 'isabelitaii@gmail.com', '1988-03-25', 'Femenina', 'NORMAL', 'NO', '', ''),
@@ -996,9 +1042,10 @@ INSERT INTO `usuarios` (`login`, `password`, `dni`, `nombre`, `apellidos`, `tele
 ('mariapumar', 'mariapumar', '78078690S', 'Maria', 'Pumar Vazquez', '683472331', 'pumarvazquezmar1234@gmail.com', '1997-03-18', 'Femenina', 'NORMAL', 'SI', 'AD66', '19518195619519819619'),
 ('mariohernandez', 'mariohernandez', '22474502Y', 'Mario', 'Hernandez Hermoso', '689242312', 'supermario64@gmail.com', '1964-04-03', 'Masculina', 'NORMAL', 'NO', '', ''),
 ('marta_castro', 'marta_castro', '28072495Y', 'Marta', 'Castro Xil', '678457393', 'martitaxil1@hotmail.com', '2000-11-19', 'Femenina', 'NORMAL', 'SI', 'ES10', '00492352082414205416'),
+('mourinho', 'mourinho', '49565820S', 'Jose Mario', 'dos Santos Mourinho Felix', '753274223', 'xoxemourinho@gmail.com', '1963-01-26', 'Masculina', 'ENTRENADOR', 'NO', '', ''),
 ('noemiquesada', 'noemiquesada', '82023628Q', 'Noemi', 'Quesada Lopez', '643237323', 'nquelopez@esei.uvigo.es', '2003-03-31', 'Femenina', 'NORMAL', 'NO', '', ''),
 ('olallardgez', 'olallardgez', '50566997W', 'Olalla', 'Rodriguez Perez', '678433189', 'superolalla@yahoo.com', '1997-12-21', 'Femenina', 'NORMAL', 'NO', '', ''),
-('olista', '1234', '24252751X', 'Oscar', 'Lista Rivera', '643956059', 'adminadmin@gmail.com', '1994-05-22', 'Masculina', 'NORMAL', 'SI', 'ES00', '1234567890123456'),
+('olista', '1234', '24252751X', 'Oscar', 'Lista Rivera', '643956059', 'olista@gmail.com', '1994-05-22', 'Masculina', 'NORMAL', 'SI', 'ES00', '1234567890123456'),
 ('oscardominguez', 'oscardominguez', '40315187M', 'Oscar', 'Dominguez Sanz', '674324233', 'oscardomsanz456@hotmail.com', '1991-11-18', 'Masculina', 'NORMAL', 'NO', '', ''),
 ('oscarfernadez', 'oscarfernadez', '36416302B', 'Oscar', 'Fernandez Dorado', '746345332', 'oscardorado98@gmail.com', '0000-00-00', 'Masculina', 'NORMAL', 'NO', '', ''),
 ('pacobarrio', 'pacobarrio', '52957832X', 'Paco', 'Barrio Leon', '647583423', 'pacoleon@yahoo.com', '1977-03-28', 'Masculina', 'NORMAL', 'SI', 'ES82', '78945102345873061212'),
@@ -1011,6 +1058,7 @@ INSERT INTO `usuarios` (`login`, `password`, `dni`, `nombre`, `apellidos`, `tele
 ('rosinafdez', 'rosinafdez', '28491046A', 'Rosina', 'Fernandez Rojas', '976543345', 'rfrojas@gmail.com', '1983-06-24', 'Femenina', 'NORMAL', 'NO', '', ''),
 ('rubencorral', 'rubencorral', '69287892R', 'Ruben', 'Corral Cabreiroa', '768453443', 'cabreiroawaters@yahoo.com', '1992-11-11', 'Masculina', 'NORMAL', 'NO', '', ''),
 ('rubengonzalez', 'rubengonzalez', '43257679S', 'Ruben', 'Gonzalez Hurtado', '674357232', 'ruben7star@gmail.com', '1999-07-25', 'Masculina', 'NORMAL', 'NO', '', ''),
+('sisu', 'sisu', '11111111h', 'ssssd', 'ssss', '666234234', 'ypgarcissssssssssssa@esei.uvigo.es', '2019-11-14', 'Masculina', 'ENTRENADOR', 'NO', '', ''),
 ('taniafernandez', 'taniafernandez', '36772892D', 'Tania', 'Fernandez Domingo', '687343884', 'domingotaniafernan@gmail.com', '1992-06-23', 'Femenina', 'NORMAL', 'NO', '', ''),
 ('teofilomartin', 'teofilomartin', '25557539P', 'Teofilo', 'Martin Vidal', '987543532', 'teofilo_87832@gmail.com', '1983-07-13', 'Masculina', 'NORMAL', 'SI', 'ES17', '20852066623456789011'),
 ('xacoboiglesias', 'xacoboiglesias', '28569206D', 'Xacobo', 'Iglesias Altomano', '983423242', 'xacoaltomano@hotmail.com', '1982-03-16', 'Masculina', 'NORMAL', 'NO', '', ''),
@@ -1020,6 +1068,25 @@ INSERT INTO `usuarios` (`login`, `password`, `dni`, `nombre`, `apellidos`, `tele
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `clases_grupales`
+--
+ALTER TABLE `clases_grupales`
+  ADD PRIMARY KEY (`ID_Clase`);
+
+--
+-- Indices de la tabla `clases_grupales_has_usuarios`
+--
+ALTER TABLE `clases_grupales_has_usuarios`
+  ADD PRIMARY KEY (`ID_Clase`,`login_usuario`);
+
+--
+-- Indices de la tabla `clases_particulares`
+--
+ALTER TABLE `clases_particulares`
+  ADD PRIMARY KEY (`ID_Clase`),
+  ADD KEY `ID_Pista` (`ID_Pista`) USING BTREE;
 
 --
 -- Indices de la tabla `parejas`
@@ -1102,6 +1169,18 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `clases_grupales`
+--
+ALTER TABLE `clases_grupales`
+  MODIFY `ID_Clase` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `clases_particulares`
+--
+ALTER TABLE `clases_particulares`
+  MODIFY `ID_Clase` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `parejas`
