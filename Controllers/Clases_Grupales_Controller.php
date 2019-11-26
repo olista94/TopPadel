@@ -25,13 +25,15 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Views/Clases_Grupales_DELETE_View.php";
 			include_once "../Views/Clases_Grupales_SHOWCURRENT_View.php";
 			include_once "../Views/Clases_Grupales_INSCRIPCION_View.php";
+			include_once "../Views/Clases_Grupales_SEARCH_View.php";
+			include_once "../Views/Clases_Grupales_ADD_View.php";
 			
 /* 			
 			include_once "../Views/Clases_Grupales_ADD_Fecha_View.php";
 			include_once "../Views/Clases_Grupales_ADD_Hora_View.php";
 			include_once "../Views/Clases_Grupales_ADD_Pista_View.php";
 			include_once "../Views/Clases_Grupales_ADD_Entrenador_View.php";
-			include_once "../Views/Clases_Grupales_SEARCH_View.php"; */
+			 */
 			 
 
 			/* RECOGE LOS DATOS DEL FORMULARIO */
@@ -121,66 +123,36 @@ if(isset($_SESSION['tipo'])){
 			//Segun la accion definida
 			switch ($_REQUEST['action']){
 				
-				case 'Confirmar_ADD':
-				$reserva = new Clases_Grupales_Model("","",'','','','');
-					new Clases_Grupales_ADD_Fecha('../Controllers/Clases_Grupales_Controller.php');	//Crea la vista de añadir
+				case 'Confirmar_ADD1':
+					$clase = new Clases_Grupales_Model("","",'','','','','','','');
+					new Clases_Grupales_ADD('../Controllers/Clases_Grupales_Controller.php');	//Crea la vista de añadir
 				
-			break;
+				break;
 			
-			case 'Confirmar_ADD_Fecha':
+			case 'Confirmar_ADD2':
 					
-				$clase = new Clases_Grupales_Model("","",'',$_REQUEST['fecha_clase'],"","");
-				$horasOcupadas = $clase -> BuscarHorasOcupadas();
-				
-				$array = Array ('08:00:00','09:30:00','11:00:00','12:30:00','14:00:00','15:30:00','17:00:00','18:30:00','20:00:00','21:30:00');
-				
-		
-				$ocup = Array();
-				
-				while($h = $horasOcupadas->fetch_array()[0]){
-					array_push($ocup,$h);
+					$clase = getDataForm();
 					
-				}
-				
-				$resultado = array_diff($array, $ocup);
-				
-				new Clases_Grupales_ADD_Hora($resultado,$_REQUEST['fecha_clase'],'../Controllers/Clases_Grupales_Controller.php');	//Crea la vista de añadir
-				
-				
-			break;
-			
-			case 'Confirmar_ADD_Hora':
-				$clase = new Clases_Grupales_Model("","","",$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],"");
-				$pistasLibres = $clase -> pistasLibres();
-				
-				
-				new Clases_Grupales_ADD_Pista($pistasLibres,$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],'../Controllers/Clases_Grupales_Controller.php');
-			break;
-			
-			
-			case 'Confirmar_ADD_Pista':
-				$clase = new Clases_Grupales_Model("","","",$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],$_REQUEST['ID_Pista']);
-				$entrenadores = $clase -> buscarEntrenador();
-				
-				$entrenadoresDisponibles = Array();
-				
-				while($e = $entrenadores->fetch_array()[0]){
-						array_push($entrenadoresDisponibles,$e);					
+					$pista = $clase -> buscarPistasLibresClases();
+					$entrenador = $clase -> buscarEntrenadoresLibresClases();
+					
+					
+					if(!is_string($entrenador) || !is_numeric($pista)){
+						new MESSAGE('No hay pista y/o entrenadores disponibles','../Controllers/Clases_Grupales_Controller.php');
+					}else{
+						
+						$mensaje = $clase -> addGrupal();
+						$idclase = $clase -> DevolverMaxIDClase();
+						
+						$clase -> insertarPistayEntrenador($pista,$entrenador,$idclase);
+						
+						new MESSAGE($mensaje,'../Controllers/Clases_Grupales_Controller.php');
+					
 					}
-				echo $_REQUEST['ID_Pista'];
-				new Clases_Grupales_ADD_Entrenador($entrenadoresDisponibles,$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],$_REQUEST['ID_Pista'],'../Controllers/Clases_Grupales_Controller.php');			 
-					
+				
 			break;
 			
-			case 'Confirmar_ADD_Entrenador':
-				
-				$clase = new Clases_Grupales_Model("","",$_REQUEST['login_entrenador'],$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],$_REQUEST['ID_Pista']);
-				
-				$mensaje = $clase -> add();
-				
-				new MESSAGE($mensaje,'../Controllers/Clases_Grupales_Controller.php');
 			
-			break;
 			
 			case 'Confirmar_DELETE1':
 			
@@ -216,9 +188,27 @@ if(isset($_SESSION['tipo'])){
 			
 				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","");
 				
-				$datos = $clase -> rellenadatos();
+				$apuntarse = $clase -> PuedeApuntarse();
 				
-				new Clases_Grupales_INSCRIPCION($datos,'../Controllers/Clases_Grupales_Controller.php');
+				$tope = $clase -> devolverTope() -> fetch_array();
+				$numApuntados = $clase -> ContarUsuarios1() -> fetch_array();
+
+				if($tope[0] > $numApuntados[0]){
+				
+				
+					if($apuntarse == false){
+						new MESSAGE('Ya estas apuntado','../Controllers/Clases_Grupales_Controller.php');
+					}
+				
+					else{
+						$datos = $clase -> rellenadatos();
+						new Clases_Grupales_INSCRIPCION($datos,'../Controllers/Clases_Grupales_Controller.php');
+					}
+				}
+				
+				else{
+					new MESSAGE('Ya se ha alcanzado el maximo de apuntados','../Controllers/Clases_Grupales_Controller.php');	
+				}
 			
 			break;
 			
@@ -243,18 +233,21 @@ if(isset($_SESSION['tipo'])){
 				$clase = getDataForm();
 				
 				if($_SESSION['tipo'] == 'NORMAL'){
-					$datos = $clase -> searchNormal();	
-					new Clases_Grupales_SHOWALL($datos,'../Controllers/Clases_Grupales_Controller.php');
+					$datos = $clase -> searchAdminNormal();
+					$apuntados = $clase -> ContarUsuarios();
+					new Clases_Grupales_SHOWALL($datos,$apuntados,'../Controllers/Clases_Grupales_Controller.php');
 				}
 				
 				else if($_SESSION['tipo'] == 'ADMIN'){
-					$datos = $clase -> searchAdmin();	
-					new Clases_Grupales_SHOWALL($datos,'../Controllers/Clases_Grupales_Controller.php');
+					$datos = $clase -> searchAdminNormal();
+					$apuntados = $clase -> ContarUsuarios();
+					new Clases_Grupales_SHOWALL($datos,$apuntados,'../Controllers/Clases_Grupales_Controller.php');
 				}
 				
 				else if($_SESSION['tipo'] == 'ENTRENADOR'){
 					$datos = $clase -> searchEntrenador();	
-					new Clases_Grupales_SHOWALL($datos,'../Controllers/Clases_Grupales_Controller.php');
+					$apuntados = $clase -> ContarUsuarios();
+					new Clases_Grupales_SHOWALL($datos,$apuntados,'../Controllers/Clases_Grupales_Controller.php');
 				}
 
 			break;
@@ -265,14 +258,20 @@ if(isset($_SESSION['tipo'])){
 				
 				if($_SESSION['tipo'] == 'NORMAL' || $_SESSION['tipo'] == 'ADMIN'){
 					$clases = new Clases_Grupales_Model('','','','','','','','','');
+					
+					$apuntados = $clases -> ContarUsuarios();
+					
 					$datos = $clases -> ShowAllAdminNormal();
-					$respuesta = new Clases_Grupales_SHOWALL($datos,'../Controllers/Clases_Grupales_Controller.php'); 
+					$respuesta = new Clases_Grupales_SHOWALL($datos,$apuntados,'../Controllers/Clases_Grupales_Controller.php'); 
 				}
 				
 				else if($_SESSION['tipo'] == 'ENTRENADOR'){
-					$clases_particulas = new Clases_Grupales_Model('','','','','','');
-					$datos = $clases_particulas -> ShowAllEntrenador();
-					$respuesta = new Clases_Grupales_SHOWALL($datos,'../Controllers/Clases_Grupales_Controller.php'); 
+					$clases = new Clases_Grupales_Model('','','','','','','','','');
+					
+					$apuntados = $clases -> ContarUsuarios();
+					
+					$datos = $clases -> ShowAllEntrenador();
+					$respuesta = new Clases_Grupales_SHOWALL($datos,$apuntados,'../Controllers/Clases_Grupales_Controller.php'); 
 				}
 				
 			}
