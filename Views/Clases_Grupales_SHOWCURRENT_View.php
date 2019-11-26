@@ -52,11 +52,6 @@
                     <td><?php echo $this -> fila['login_entrenador']; ?></td>
                 </tr>	
 				
-				<tr>
-                    <th><?php echo $strings['Invitado']; ?></th>
-                    <td><?php echo $this -> fila['invitado']; ?></td>
-                </tr>
-				
                 <tr>
                     <th><?php echo $strings['Fecha']; ?></th>
                     <td><?php echo $this -> fila['fecha_clase']; ?></td>

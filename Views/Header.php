@@ -112,7 +112,7 @@ if(isset($_SESSION['tipo'])){//Si se loguea como ADMIN
 			<nav class="dropdownContent" id="myDropdown">
 				<a href="../Controllers/Clases_Particulares_Controller.php?action=default"><?php echo $strings['Particulares']; ?></a>
 				<a href="../Controllers/Clases_Grupales_Controller.php?action=default"><?php echo $strings['Escuelas']; ?></a>
-				<a href=""><?php echo $strings['Clinics']; ?></a>
+				<a href="../Controllers/Clinics_Controller.php?action=default"><?php echo $strings['Clinics']; ?></a>
 			</nav>		
 		</li>
 		
@@ -207,7 +207,7 @@ else if($_SESSION['tipo']=='NORMAL'){//SI ES DEPORTISTA
 			<nav class="dropdownContent" id="myDropdown">
 				<a href="../Controllers/Clases_Particulares_Controller.php?action=default"><?php echo $strings['Particulares']; ?></a>
 				<a href="../Controllers/Clases_Grupales_Controller.php?action=default"><?php echo $strings['Escuelas']; ?></a>
-				<a href=""><?php echo $strings['Clinics']; ?></a>
+				<a href="../Controllers/Clinics_Controller.php?action=default"><?php echo $strings['Clinics']; ?></a>
 			</nav>
 		</li>
 				
@@ -293,8 +293,8 @@ else if($_SESSION['tipo']=='NORMAL'){//SI ES DEPORTISTA
 		<li><a class="dropdownElm" onclick="dropdown()"><?php echo $strings['Clases']; ?></a>
 			<nav class="dropdownContent" id="myDropdown">
 				<a href="../Controllers/Clases_Particulares_Controller.php?action=default"><?php echo $strings['Particulares']; ?></a>
-				<a href=""><?php echo $strings['Escuelas']; ?></a>
-				<a href=""><?php echo $strings['Clinics']; ?></a>
+				<a href="../Controllers/Clases_Grupales_Controller.php?action=default"><?php echo $strings['Escuelas']; ?></a>
+				<a href="../Controllers/Clinics_Controller.php?action=default"><?php echo $strings['Clinics']; ?></a>
 			</nav>
 		</li>
 				
