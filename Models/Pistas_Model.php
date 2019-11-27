@@ -100,7 +100,7 @@ function search(){
 					(`techo` LIKE '%$this->techo%') &&
 					(`suelo` LIKE '%$this->suelo%')				
     				)";
-				
+				echo $sql;
    //Si se produce un error
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda';

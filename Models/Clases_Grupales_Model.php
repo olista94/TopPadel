@@ -50,7 +50,7 @@ function addGrupal(){
 				)
 				";
 				
-				echo $sql;
+				
 		if (!$this->mysqli->query($sql)) {
 			
 			return 'Error al insertar';//Devuelve mensaje de error	
@@ -93,7 +93,7 @@ function searchAdminNormal(){
 					(`tipo` LIKE 'ESCUELAS')					
     				)";
 				
-echo $sql;
+
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda';//Devuelve mensaje de error	
 		
@@ -141,8 +141,10 @@ function delete()
     {
 			//Sentencia sql para borrar
 			$sql = "DELETE FROM clases_grupales WHERE (`ID_Clase` = '$this->ID_Clase')";
+			$sql1 = "DELETE FROM clases_grupales_has_usuarios WHERE (`ID_Clase` = '$this->ID_Clase')";
 			
 			$this->mysqli->query($sql);
+			$this->mysqli->query($sql1);
 			
 			return 'Borrado correctamente';//Exito
 		
@@ -228,7 +230,7 @@ function ShowAllAdminNormal(){
        			FROM clases_grupales
 				WHERE `tipo` = 'ESCUELAS'
     			";
-				
+				echo $sql;
 
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda';//Devuelve mensaje de error	
@@ -250,7 +252,7 @@ function apuntarUsuario(){
 				)
 				";
 				
-				echo $sql;
+				
 		if (!$this->mysqli->query($sql)) {
 			
 			return 'Error al insertar.Ya existe un usuario con ese login';//Devuelve mensaje de error	
@@ -283,7 +285,7 @@ function ContarUsuarios()
 			FROM clases_grupales_has_usuarios
 			GROUP BY `ID_Clase`
 			";
-		echo $sql;
+		
     $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
     
     if ($result)
@@ -321,7 +323,7 @@ function devolverTope()
 			WHERE (`ID_Clase` = '$this->ID_Clase')
 			
 			";
-		echo $sql;
+		
     $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
     
     if ($result)
@@ -385,7 +387,7 @@ function buscarPistasLibresClases(){
 			
 			WHERE (`ID_Clase` = '".$idclase."')";
 			 
-			 echo $sql;
+			 
 			//Si ya se han insertado la PK o FK
 		if (!$this->mysqli->query($sql)) {
 			

@@ -46,7 +46,7 @@ function add(){
 				)
 				";
 				
-				echo $sql;
+				
 		if (!$this->mysqli->query($sql)) {
 			
 			return 'Error al insertar.Ya existe un usuario con ese login';//Devuelve mensaje de error	
@@ -135,7 +135,7 @@ function searchAdmin(){
 					
     				)";
 				
-echo $sql;
+
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda';//Devuelve mensaje de error	
 		
@@ -160,7 +160,7 @@ function searchNormal(){
 					
     				)";
 				
-echo $sql;
+
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda';//Devuelve mensaje de error	
 		
@@ -185,7 +185,7 @@ function searchEntrenador(){
 					
     				)";
 				
-echo $sql;
+
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda';//Devuelve mensaje de error	
 		
@@ -222,7 +222,7 @@ function BuscarHorasOcupadas(){
 			FROM clases_particulares cp,pista p
 			WHERE `fecha_clase` = '$this->fecha_clase' and p.ID_Pista = cp.ID_Pista GROUP BY `hora_clase` HAVING COUNT(*) >= (SELECT COUNT(ID_Pista) FROM pista)
 			";
-	echo $sql;
+	
 
 	$resultado = $this->mysqli->query($sql);
 	
@@ -241,7 +241,7 @@ function pistasLibres(){
 			WHERE `ID_Pista` NOT IN 
 							(SELECT p.`ID_Pista` FROM clases_particulares cp,pista p 
 							WHERE `fecha_clase` = '$this->fecha_clase' AND `hora_clase` = '$this->hora_clase' AND cp.`ID_Pista` = p.`ID_Pista`)";
-echo $sql;
+
 	$resultado = $this->mysqli->query($sql);
 	
 	if (!$resultado) { 
