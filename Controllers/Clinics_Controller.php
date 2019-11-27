@@ -21,12 +21,13 @@ if(isset($_SESSION['tipo'])){
 
 			//Incluimos las vistas y modelo necesarios
 			include_once "../Models/Clinics_Model.php";
-			
+			include_once "../Models/Pistas_Model.php";		
 			include_once "../Views/Clinics_SHOWALL_View.php";
 			include_once "../Views/Clinics_SHOWCURRENT_View.php";
 			include_once "../Views/Clinics_DELETE_View.php";
 			include_once "../Views/Clinics_ADD_View.php";
 			include_once "../Views/Clinics_SEARCH_View.php";
+			include_once "../Views/Clinics_INSCRIPCION_View.php";
 			
 			 
 
@@ -56,21 +57,22 @@ if(isset($_SESSION['tipo'])){
 				$tope = "";
 			}
 			
-			if(isset($_REQUEST['fecha_clase'])){
-				$fecha_clase = $_REQUEST['fecha_clase'];//Identificador de la Inscripcion
+			if(isset($_REQUEST['tipo'])){
+				$tipo = $_REQUEST['tipo'];//Identificador de la Inscripcion
 				
 			}
 			else{
-				$fecha_clase = "";
+				$tipo = "";
+			}
+			
+			if(isset($_REQUEST['descripcion'])){
+				$descripcion = $_REQUEST['descripcion'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$descripcion = "";
 			}
 
-			if(isset($_REQUEST['hora_clase'])){
-				$hora_clase = $_REQUEST['hora_clase'];//Identificador de la Inscripcion
-				
-			}
-			else{
-				$hora_clase = "";
-			}
 			if(isset($_REQUEST['invitado'])){
 				$invitado = $_REQUEST['invitado'];//Identificador de la Inscripcion
 				
@@ -78,12 +80,19 @@ if(isset($_SESSION['tipo'])){
 			else{
 				$invitado = "";
 			}
-			if(isset($_REQUEST['descripcion'])){
-				$descripcion = $_REQUEST['descripcion'];//Identificador de la Inscripcion
+			if(isset($_REQUEST['fecha_clase'])){
+				$fecha_clase = $_REQUEST['fecha_clase'];//Identificador de la Inscripcion
 				
 			}
 			else{
-				$descripcion = "";
+				$fecha_clase = "";
+			}
+			if(isset($_REQUEST['hora_clase'])){
+				$hora_clase = $_REQUEST['hora_clase'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$hora_clase = "";
 			}
 			
 			if(isset($_REQUEST['ID_Pista'])){
@@ -94,7 +103,7 @@ if(isset($_SESSION['tipo'])){
 				$ID_Pista = "";
 			}
 				
-				$clinics = new Clinincs_Model ($ID_Clase,$login_entrenador,$tope,$fecha_clase,$hora_clase,$invitado,$descripcion,$ID_Pista); //creamos el objeto usuario
+				$clinics = new Clinics_Model ($ID_Clase,$login_entrenador,$tope,$tipo,$descripcion,$invitado,$fecha_clase,$hora_clase,$ID_Pista); //creamos el objeto usuario
 				
 				return $clinics; //devolvemos el objeto usuario
 			}
@@ -107,74 +116,43 @@ if(isset($_SESSION['tipo'])){
 			//Segun la accion definida
 			switch ($_REQUEST['action']){
 				
-				case 'Confirmar_ADD':
-				$reserva = new Clinics_Model("","",'','','','','','');
-					new Clinics_ADD_Fecha('../Controllers/Clinics_Controller.php');	//Crea la vista de añadir
+				case 'Confirmar_ADD1':
+					$clase = new Clinics_Model("","",'','','','','','','');
+					new Clinics_ADD('../Controllers/Clinics_Controller.php');	//Crea la vista de añadir
 				
-			break;
+				break;
 			
-			case 'Confirmar_ADD_Fecha':
+			case 'Confirmar_ADD2':
 					
-				$clinics = new clinics_Model("","",'','',$_REQUEST['fecha_clase'],"","","");
-				$horasOcupadas = $clase -> BuscarHorasOcupadas();
-				
-				$array = Array ('08:00:00','09:30:00','11:00:00','12:30:00','14:00:00','15:30:00','17:00:00','18:30:00','20:00:00','21:30:00');
-				
-		
-				$ocup = Array();
-				
-				while($h = $horasOcupadas->fetch_array()[0]){
-					array_push($ocup,$h);
+					$clase = getDataForm();
 					
-				}
-				
-				$resultado = array_diff($array, $ocup);
-				
-				new Clinics_ADD_Hora($resultado,$_REQUEST['fecha_clase'],'../Controllers/Cinics_Controller.php');	//Crea la vista de añadir
-				
-				
-			break;
-			
-			case 'Confirmar_ADD_Hora':
-				$clinics = new Clinics_Model("","","",$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],"","","","");
-				$pistasLibres = $clinics -> pistasLibres();
-				
-				
-				new Clinics_ADD_Pista($pistasLibres,$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],'../Controllers/Clinics_Controller.php');
-			break;
-			
-			
-			case 'Confirmar_ADD_Pista':
-				$clase = new Clinics_Model("","","",$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],"","",$_REQUEST['ID_Pista']);
-				$entrenadores = $clase -> buscarEntrenador();
-				
-				$entrenadoresDisponibles = Array();
-				
-				while($e = $entrenadores->fetch_array()[0]){
-						array_push($entrenadoresDisponibles,$e);					
+					$pista = $clase -> buscarPistasLibresClases();
+					$entrenador = $clase -> buscarEntrenadoresLibresClases();
+					
+					
+					if(!is_string($entrenador) || !is_numeric($pista)){
+						new MESSAGE('No hay pista y/o entrenadores disponibles','../Controllers/Clinics_Controller.php');
+					}else{
+						
+						$mensaje = $clase -> addClinic();
+						$idclase = $clase -> DevolverMaxIDClase();
+						
+						$clase -> insertarPistayEntrenador($pista,$entrenador,$idclase);
+						
+						new MESSAGE($mensaje,'../Controllers/Clinics_Controller.php');
+					
 					}
-				echo $_REQUEST['ID_Pista'];
-				new Clinics_ADD_Entrenador($entrenadoresDisponibles,$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],$_REQUEST['ID_Pista'],'../Controllers/Clinics_Controller.php');			 
-					
-			break;
-			
-			case 'Confirmar_ADD_Entrenador':
 				
-				$clase = new Clinics_Model("","",$_REQUEST['login_entrenador'],$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],"","","",$_REQUEST['ID_Pista']);
-				
-				$mensaje = $clase -> add();
-				
-				new MESSAGE($mensaje,'../Controllers/Clinics_Controller.php');
-			
 			break;
 			
 			case 'Confirmar_DELETE1':
 			
 				$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");
 				
-				$datos = $clase -> searchAdmin();
+				$datos = $clase -> searchAdminNormal();
+				$p = $pistas -> search();
 				
-				new Clinics_DELETE($datos,'../Controllers/Clainics_Controller.php');
+				new Clinics_DELETE($datos,$p,'../Controllers/Clinics_Controller.php');
 			
 			break;
 			
@@ -192,15 +170,18 @@ if(isset($_SESSION['tipo'])){
 			
 				$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");
 				
-				$datos = $clase -> searchAdmin();
+				$datos = $clase -> searchAdminNormal();
+				$p = $pistas -> search();
 				
-				new Clinics_SHOWCURRENT($datos,'../Controllers/Clinics_Controller.php');
+				new Clinics_SHOWCURRENT($datos,$p,'../Controllers/Clinics_Controller.php');
 			
 			break;
 			
 			case 'Confirmar_SEARCH1':
+				$pistas = new Pistas_Model("","","",""); 
+				$p = $pistas -> search(); 
 				
-				new Clinics_SEARCH('../Controllers/Clinics_Controller.php');
+				new Clinics_SEARCH($p,'../Controllers/Clinics_Controller.php');
 			
 			break;
 			
@@ -209,20 +190,65 @@ if(isset($_SESSION['tipo'])){
 				$clase = getDataForm();
 				
 				if($_SESSION['tipo'] == 'NORMAL'){
-					$datos = $clase -> searchNormal();	
-					new Clinics_SHOWALL($datos,'../Controllers/Clinics_Controller.php');
+					$datos = $clase -> searchAdminNormal();
+					$apuntados = $clase -> ContarUsuarios();
+					
+					new Clinics_SHOWALL($datos,$apuntados,'../Controllers/Clinics_Controller.php');
 				}
 				
 				else if($_SESSION['tipo'] == 'ADMIN'){
-					$datos = $clase -> searchAdmin();	
-					new Clinics_SHOWALL($datos,'../Controllers/Clinics_Controller.php');
+					$datos = $clase -> searchAdminNormal();
+					$apuntados = $clase -> ContarUsuarios();
+					
+					new Clinics_SHOWALL($datos,$apuntados,'../Controllers/Clinics_Controller.php');
 				}
 				
 				else if($_SESSION['tipo'] == 'ENTRENADOR'){
-					$datos = $clase -> searchEntrenador();	
-					new Clinics_SHOWALL($datos,'../Controllers/Clinics_Controller.php');
+					$datos = $clase -> searchEntrenador();
+					$apuntados = $clase -> ContarUsuarios();
+					
+					new Clinics_SHOWALL($datos,$apuntados,'../Controllers/Clinics_Controller.php');
 				}
 
+			break;
+			
+			case 'Confirmar_INSCRIPCION1':
+			
+				$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");
+				
+				$apuntarse = $clase -> PuedeApuntarse();
+				
+				$tope = $clase -> devolverTope() -> fetch_array();
+				$numApuntados = $clase -> ContarUsuarios1() -> fetch_array();
+
+				if($tope[0] > $numApuntados[0]){
+				
+				
+					if($apuntarse == false){
+						new MESSAGE('Ya estas apuntado','../Controllers/Clinics_Controller.php');
+					}
+				
+					else{
+						$p = $pistas -> search();
+						$datos = $clase -> rellenadatos();
+						new Clinics_INSCRIPCION($datos,$p,'../Controllers/Clinics_Controller.php');
+					}
+				}
+				
+				else{
+					new MESSAGE('Ya se ha alcanzado el maximo de apuntados','../Controllers/Clinics_Controller.php');	
+				}
+			
+			break;
+			
+			case 'Confirmar_INSCRIPCION2':
+			
+				$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");
+				
+				$mensaje = $clase -> apuntarUsuario();
+				
+				new MESSAGE($mensaje,'../Controllers/Clinics_Controller.php');
+			
 			break;
 
 				
@@ -232,18 +258,27 @@ if(isset($_SESSION['tipo'])){
 				if($_SESSION['tipo'] == 'NORMAL'){
 					$clinics = new Clinics_Model('','','','','','','','','');
 					$datos = $clinics -> ShowAllAdminNormal();
-					$respuesta = new Clinics_SHOWALL($datos,'../Controllers/Clinics_Controller.php'); 
+					
+					$apuntados = $clinics -> ContarUsuarios();
+					
+					$respuesta = new Clinics_SHOWALL($datos,$apuntados,'../Controllers/Clinics_Controller.php'); 
 				}
 				else if($_SESSION['tipo'] == 'ADMIN'){
 					$clinics = new Clinics_Model('','','','','','','','','');
 					$datos = $clinics -> ShowAllAdminNormal();
-					$respuesta = new Clinics_SHOWALL($datos,'../Controllers/Clinics_Controller.php'); 
+					
+					$apuntados = $clinics -> ContarUsuarios();
+					
+					$respuesta = new Clinics_SHOWALL($datos,$apuntados,'../Controllers/Clinics_Controller.php'); 
 				}
 				
 				else if($_SESSION['tipo'] == 'ENTRENADOR'){
 					$clinics = new Clinics_Model('','','','','','','','','');
 					$datos = $clinics -> ShowAllEntrenador();
-					$respuesta = new Clinics_SHOWALL($datos,'../Controllers/Clinics_Controller.php'); 
+					
+					$apuntados = $clinics -> ContarUsuarios();
+					
+					$respuesta = new Clinics_SHOWALL($datos,$apuntados,'../Controllers/Clinics_Controller.php'); 
 				}
 				
 			}
