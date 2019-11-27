@@ -72,6 +72,11 @@
                     <td><?php echo $this -> fila['ID_Pista']; ?></td>
                 </tr>
 				
+				 <tr>
+                    <th><?php echo $strings['Tope']; ?></th>
+                    <td><?php echo $this -> fila['tope']; ?></td>
+                </tr>
+				
 				<!--Confirmar borrado-->
 					<th><button class="borrar-si" type="submit" name="action" value="Confirmar_DELETE2"></button></th>
 					<!--Cancelar borrado-->

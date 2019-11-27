@@ -4,14 +4,16 @@
 
 	//Datos del usuario
 	var $datos;
+	var $pistas;
 	//Variable con el enlace al form para ADD usuaro
 	var $enlace;
 	var $fila;
 	
 	//Constructor de la clase	
-	function __construct($datos,$enlace){
+	function __construct($datos,$pistas,$enlace){
 	
 		$this -> datos = $datos;
+		$this -> pistas = $pistas -> fetch_array();
 		$this -> enlace = $enlace;
 		$this -> fila = $this -> datos -> fetch_array();
 		$this -> mostrar();
@@ -66,8 +68,13 @@
                 </tr>
 				<!--Campo DNI del usuario-->
                 <tr>
-                    <th><?php echo $strings['Pista']; ?></th>
-                    <td><?php echo $this -> fila['ID_Pista']; ?></td>
+                        <th><?php echo $strings['Pista']; ?></th>
+                        <td><?php echo $this -> pistas['Nombre_Pista']; ?></td>
+                   </tr>
+				
+				<tr>
+                    <th><?php echo $strings['Tope']; ?></th>
+                    <td><?php echo $this -> fila['tope']; ?></td>
                 </tr>
 
                                                                         

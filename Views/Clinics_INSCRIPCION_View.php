@@ -2,7 +2,7 @@
  
   <?php
   //Declaracion de la clase
- class Clases_Grupales_DELETE{
+ class Clinics_INSCRIPCION{
 
 	//Datos del usuario
 	var $datos;
@@ -30,14 +30,14 @@
         ?>
              <!--Tabla con los datos del usuario-->
 			<div class="show-half">
-            <form class="formShow" enctype="multipart/form-data" action="../Controllers/Clases_Grupales_Controller.php">
+            <form class="formShow" enctype="multipart/form-data" action="../Controllers/Clinics_Controller.php">
                 <!--ID del usuario tipo hidden para enviarlo al model-->
 				<input type="hidden" name="ID_Clase" value= "<?php echo $this -> fila['ID_Clase'] ?>">
                 <table class="showU" style="margin-left: 30%;">
 
-                <tr><th class="title" colspan="4"><?php echo $strings['Borrar clase']; ?>
+                <tr><th class="title" colspan="4"><?php echo $strings['¿Apuntarse a este clinic?']; ?>
 					<!--Boton para volver atras-->
-				   <button onclick="location.href='../Controllers/Clases_Grupales_Controller.php';" class="volver"></button></th>
+				   <button onclick="location.href='../Controllers/Clinics_Controller.php';" class="volver"></button></th>
                 </tr>
 
 
@@ -52,6 +52,11 @@
                     <td><?php echo $this -> fila['login_entrenador']; ?></td>
                 </tr>	
 				
+				<tr>
+                    <th><?php echo $strings['Invitado']; ?></th>
+                    <td><?php echo $this -> fila['invitado']; ?></td>
+                </tr>
+				
                 <tr>
                     <th><?php echo $strings['Fecha']; ?></th>
                     <td><?php echo $this -> fila['fecha_clase']; ?></td>
@@ -63,19 +68,18 @@
                 </tr>
 				<!--Campo DNI del usuario-->
                 <tr>
-                    <th><?php echo $strings['Pista']; ?></th>
-                    <td><?php echo $this -> fila['ID_Pista']; ?></td>
-                </tr>
+                        <th><?php echo $strings['Pista']; ?></th>
+                        <td><?php echo $this -> pista['Nombre_Pista']; ?></td>
+                   </tr>
 				
-				<tr>
+				 <tr>
                     <th><?php echo $strings['Tope']; ?></th>
                     <td><?php echo $this -> fila['tope']; ?></td>
                 </tr>
 				
 				<!--Confirmar borrado-->
-					<th><button class="borrar-si" type="submit" name="action" value="Confirmar_DELETE2"></button></th>
-					<!--Cancelar borrado-->
-					<td><button class="borrar-no" type="submit" name="action" value=""></button></td>
+					<th><button class="aceptar" type="submit" name="action" value="Confirmar_INSCRIPCION2"></button></th>
+
                 </tr> 
                                                                         
             </table>
