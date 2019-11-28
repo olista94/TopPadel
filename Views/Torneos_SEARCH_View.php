@@ -29,9 +29,6 @@
             
             </legend>
 		<div>
-			<!--Campo ID de la Torneo-->
-                <label ><?php echo $strings['ID Torneo']; ?></label>
-                <input type="text"  name="ID_Torneo" size="5"/>
 	
             <!--Campo nombre de la Torneo-->
                 <label ><?php echo $strings['Nombre']; ?></label>

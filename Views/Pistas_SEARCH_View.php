@@ -30,11 +30,6 @@
             <legend><?php echo $strings['Buscar pista'];?>
             
             </legend>
-
-			<!--Campo ID de la pista-->
-                <label ><?php echo $strings['ID pista']; ?></label>
-                <input type="text"  name="ID_Pista" size="5"/>
-	
             <!--Campo nombre de la pista-->
                 <label ><?php echo $strings['Nombre de la pista']; ?></label>
                 <input type="text"  name="Nombre_Pista" size="45"/>

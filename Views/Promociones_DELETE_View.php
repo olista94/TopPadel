@@ -49,19 +49,18 @@
 						<button onclick="location.href='../Controllers/	Promociones_Controller.php';" class="volver"></button></th>
                     </tr>
 					
-                    <tr>
-                        <th><?php echo $strings['ID Promocion']; ?></th>
-                        <td><?php echo $this -> fila['ID_Promo']; ?></td>								
-                    </tr>
-					
 					<tr>
                         <th><?php echo $strings['Usuario']; ?></th>
                         <td><?php echo $this -> fila['usuarios_login_usuario']; ?></td>								
                     </tr>
 					
-                    <tr>
+                     <tr>
                         <th><?php echo $strings['Pista']; ?></th>
-                        <td><?php echo $this -> pista['Nombre_Pista']; ?></td>
+                        <td><?php if($this -> fila['cerrada'] == 'NO')
+                                    echo "-";
+                                    else
+                                        echo $this -> pista['Nombre_Pista'];
+                         ?></td>
                     </tr>
 					
                     <tr>

@@ -37,11 +37,7 @@
                    <!--Boton para volver atrás -->
 				   <button onclick="location.href='../Controllers/Torneos_Controller.php';" class="volver"></button></th>
                 </tr>
-				 <!--Campo ID_Torneo del torneo-->
-                <tr>
-                    <th><?php echo $strings['ID Torneo']; ?></th>
-                    <td><?php echo $this -> fila['ID_Torneo']; ?></td>
-                </tr>
+
 				 <!--Campo nombre del torneo-->
                 <tr>
                     <th><?php echo $strings['Nombre']; ?></th>

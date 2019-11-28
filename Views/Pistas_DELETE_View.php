@@ -40,11 +40,6 @@
                    <!--Boton para volver atrás -->
 				   <button onclick="location.href='../Controllers/Pistas_Controller.php';" class="volver"></button></th>
                 </tr>
-				<!--Campo ID de la pista-->
-                <tr>
-                    <th><?php echo $strings['ID pista']; ?></th>
-                    <td><?php echo $this -> fila['ID_Pista']; ?></td>								
-                </tr>
 				<!--Campo nombre de la pista-->
                 <tr>
                     <th><?php echo $strings['Nombre de la pista']; ?></th>

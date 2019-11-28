@@ -6,11 +6,13 @@
     class Clases_Particulares_SEARCH {
 		
 //Variable con el enlace al form para SEARCH usuaro
+      var $pista;
       var $enlace;
 
 //Constructor de la clase	
-      function __construct($enlace){
+      function __construct($pista,$enlace){
 
+        $this -> pista = $pista;
         $this -> enlace = $enlace;
         $this->pinta();
 
@@ -68,10 +70,22 @@
 						<option value="21:30">21:30</option>
 				</select>	<br>
 			<!--Campo email del usuario-->
-            <div class="form-group">
-                <label for="ID_Pista"><?php echo $strings['Pista']; ?></label>
-                <input type="text" id="ID_Pista" name="ID_Pista" >
-            </div><br>
+           <label>
+					<?php echo $strings['Pista']; ?></label>
+					<select name="ID_Pista">
+					<option value=""></option>
+						<?php
+						
+							while($pista=$this->pista->fetch_array()){
+						?>
+						
+								<option value="<?php echo $pista[0];?>"><?php echo $pista[1];?>
+
+								</option>
+						<?php
+							}
+						?>
+					</select><br>
 			
 			
 		   <!--Boton de confirmar busqueda-->
@@ -90,11 +104,13 @@
 	 class Clases_Particulares_SEARCH {
 		
 //Variable con el enlace al form para SEARCH usuaro
+      var $pista;
       var $enlace;
 
 //Constructor de la clase	
-      function __construct($enlace){
+      function __construct($pista,$enlace){
 
+        $this -> pista = $pista;
         $this -> enlace = $enlace;
         $this->pinta();
 
@@ -143,10 +159,22 @@
 				</select>	
 
 			<br>
-            <div class="form-group">
-                <label for="ID_Pista"><?php echo $strings['Pista']; ?></label>
-                <input type="text" id="ID_Pista" name="ID_Pista" >
-            </div>
+            <label>
+					<?php echo $strings['Pista']; ?></label>
+					<select name="ID_Pista">
+					<option value=""></option>
+						<?php
+						
+							while($pista=$this->pista->fetch_array()){
+						?>
+						
+								<option value="<?php echo $pista[0];?>"><?php echo $pista[1];?>
+
+								</option>
+						<?php
+							}
+						?>
+					</select>
 			
 			<br>
 		   <!--Boton de confirmar busqueda-->
@@ -165,11 +193,13 @@
 	 class Clases_Particulares_SEARCH {
 		
 //Variable con el enlace al form para SEARCH usuaro
+      var $pista;
       var $enlace;
 
 //Constructor de la clase	
-      function __construct($enlace){
+      function __construct($pista,$enlace){
 
+        $this -> pista = $pista;
         $this -> enlace = $enlace;
         $this->pinta();
 
@@ -218,10 +248,22 @@
 				</select>	
 
 			<br>
-            <div class="form-group">
-                <label for="ID_Pista"><?php echo $strings['Pista']; ?></label>
-                <input type="text" id="ID_Pista" name="ID_Pista" >
-            </div>
+           <label>
+					<?php echo $strings['Pista']; ?></label>
+					<select name="ID_Pista">
+					<option value=""></option>
+						<?php
+						
+							while($pista=$this->pista->fetch_array()){
+						?>
+						
+								<option value="<?php echo $pista[0];?>"><?php echo $pista[1];?>
+
+								</option>
+						<?php
+							}
+						?>
+					</select>
 			
 			<br>
 		   <!--Boton de confirmar busqueda-->

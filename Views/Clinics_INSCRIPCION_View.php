@@ -6,14 +6,16 @@
 
 	//Datos del usuario
 	var $datos;
+	var $pista;
 	//Variable con el enlace al form para ADD usuaro
 	var $enlace;
 	var $fila;
 	
 	//Constructor de la clase	
-	function __construct($datos,$enlace){
+	function __construct($datos,$pista,$enlace){
 	
 		$this -> datos = $datos;
+		$this -> pista = $pista -> fetch_array();
 		$this -> enlace = $enlace;
 		$this -> fila = $this -> datos -> fetch_array();
 		$this -> mostrar();

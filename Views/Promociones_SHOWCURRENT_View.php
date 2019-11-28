@@ -54,11 +54,6 @@
 						<button onclick="location.href='../Controllers/	Promociones_Controller.php';" class="volver"></button></th>
                     </tr>
 					
-                    <tr>
-                        <th><?php echo $strings['ID Promocion']; ?></th>
-                        <td><?php echo $this -> fila['ID_Promo']; ?></td>								
-                    </tr>
-					
 					<tr>
                         <th><?php echo $strings['Usuario']; ?></th>
                         <td><?php echo $this -> fila['usuarios_login_usuario']; ?></td>								
@@ -158,11 +153,6 @@
                     <tr><th class="title" colspan="4"><?php echo $strings['Detalles de la promocion']; ?>
                         <!--Boton para volver atrás -->
 						<button onclick="location.href='../Controllers/	Promociones_Controller.php';" class="volver"></button></th>
-                    </tr>
-					
-                    <tr>
-                        <th><?php echo $strings['ID Promocion']; ?></th>
-                        <td><?php echo $this -> fila['ID_Promo']; ?></td>								
                     </tr>
 					
 					<tr>

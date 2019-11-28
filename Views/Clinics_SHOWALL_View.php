@@ -51,7 +51,6 @@ if($_SESSION['tipo'] == "ADMIN"){
 			<!--Botones para añadir o buscar-->
 			<button class="anadir-little"  name="action" value="Confirmar_ADD1" type="submit"></button>
 			<button class="buscar-little" name="action" value="Confirmar_SEARCH1" type="submit"></button>
-			
 			</form></th></tr>
 			<!--Campos a mostrar-->
 			<tr>

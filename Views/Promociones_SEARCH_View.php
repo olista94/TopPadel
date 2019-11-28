@@ -34,10 +34,6 @@
             <button onclick="location.href='../Controllers/Promociones_Controller.php';" class="volver"></button>
             </legend>
 			
-			 <label for="usuarios_login">
-				<?php echo $strings['ID Promocion']; ?></label>
-                <input type="text" id="ID_Promo" name="ID_Promo" maxlength="7" size="7"/>
-			
 			<label>
 					<?php echo $strings['Pista']; ?></label>
 					<select name="pista_ID_Pista">

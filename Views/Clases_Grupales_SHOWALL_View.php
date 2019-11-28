@@ -152,6 +152,7 @@ if ($_SESSION['tipo'] == "NORMAL"){
 		include '../Locales/Strings_'. $_SESSION['idioma'] .'.php';  
 	 
 ?>
+
 <!--Tabla con los datos de los usuarios-->
 	<div class="showall">   
                                 
