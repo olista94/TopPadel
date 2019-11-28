@@ -22,6 +22,7 @@ if(isset($_SESSION['tipo'])){
 			//Incluimos las vistas y modelo necesarios
 			include_once "../Views/Clases_Grupales_SHOWALL_View.php";
 			include_once "../Models/Clases_Grupales_Model.php";
+			include_once "../Models/Pistas_Model.php";
 			include_once "../Views/Clases_Grupales_DELETE_View.php";
 			include_once "../Views/Clases_Grupales_SHOWCURRENT_View.php";
 			include_once "../Views/Clases_Grupales_INSCRIPCION_View.php";
@@ -159,8 +160,14 @@ if(isset($_SESSION['tipo'])){
 				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","");
 				
 				$datos = $clase -> rellenadatos();
+				$array = $datos -> fetch_array();
 				
-				new Clases_Grupales_DELETE($datos,'../Controllers/Clases_Grupales_Controller.php');
+				$pistas = new Pistas_Model($array['ID_Pista'],"","","");
+				$p = $pistas -> searchById();
+				
+				$datos = $clase -> rellenadatos();
+				
+				new Clases_Grupales_DELETE($datos,$p,'../Controllers/Clases_Grupales_Controller.php');
 			
 			break;
 			
@@ -179,8 +186,14 @@ if(isset($_SESSION['tipo'])){
 				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","");
 				
 				$datos = $clase -> rellenadatos();
+				$array = $datos -> fetch_array();
 				
-				new Clases_Grupales_SHOWCURRENT($datos,'../Controllers/Clases_Grupales_Controller.php');
+				$pistas = new Pistas_Model($array['ID_Pista'],"","","");
+				$p = $pistas -> searchById();
+				
+				$datos = $clase -> rellenadatos();
+				
+				new Clases_Grupales_SHOWCURRENT($datos,$p,'../Controllers/Clases_Grupales_Controller.php');
 			
 			break;
 			
@@ -202,7 +215,13 @@ if(isset($_SESSION['tipo'])){
 				
 					else{
 						$datos = $clase -> rellenadatos();
-						new Clases_Grupales_INSCRIPCION($datos,'../Controllers/Clases_Grupales_Controller.php');
+						$array = $datos -> fetch_array();
+				
+						$pistas = new Pistas_Model($array['ID_Pista'],"","","");
+						$p = $pistas -> searchById();
+				
+						$datos = $clase -> rellenadatos();
+						new Clases_Grupales_INSCRIPCION($datos,$p,'../Controllers/Clases_Grupales_Controller.php');
 					}
 				}
 				
@@ -223,8 +242,10 @@ if(isset($_SESSION['tipo'])){
 			break;
 			
 			case 'Confirmar_SEARCH1':
+				$pistas = new Pistas_Model("","","","");
+				$p = $pistas -> search();
 				
-				new Clases_Grupales_SEARCH('../Controllers/Clases_Grupales_Controller.php');
+				new Clases_Grupales_SEARCH($p,'../Controllers/Clases_Grupales_Controller.php');
 			
 			break;
 			

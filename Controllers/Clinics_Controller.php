@@ -149,8 +149,13 @@ if(isset($_SESSION['tipo'])){
 			
 				$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");
 				
-				$datos = $clase -> searchAdminNormal();
-				$p = $pistas -> search();
+				$datos = $clase -> rellenadatos();
+				
+				$array = $datos -> fetch_array();
+				$pistas = new Pistas_Model($array['ID_Pista'],"","","");
+				$p = $pistas -> searchById();
+				
+				$datos = $clase -> rellenadatos();
 				
 				new Clinics_DELETE($datos,$p,'../Controllers/Clinics_Controller.php');
 			
@@ -170,8 +175,13 @@ if(isset($_SESSION['tipo'])){
 			
 				$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");
 				
-				$datos = $clase -> searchAdminNormal();
-				$p = $pistas -> search();
+				$datos = $clase -> rellenadatos();
+				
+				$array = $datos -> fetch_array();
+				$pistas = new Pistas_Model($array['ID_Pista'],"","","");
+				$p = $pistas -> searchById();
+				
+				$datos = $clase -> rellenadatos();
 				
 				new Clinics_SHOWCURRENT($datos,$p,'../Controllers/Clinics_Controller.php');
 			
@@ -229,7 +239,11 @@ if(isset($_SESSION['tipo'])){
 					}
 				
 					else{
-						$p = $pistas -> search();
+						$datos = $clase -> rellenadatos();	
+						$array = $datos -> fetch_array();
+						$pistas = new Pistas_Model($array['ID_Pista'],"","","");
+						$p = $pistas -> searchById();
+				
 						$datos = $clase -> rellenadatos();
 						new Clinics_INSCRIPCION($datos,$p,'../Controllers/Clinics_Controller.php');
 					}

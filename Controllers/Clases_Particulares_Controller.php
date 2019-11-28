@@ -21,6 +21,7 @@ if(isset($_SESSION['tipo'])){
 
 			//Incluimos las vistas y modelo necesarios
 			include_once "../Models/Clases_Particulares_Model.php";
+			include_once "../Models/Pistas_Model.php";
 			include_once "../Views/Clases_Particulares_SHOWALL_View.php";
 			include_once "../Views/Clases_Particulares_ADD_Fecha_View.php";
 			include_once "../Views/Clases_Particulares_ADD_Hora_View.php";
@@ -140,7 +141,6 @@ if(isset($_SESSION['tipo'])){
 				while($e = $entrenadores->fetch_array()[0]){
 						array_push($entrenadoresDisponibles,$e);					
 					}
-				echo $_REQUEST['ID_Pista'];
 				new Clases_Particulares_ADD_Entrenador($entrenadoresDisponibles,$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],$_REQUEST['ID_Pista'],'../Controllers/Clases_Particulares_Controller.php');			 
 					
 			break;
@@ -160,8 +160,14 @@ if(isset($_SESSION['tipo'])){
 				$clase = new Clases_Particulares_Model($_REQUEST['ID_Clase'],"","","","","");
 				
 				$datos = $clase -> searchAdmin();
+				$array = $datos -> fetch_array();
 				
-				new Clases_Particulares_DELETE($datos,'../Controllers/Clases_Particulares_Controller.php');
+				$pistas = new Pistas_Model($array['ID_Pista'],"","","");
+				$p = $pistas -> searchById();
+				
+				$datos = $clase -> searchAdmin();
+				
+				new Clases_Particulares_DELETE($datos,$p,'../Controllers/Clases_Particulares_Controller.php');
 			
 			break;
 			
@@ -180,14 +186,21 @@ if(isset($_SESSION['tipo'])){
 				$clase = new Clases_Particulares_Model($_REQUEST['ID_Clase'],"","","","","");
 				
 				$datos = $clase -> searchAdmin();
+				$array = $datos -> fetch_array();
 				
-				new Clases_Particulares_SHOWCURRENT($datos,'../Controllers/Clases_Particulares_Controller.php');
+				$pistas = new Pistas_Model($array['ID_Pista'],"","","");
+				$p = $pistas -> searchById();
+				
+				$datos = $clase -> searchAdmin();
+				
+				new Clases_Particulares_SHOWCURRENT($datos,$p,'../Controllers/Clases_Particulares_Controller.php');
 			
 			break;
 			
 			case 'Confirmar_SEARCH1':
-				
-				new Clases_Particulares_SEARCH('../Controllers/Clases_Particulares_Controller.php');
+				$pistas = new Pistas_Model("","","",""); //Construye el objeto categorias llamando al modelo
+				$p = $pistas -> search();
+				new Clases_Particulares_SEARCH($p,'../Controllers/Clases_Particulares_Controller.php');
 			
 			break;
 			
