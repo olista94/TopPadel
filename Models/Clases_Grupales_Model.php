@@ -114,13 +114,13 @@ function searchEntrenador(){
 					(`login_entrenador` LIKE '".$_SESSION['login']."') &&
 					(`fecha_clase` LIKE '%$this->fecha_clase%') &&
 					(`hora_clase` LIKE '%$this->hora_clase%') &&
-					(`tope` LIKE '$this->tope') &&
+					(`tope` LIKE '%$this->tope%') &&
 					(`ID_Pista` LIKE '%$this->ID_Pista%') &&
 					(`tipo` LIKE 'ESCUELAS')
 					
     				)";
 				
-
+echo $sql;
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda';//Devuelve mensaje de error	
 		

@@ -92,7 +92,7 @@ function searchAdminNormal(){
 					(`tipo` LIKE 'CLINICS')					
     				)";
 				
-
+echo $sql;
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda';//Devuelve mensaje de error	
 		

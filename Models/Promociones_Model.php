@@ -67,7 +67,8 @@ function searchAdmin(){
 					(`usuarios_login_usuario` LIKE '%$this->usuarios_login_usuario%') &&
 					(`fecha` LIKE '%$this->fecha%') &&
 					(`hora_inicio` LIKE '%$this->hora_inicio%') &&
-					(`ID_Promo` LIKE '%$this->ID_Promo%')
+					(`ID_Promo` LIKE '%$this->ID_Promo%') &&
+					(`pista_ID_Pista` LIKE '%$this->pista_ID_Pista%')
 			)";  
 	if (!($resultado = $this->mysqli->query($sql))){
 	return 'Error en la búsqueda';//Devuelve mensaje de error

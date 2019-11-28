@@ -134,7 +134,6 @@ function searchAdmin(){
 					(`ID_Pista` LIKE '%$this->ID_Pista%')
 					
     				)";
-				
 
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda';//Devuelve mensaje de error	
