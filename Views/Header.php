@@ -115,7 +115,7 @@ if(isset($_SESSION['tipo'])){//Si se loguea como ADMIN
 				<a href="../Controllers/Clinics_Controller.php?action=default"><?php echo $strings['Clinics']; ?></a>
 			</nav>		
 		</li>
-		
+		<li><a href="../Controllers/Usuarios_Controller.php?action=Confirmar_Ranking"><?php echo $strings['Rankings']; ?></a></li>
 		
 		<a href="javascript:void(0);" class="icon" onclick="responsiveMenu()">
 			<i class="fa fa-bars"></i>
@@ -155,6 +155,9 @@ else if($_SESSION['tipo']=='NORMAL'){//SI ES DEPORTISTA
 						</li>
 						<li style = "padding-bottom:5">
 							<a href="../Controllers/Usuarios_Controller.php?action=Hacerse_Socio1"><?php echo $strings['Soci@s']; ?></a>
+						</li>
+						<li style = "padding-bottom:5">
+							<a href="../Controllers/Usuarios_Controller.php?action=Ver_Estadisticas"><?php echo $strings['Estadisticas']; ?></a>
 						</li>
 						<li class="cerrar">
 							<a href='../Functions/Desconectar.php'><?php echo $strings['Cerrar sesion']; ?></a>
@@ -210,6 +213,7 @@ else if($_SESSION['tipo']=='NORMAL'){//SI ES DEPORTISTA
 				<a href="../Controllers/Clinics_Controller.php?action=default"><?php echo $strings['Clinics']; ?></a>
 			</nav>
 		</li>
+		<li><a href="../Controllers/Usuarios_Controller.php?action=Confirmar_Ranking"><?php echo $strings['Rankings']; ?></a></li>
 				
 		<a href="javascript:void(0);" class="icon" onclick="responsiveMenu()">
 			<i class="fa fa-bars"></i>

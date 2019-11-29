@@ -42,7 +42,8 @@ if(isset($_SESSION['tipo'])){
 ?>
 
 <!--Tabla con los datos de los torneos-->
-	<div class="showall">   
+	<div class="showall"> 
+
          <button title = "<?php echo $strings ['Criterios desempate:'];
          					echo "\n";
          					echo "+"; echo $strings ['Puntos'];
@@ -94,7 +95,7 @@ if(isset($_SESSION['tipo'])){
 		
 	
 			<tr>
-			
+				<th></th> 
 				<th><?php echo $strings['Jugador 1']; ?></th>
 				<th><?php echo $strings['Jugador 2']; ?></th>
 				<th title = "<?php echo $strings['Partidos jugados']; ?>"><?php echo $strings['PJ']; ?></th>
@@ -110,6 +111,7 @@ if(isset($_SESSION['tipo'])){
 		<?php 
 		//Mientras haya filas en la bd
 		//if(!is_array($this -> parejas))
+			$i = 1;
 				while($clasificacion=$this->clasificacion->fetch_array()){
 					
 	
@@ -119,7 +121,7 @@ if(isset($_SESSION['tipo'])){
 					<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
 					
 					<!--Datos-->
-
+					<td><?php echo "$i"; $i = $i+1;?></td>
 					<td><?php echo $clasificacion['usuarios_login']; ?></td>
 					<td><?php echo $clasificacion['usuarios_login1']; ?></td>
 					<td><?php echo $clasificacion['PJ']; ?></td>
@@ -318,7 +320,8 @@ if(isset($_SESSION['tipo'])){
 			</th></tr>
 	<!--Campos Categoria,nombre,Edicion,Fecha,Nivel -->
 			<tr>
-			
+				
+				<th></th>
 				<th><?php echo $strings['Jugador 1']; ?></th>
 				<th><?php echo $strings['Jugador 2']; ?></th>
 				<th title = "<?php echo $strings['Partidos jugados']; ?>"><?php echo $strings['PJ']; ?></th>
@@ -334,6 +337,7 @@ if(isset($_SESSION['tipo'])){
 		<?php 
 		//Mientras haya filas en la bd
 		//if(!is_array($this -> parejas))
+			$i = 1;
 				while($clasificacion=$this->clasificacion->fetch_array()){
 					
 	
@@ -343,7 +347,7 @@ if(isset($_SESSION['tipo'])){
 					<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
 					
 					<!--Datos-->
-
+					<td><?php echo "$i"; $i = $i+1;?></td>
 					<td><?php echo $clasificacion['usuarios_login']; ?></td>
 					<td><?php echo $clasificacion['usuarios_login1']; ?></td>
 					<td><?php echo $clasificacion['PJ']; ?></td>

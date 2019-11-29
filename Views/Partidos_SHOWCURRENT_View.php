@@ -43,7 +43,9 @@
 				   
 				   <form class="formShow" enctype="multipart/form-data" action="../Controllers/Torneos_Controller.php">
 				   <input type="hidden" name="ID_Torneo" value= "<?php echo $this -> idtorneo ?>">	
-				   <button name = "action" value="Confirmar_SHOWTORNEO"  class="volver"></button></form></th>
+				   <button name = "action" value="Confirmar_SHOWTORNEO"  class="volver"></button>
+				   
+				   </form></th>
 				
                 </tr>
 				 <!--Campo ID_Torneo del torneo-->
