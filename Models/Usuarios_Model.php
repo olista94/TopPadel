@@ -379,6 +379,57 @@ function addSocio(){
 			return  'Borrado correctamente'; //operacion de insertado correcta
 		}		
 	}
+	
+	
+		function verRanking() {	
+			$sql = "SELECT login,ranking FROM usuarios Order by ranking desc LIMIT 20";
+
+			if (!($resultado = $this->mysqli->query($sql))){
+				return 'No existe'; //Devuelve mensaje de error	
+			}
+			else{ 
+				$result = $resultado;
+				return $result;//Se devuelve el resultado de la consulta
+			}
+		}
+		
+		function getPuntosRanking() {	
+			$sql = "SELECT ranking FROM usuarios where login = '".$_SESSION['login']."'
+			";
+			
+
+			if (!($resultado = $this->mysqli->query($sql))){
+				return 'No existe'; //Devuelve mensaje de error	
+			}
+			else{ 
+				$result = $resultado;
+				return $result->fetch_array()[0];//Se devuelve el resultado de la consulta
+			}
+		}
+		
+		function verRankingMasculino() {	
+			$sql = "SELECT login,ranking FROM usuarios WHERE `sexo` = 'Masculina' Order by ranking desc LIMIT 20";
+
+			if (!($resultado = $this->mysqli->query($sql))){
+				return 'No existe'; //Devuelve mensaje de error	
+			}
+			else{ 
+				$result = $resultado;
+				return $result;//Se devuelve el resultado de la consulta
+			}
+		}
+		
+		function verRankingFemenino() {	
+			$sql = "SELECT login,ranking FROM usuarios WHERE `sexo` = 'Femenina' Order by ranking desc LIMIT 20";
+
+			if (!($resultado = $this->mysqli->query($sql))){
+				return 'No existe'; //Devuelve mensaje de error	
+			}
+			else{ 
+				$result = $resultado;
+				return $result;//Se devuelve el resultado de la consulta
+			}
+		}
 
 }//fin de clase
 

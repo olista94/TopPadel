@@ -120,7 +120,7 @@ function searchEntrenador(){
 					
     				)";
 				
-echo $sql;
+
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda';//Devuelve mensaje de error	
 		
@@ -230,7 +230,7 @@ function ShowAllAdminNormal(){
        			FROM clases_grupales
 				WHERE `tipo` = 'ESCUELAS'
     			";
-				echo $sql;
+				
 
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda';//Devuelve mensaje de error	
