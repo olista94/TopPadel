@@ -21,11 +21,14 @@ if(isset($_SESSION['tipo'])){
 
 			//Incluimos las vistas y modelo necesarios
 			include_once "../Models/Usuarios_Model.php";
+			include_once "../Models/Partidos_Model.php";
 			include_once "../Views/Usuarios_SHOWALL_View.php";
+			include_once "../Views/Usuarios_RANKING_View.php";
 			include_once "../Views/Usuarios_SHOWALL_Normal_View.php";
 			include_once "../Views/Usuarios_ADD_View.php";
 			include_once "../Views/Usuarios_SEARCH_View.php";
 			include_once "../Views/Usuarios_EDIT_View.php";
+			include_once "../Views/Usuarios_ESTADISTICAS_View.php";
 			include_once "../Views/Usuarios_SHOWCURRENT_View.php";
 			include_once "../Views/Usuarios_SHOWCURRENT_Normal_View.php";
 			include_once "../Views/Usuarios_DELETE_View.php";
@@ -234,7 +237,35 @@ if(isset($_SESSION['tipo'])){
 						new Usuarios_SHOWCURRENT($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
 					
 				break;
-
+				
+				
+				case 'Confirmar_Ranking':
+					//Si no le pasamos datos desde formulario
+					
+						$usuario = new Usuarios_Model('','','','','','','','','','','','','');//Creamos el objeto usuario
+						$datos = $usuario->verRanking();//Rellenamos con los datos del usuario
+						new Usuarios_RANKING($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+					
+				break;
+				
+				case 'Ranking_Masc':
+					//Si no le pasamos datos desde formulario
+					
+						$usuario = new Usuarios_Model('','','','','','','','','','','','','');//Creamos el objeto usuario
+						$datos = $usuario->verRankingMasculino();//Rellenamos con los datos del usuario
+						new Usuarios_RANKING($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+					
+				break;
+				
+				case 'Ranking_Fem':
+					//Si no le pasamos datos desde formulario
+					
+						$usuario = new Usuarios_Model('','','','','','','','','','','','','');//Creamos el objeto usuario
+						$datos = $usuario->verRankingFemenino();//Rellenamos con los datos del usuario
+						new Usuarios_RANKING($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+					
+				break;
+							
 				default: /*PARA EL SHOWALL */
 					$usuario = new Usuarios_Model('','','','','','','','','','','','','','','','');//Creamos el objeto usuario
 					$datos = $usuario -> search();//Buscamos todos los usuarios
@@ -244,11 +275,40 @@ if(isset($_SESSION['tipo'])){
 	
 	
 	else{
+
 		$user = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
 		$socio = $user -> DevolverSocio();
 		
+		if($_REQUEST['action'] == 'Confirmar_Ranking'){
+					//Si no le pasamos datos desde formulario
+					
+					
+
+						$usuario = new Usuarios_Model('','','','','','','','','','','','','');//Creamos el objeto usuario
+						$datos = $usuario->verRanking();//Rellenamos con los datos del usuario
+						new Usuarios_RANKING($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+					
+				}
+				
+				
+				else if($_REQUEST['action'] == 'Ranking_Masc'){
+					//Si no le pasamos datos desde formulario
+					
+						$usuario = new Usuarios_Model('','','','','','','','','','','','','');//Creamos el objeto usuario
+						$datos = $usuario->verRankingMasculino();//Rellenamos con los datos del usuario
+						new Usuarios_RANKING($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+					
+				}
+				
+				else if($_REQUEST['action'] == 'Ranking_Fem'){
+					//Si no le pasamos datos desde formulario
+					
+						$usuario = new Usuarios_Model('','','','','','','','','','','','','');//Creamos el objeto usuario
+						$datos = $usuario->verRankingFemenino();//Rellenamos con los datos del usuario
+						new Usuarios_RANKING($datos,'../Controllers/Usuarios_Controller.php'); //Creamos la vista
+				}
 		
-		if($_REQUEST['action'] == 'Confirmar_SHOWCURRENT1'){
+		else if($_REQUEST['action'] == 'Confirmar_SHOWCURRENT1'){
 			
 						$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');//Creamos el objeto usuario
 						$datos = $usuario->rellenadatos();//Rellenamos con los datos del usuario
@@ -272,6 +332,18 @@ if(isset($_SESSION['tipo'])){
 						$usuario = getDataForm();//Obtenemos los datos del formulario y los guardamos
 						$datos = $usuario-> search();//Buscamos los usuarios
 						new Usuarios_SHOWALL_Normal($datos,'../Controllers/Usuarios_Controller.php'); 
+		}
+		
+		else if($_REQUEST['action'] == 'Ver_Estadisticas'){
+					
+						$partido = new Partidos_Model('','','','','','','','','','','','','');
+						$datos = $partido->estadisticas($_SESSION['login']);
+						
+						$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
+						$ranking = $usuario -> getPuntosRanking();
+						
+						new Usuarios_ESTADISTICAS($datos,$ranking,'../Controllers/Usuarios_Controller.php');
+
 		}
 		
 		else if($_REQUEST['action'] == 'Hacerse_Socio1'){
@@ -328,6 +400,8 @@ if(isset($_SESSION['tipo'])){
 		}
 		
 		else{
+			
+			
 			new MESSAGE('No puedes ver esto si no eres administrador', '../Controllers/Index_Controller.php'); //muestra el mensaje
 		}
 	}

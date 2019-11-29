@@ -237,6 +237,11 @@ if(!IsAuthenticated()){
 			}
 		break;
 		
+		case 'Generar_Ranking':
+			
+			
+		break;
+		
 		case 'Confirmar_SHOWTORNEO':
 				
 				$torneo1 = new Torneos_Model($_REQUEST['ID_Torneo'],'','','','','');

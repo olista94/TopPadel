@@ -224,6 +224,13 @@ if (!IsAuthenticated()){ //si no está autenticado
 					$pL = $_REQUEST['ID_ParejaLocal'];
 					$pV = $_REQUEST['ID_ParejaVisitante'];
 					
+					$parejaLocal = new Parejas_Model($_REQUEST['ID_ParejaLocal'],'','');
+					$local1 = $parejaLocal -> DevolverMiembro1Pareja($pL); 
+					$local2 = $parejaLocal -> DevolverMiembro2Pareja($pL); 
+					
+					$parejaVisitante = new Parejas_Model($_REQUEST['ID_ParejaVisitante'],'','');
+					$visitante1 = $parejaVisitante -> DevolverMiembro1Pareja($pV); 
+					$visitante2 = $parejaVisitante -> DevolverMiembro2Pareja($pV);
 					
 					
 					$mensaje = $partido->addResultado();
@@ -239,6 +246,13 @@ if (!IsAuthenticated()){ //si no está autenticado
 					$part1 -> getClasificacion($_REQUEST["ID_Torneo"],$pL);
 					$part1 -> getClasificacion($_REQUEST["ID_Torneo"],$pV);
 					
+					$part1 -> actualizarRanking($local1);
+					$part1 -> actualizarRanking($local2);
+					$part1 -> actualizarRanking($visitante1);
+					$part1 -> actualizarRanking($visitante2);
+					
+					
+					
 				new MESSAGE($mensaje,'../Controllers/Torneos_Controller.php');
 			
 			break;
@@ -252,7 +266,8 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$partido = new Partidos_Model($_REQUEST['ID_Partido'],'','','','','','','','','','','','');
 				
 				$datos = $partido -> ShowCurrentPartidos();
-	
+				
+			
 				//$array = $datos -> fech_array();
 
 				new Partidos_SHOWCURRENT($datos,$_REQUEST['ID_Torneo'],'../Controllers/Partidos_Controller.php');
