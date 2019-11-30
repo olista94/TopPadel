@@ -289,8 +289,10 @@ if ($_SESSION['tipo'] == "NORMAL"){
 			<tr>
 				<form action="../Controllers/Clases_Grupales_Controller.php" method="post" name="action" >
 					<input type="hidden" name="ID_Clase" value="<?php echo $fila['ID_Clase']; ?>">
+					
 					<!--Datos-->
-					<td><?php echo $fila['descripcion']; ?></td>
+					<td><button title =	"<?php echo $strings['Pulsa para controlar asistencia']; ?>" 
+						class="tarea" name="action" value="Confirmar_SHOWCLASE"><?php echo $fila['descripcion']; ?></button></td>
 					<td><?php echo $fila['fecha_clase']; ?></td>
 					<td><?php echo $fila['tope']; ?></td>
 					<td>
