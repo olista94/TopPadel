@@ -315,6 +315,7 @@ array(
 	'Partidos Ganados' => 'Partidos Gañados',
 	'Partidos Perdidos' => 'Partidos Perdidos',
 	'Torneos Disputados' => 'Torneos Disputados',
+	'Dia' => 'Día',
 	'' => '',
 	'' => '',
 	'' => ''
