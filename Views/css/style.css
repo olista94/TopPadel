@@ -304,10 +304,10 @@ input {
 	width:60%;	
 	margin-left:auto;
 	margin-right:auto;	
-  margin-top:30px;
-  margin-bottom: 35px;
-  padding: 0px 20px 20px 20px;  
-  box-shadow: 2px 3px 18px -5px rgba(0,0,0,0.75);
+	margin-top:30px;
+	margin-bottom: 35px;
+	padding: 0px 20px 20px 20px;  
+	box-shadow: 2px 3px 18px -5px rgba(0,0,0,0.75);
 }
 
 .title{
@@ -1149,4 +1149,55 @@ nav a{
   padding: 15px 30px;
   background-image: url(../img/chica.png);
   background-color: #fff;
+}
+
+.tablaClases {	
+	font-size:14px;
+	color:#2b2b2b;
+	width:60%;	
+	margin-left:auto;
+	margin-right:auto;	
+	margin-top:30px;
+	margin-bottom: 35px;
+	padding: 0px 20px 20px 20px;  
+	box-shadow: 2px 3px 18px -5px rgba(0,0,0,0.75);
+	border-collapse: collapse;
+}
+
+.tablaClases table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.tablaClases th {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.tablaClases td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  width:10px;
+}
+
+.tablaClases th{
+  padding: 10px;
+}
+
+.tablaClases td {
+  padding: 10px;
+}
+
+.title{
+	border: none;
+}
+
+.guardar {
+  vertical-align: text-bottom;
+  float: right;
+  margin-top: 5px;
+  margin-right: 5px;
+  padding: 15px 30px;
+  background-image: url(../img/guardar.png);
+  background-color: #1223B0;
 }
