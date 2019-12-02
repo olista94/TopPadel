@@ -63,8 +63,10 @@ if(isset($_SESSION['tipo'])){
 
 			
 			<form class="tableActions" action="../Controllers/Torneos_Controller.php" method="post">
+			
 			<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
 			<input type="hidden" name="grupo" value=<?php echo $this->grupo; ?>>
+			<button type="submit" name="action" value="Ver_Playoffs" value="Submit" class="aceptar">PO</button>
 					<div>
 					<label class="lblSearch" >
 					<?php echo $strings['Grupo']; ?>:</label>
@@ -223,7 +225,7 @@ if(isset($_SESSION['tipo'])){
 			}
 		?>                    
 		</table>        
-	</div>  	
+	</div> 
        
 <?php   
     }
@@ -272,7 +274,10 @@ if(isset($_SESSION['tipo'])){
 ?>
 
 <!--Tabla con los datos de los torneos-->
+
+				
 	<div class="showall">   
+	
                   <button title = "<?php echo $strings ['Criterios desempate:'];
          					echo "\n";
          					echo "+"; echo $strings ['Puntos'];
