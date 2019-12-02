@@ -38,21 +38,12 @@ function __construct($ID_Clase,$login_usuario,$dia1,$dia2,$dia3,$dia4,$dia5,$dia
 	$this->mysqli = ConnectDB();
 }
 
-function controlarAsistencia(){
+function controlarAsistencia($idclase,$dia,$usuario,$asiste){
 			//Sentencia sql que insetara la categoria
 		$sql = "UPDATE clases_grupales_has_usuarios SET
-			`dia1` = '$this->dia1',
-			`dia2` = '$this->dia2',
-			`dia3` = '$this->dia3',
-			`dia4` = '$this->dia4',
-			`dia5` = '$this->dia5',
-			`dia6` = '$this->dia6',
-			`dia7` = '$this->dia7',
-			`dia8` = '$this->dia8',
-			`dia9` = '$this->dia9',
-			`dia10` = '$this->dia10'
+			".$dia." = '".$asiste."'
 			
-			WHERE (`ID_Clase` = '$this->ID_Clase')
+			WHERE (`ID_Clase` = '".$idclase."') AND (login_usuario = '".$usuario."')
 			";
 			 echo $sql;
 			 

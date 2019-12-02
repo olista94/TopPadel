@@ -49,7 +49,7 @@ function partidosPareja(){
 			FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph
 
 			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido
-			AND (`ID_ParejaLocal` = '$this->ID_ParejaLocal' OR `ID_ParejaVisitante` = '$this->ID_ParejaVisitante')
+			AND (`ID_ParejaLocal` = '$this->ID_ParejaLocal' OR `ID_ParejaVisitante` = '$this->ID_ParejaVisitante') and (part.ronda = 'Grupos')
 			"; 
 
 	if (!$resultado = $this->mysqli->query($sql)) { 

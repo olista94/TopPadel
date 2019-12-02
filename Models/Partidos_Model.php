@@ -61,6 +61,29 @@ function add(){
 			return  'Insercion correcta'; 
 		}		
 	}
+	
+	function addCuartos(){
+			//Sentencia sql que insetara la categoria
+		$sql = "INSERT INTO partidos (
+			ronda,
+			pista_ID_Pista
+			) 
+				VALUES (					
+					'Cuartos',					
+					NULL
+					)";
+			 
+			//Si ya se han insertado la PK o FK
+		if (!$this->mysqli->query($sql)) {
+			
+			return 'Error al insertar';
+		}
+		//operacion de insertado correcta
+		else{
+			return  'Insercion correcta'; 
+		}		
+	}
+	
 	function addResultado(){
 			//Sentencia sql que insetara la categoria
 		$sql = "UPDATE partidos SET
@@ -523,6 +546,28 @@ function ShowCurrentPartidos(){
 			FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,pista pis 
 			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido AND part.pista_ID_Pista = pis.ID_Pista 
 			AND (part.`ID_Partido` = '$this->ID_Partido' )
+			"; 
+
+	if (!$resultado = $this->mysqli->query($sql)) { 
+		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
+	}
+	else{ 
+		return $resultado; ; //Devuelve mensaje de exito	
+	}
+}
+
+function ShowAllPlayoffs(){
+	
+	
+	$sql = "SELECT part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+			par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+			par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+			part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+			part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+			FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+			phg.ID_Pareja = par.ID_Pareja and ronda in ('Cuartos','Semis','Final') 
+			order by 1
 			"; 
 
 	if (!$resultado = $this->mysqli->query($sql)) { 
