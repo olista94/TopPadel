@@ -25,7 +25,8 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Models/Pistas_Model.php";
 			include_once "../Views/Clases_Grupales_DELETE_View.php";
 			include_once "../Views/Clases_Grupales_SHOWCURRENT_View.php";
-			include_once "../Views/Clases_Grupales_SHOWCLASE_View.php";
+			/* include_once "../Views/Clases_Grupales_SHOWCLASE_View.php"; */
+			include_once "../Views/Clases_Grupales_SHOWCLASE_Dia_View.php";
 			include_once "../Views/Clases_Grupales_INSCRIPCION_View.php";
 			include_once "../Views/Clases_Grupales_SEARCH_View.php";
 			include_once "../Views/Clases_Grupales_ADD_View.php";
@@ -280,7 +281,7 @@ if(isset($_SESSION['tipo'])){
 					$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
 					$apuntados = $clase -> Apuntados();
 					
-					new Clases_Grupales_SHOWCLASE($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+					new Clases_Grupales_SHOWCLASE_Dia($apuntados,'../Controllers/Clases_Grupales_Controller.php');
 			break;
 			
 			case 'Guardar_Asistencia':

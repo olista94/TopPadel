@@ -23,12 +23,25 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Views/Clases_Grupales_SHOWALL_View.php";
 			include_once "../Models/Clases_Grupales_Model.php";
 			include_once "../Models/Clases_Grupales_has_Usuarios_Model.php";
-			include_once "../Views/Clases_Grupales_SHOWCLASE_View.php";
+			/* include_once "../Views/Clases_Grupales_SHOWCLASE_View.php"; */
+			include_once "../Views/Clases_Grupales_SHOWCLASE_Dia_View.php";
 			 
 
 			/* RECOGE LOS DATOS DEL FORMULARIO */
 			function getDataForm(){
-			if(isset($_REQUEST['ID_Clase'])){
+				
+				$dia = $_REQUEST['dia'];
+				$idclase = $_REQUEST['ID_Clase'];
+				
+				$clase = new Clases_Grupales_has_Usuarios_Model("","","","","","","","","","","","");
+				
+				foreach($_REQUEST as $i => $dato){
+					if($i != "dia" && $i != 'action' && $i != 'ID_Clase'){
+						$clase -> controlarAsistencia($idclase,$dia,$i,$dato);
+					}
+				}
+				
+			/* if(isset($_REQUEST['ID_Clase'])){
 				$ID_Clase = $_REQUEST['ID_Clase'];//Identificador de la Inscripcion
 				
 			}
@@ -126,7 +139,7 @@ if(isset($_SESSION['tipo'])){
 				
 				$clases_grupales_has_usuarios = new Clases_Grupales_has_Usuarios_Model ($ID_Clase,$login_usuario,$dia1,$dia2,$dia3,$dia4,$dia5,$dia6,$dia7,$dia8,$dia9,$dia10); //creamos el objeto usuario
 				
-				return $clases_grupales_has_usuarios; //devolvemos el objeto usuario
+				return $clases_grupales_has_usuarios; //devolvemos el objeto usuario */
 			}
 
 			//Si mandamos alguna accion desde la vista
@@ -140,13 +153,7 @@ if(isset($_SESSION['tipo'])){
 			case 'Guardar_Asistencia':
 					$clase = new Clases_Grupales_has_Usuarios_Model("","","","","","","","","","","","");
 					$clase = getDataForm(); 
-					$apunt = $clase -> devolverNumApuntados();
-					$apunt1 = $apunt ->fetch_array()[0];
-				
-					for($i=0; $i < $apunt1; $i++){
-						$mensaje = $clase-> controlarAsistencia(); 
-					}
-					new MESSAGE($mensaje,'../Controllers/Clases_Grupales_Controller.php'); 
+					
 			break;
 
 				
