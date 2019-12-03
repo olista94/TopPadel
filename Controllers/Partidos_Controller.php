@@ -246,6 +246,22 @@ if (!IsAuthenticated()){ //si no está autenticado
 					$part1 -> getClasificacion($_REQUEST["ID_Torneo"],$pL);
 					$part1 -> getClasificacion($_REQUEST["ID_Torneo"],$pV);
 					
+					$ronda = $part1 -> getRonda();
+					if($ronda == 'Cuartos'){
+						$part1 -> getClasificacionCuartos($_REQUEST["ID_Torneo"],$pL);
+						$part1 -> getClasificacionCuartos($_REQUEST["ID_Torneo"],$pV);
+					}
+					
+					if($ronda == 'Semis'){
+						$part1 -> getClasificacionSemis($_REQUEST["ID_Torneo"],$pL);
+						$part1 -> getClasificacionSemis($_REQUEST["ID_Torneo"],$pV);
+					}
+					
+					if($ronda == 'Final'){
+						$part1 -> getClasificacionFinal($_REQUEST["ID_Torneo"],$pL);
+						$part1 -> getClasificacionFinal($_REQUEST["ID_Torneo"],$pV);
+					}
+					
 					$part1 -> actualizarRanking($local1);
 					$part1 -> actualizarRanking($local2);
 					$part1 -> actualizarRanking($visitante1);

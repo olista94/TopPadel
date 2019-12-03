@@ -20,6 +20,8 @@ if(!IsAuthenticated()){
 	include_once "../Views/Torneos_SHOWTORNEO_View.php";
 	include_once "../Views/Torneos_SHOWTORNEO_Generado_View.php";
 	include_once "../Views/Torneos_SHOWTORNEO_Generado_Cuartos_View.php";
+	include_once "../Views/Torneos_SHOWTORNEO_Generado_Semis_View.php";
+	include_once "../Views/Torneos_SHOWTORNEO_Generado_Final_View.php";
 	include_once "../Views/Torneos_DELETE_View.php";
 	include_once "../Models/Inscripcion_Model.php";
 	include_once "../Models/Partidos_Model.php";
@@ -164,6 +166,32 @@ if(!IsAuthenticated()){
 		$h = 7;
 		for ($i = 0; $i < 4; $i++) {	
 			$mensaje = $partido -> addCuartos();
+			$partido1 = new Partidos_Model('','','','','','','','','','','','','');
+			$idpartido = $partido1 -> DevolverID();	
+					$mensaje1 = $enfrentamiento -> add($idpartido,$idtorneo,$clasificados[$j],$clasificados[$h]);	
+					$j++;
+					$h--;
+		}
+	}
+	
+	function generarSemis($clasificados,$idtorneo,$partido,$enfrentamiento){
+		$j = 0;
+		$h = 3;
+		for ($i = 0; $i < 2; $i++) {	
+			$mensaje = $partido -> addSemis();
+			$partido1 = new Partidos_Model('','','','','','','','','','','','','');
+			$idpartido = $partido1 -> DevolverID();	
+					$mensaje1 = $enfrentamiento -> add($idpartido,$idtorneo,$clasificados[$j],$clasificados[$h]);	
+					$j++;
+					$h--;
+		}
+	}
+	
+	function generarFinal($clasificados,$idtorneo,$partido,$enfrentamiento){
+		$j = 0;
+		$h = 1;
+		for ($i = 0; $i < 1; $i++) {	
+			$mensaje = $partido -> addFinal();
 			$partido1 = new Partidos_Model('','','','','','','','','','','','','');
 			$idpartido = $partido1 -> DevolverID();	
 					$mensaje1 = $enfrentamiento -> add($idpartido,$idtorneo,$clasificados[$j],$clasificados[$h]);	
@@ -356,7 +384,7 @@ if(!IsAuthenticated()){
 				
 		break;
 		
-		case 'Ver_Playoffs':
+		case 'Ver_Cuartos':
 		
 		$playoffs = new Torneos_Model($_REQUEST['ID_Torneo'],'','','','','');
 		$idtorneo = $_REQUEST['ID_Torneo'];
@@ -389,17 +417,125 @@ if(!IsAuthenticated()){
 					unset($clasificados);
 					$clasificados = array(); 
 				}
-				new Torneos_SHOWTORNEO_Generado_Cuartos('../Controllers/Torneos_Controller.php');				
+				$partido = new Partidos_Model('','','','','','','','','','','','','');
+				$datos = $partido -> ShowAllCuartos($_REQUEST['ID_Torneo']);
+				new Torneos_SHOWTORNEO_Generado_Cuartos($datos,$_REQUEST['ID_Torneo'],$_REQUEST['grupo'],'../Controllers/Torneos_Controller.php');				
 			}
 				
 			else{
 				$partido = new Partidos_Model('','','','','','','','','','','','','');
-				$datos = $partido -> ShowAllPlayoffs();
-				new Torneos_SHOWTORNEO_Generado_Cuartos($datos,$_REQUEST['ID_Torneo'],'../Controllers/Torneos_Controller.php');
+				$datos = $partido -> ShowAllCuartos($_REQUEST['ID_Torneo']);
+				
+				
+				new Torneos_SHOWTORNEO_Generado_Cuartos($datos,$_REQUEST['ID_Torneo'],$_REQUEST['grupo'],'../Controllers/Torneos_Controller.php');
 			}
 		}	
 				
 		break;
+		
+		
+		case 'Ver_Semis':
+		
+		$semis = new Torneos_Model($_REQUEST['ID_Torneo'],'','','','','');
+		$idtorneo = $_REQUEST['ID_Torneo'];
+		$grupo = $_REQUEST['grupo'];
+		$clasificados = Array();
+		$partido = new Partidos_Model('','','','','','','','','','','','','');
+		$enfrentamiento = new Parejas_has_partidos_Model('','','','');
+		
+		if($semis -> puedeGenerarSemis() == false){
+			new MESSAGE('Los cuartos de final todavia no han acabado','../Controllers/Torneos_Controller.php');
+		}
+		else{
+
+		
+			if($semis -> puedeGenerarSemis() == true && $semis -> semisGeneradas() == false){
+				
+				$numGrupos = $semis -> numGrupos($idtorneo);
+				echo $numGrupos;
+				
+				for($i = 0; $i < $numGrupos; $i++){
+					echo $i;
+					echo $idtorneo;
+					$semis = new Torneos_Model($_REQUEST['ID_Torneo'],'','','','','');
+					$clasif = $semis -> devolverClasificadosASemis($i,$idtorneo);
+							
+						while($clasif1 = $clasif->fetch_array()[0]){
+							array_push($clasificados,$clasif1);										
+						}
+					
+					$semis = generarSemis($clasificados,$idtorneo,$partido,$enfrentamiento);
+					unset($clasificados);
+					$clasificados = array(); 
+				}
+				$partido = new Partidos_Model('','','','','','','','','','','','','');
+				$datos = $partido -> ShowAllSemis($_REQUEST['ID_Torneo']);
+				
+				new Torneos_SHOWTORNEO_Generado_Semis($datos,$_REQUEST['ID_Torneo'],$_REQUEST['grupo'],'../Controllers/Torneos_Controller.php');				
+			}
+				
+			else{
+				$partido = new Partidos_Model('','','','','','','','','','','','','');
+				$datos = $partido -> ShowAllSemis($_REQUEST['ID_Torneo']);
+				
+				
+				new Torneos_SHOWTORNEO_Generado_Semis($datos,$_REQUEST['ID_Torneo'],$_REQUEST['grupo'],'../Controllers/Torneos_Controller.php');
+			}
+		}	
+				
+		break;
+		
+		case 'Ver_Final':
+		
+		$final = new Torneos_Model($_REQUEST['ID_Torneo'],'','','','','');
+		$idtorneo = $_REQUEST['ID_Torneo'];
+		$grupo = $_REQUEST['grupo'];
+		$clasificados = Array();
+		$partido = new Partidos_Model('','','','','','','','','','','','','');
+		$enfrentamiento = new Parejas_has_partidos_Model('','','','');
+		
+		if($final -> puedeGenerarFinal() == false){
+			new MESSAGE('Las semifinales todavia no han acabado','../Controllers/Torneos_Controller.php');
+		}
+		else{
+
+		
+			if($final -> puedeGenerarFinal() == true && $final -> finalGenerada() == false){
+				
+				$numGrupos = $final -> numGrupos($idtorneo);
+				echo $numGrupos;
+				
+				for($i = 0; $i < $numGrupos; $i++){
+					echo $i;
+					echo $idtorneo;
+					$final = new Torneos_Model($_REQUEST['ID_Torneo'],'','','','','');
+					$clasif = $final -> devolverClasificadosAFinal($i,$idtorneo);
+							
+						while($clasif1 = $clasif->fetch_array()[0]){
+							array_push($clasificados,$clasif1);										
+						}
+					
+					$final = generarFinal($clasificados,$idtorneo,$partido,$enfrentamiento);
+					unset($clasificados);
+					$clasificados = array(); 
+				}
+				$partido = new Partidos_Model('','','','','','','','','','','','','');
+				$datos = $partido -> ShowAllFinal($_REQUEST['ID_Torneo']);
+				
+				new Torneos_SHOWTORNEO_Generado_Final($datos,$_REQUEST['ID_Torneo'],$_REQUEST['grupo'],'../Controllers/Torneos_Controller.php');				
+			}
+				
+			else{
+				$partido = new Partidos_Model('','','','','','','','','','','','','');
+				$datos = $partido -> ShowAllFinal($_REQUEST['ID_Torneo']);
+				
+				
+				new Torneos_SHOWTORNEO_Generado_Final($datos,$_REQUEST['ID_Torneo'],$_REQUEST['grupo'],'../Controllers/Torneos_Controller.php');
+			}
+		}	
+				
+		break;
+		
 				
 		case 'Ver_Partidos_Pareja':
 				$torneo1 = new Torneos_Model($_REQUEST['ID_Torneo'],'','','','','');
