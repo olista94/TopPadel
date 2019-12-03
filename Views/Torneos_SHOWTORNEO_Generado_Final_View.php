@@ -3,7 +3,7 @@
 include_once '../Functions/Authentication.php';
 
  //Declaracion de la clase 
- class Torneos_SHOWTORNEO_Generado_Cuartos{	 
+ class Torneos_SHOWTORNEO_Generado_Final{	 
 
 	var $datos;	
 	var $idtorneo;	
@@ -32,6 +32,7 @@ include_once '../Functions/Authentication.php';
 ?>
 
 <!----------------------------------------------------------------------------Playoffs---------------------------------------------------------------------------------------------->
+
 <form action="../Controllers/Torneos_Controller.php" method="post" name="action" class="ronda">
 			<button type="submit" name="action" value="Confirmar_SHOWTORNEO" value="Submit" ><?php echo $strings['Liga regular'];?></button>
 			<button type="submit" name="action" value="Ver_Cuartos" value="Submit" ><?php echo $strings['Cuartos'];?></button>
@@ -44,10 +45,10 @@ include_once '../Functions/Authentication.php';
 <div class="showall">   
                                 
 		<table style="width:70%" class="showAllUsers">
-			<tr><th class="title" colspan="4"><?php echo $strings['Cuartos']; ?>
+			<tr><th class="title" colspan="4"><?php echo $strings['Final']; ?>
 			</th></tr>
 			
-			
+		
 			<tr>
 				<th><?php echo $strings['Local']; ?></th>
 				<th><?php echo $strings['Visitante']; ?></th>

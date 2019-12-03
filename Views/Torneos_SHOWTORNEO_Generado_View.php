@@ -36,12 +36,17 @@ if(isset($_SESSION['tipo'])){
 		}
 	//Archivo del idioma	
 		include '../Locales/Strings_'. $_SESSION['idioma'] .'.php';  
-	 
-			$_SESSION['ID_Torneo'] = 'ID_Torneo';
 		
 ?>
 
-<!--Tabla con los datos de los torneos-->
+<form action="../Controllers/Torneos_Controller.php" method="post" name="action" class="ronda">
+			<button type="submit" name="action" value="Confirmar_SHOWTORNEO" value="Submit" ><?php echo $strings['Liga regular'];?></button>
+			<button type="submit" name="action" value="Ver_Cuartos" value="Submit" ><?php echo $strings['Cuartos'];?></button>
+			<button type="submit" name="action" value="Ver_Semis" value="Submit" ><?php echo $strings['Semifinales'];?></button>
+			<button type="submit" name="action" value="Ver_Final" value="Submit" ><?php echo $strings['Final'];?></button>
+			<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
+			<input type="hidden" name="grupo" value=<?php echo $this->grupo; ?>>
+			</form>
 	<div class="showall"> 
 
          <button title = "<?php echo $strings ['Criterios desempate:'];
@@ -66,7 +71,7 @@ if(isset($_SESSION['tipo'])){
 			
 			<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
 			<input type="hidden" name="grupo" value=<?php echo $this->grupo; ?>>
-			<button type="submit" name="action" value="Ver_Playoffs" value="Submit" class="aceptar">PO</button>
+			
 					<div>
 					<label class="lblSearch" >
 					<?php echo $strings['Grupo']; ?>:</label>
