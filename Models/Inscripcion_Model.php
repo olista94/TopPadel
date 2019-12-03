@@ -26,7 +26,7 @@ function add(){
 				'$this->torneos_ID_Torneo'
 				)
 			";
-			echo $sql;
+			
 
 	if (!$this->mysqli->query($sql)) { 
 		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error

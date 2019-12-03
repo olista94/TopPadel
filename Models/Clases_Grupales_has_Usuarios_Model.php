@@ -45,7 +45,7 @@ function controlarAsistencia($idclase,$dia,$usuario,$asiste){
 			
 			WHERE (`ID_Clase` = '".$idclase."') AND (login_usuario = '".$usuario."')
 			";
-			 echo $sql;
+			 
 			 
 			//Si ya se han insertado la PK o FK
 		if (!$this->mysqli->query($sql)) {
@@ -65,7 +65,7 @@ function controlarAsistencia($idclase,$dia,$usuario,$asiste){
 			WHERE (`ID_Clase` = '$this->ID_Clase')
 			
 			";
-			echo $sql;
+			
 		
     $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
     

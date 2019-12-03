@@ -84,6 +84,50 @@ function add(){
 		}		
 	}
 	
+	function addSemis(){
+			//Sentencia sql que insetara la categoria
+		$sql = "INSERT INTO partidos (
+			ronda,
+			pista_ID_Pista
+			) 
+				VALUES (					
+					'Semis',					
+					NULL
+					)";
+			 
+			//Si ya se han insertado la PK o FK
+		if (!$this->mysqli->query($sql)) {
+			
+			return 'Error al insertar';
+		}
+		//operacion de insertado correcta
+		else{
+			return  'Insercion correcta'; 
+		}		
+	}
+	
+	function addFinal(){
+			//Sentencia sql que insetara la categoria
+		$sql = "INSERT INTO partidos (
+			ronda,
+			pista_ID_Pista
+			) 
+				VALUES (					
+					'Final',					
+					NULL
+					)";
+			 
+			//Si ya se han insertado la PK o FK
+		if (!$this->mysqli->query($sql)) {
+			
+			return 'Error al insertar';
+		}
+		//operacion de insertado correcta
+		else{
+			return  'Insercion correcta'; 
+		}		
+	}
+	
 	function addResultado(){
 			//Sentencia sql que insetara la categoria
 		$sql = "UPDATE partidos SET
@@ -167,72 +211,132 @@ function add(){
 	
 	function getClasificacion($idtorneo,$pareja){
 			//Sentencia sql que insetara la categoria
-			$sql = "SELECT COUNT(*) FROM `partidos` p WHERE Sets_Local = 2 AND ID_Partido IN 
-												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
-												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaLocal = '".$pareja."'))";
+			$sql = "SELECT COUNT(*), part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaLocal = '".$pareja."' and ronda = 'Grupos' and `Sets_Local`= 2
+					order by 1";
 		
 			 
 			$resultado = $this->mysqli->query($sql);
 			
-			$sqlSFL = "SELECT COALESCE (SUM(Sets_Local),0) as SetsFavorLocal FROM `partidos` p WHERE ID_Partido IN 
-												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
-												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaLocal = '".$pareja."'))";
+			$sqlSFL = "SELECT COALESCE (SUM(Sets_Local),0) as SetsFavorLocal, part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaLocal = '".$pareja."' and ronda = 'Grupos' 
+					order by 1";
 		
 			
 			$SFL = $this->mysqli->query($sqlSFL);
 			
-			$sqlSCL = "SELECT COALESCE (SUM(Sets_Visitante),0) as SetsContraLocal FROM `partidos` p WHERE ID_Partido IN 
-												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
-												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaLocal = '".$pareja."'))";
+			$sqlSCL = "SELECT COALESCE (SUM(Sets_Visitante),0) as SetsFavorVisitante, part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaLocal = '".$pareja."' and ronda = 'Grupos'
+					order by 1";
 		
 			
 			$SCL = $this->mysqli->query($sqlSCL);
 			
-			$sqlJFL = "SELECT COALESCE (SUM(JuegosSet1_Local+JuegosSet2_Local+JuegosSet3_Local),0) as JuegosFavorLocal FROM `partidos` p WHERE ID_Partido IN 
-												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
-												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaLocal = '".$pareja."'))";
+			$sqlJFL = "SELECT COALESCE (SUM(JuegosSet1_Local+JuegosSet2_Local+JuegosSet3_Local),0) as JuegosFavorLocal, part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaLocal = '".$pareja."' and ronda = 'Grupos'
+					order by 1";
 		
 			
 			$JFL = $this->mysqli->query($sqlJFL);
 			
-			$sqlJCL = "SELECT COALESCE (SUM(`JuegosSet1_Visitante`+`JuegosSet2_Visitante`+`JuegosSet3_Visitante`),0) as JuegosContraLocal FROM `partidos` p WHERE ID_Partido IN 
-												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
-												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaLocal = '".$pareja."'))";
+			$sqlJCL = "SELECT COALESCE (SUM(`JuegosSet1_Visitante`+`JuegosSet2_Visitante`+`JuegosSet3_Visitante`),0) as JuegosContraLocal, part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaLocal = '".$pareja."' and ronda = 'Grupos'
+					order by 1";
 		
 	
 			$JCL = $this->mysqli->query($sqlJCL);
 			
-			$sql1 = "SELECT COUNT(*) FROM `partidos` p WHERE Sets_Visitante = 2 AND ID_Partido IN 
-												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
-												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaVisitante = '".$pareja."'))";
+			$sql1 = "SELECT COUNT(*), part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaVisitante = '".$pareja."' and ronda = 'Grupos' and `Sets_Visitante`= 2
+					order by 1";
 			 
 			
 			$resultado1 = $this->mysqli->query($sql1);
 			
-			$sqlSFV = "SELECT COALESCE (SUM(Sets_Visitante),0) as SetsFavorVisitante FROM `partidos` p
-						WHERE ID_Partido IN (SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
-												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaVisitante = '".$pareja."'))";
+			$sqlSFV = "SELECT COALESCE (SUM(Sets_Visitante),0) as SetsFavorVisitante, part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaVisitante = '".$pareja."' and ronda = 'Grupos'
+					order by 1";
 		
 			
 			$SFV = $this->mysqli->query($sqlSFV);
 			
-			$sqlSCV = "SELECT COALESCE (SUM(Sets_Local),0) as SetsContraVisitante FROM `partidos` p WHERE ID_Partido IN 
-												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
-												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaVisitante = '".$pareja."'))";
+			$sqlSCV = "SELECT COALESCE (SUM(Sets_Local),0) as SetsContraVisitante, part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaVisitante = '".$pareja."' and ronda = 'Grupos'
+					order by 1";
 		
 			
 			$SCV = $this->mysqli->query($sqlSCV);
 			
-			$sqlJFV = "SELECT COALESCE (SUM(`JuegosSet1_Visitante`+`JuegosSet2_Visitante`+`JuegosSet3_Visitante`),0) as JuegosFavorVisitante FROM `partidos` p WHERE ID_Partido IN 
-												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
-												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaVisitante = '".$pareja."'))";
+			$sqlJFV = "SELECT COALESCE (SUM(`JuegosSet1_Visitante`+`JuegosSet2_Visitante`+`JuegosSet3_Visitante`),0) as JuegosFavorVisitante, part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaVisitante = '".$pareja."' and ronda = 'Grupos'
+					order by 1";
 		
 			
 			$JFV = $this->mysqli->query($sqlJFV);
 			
-			$sqlJCV = "SELECT COALESCE (SUM(JuegosSet1_Local+JuegosSet2_Local+JuegosSet3_Local),0) as JuegosContraVistante FROM `partidos` p WHERE ID_Partido IN 
-												(SELECT ID_Partido FROM parejas_has_partidos ph WHERE `ID_Torneo` = '".$idtorneo."'
-												AND p.ID_Partido = ph.ID_Partido AND(ID_ParejaVisitante = '".$pareja."'))";
+			$sqlJCV = "SELECT COALESCE (SUM(JuegosSet1_Local+JuegosSet2_Local+JuegosSet3_Local),0) as JuegosContraVistante, part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaVisitante = '".$pareja."' and ronda = 'Grupos'
+					order by 1";
 		
 			
 			$JCV = $this->mysqli->query($sqlJCV);
@@ -244,7 +348,7 @@ function add(){
 			$juegosContra = $JCL -> fetch_array()[0] + $JCV -> fetch_array()[0];
 			
 			$sql2 = "SELECT COUNT(*) FROM `parejas_has_partidos` ph,`partidos` p
-					 WHERE (ID_ParejaLocal = '".$pareja."' OR ID_ParejaVisitante= '".$pareja."') and ID_Torneo = '".$idtorneo."'
+					 WHERE (ID_ParejaLocal = '".$pareja."' OR ID_ParejaVisitante= '".$pareja."') and ID_Torneo = '".$idtorneo."' AND ronda = 'Grupos'
 					 AND p.`ID_Partido` = ph.`ID_Partido` AND `Sets_Local` IS NOT NULL";
 			
 			$jugados =  $this->mysqli->query($sql2) -> fetch_array()[0];
@@ -297,7 +401,7 @@ function add(){
 					WHERE  (p.`ID_Partido` = ph.`ID_Partido`) and (par.ID_Pareja = ph.ID_ParejaLocal OR par.ID_Pareja = ph.ID_ParejaVisitante)
 					AND (usuarios_login = '".$jugador."' OR usuarios_login1 = '".$jugador."') AND `Sets_Local` IS NOT NULL";
 			
-			echo $sql2;
+			
 			$jugados =  $this->mysqli->query($sql2) -> fetch_array()[0];
 				
 			
@@ -310,7 +414,7 @@ function add(){
 			
 			$sql3 = "UPDATE `usuarios` SET `ranking` = '".$puntosTotales."'
 			WHERE login = '".$jugador."'";
-			echo $sql3;
+			
 			if (!$this->mysqli->query($sql3)) {
 			
 				return 'Error al insertar';
@@ -552,11 +656,11 @@ function ShowCurrentPartidos(){
 		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
 	}
 	else{ 
-		return $resultado; ; //Devuelve mensaje de exito	
+		return $resultado;//Devuelve mensaje de exito	
 	}
 }
 
-function ShowAllPlayoffs(){
+function ShowAllCuartos($idtorneo){
 	
 	
 	$sql = "SELECT part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
@@ -566,7 +670,7 @@ function ShowAllPlayoffs(){
 			part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
 			FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
 			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
-			phg.ID_Pareja = par.ID_Pareja and ronda in ('Cuartos','Semis','Final') 
+			phg.ID_Pareja = par.ID_Pareja and ronda = 'Cuartos' and phg.`ID_Torneo` = '".$idtorneo."'
 			order by 1
 			"; 
 
@@ -574,9 +678,247 @@ function ShowAllPlayoffs(){
 		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
 	}
 	else{ 
-		return $resultado; ; //Devuelve mensaje de exito	
+		return $resultado;  //Devuelve mensaje de exito	
 	}
 }
+
+function ShowAllSemis($idtorneo){
+	
+	
+	$sql = "SELECT part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+			par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+			par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+			part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+			part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+			FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+			phg.ID_Pareja = par.ID_Pareja and ronda = 'Semis' and phg.`ID_Torneo` = '".$idtorneo."'
+			order by 1
+			"; 
+
+	if (!$resultado = $this->mysqli->query($sql)) { 
+		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
+	}
+	else{ 
+		return $resultado;  //Devuelve mensaje de exito	
+	}
+}
+
+function ShowAllFinal($idtorneo){
+	
+	
+	$sql = "SELECT part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+			par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+			par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+			part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+			part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+			FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+			phg.ID_Pareja = par.ID_Pareja and ronda = 'Final' and phg.`ID_Torneo` = '".$idtorneo."'
+			order by 1
+			"; 
+
+	if (!$resultado = $this->mysqli->query($sql)) { 
+		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
+	}
+	else{ 
+		return $resultado;  //Devuelve mensaje de exito	
+	}
+}
+
+function getRonda(){
+	
+	
+	$sql = "SELECT ronda
+			FROM partidos
+			WHERE `ID_Partido` = '$this->ID_Partido'
+			"; 
+
+	if (!$resultado = $this->mysqli->query($sql)) { 
+		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
+	}
+	else{ 
+		return $resultado ->fetch_array()[0] ; //Devuelve mensaje de exito	
+	}
+}
+
+function getClasificacionCuartos($idtorneo,$pareja){
+			//Sentencia sql que insetara la categoria
+			$sql = "SELECT COUNT(*), part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaLocal = '".$pareja."' and ronda = 'Cuartos' and `Sets_Local`= 2
+					order by 1";
+		
+			
+			$resultado = $this->mysqli->query($sql);
+			
+			
+			
+			$sql1 = "SELECT COUNT(*), part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaVisitante = '".$pareja."' and ronda = 'Cuartos' and `Sets_Visitante`= 2
+					order by 1";
+			 
+			
+			$resultado1 = $this->mysqli->query($sql1);
+			
+			
+			
+			$ganados = $resultado -> fetch_array()[0] + $resultado1 -> fetch_array()[0];
+			
+			$sql2 = "SELECT COUNT(*) FROM `parejas_has_partidos` ph,`partidos` p
+					 WHERE (ID_ParejaLocal = '".$pareja."' OR ID_ParejaVisitante= '".$pareja."') and ID_Torneo = '".$idtorneo."' AND ronda = 'Cuartos'
+					 AND p.`ID_Partido` = ph.`ID_Partido` AND `Sets_Local` IS NOT NULL";
+			
+			$jugados =  $this->mysqli->query($sql2) -> fetch_array()[0];
+				
+			
+			$perdidos = $jugados - $ganados;
+		
+			$puntos = ($ganados*3) + $perdidos;
+			
+			$sql3 = "UPDATE `parejas_has_torneos` SET `PtosCuartos`='".$puntos."'
+			WHERE parejas_ID_Pareja = '".$pareja."'";
+			
+			if (!$this->mysqli->query($sql3)) {
+			
+				return 'Error al insertar';
+			}
+		//operacion de insertado correcta
+			else{
+				return  'Insercion correcta'; 
+			}			
+			
+	}
+	
+	function getClasificacionSemis($idtorneo,$pareja){
+			//Sentencia sql que insetara la categoria
+			$sql = "SELECT COUNT(*), part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaLocal = '".$pareja."' and ronda = 'Semis' and `Sets_Local`= 2
+					order by 1";
+		
+			
+			$resultado = $this->mysqli->query($sql);
+			
+			
+			
+			$sql1 = "SELECT COUNT(*), part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaVisitante = '".$pareja."' and ronda = 'Semis' and `Sets_Visitante`= 2
+					order by 1";
+			 
+			
+			$resultado1 = $this->mysqli->query($sql1);
+			
+			
+			
+			$ganados = $resultado -> fetch_array()[0] + $resultado1 -> fetch_array()[0];
+			
+			$sql2 = "SELECT COUNT(*) FROM `parejas_has_partidos` ph,`partidos` p
+					 WHERE (ID_ParejaLocal = '".$pareja."' OR ID_ParejaVisitante= '".$pareja."') and ID_Torneo = '".$idtorneo."' AND ronda = 'Semis'
+					 AND p.`ID_Partido` = ph.`ID_Partido` AND `Sets_Local` IS NOT NULL";
+			
+			$jugados =  $this->mysqli->query($sql2) -> fetch_array()[0];
+				
+			
+			$perdidos = $jugados - $ganados;
+		
+			$puntos = ($ganados*3) + $perdidos;
+			
+			$sql3 = "UPDATE `parejas_has_torneos` SET `PtosSemis`='".$puntos."'
+			WHERE parejas_ID_Pareja = '".$pareja."'";
+			
+			if (!$this->mysqli->query($sql3)) {
+			
+				return 'Error al insertar';
+			}
+		//operacion de insertado correcta
+			else{
+				return  'Insercion correcta'; 
+			}			
+			
+	}
+ 
+ function getClasificacionFinal($idtorneo,$pareja){
+			//Sentencia sql que insetara la categoria
+			$sql = "SELECT COUNT(*), part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaLocal = '".$pareja."' and ronda = 'Final' and `Sets_Local`= 2
+					order by 1";
+		
+			
+			$resultado = $this->mysqli->query($sql);
+			
+			
+			
+			$sql1 = "SELECT COUNT(*), part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
+					par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2, par1.ID_Pareja as ID_ParejaVisitante,
+					par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2, part.Sets_Local,part.Sets_Visitante,
+					part.JuegosSet1_Local as JuegosSet1_Local,part.JuegosSet1_Visitante as JuegosSet1_Visitante, part.JuegosSet2_Local as JuegosSet2_Local,
+					part.JuegosSet2_Visitante as JuegosSet2_Visitante, part.JuegosSet3_Local as JuegosSet3_Local,part.JuegosSet3_Visitante as JuegosSet3_Visitante
+					FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaVisitante = '".$pareja."' and ronda = 'Final' and `Sets_Visitante`= 2
+					order by 1";
+			 
+			
+			$resultado1 = $this->mysqli->query($sql1);
+			
+			
+			
+			$ganados = $resultado -> fetch_array()[0] + $resultado1 -> fetch_array()[0];
+			
+			$sql2 = "SELECT COUNT(*) FROM `parejas_has_partidos` ph,`partidos` p
+					 WHERE (ID_ParejaLocal = '".$pareja."' OR ID_ParejaVisitante= '".$pareja."') and ID_Torneo = '".$idtorneo."' AND ronda = 'Final'
+					 AND p.`ID_Partido` = ph.`ID_Partido` AND `Sets_Local` IS NOT NULL";
+			
+			$jugados =  $this->mysqli->query($sql2) -> fetch_array()[0];
+				
+			
+			$perdidos = $jugados - $ganados;
+		
+			$puntos = ($ganados*3) + $perdidos;
+			
+			$sql3 = "UPDATE `parejas_has_torneos` SET `PtosFinal`='".$puntos."'
+			WHERE parejas_ID_Pareja = '".$pareja."'";
+			
+			if (!$this->mysqli->query($sql3)) {
+			
+				return 'Error al insertar';
+			}
+		//operacion de insertado correcta
+			else{
+				return  'Insercion correcta'; 
+			}			
+			
+	}
+ 
  
 }//fin de clase
 ?> 

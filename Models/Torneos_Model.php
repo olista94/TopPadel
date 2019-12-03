@@ -263,6 +263,7 @@ function ResultadosPartidosPareja($idpartido,$idparejalocal,$idparejavisitante){
  function puedeGenerarPlayoffs(){//Comprueba que la liga regular ha terminado para poder generar los PO
 	 
 	$sql = "SELECT php.*,p.* FROM `parejas_has_partidos` php, partidos p WHERE JuegosSet1_Local is null and (p.ID_Partido = php.`ID_Partido`) AND (p.ronda = 'Grupos')
+			AND php.`ID_Torneo` = '$this->ID_Torneo'
 	";
 	 
 	  $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
@@ -278,7 +279,7 @@ function ResultadosPartidosPareja($idpartido,$idparejalocal,$idparejavisitante){
  
  function playoffsGenerados(){//Comprueba si ya se han generado los PO para no volver a generarlos
 	 
-	$sql = "SELECT php.*,p.* FROM `parejas_has_partidos` php, partidos p WHERE JuegosSet1_Local is null and (p.ID_Partido = php.`ID_Partido`) and ronda = 'Cuartos'
+	$sql = "SELECT php.*,p.* FROM `parejas_has_partidos` php, partidos p WHERE (p.ID_Partido = php.`ID_Partido`) and ronda = 'Cuartos'  AND php.`ID_Torneo` = '$this->ID_Torneo'
 	";
 	 
 	  $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
@@ -317,7 +318,135 @@ function ResultadosPartidosPareja($idpartido,$idparejalocal,$idparejavisitante){
 			ORDER BY grupo,`Ptos` DESC,`SF` DESC,`SC` ASC,`JF` DESC,`JC` ASC
 			LIMIT 8
 	";
-	 echo $sql;
+	 
+	  $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'No existe'; //Devuelve mensaje de error
+	}
+    else{ 
+		return $result;//Se devuelve el resultado de la consulta
+	}
+ }
+ 
+ //----------------------------------------------------------------------------SEMIS--------------------------------------------------------------------------------------------------
+ 
+ function puedeGenerarSemis(){//Comprueba que la liga regular ha terminado para poder generar los PO
+	 
+	$sql1 =  "SELECT php.*,p.* FROM `parejas_has_partidos` php, partidos p WHERE (p.ID_Partido = php.`ID_Partido`) AND (p.ronda = 'Cuartos')
+			AND php.`ID_Torneo` = '$this->ID_Torneo'
+	";
+	 
+	$result1 = $this->mysqli->query($sql1);
+	 
+	if($result1->num_rows > 1){
+	 
+		$sql = "SELECT php.*,p.* FROM `parejas_has_partidos` php, partidos p WHERE JuegosSet1_Local is null and (p.ID_Partido = php.`ID_Partido`) AND (p.ronda = 'Cuartos')
+			AND php.`ID_Torneo` = '$this->ID_Torneo'
+			";
+	
+		$result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
+    
+		if ($result->num_rows >= 1){
+			return false;//Devuelve mensaje de exito
+		} 
+		else{
+			return true;//Devuelve mensaje de error
+		}
+	}else{
+		return false;
+	}
+ }
+ 
+ function semisGeneradas(){//Comprueba si ya se han generado los PO para no volver a generarlos
+	 
+	$sql = "SELECT php.*,p.* FROM `parejas_has_partidos` php, partidos p WHERE (p.ID_Partido = php.`ID_Partido`) and ronda = 'Semis'  AND php.`ID_Torneo` = '$this->ID_Torneo'
+	";
+	 
+	  $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
+    
+    if ($result->num_rows >= 1)
+    {
+		return true;//Devuelve mensaje de exito
+    } 
+	else{
+        return false;//Devuelve mensaje de error
+	}
+ }
+ 
+ function devolverClasificadosASemis($grupo,$idtorneo){//Comprueba si ya se han generado los PO para no volver a generarlos
+	 
+	$sql = "SELECT parejas_ID_Pareja
+			FROM `parejas_has_torneos` pht, `parejas_has_grupos` phg
+			WHERE `parejas_ID_Pareja` = ID_Pareja and grupo = '".$grupo."' and `torneos_ID_Torneo` = '".$idtorneo."'
+			ORDER BY grupo,`PtosCuartos` DESC
+			LIMIT 4
+	";
+	 
+	  $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'No existe'; //Devuelve mensaje de error
+	}
+    else{ 
+		return $result;//Se devuelve el resultado de la consulta
+	}
+ }
+ 
+  //----------------------------------------------------------------------------FINAL--------------------------------------------------------------------------------------------------
+ 
+ function puedeGenerarFinal(){//Comprueba que la liga regular ha terminado para poder generar los PO
+	 
+	$sql1 =  "SELECT php.*,p.* FROM `parejas_has_partidos` php, partidos p WHERE (p.ID_Partido = php.`ID_Partido`) AND (p.ronda = 'Semis')
+			AND php.`ID_Torneo` = '$this->ID_Torneo'
+	";
+	 
+	$result1 = $this->mysqli->query($sql1);
+	 
+	if($result1->num_rows > 1){
+	 
+		$sql = "SELECT php.*,p.* FROM `parejas_has_partidos` php, partidos p WHERE JuegosSet1_Local is null and (p.ID_Partido = php.`ID_Partido`) AND (p.ronda = 'Semis')
+			AND php.`ID_Torneo` = '$this->ID_Torneo'
+			";
+	
+		$result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
+    
+		if ($result->num_rows >= 1){
+			return false;//Devuelve mensaje de exito
+		} 
+		else{
+			return true;//Devuelve mensaje de error
+		}
+	}else{
+		return false;
+	}
+ }
+ 
+ function finalGenerada(){//Comprueba si ya se han generado los PO para no volver a generarlos
+	 
+	$sql = "SELECT php.*,p.* FROM `parejas_has_partidos` php, partidos p WHERE (p.ID_Partido = php.`ID_Partido`) and ronda = 'Final'  AND php.`ID_Torneo` = '$this->ID_Torneo'
+	";
+	 
+	  $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
+    
+    if ($result->num_rows >= 1)
+    {
+		return true;//Devuelve mensaje de exito
+    } 
+	else{
+        return false;//Devuelve mensaje de error
+	}
+ }
+ 
+ function devolverClasificadosAFinal($grupo,$idtorneo){//Comprueba si ya se han generado los PO para no volver a generarlos
+	 
+	$sql = "SELECT parejas_ID_Pareja
+			FROM `parejas_has_torneos` pht, `parejas_has_grupos` phg
+			WHERE `parejas_ID_Pareja` = ID_Pareja and grupo = '".$grupo."' and `torneos_ID_Torneo` = '".$idtorneo."'
+			ORDER BY grupo,`PtosSemis` DESC
+			LIMIT 2
+	";
+	 
 	  $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
     
     if (!($resultado = $this->mysqli->query($sql))){
