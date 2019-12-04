@@ -310,6 +310,30 @@ input {
 	box-shadow: 2px 3px 18px -5px rgba(0,0,0,0.75);
 }
 
+.asistencia  {	
+	font-size:14px;
+	color:#2b2b2b;
+	width:60%;	
+	margin-left:auto;
+	margin-right:auto;	
+	margin-top:30px;
+	margin-bottom: 35px;
+	padding: 0px 20px 20px 20px;  
+	box-shadow: 2px 3px 18px -5px rgba(0,0,0,0.75);
+	border-collapse:collapse;
+}
+
+.asistencia th{
+	border: 1px solid black;
+	border-collapse:collapse;
+}
+
+.asistencia td{
+	border: 1px solid black;
+	border-collapse:collapse;
+}
+
+
 .title{
   text-align:left;  
   font-size:24px;
@@ -1198,7 +1222,7 @@ nav a{
   margin-top: 5px;
   margin-right: 5px;
   padding: 15px 30px;
-  background-image: url(../img/guardar.png);
+  background-image: url(../img/guardar2.png);
   background-color: #1223B0;
 }
 
@@ -1211,4 +1235,20 @@ nav a{
   margin-top:0px;
   padding: 0;  
   box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+}
+
+.botonesRondas {  
+  background-size: 10px 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: 25px;
+  margin-right: 20px;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 3px;
+  background-color:#4CAF50;
 }
