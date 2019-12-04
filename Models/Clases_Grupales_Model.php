@@ -417,7 +417,7 @@ function buscarPistasLibresClases(){
 function Apuntados()
 {	
     $sql = "SELECT * FROM `clases_grupales_has_usuarios` WHERE ID_Clase = '$this->ID_Clase'";
-
+echo $sql;
 	$result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){
