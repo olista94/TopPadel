@@ -3,7 +3,7 @@
 include_once '../Functions/Authentication.php';
 
  //Declaracion de la clase 
- class Torneos_SHOWTORNEO_Generado_Final{	 
+ class Torneos_SHOWTORNEO_Generado_Superfinal{	 
 
 	var $datos;	
 	var $idtorneo;	
@@ -44,7 +44,7 @@ include_once '../Functions/Authentication.php';
 			<?php
 			if($this -> numGrupos > 1){
 				?>
-				<button class="botonesRondas" type="submit" name="action" value="Ver_Superfinal" value="Submit" ><?php echo $strings['Superfinal'];?></button>
+				<button class="botonesRondas" type="submit" name="action" value="Ver_Superfinal" value="Submit" ><?php echo $strings['Superfinal'];?></button>	
 			<?php } ?>
 			
 			<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
@@ -54,7 +54,7 @@ include_once '../Functions/Authentication.php';
 <div class="showall">   
                                 
 		<table style="width:70%" class="showAllUsers">
-			<tr><th class="title" colspan="4"><?php echo $strings['Final']; ?>
+			<tr><th class="title" colspan="4"><?php echo $strings['Superfinal']; ?>
 			</th></tr>
 			
 		
@@ -63,7 +63,6 @@ include_once '../Functions/Authentication.php';
 				<th><?php echo $strings['Visitante']; ?></th>
 				<th><?php echo "Res"; ?></th>
 				<th><?php echo $strings['Ronda']; ?></th>
-				<th><?php echo $strings['Grupo']; ?></th>
 				<th></th>
 			</tr>
 		<?php 
@@ -84,7 +83,7 @@ include_once '../Functions/Authentication.php';
 					<td><?php echo "$datos[9]-$datos[10]" ; ?></td>
 					<td><?php echo "$datos[11]-$datos[12]" ; ?></td>
 					<td><?php echo "$datos[3]" ; ?></td>
-					<td><?php echo "$datos[4]" ; ?></td>
+
 					
 				<td style="text-align:right">
 					<!--Botones para editar,borrar o ver en detalle-->

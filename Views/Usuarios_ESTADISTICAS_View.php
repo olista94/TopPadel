@@ -40,17 +40,29 @@
 				<!--Campo login del usuario-->
                 <tr>
                     <th><?php echo $strings['Partidos Jugados']; ?></th>
-                    <td><?php echo $this -> fila['PJ']; ?></td>								
-                </tr>
+                    <td><?php if($this->fila['PJ'] == null)
+								echo '0';
+							else
+								echo $this -> fila['PJ']; ?>
+					</td>								
+				</tr>
 				<!--Campo password del usuario-->
                 <tr>
                     <th><?php echo $strings['Partidos Ganados']; ?></th>
-                    <td><?php echo $this -> fila['PG']; ?></td>
+                    <td><?php if($this->fila['PG'] == null)
+								echo '0';
+							else
+								echo $this -> fila['PG']; ?>
+					</td>
                 </tr>
 				<!--Campo nombre del usuario-->
                 <tr>
                     <th><?php echo $strings['Partidos Perdidos']; ?></th>
-                    <td><?php echo $this -> fila['PP']; ?></td>
+                    <td><?php if($this->fila['PP'] == null)
+								echo '0';
+							else
+								echo $this -> fila['PP']; ?>
+					</td>
                 </tr>
 				
 				<tr>

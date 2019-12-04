@@ -8,12 +8,14 @@ include_once '../Functions/Authentication.php';
 	var $datos;	
 	var $idtorneo;	
 	var $grupo;	
+	var $numGrupos;	
 	var $enlace;	
 	//Constructor de la clase
-	function __construct($datos,$idtorneo,$grupo,$enlace){
+	function __construct($datos,$idtorneo,$grupo,$numGrupos,$enlace){
 		$this -> datos = $datos;
 		$this -> idtorneo = $idtorneo;
 		$this -> grupo = $grupo;
+		$this -> numGrupos = $numGrupos;
 		$this -> enlace = $enlace;
 		$this -> mostrar();
 		
@@ -33,10 +35,17 @@ include_once '../Functions/Authentication.php';
 
 <!----------------------------------------------------------------------------Playoffs---------------------------------------------------------------------------------------------->
 <form action="../Controllers/Torneos_Controller.php" method="post" name="action" class="ronda">
-			<button type="submit" name="action" value="Confirmar_SHOWTORNEO" value="Submit" ><?php echo $strings['Liga regular'];?></button>
-			<button type="submit" name="action" value="Ver_Cuartos" value="Submit" ><?php echo $strings['Cuartos'];?></button>
-			<button type="submit" name="action" value="Ver_Semis" value="Submit" ><?php echo $strings['Semifinales'];?></button>
-			<button type="submit" name="action" value="Ver_Final" value="Submit" ><?php echo $strings['Final'];?></button>
+			<button class="botonesRondas" type="submit" name="action" value="Confirmar_SHOWTORNEO" value="Submit" ><?php echo $strings['Liga regular'];?></button>
+			<button class="botonesRondas" type="submit" name="action" value="Ver_Cuartos" value="Submit" ><?php echo $strings['Cuartos'];?></button>
+			<button class="botonesRondas" type="submit" name="action" value="Ver_Semis" value="Submit" ><?php echo $strings['Semifinales'];?></button>
+			<button class="botonesRondas" type="submit" name="action" value="Ver_Final" value="Submit" ><?php echo $strings['Final'];?></button>
+			
+			<?php
+			if($this -> numGrupos > 1){
+				?>
+				<button class="botonesRondas" type="submit" name="action" value="Ver_Superfinal" value="Submit" ><?php echo $strings['Superfinal'];?></button>
+			<?php } ?>
+			
 			<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
 			<input type="hidden" name="grupo" value=<?php echo $this->grupo; ?>>
 			</form>

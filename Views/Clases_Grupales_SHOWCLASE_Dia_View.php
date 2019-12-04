@@ -34,7 +34,7 @@ include_once '../Functions/Authentication.php';
 
 			
 			<form class="tableActions" action="../Controllers/Clases_Grupales_has_Usuarios_Controller.php" method="post">
-<input type="hidden" name="ID_Clase" value="<?php echo $this -> apuntados -> fetch_array()[0]; ?>">
+			<input type="hidden" name="ID_Clase" value="<?php echo $this -> apuntados -> fetch_array()[0]; ?>">
 					<div>
 					<label class="lblSearch" for="action">
 					<?php echo $strings['Dia']; ?>:</label>
