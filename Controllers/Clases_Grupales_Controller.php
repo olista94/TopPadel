@@ -25,7 +25,7 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Models/Pistas_Model.php";
 			include_once "../Views/Clases_Grupales_DELETE_View.php";
 			include_once "../Views/Clases_Grupales_SHOWCURRENT_View.php";
-			/* include_once "../Views/Clases_Grupales_SHOWCLASE_View.php"; */
+			include_once "../Views/Clases_Grupales_SHOWCLASE_View.php"; 
 			include_once "../Views/Clases_Grupales_SHOWCLASE_Dia_View.php";
 			include_once "../Views/Clases_Grupales_INSCRIPCION_View.php";
 			include_once "../Views/Clases_Grupales_SEARCH_View.php";
@@ -275,19 +275,19 @@ if(isset($_SESSION['tipo'])){
 
 			break;
 			
-			
-			
 			case 'Confirmar_SHOWCLASE':
 					$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
 					$apuntados = $clase -> Apuntados();
 					
-					new Clases_Grupales_SHOWCLASE_Dia($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+					new Clases_Grupales_SHOWCLASE($apuntados,'../Controllers/Clases_Grupales_Controller.php');
 			break;
 			
-			case 'Guardar_Asistencia':
-					$clase = getDataForm(); //Asigna los datos recogidos al objeto torneo
-					$mensaje = $clase-> controlarAsistencia(); //Llama al modelo para editar y le pasa la respuesta a MESSAGE
-					new MESSAGE($mensaje,'../Controllers/Clases_Grupales_Controller.php'); //Devuelve el mensaje de la inserción
+			
+			case 'Confirmar_Edit_SHOWCLASE':
+					$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
+					$apuntados = $clase -> Apuntados();
+					
+					new Clases_Grupales_SHOWCLASE_Dia($apuntados,'../Controllers/Clases_Grupales_Controller.php');
 			break;
 
 				

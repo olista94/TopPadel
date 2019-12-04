@@ -155,6 +155,13 @@ if(isset($_SESSION['tipo'])){
 					$clase = getDataForm(); 
 					
 			break;
+			
+			case 'Confirmar_SHOWCLASE':
+					$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
+					$apuntados = $clase -> Apuntados();
+					
+					new Clases_Grupales_SHOWCLASE($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+			break;
 
 				
 				
