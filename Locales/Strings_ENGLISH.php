@@ -324,6 +324,8 @@ array(
 	'Los cuartos de final todavia no han acabado' => 'Quarter-finals hasn´t finished yet',
 	'Las semifinales todavia no han acabado' => 'Semi-finais hasn´t finished yet',
 	'No puedes ver nada sin loguearte' => 'You can´t see anything without login',
+	'Superfinal' => 'Superfinal',
+	'Las finales todavia no han acabado' => 'Finals hasn´t finished yet',
 	'' => '',
 	'' => '',
 	'' => ''

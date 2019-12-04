@@ -324,6 +324,8 @@ array(
 	'Los cuartos de final todavia no han acabado' => 'Os cuartos de final todavia non remataron',
 	'Las semifinales todavia no han acabado' => 'As semifinais todavia non remataron',
 	'No puedes ver nada sin loguearte' => 'Non podes ver nada sen loguearte',
+	'Superfinal' => 'Superfinal',
+	'Las finales todavia no han acabado' => 'As finais todavia non remataron',
 	'' => '',
 	'' => '',
 	'' => ''
