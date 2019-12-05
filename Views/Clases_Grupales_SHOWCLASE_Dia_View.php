@@ -53,22 +53,19 @@ include_once '../Functions/Authentication.php';
 						<?php $this -> apuntados -> data_seek(0);
 						while($login = $this -> apuntados -> fetch_array()[1]){?>
 							
-							<li> <label for="tipo"><?php echo $strings['Tipo']; ?></label>
+							<li style="display:inline-block"> <label for="tipo"> <?php echo $login; ?></label>
 					<select name="<?php echo $login; ?>">
-		<option value="0"><?php echo $strings['SI']; ?></option>
-		<option value="1"><?php echo $strings['NO']; ?></option>
-	  </select> <?php echo $login; ?>
+		<option value="0"><?php echo $strings['Asiste']; ?></option>
+		<option value="1"><?php echo $strings['Falta']; ?></option>
+	  </select>
 							
 							</li>
 							<?php
 						}
-?>						
-					
+						?>							
 					</ul>
-				<button type="submit" name="action" value="Guardar_Asistencia" value="Submit" class="buscar-little"></button>
-				
 					</div>
-					
+					<button type="submit" name="action" value="Guardar_Asistencia" value="Submit" class="guardar"></button>
 				</form>
 			       
 	</div> 	
