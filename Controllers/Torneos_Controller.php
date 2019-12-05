@@ -203,7 +203,6 @@ if(!IsAuthenticated()){
 	
 	function generarSuperfinal($clasificados,$idtorneo,$partido,$enfrentamiento){
 		$longitud = count($clasificados);
-		echo $longitud;
 		
 		for($i = 0;$i < $longitud; $i++){
 			for($j = $i+1;$j < $longitud; $j++){
@@ -483,7 +482,7 @@ if(!IsAuthenticated()){
 					unset($clasificados);
 					$clasificados = array(); 
 				}
-				$numGrupos = $playoffs -> numGrupos($idtorneo);
+
 				
 				$partido = new Partidos_Model('','','','','','','','','','','','','');
 				$datos = $partido -> ShowAllSemis($_REQUEST['ID_Torneo']);
@@ -578,12 +577,8 @@ if(!IsAuthenticated()){
 						while($clasif1 = $clasif->fetch_array()[0]){
 							array_push($clasificados,$clasif1);										
 						}
-					
-					$superfinal = generarSuperfinal($clasificados,$idtorneo,$partido,$enfrentamiento);
-					/* unset($clasificados);
-					$clasificados = array(); */
-					
 				}
+				$superfinal = generarSuperfinal($clasificados,$idtorneo,$partido,$enfrentamiento);
 				
 				$partido = new Partidos_Model('','','','','','','','','','','','','');
 				$datos = $partido -> ShowAllSuperfinal($_REQUEST['ID_Torneo']);

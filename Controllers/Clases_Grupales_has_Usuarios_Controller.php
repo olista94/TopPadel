@@ -23,7 +23,7 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Views/Clases_Grupales_SHOWALL_View.php";
 			include_once "../Models/Clases_Grupales_Model.php";
 			include_once "../Models/Clases_Grupales_has_Usuarios_Model.php";
-			/* include_once "../Views/Clases_Grupales_SHOWCLASE_View.php"; */
+			include_once "../Views/Clases_Grupales_SHOWCLASE_View.php";
 			include_once "../Views/Clases_Grupales_SHOWCLASE_Dia_View.php";
 			 
 
@@ -154,6 +154,10 @@ if(isset($_SESSION['tipo'])){
 					$clase = new Clases_Grupales_has_Usuarios_Model("","","","","","","","","","","","");
 					$clase = getDataForm(); 
 					
+					$clase = new Clases_Grupales_has_Usuarios_Model($_REQUEST['ID_Clase'],"","","","","","","","","","","");
+					$apuntados = $clase -> Apuntados();
+					
+					new Clases_Grupales_SHOWCLASE($apuntados,'../Controllers/Clases_Grupales_Controller.php');
 			break;
 			
 			case 'Confirmar_SHOWCLASE':
