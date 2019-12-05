@@ -309,7 +309,7 @@ function DevolverSocioConectado()//Devuelve si es socio o no el usuario conectad
 
 function BuscarHombre()
 {	
-    $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Masculina' AND `login` <> '".$_SESSION['login']."' AND `login` <> 'admin')";
+    $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Masculina' AND `login` <> '".$_SESSION['login']."' AND `login` <> 'admin' AND `tipo` <> 'ENTRENADOR')";
    
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
@@ -324,7 +324,7 @@ function BuscarHombre()
 
 function BuscarMujer()
 {	
-    $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Femenina' AND `login` <> '".$_SESSION['login']."' AND `login` <> 'admin' )";
+    $sql = "SELECT login FROM usuarios WHERE (`sexo` = 'Femenina' AND `login` <> '".$_SESSION['login']."' AND `login` <> 'admin' AND `tipo` <> 'ENTRENADOR')";
      ;
     $result = $this->mysqli->query($sql);//Guarda el resultado
     

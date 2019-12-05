@@ -510,7 +510,6 @@ function ResultadosPartidosPareja($idpartido,$idparejalocal,$idparejavisitante){
 			ORDER BY grupo,`PtosFinal` DESC
 			LIMIT 1
 	";
-	
 	  $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
     
     if (!($resultado = $this->mysqli->query($sql))){

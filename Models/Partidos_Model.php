@@ -138,7 +138,7 @@ function add(){
 					'Superfinal',					
 					NULL
 					)";
-			 echo $sql;
+			
 			//Si ya se han insertado la PK o FK
 		if (!$this->mysqli->query($sql)) {
 			
