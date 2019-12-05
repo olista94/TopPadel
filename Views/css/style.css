@@ -1221,7 +1221,7 @@ nav a{
   float: right;
   margin-top: 5px;
   margin-right: 5px;
-  padding: 15px 30px;
+  padding: 15px 15px;
   background-image: url(../img/guardar2.png);
   background-color: #1223B0;
 }
