@@ -285,9 +285,11 @@ if(isset($_SESSION['tipo'])){
 			
 			case 'Confirmar_Edit_SHOWCLASE':
 					$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
-					$apuntados = $clase -> Apuntados();
 					
-					new Clases_Grupales_SHOWCLASE_Dia($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+					$asistencia = $clase -> mostrarDia1();
+					$dia = mysqli_fetch_field_direct($asistencia, 2)->name;
+					
+					new Clases_Grupales_SHOWCLASE_Dia($asistencia,$dia,'../Controllers/Clases_Grupales_Controller.php');
 			break;
 
 				
