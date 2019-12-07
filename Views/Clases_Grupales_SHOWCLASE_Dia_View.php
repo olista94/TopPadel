@@ -7,11 +7,13 @@ include_once '../Functions/Authentication.php';
 
 	//Variable con el enlace al showall
 	var $apuntados;	
+	var $dia;	
 	var $enlace;	
 	//Constructor de la clase
-	function __construct($apuntados,$enlace){
+	function __construct($apuntados,$dia,$enlace){
 
 		$this -> apuntados = $apuntados;
+		$this -> dia = $dia;
 		$this -> enlace = $enlace;
 		$this -> mostrar();
 		
@@ -35,29 +37,31 @@ include_once '../Functions/Authentication.php';
 			
 			<form class="tableActions" action="../Controllers/Clases_Grupales_has_Usuarios_Controller.php" method="post">
 			<input type="hidden" name="ID_Clase" value="<?php echo $this -> apuntados -> fetch_array()[0]; ?>">
+			<input type="hidden" name="dia2" value="<?php echo $this->dia; ?>">
 					<div>
 					<label class="lblSearch" for="action">
 					<?php echo $strings['Dia']; ?>:</label>
-					<select class="slcSearch" name="dia">
+					<select class="slcSearch" name="dia1">
 					<?php for($i = 1; $i < 11; $i++){
 						?>
-					<option value="<?php echo 'dia'.$i;?>"><?php echo 'dia'.$i;?></option>
+					<option  value="<?php echo 'dia'.$i;?>"><?php echo 'Dia '.$i;?></option>
 						
 						<?php
 							}
 						?>
+						
 					</select>
-					
+					<button type="submit" name="action" value="Ver_Dia" value="Submit" class="buscar-little"></button>
 					<ul>
 					
 						<?php $this -> apuntados -> data_seek(0);
-						while($login = $this -> apuntados -> fetch_array()[1]){?>
+						while($login = $this -> apuntados -> fetch_array()){?>
 							
-							<li style="display:inline-block"> <label for="tipo"> <?php echo $login; ?></label>
-					<select name="<?php echo $login; ?>">
-		<option value="0"><?php echo $strings['Asiste']; ?></option>
-		<option value="1"><?php echo $strings['Falta']; ?></option>
-	  </select>
+							<li style="display:inline-block"> <label for="tipo"> <?php echo $login[1]; ?></label>
+					<select name="<?php echo $login[1]; ?>">
+					<option value="0" <?php if($login[2] == 0) echo "selected"; ?>><?php echo $strings['Asiste']; ?></option>
+					<option value="1" <?php if($login[2] == 1) echo "selected"; ?>><?php echo $strings['Falta']; ?></option>
+					</select>
 							
 							</li>
 							<?php
