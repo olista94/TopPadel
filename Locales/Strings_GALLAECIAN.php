@@ -326,6 +326,8 @@ array(
 	'No puedes ver nada sin loguearte' => 'Non podes ver nada sen loguearte',
 	'Superfinal' => 'Superfinal',
 	'Las finales todavia no han acabado' => 'As finais todavia non remataron',
+	'Falta' => 'Falta',
+	'Asiste' => 'Asiste',
 	'' => '',
 	'' => '',
 	'' => ''
