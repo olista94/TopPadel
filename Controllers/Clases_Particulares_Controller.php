@@ -173,11 +173,20 @@ if(isset($_SESSION['tipo'])){
 			
 			case 'Confirmar_DELETE2':
 			
+			if($_SESSION['tipo'] == 'NORMAL' || $_SESSION['tipo'] == 'ADMIN'){
 				$clase = new Clases_Particulares_Model($_REQUEST['ID_Clase'],"","","","","");
 				
 				$mensaje = $clase -> delete();
 				
 				new MESSAGE($mensaje,'../Controllers/Clases_Particulares_Controller.php');
+			}
+			else{
+				$clase = new Clases_Particulares_Model($_REQUEST['ID_Clase'],"","","","","");
+				
+				$mensaje = $clase -> solicitaBorrado();
+				
+				new MESSAGE($mensaje,'../Controllers/Clases_Particulares_Controller.php');
+			}
 			
 			break;
 			

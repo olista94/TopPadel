@@ -28,6 +28,8 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Views/Clinics_ADD_View.php";
 			include_once "../Views/Clinics_SEARCH_View.php";
 			include_once "../Views/Clinics_INSCRIPCION_View.php";
+			include_once "../Views/Clinics_SHOWCLINIC_View.php"; 
+			include_once "../Views/Clinics_SHOWCLINIC_Dia_View.php"; 
 			
 			 
 
@@ -263,6 +265,23 @@ if(isset($_SESSION['tipo'])){
 				
 				new MESSAGE($mensaje,'../Controllers/Clinics_Controller.php');
 			
+			break;
+			
+			case 'Confirmar_SHOWCLINIC':
+					$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");
+					$apuntados = $clase -> Apuntados();
+					
+					new Clinics_SHOWCLINIC($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+			break;
+			
+			
+			case 'Confirmar_Edit_SHOWCLINIC':
+					$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");
+					
+					$asistencia = $clase -> mostrarDia1();
+					$dia = mysqli_fetch_field_direct($asistencia, 2)->name;
+					
+					new Clinics_SHOWCLINIC_Dia($asistencia,$dia,'../Controllers/Clases_Grupales_Controller.php');
 			break;
 
 				
