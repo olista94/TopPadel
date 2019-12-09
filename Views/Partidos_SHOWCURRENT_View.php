@@ -66,7 +66,7 @@
 							else if($this -> fila['ronda'] == 'Cuartos')
 								echo $strings['Cuartos'];
 							else if($this -> fila['ronda'] == 'Semis')
-								echo $strings['Semis'];
+								echo $strings['Semifinales'];
 							else if($this -> fila['ronda'] == 'Final')
 								echo $strings['Final'];
 							else if($this -> fila['ronda'] == 'Superfinal')
