@@ -66,6 +66,16 @@
                 </tr>
 				
 				<tr>
+                    <th><?php echo $strings['% victorias']; ?></th>
+                    <td><?php 
+					
+					
+					echo ( ($this -> fila['PG']) / ($this -> fila['PJ']) ) * 100 ; echo "%";
+					
+					 ?></td>
+                </tr>
+				
+				<tr>
                     <th><?php echo $strings['Torneos Disputados']; ?></th>
                     <td><?php echo $this -> fila['Num_Torneos']; ?></td>
                 </tr>

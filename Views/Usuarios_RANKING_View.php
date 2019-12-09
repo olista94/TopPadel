@@ -30,6 +30,17 @@ include_once '../Functions/Authentication.php';
 ?>
 <!--Tabla con los datos de los usuarios-->
 	<div class="showall">   
+	
+	<button title = "<?php echo $strings ['Criterios de puntuacion:'];
+         					echo "\n";
+         					echo $strings ['Partido ganado -> +3 puntos'];
+							echo "\n";
+         					echo $strings ['Partido perdido -> -1 punto'];
+         					echo "\n";
+         					echo $strings ['Aplicable a cualquier partido dentro de un campeonato'];?>
+
+
+         	" type="submit" name="action" value="Submit" class="ayuda-ico"></button>
                                 
 		<table class="showAllUsers">
 			<tr><th class="title" colspan="4"><?php echo $strings['Rankings']; ?>

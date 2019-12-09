@@ -61,7 +61,8 @@ include '../Views/Header.php';
 					<td><?php echo $fila['login_usuario']; ?></td>
 					<td><?php echo $fila['login_entrenador']; ?></td>
 					<td><?php echo $fila['fecha_clase']; ?></td>
-					<td><?php echo $fila['hora_clase']; ?></td>		
+					<td><?php echo $fila['hora_clase']; ?></td>
+					<td><b><?php if ($fila['borrado'] == 'SI') echo "Aplazamiento sugerido"; else echo ""; ?>
 					<td style="text-align:right">
 					<!--Botones para editar,borrar o ver en detalle-->
 						<button class="borrar" name="action" value="Confirmar_DELETE1" type="submit"></button>
@@ -141,7 +142,8 @@ include '../Views/Header.php';
 					<td><?php echo $fila['login_usuario']; ?></td>
 					<td><?php echo $fila['login_entrenador']; ?></td>
 					<td><?php echo $fila['fecha_clase']; ?></td>
-					<td><?php echo $fila['hora_clase']; ?></td>		
+					<td><?php echo $fila['hora_clase']; ?></td>
+					<td><b><?php if ($fila['borrado'] == 'SI') echo "Aplazamiento sugerido"; else echo ""; ?>
 					<td style="text-align:right">
 					<!--Botones para editar,borrar o ver en detalle-->
 						<button class="borrar" name="action" value="Confirmar_DELETE1" type="submit"></button>

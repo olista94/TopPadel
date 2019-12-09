@@ -31,7 +31,7 @@ include_once '../Functions/Authentication.php';
 
 <div class="showall">   
      <table class="asistencia">
-			<tr><th style="border:none;" class="title" colspan="4"><?php echo $strings['Clases']; ?>
+			<tr><th style="border:none;" class="title" colspan="4"><?php echo $strings['Asistencia']; ?>
 			<form class="tableActions" action="../Controllers/Clases_Grupales_Controller.php" method="">
 			<!--Botones para añadir o buscar-->
 			<button class="guardar" name="action" value="Confirmar_Edit_SHOWCLASE" type="submit"></button>
