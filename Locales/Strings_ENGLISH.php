@@ -326,8 +326,17 @@ array(
 	'No puedes ver nada sin loguearte' => 'You can´t see anything without login',
 	'Superfinal' => 'Superfinal',
 	'Las finales todavia no han acabado' => 'Finals hasn´t finished yet',
-	'Falta' => 'Absence',
+	'Falta' => 'Miss',
 	'Asiste' => 'Attend',
+	'Criterios de puntuacion:' => 'Ranking criteria:',
+	'Partido ganado -> +3 puntos' => 'Win -> +3 points',
+	'Partido perdido -> -1 punto' => 'Defeat -> -1 point',
+	'Aplicable a cualquier partido dentro de un campeonato' => 'This criteria are applicable to any match of a championship',
+	'Asistencia' => 'Attendance',
+	'% victorias' => 'Win %',
+	'Solicitud enviada' => 'Request sent',
+	'Pulsa para controlar asistencia' => 'Click for control the attendance',
+	'' => '',
 	'' => '',
 	'' => ''
 	
