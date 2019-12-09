@@ -245,14 +245,14 @@ function ShowAllAdminNormal(){
 function apuntarUsuario(){
 
 		//Sentencia sql para insertar	
-		$sql = "INSERT INTO clases_grupales_has_usuarios
+		$sql = "INSERT INTO clases_grupales_has_usuarios (ID_Clase,login_usuario)
 			VALUES (
 				'$this->ID_Clase',
 				'".$_SESSION['login']."'
 				
 				)
 				";
-				
+				echo $sql;
 				
 		if (!$this->mysqli->query($sql)) {
 			
@@ -416,6 +416,35 @@ function buscarPistasLibresClases(){
 	}
 }
 
+function Apuntados()
+{	
+    $sql = "SELECT * FROM `clases_grupales_has_usuarios` WHERE ID_Clase = '$this->ID_Clase'";
+
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado;//Se devuelve el resultado de la consulta
+	}
+}
+
+function mostrarDia1()
+{	
+    $sql = "SELECT ID_Clase,login_usuario,dia1 FROM `clases_grupales_has_usuarios` WHERE ID_Clase = '$this->ID_Clase'";
+
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado;//Se devuelve el resultado de la consulta
+	}
+}
 
 }//fin de clase
 

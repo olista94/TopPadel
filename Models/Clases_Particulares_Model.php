@@ -34,7 +34,7 @@ function __construct($ID_Clase,$login_usuario,$login_entrenador,$fecha_clase,$ho
 function add(){
 
 		//Sentencia sql para insertar	
-		$sql = "INSERT INTO clases_particulares
+		$sql = "INSERT INTO clases_particulares (ID_Clase,login_usuario,login_entrenador,fecha_clase,hora_clase,ID_Pista)
 			VALUES (
 				'$this->ID_Clase',
 				'".$_SESSION['login']."',
@@ -46,7 +46,6 @@ function add(){
 				)
 				";
 				
-				
 		if (!$this->mysqli->query($sql)) {
 			
 			return 'Error al insertar.Ya existe un usuario con ese login';//Devuelve mensaje de error	
@@ -56,68 +55,7 @@ function add(){
 			return  'Insercion correcta'; //operacion de insertado correcta
 		}		
 	}
-	
-	function rellenadatos() 
-{	
-    $sql = "SELECT * FROM usuarios WHERE (`login` = '$this->login')";
 
-    if (!($resultado = $this->mysqli->query($sql))){
-		return 'No existe'; //Devuelve mensaje de error	
-	}
-    else{ 
-		$result = $resultado;
-		return $result;//Se devuelve el resultado de la consulta
-	}
-}
-
-	function DatosSocio() 
-{	
-    $sql = "SELECT socio,IBAN,cuenta FROM usuarios WHERE (`login` = '$this->login')";
-
-    if (!($resultado = $this->mysqli->query($sql))){
-		return 'No existe'; //Devuelve mensaje de error	
-	}
-    else{ 
-		$result = $resultado;
-		return $result;//Se devuelve el resultado de la consulta
-	}
-}
-
-//Funcion que edita un usuario
-function edit()
-{
-	
-    $sql = "SELECT * FROM usuarios WHERE (`login` = '$this->login')";
-    
-    $result = $this->mysqli->query($sql);
-    
-    if ($result->num_rows == 1)
-    {	
-		//Sentencia sql para editar
-		$sql = "UPDATE usuarios SET
-					`password` = '$this->password',
-					`dni` = '$this->dni',
-					`nombre` = '$this->nombre',
-					`apellidos` = '$this->apellidos',
-					`telefono` = '$this->telefono',
-					`email` = '$this->email',
-					`fecha` = '$this->fecha',
-					`sexo` = '$this->sexo',
-					`tipo` = '$this->tipo'
-
-				WHERE (`login` = '$this->login')";
-
-        if (!($resultado = $this->mysqli->query($sql))){
-			return 'Error en la modificación';//Devuelve mensaje de error	
-		}
-		else{ 
-			
-			return 'Modificado correctamente'; //Exito
-		}
-    }
-    else 
-    	return 'No existe';//Devuelve mensaje de error	
-} 
 
 //Funcion para buscar un usuario
 function searchAdmin(){ 
@@ -321,6 +259,25 @@ function ShowAllAdmin(){
 		return $resultado;//Se devuelve el resultado de la consulta
 	}
 }
+
+function solicitaBorrado(){
+			//Sentencia sql que insetara la categoria
+		$sql = "UPDATE clases_particulares SET
+			`borrado` = 'SI'
+			
+			WHERE (`ID_Clase` = '$this->ID_Clase')
+			";
+			
+			//Si ya se han insertado la PK o FK
+		if (!$this->mysqli->query($sql)) {
+			
+			return 'Error al insertar';
+		}
+		//operacion de insertado correcta
+		else{
+			return  'Solicitud enviada'; 
+		}		
+	}
 
 
 }//fin de clase

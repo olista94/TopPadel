@@ -244,7 +244,7 @@ function ShowAllAdminNormal(){
 function apuntarUsuario(){
 
 		//Sentencia sql para insertar	
-		$sql = "INSERT INTO clases_grupales_has_usuarios
+		$sql = "INSERT INTO clases_grupales_has_usuarios (ID_Clase,login_usuario)
 			VALUES (
 				'$this->ID_Clase',
 				'".$_SESSION['login']."'
