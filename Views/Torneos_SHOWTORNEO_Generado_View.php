@@ -286,6 +286,21 @@ if(isset($_SESSION['tipo'])){
 
 <!--Tabla con los datos de los torneos-->
 
+<form action="../Controllers/Torneos_Controller.php" method="post" name="action" class="ronda">
+			<button class="botonesRondas" type="submit" name="action" value="Confirmar_SHOWTORNEO" value="Submit" ><?php echo $strings['Liga regular'];?></button>
+			<button class="botonesRondas" type="submit" name="action" value="Ver_Cuartos" value="Submit" ><?php echo $strings['Cuartos'];?></button>
+			<button class="botonesRondas" type="submit" name="action" value="Ver_Semis" value="Submit" ><?php echo $strings['Semifinales'];?></button>
+			<button class="botonesRondas" type="submit" name="action" value="Ver_Final" value="Submit" ><?php echo $strings['Final'];?></button>
+			
+			<?php $numGrupos = $this-> grupos -> num_rows;
+			if($numGrupos > 1){
+				?>
+				<button class="botonesRondas" type="submit" name="action" value="Ver_Superfinal" value="Submit" ><?php echo $strings['Superfinal'];?></button>
+			<?php } ?>
+			
+			<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
+			<input type="hidden" name="grupo" value=<?php echo $this->grupo; ?>>
+			</form>
 				
 	<div class="showall">   
 	

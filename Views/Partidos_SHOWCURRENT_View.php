@@ -62,7 +62,16 @@
 				<tr>
                     <th><?php echo $strings['Ronda']; ?></th>
                     <td><?php if($this -> fila['ronda'] == 'Grupos')
-								echo $strings['Grupos']; ?></td>
+								echo $strings['Grupos'];
+							else if($this -> fila['ronda'] == 'Cuartos')
+								echo $strings['Cuartos'];
+							else if($this -> fila['ronda'] == 'Semis')
+								echo $strings['Semis'];
+							else if($this -> fila['ronda'] == 'Final')
+								echo $strings['Final'];
+							else if($this -> fila['ronda'] == 'Superfinal')
+								echo $strings['Superfinal'];
+							?></td>
                 </tr>
 				<!--Campo telefono del torneo-->
 				
