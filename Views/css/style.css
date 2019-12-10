@@ -321,6 +321,7 @@ input {
 	padding: 0px 20px 20px 20px;  
 	box-shadow: 2px 3px 18px -5px rgba(0,0,0,0.75);
 	border-collapse:collapse;
+
 }
 
 .asistencia th{
@@ -1221,7 +1222,7 @@ nav a{
   float: right;
   margin-top: 5px;
   margin-right: 5px;
-  padding: 15px 15px;
+  padding: 20px 20px;
   background-image: url(../img/guardar2.png);
   background-color: #1223B0;
 }
@@ -1252,3 +1253,16 @@ nav a{
   border-radius: 3px;
   background-color:#4CAF50;
 }
+
+.refrescar {
+  vertical-align: text-bottom;
+  float: right;
+  margin-top: 2px;
+  margin-right: 5px;
+  padding: 15px 15px;
+  background-image: url(../img/refrescar.png);
+  text-shadow: 0 0 3px;
+  background-color: #eef9f6;
+
+}
+
