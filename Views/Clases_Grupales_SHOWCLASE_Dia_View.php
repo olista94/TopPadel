@@ -39,7 +39,7 @@ include_once '../Functions/Authentication.php';
 			<input type="hidden" name="ID_Clase" value="<?php echo $this -> apuntados -> fetch_array()[0]; ?>">
 			<input type="hidden" name="dia2" value="<?php echo $this->dia; ?>">
 					<div>
-					<label class="lblSearch" for="action">
+					<label style="margin-left: 40%;font-size: 16px;" class="lblSearch" for="action">
 					<?php echo $strings['Dia']; ?>:</label>
 					<select class="slcSearch" name="dia1">
 					<?php for($i = 1; $i < 11; $i++){
@@ -51,16 +51,17 @@ include_once '../Functions/Authentication.php';
 						?>
 						
 					</select>
-					<button type="submit" name="action" value="Ver_Dia" value="Submit" class="buscar-little"></button>
+					<button style="margin-right: 45%;margin-top: 12px;" type="submit" name="action" value="Ver_Dia" value="Submit" 
+						class="buscar-little"></button> 
 					<ul>
 					
 						<?php $this -> apuntados -> data_seek(0);
 						while($login = $this -> apuntados -> fetch_array()){?>
 							
-							<li style="display:inline-block"> <label for="tipo"> <?php echo $login[1]; ?></label>
+							<li style="display:inline-block; margin: 30px"> <label for="tipo" > <?php echo $login[1]; ?></label>
 					<select name="<?php echo $login[1]; ?>">
-					<option value="0" <?php if($login[2] == 0) echo "selected"; ?>><?php echo $strings['Asiste']; ?></option>
-					<option value="1" <?php if($login[2] == 1) echo "selected"; ?>><?php echo $strings['Falta']; ?></option>
+					<option style="background: #80c60e;" value="0" <?php if($login[2] == 0) echo "selected"; ?>><?php echo $strings['Asiste']; ?></option>
+					<option style="background: #fa312a;" value="1" <?php if($login[2] == 1) echo "selected"; ?>><?php echo $strings['Falta']; ?></option>
 					</select>
 							
 							</li>
@@ -69,7 +70,7 @@ include_once '../Functions/Authentication.php';
 						?>							
 					</ul>
 					</div>
-					<button type="submit" name="action" value="Guardar_Asistencia" value="Submit" class="guardar"></button>
+					<button style="margin-right: 50%;margin-left: 50%;" type="submit" name="action" value="Guardar_Asistencia" value="Submit" class="guardar"></button>
 				</form>
 			       
 	</div> 	
