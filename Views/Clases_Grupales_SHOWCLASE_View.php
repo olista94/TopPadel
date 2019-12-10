@@ -31,16 +31,16 @@ include_once '../Functions/Authentication.php';
 
 <div class="showall">   
      <table class="asistencia">
-			<tr><th style="border:none;" class="title" colspan="4"><?php echo $strings['Asistencia']; ?>
+			<tr><th style="border:none;background: #FFF;" class="title" colspan="4"><?php echo $strings['Asistencia']; ?>
 			<form class="tableActions" action="../Controllers/Clases_Grupales_Controller.php" method="">
 			<!--Botones para añadir o buscar-->
-			<button class="guardar" name="action" value="Confirmar_Edit_SHOWCLASE" type="submit"></button>
+			<button class="refrescar" name="action" value="Confirmar_Edit_SHOWCLASE" type="submit"></button>
 			<input type="hidden" name="ID_Clase" value="<?php echo $this -> apuntados -> fetch_array()[0]; ?>">
 			</form></th></tr>
 	<!--Campos Categoria,nombre,Edicion,Fecha,Nivel -->
 			<tr>
 			
-				<th style="border-left:none;border-top:none;"></th>
+				<th style="border-left:none;border-top:none;background: #FFF"></th>
 				<th><?php echo $strings['Dia'];echo " 1" ?></th>
 				<th><?php echo $strings['Dia'];echo " 2" ?></th>
 				<th><?php echo $strings['Dia'];echo " 3" ?></th>
@@ -63,9 +63,20 @@ include_once '../Functions/Authentication.php';
 					<!--Datos-->
 					
 					<td style="border:1px solid black;border-left:none;border-collapse:collapse;"><?php echo $fila['login_usuario']; ?></td>	
-							
-					<td><?php if($fila['dia1'] == 0){
+					
+					<!-- Estilo para alternar colores entre filas da table -->
+					<style type='text/css'>
+						tr:nth-child(odd) {	
+    						background-color:#f2f2f2; /*gris*/	
+						}	
+						tr:nth-child(even) {	
+    						background-color:#FFF; /*azul*/	
+						} 	
+					</style>
+					<!-- ************************************************* -->
+							<td><?php if($fila['dia1'] == 0){
 								echo $strings['Asiste'];
+
 							}
 							else{
 								echo $strings['Falta'];
