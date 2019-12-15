@@ -83,6 +83,11 @@
 						?></td>
                     </tr>
 					
+					<tr>
+                        <th><?php echo $strings['Metodo de pago']; ?></th>
+                        <td><?php echo $this -> fila['pago']; ?></td>
+                    </tr>
+					
                                                                             
                 </table>
             </form>            

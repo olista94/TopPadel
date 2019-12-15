@@ -69,8 +69,10 @@
                     <th><?php echo $strings['% victorias']; ?></th>
                     <td><?php 
 					
-					
-					echo ( ($this -> fila['PG']) / ($this -> fila['PJ']) ) * 100 ; echo "%";
+					if($this -> fila['PJ'] == 0)
+						echo "-";
+					else
+					echo "( ($this -> fila['PG']) / ($this -> fila['PJ']) ) * 100 %";
 					
 					 ?></td>
                 </tr>
