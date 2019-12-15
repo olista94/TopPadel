@@ -336,6 +336,11 @@ array(
 	'% victorias' => 'Win %',
 	'Solicitud enviada' => 'Request sent',
 	'Pulsa para controlar asistencia' => 'Click for control the attendance',
+	'Aplazamiento sugerido' => 'Change requested',
+	'Cuadro de honor' => 'Honor box',
+	'Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul' => 'Add successfull.You can go to Paypal website after clicking over its logo in the blue button',
+	'Metodo de pago' => 'Payment way',
+	'Recuerda realizar el pago en las instalaciones del club' => 'Don´t forget to pay in the club',
 	'' => '',
 	'' => '',
 	'' => ''
