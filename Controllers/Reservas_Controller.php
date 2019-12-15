@@ -2,6 +2,7 @@
 <?php
 session_start();
 include_once "../Views/MESSAGE.php";
+include_once "../Views/MESSAGE_Pago.php";
 include_once "../Views/ALERT.php";
 include_once "../Functions/Authentication.php";
 if (!IsAuthenticated()){ //si no está autenticado
@@ -15,6 +16,8 @@ if (!IsAuthenticated()){ //si no está autenticado
 	//include_once "../Views/Reservas_ADD_View.php";
 	include_once "../Views/Reservas_ADD_Pista_View.php";
 	include_once "../Views/Reservas_ADD_Fecha_View.php";
+	include_once "../Views/Reservas_ADD_Pago_View.php";
+	include_once "../Views/Reservas_ADD_Tarjeta_View.php";
 	include_once "../Views/Reservas_ADD_Hora_View.php";
 	include_once "../Views/Reservas_SEARCH_View.php";
 	include_once "../Views/Reservas_DELETE_View.php";
@@ -48,13 +51,13 @@ if (!IsAuthenticated()){ //si no está autenticado
 		
 		
 		//Comprueba si está el campo
-		if(isset($_REQUEST['hora_fin'])){
-			$hora_fin = $_REQUEST['hora_fin'];//Si el campo se le ha pasado se le asigna
+		if(isset($_REQUEST['pago'])){
+			$pago = $_REQUEST['pago'];//Si el campo se le ha pasado se le asigna
 		}else{
-			$hora_fin = ""; //Si no, se pone como vacío
+			$pago = ""; //Si no, se pone como vacío
 		}
 		//Construye el objeto reserva con los parámetros
-		$reserva = new Reservas_Model ($usuarios_login,$pista_ID_Pista,$fecha_reserva,$hora_inicio,$hora_fin);
+		$reserva = new Reservas_Model ($usuarios_login,$pista_ID_Pista,$fecha_reserva,$hora_inicio,$pago);
 		
 		//Devuelve el objeto reserva
 		return $reserva;
@@ -67,7 +70,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 	switch ($_REQUEST['action']){
 		//Añadir una reserva desde el showall
 		case 'Confirmar_ADD1':
-				$reserva = new Reservas_Model("","",'','');
+				$reserva = new Reservas_Model("","",'','','');
 				$numReservas = $reserva->contarReservasUsuario()->fetch_array()[1];
 
 				if($numReservas >= 5){
@@ -80,7 +83,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 			
 			case 'Confirmar_ADD_Fecha':
 					
-				$reservas = new Reservas_Model("","",$_REQUEST['fecha_reserva'],"");
+				$reservas = new Reservas_Model("","",$_REQUEST['fecha_reserva'],"",'');
 				$horasOcupadas = $reservas -> BuscarHorasOcupadas();
 				
 				$array = Array ('08:00:00','09:30:00','11:00:00','12:30:00','14:00:00','15:30:00','17:00:00','18:30:00','20:00:00','21:30:00');
@@ -90,7 +93,6 @@ if (!IsAuthenticated()){ //si no está autenticado
 				
 				while($h = $horasOcupadas->fetch_array()[0]){
 					array_push($ocup,$h);
-					
 				}
 				
 				$resultado = array_diff($array, $ocup);
@@ -101,49 +103,38 @@ if (!IsAuthenticated()){ //si no está autenticado
 			break;
 			
 			case 'Confirmar_ADD_Hora':
-				$reservas = new Reservas_Model("","",$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio']);
+				$reservas = new Reservas_Model("","",$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],'');
 				$pistasLibres = $reservas -> pistasLibres();
-				
-				/* $pista = new Pistas_Model("","","","");
-				$pistasTotales = $pista->DevolverTodasLasPistas();
-				
-				$arrayIDsOcupadas = Array();
-				$arrayIDsTotales = Array();
-				$arrayNombresOcupadas = Array();
-				$arrayNombresTotales = Array();
-				
-				while($i = $pistasOcupadas->fetch_array()[0]){
-					array_push($arrayIDsOcupadas,$i);
-				}
-				
-				while($j = $pistasTotales->fetch_array()[0]){
-					array_push($arrayIDsTotales,$j);
-				}
-				
-				while($i = $pistasOcupadas->fetch_array()[1]){
-					array_push($arrayNombresOcupadas,$i);
-				}
-				
-				while($j = $pistasTotales->fetch_array()[1]){
-					array_push($arrayNombresTotales,$j);
-				}
-				
-				$IDsLibres = array_diff($arrayIDsTotales, $arrayIDsOcupadas);
-				$NombresLibres = array_diff($arrayNombresTotales, $arrayNombresOcupadas); */
-				
 				
 				new Reservas_ADD_Pista($pistasLibres,$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],'../Controllers/Reservas_Controller.php');
 			break;
 			
 			case 'Confirmar_ADD_Pista':
 			
-				$reserva = getDataForm();
-				//Asigna los datos obtenidos al objeto reserva		
-				$mensaje = $reserva-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
-				//Si el insertado es correcto
-				new MESSAGE($mensaje,'../Controllers/Reservas_Controller.php');			 
+				//$reserva = getDataForm();
+				
+				new Reservas_ADD_Pago($_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],$_REQUEST['pista_ID_Pista'],'../Controllers/Reservas_Controller.php');			 
 					
-		break;
+			break;
+			
+			case 'Confirmar_ADD_Pago':
+			
+				$reserva = getDataForm();
+				$reservas = new Reservas_Model($_SESSION['login'],$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],$_REQUEST['pago']);
+				$reservas -> add();
+				$pago = $reservas -> devolverMetodoPago();
+				if($pago == 'Paypal'){
+					new MESSAGE_Pago('Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul','../Controllers/Reservas_Controller.php');			 
+				}
+				else if($pago == 'Contrareembloso'){
+					new MESSAGE('Recuerda realizar el pago en las instalaciones del club','../Controllers/Reservas_Controller.php');
+				}
+				
+				else if($pago == 'Tarjeta'){
+					new Reservas_ADD_Tarjeta('../Controllers/Reservas_Controller.php');
+				}
+				
+			break;
 		
 		//Si se selecciona la accion buscar desde el showall
 		case 'Confirmar_SEARCH1':

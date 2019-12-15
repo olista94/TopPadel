@@ -24,6 +24,7 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Models/Clases_Grupales_Model.php";
 			include_once "../Models/Clases_Grupales_has_Usuarios_Model.php";
 			include_once "../Views/Clases_Grupales_SHOWCLASE_View.php";
+			include_once "../Views/Clinics_SHOWCLINIC_View.php";
 			include_once "../Views/Clases_Grupales_SHOWCLASE_Dia_View.php";
 			 
 
@@ -71,15 +72,25 @@ if(isset($_SESSION['tipo'])){
 					$clase = new Clases_Grupales_has_Usuarios_Model($_REQUEST['ID_Clase'],"","","","","","","","","","","");
 					$apuntados = $clase -> Apuntados();
 					
-					new Clases_Grupales_SHOWCLASE($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+					$clase2 = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","");
+					$tipo = $clase2 -> devolverTipo();
+					
+					if($tipo == 'ESCUELAS'){
+						echo $tipo;
+						new Clases_Grupales_SHOWCLASE($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+					}
+					else{
+						echo $tipo;
+						new Clinics_SHOWCLINIC($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+					}
 			break;
 			
-			case 'Confirmar_SHOWCLASE':
+			/*case 'Confirmar_SHOWCLASE':
 					$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
 					$apuntados = $clase -> Apuntados();
 					
 					new Clases_Grupales_SHOWCLASE($apuntados,'../Controllers/Clases_Grupales_Controller.php');
-			break;
+			break; */
 
 				
 				
