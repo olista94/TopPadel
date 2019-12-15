@@ -1266,3 +1266,8 @@ nav a{
 
 }
 
+.paypal{
+	background-color:rgb(76, 116, 175);
+	background-image: url(../img/paypal.png); 
+}
+
