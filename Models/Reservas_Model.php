@@ -8,13 +8,15 @@ class Reservas_Model {
 	var $pista_ID_Pista;
 	var $fecha_reserva;
 	var $hora_inicio;
+	var $pago;
 	
 //Constructor de la clase
-function __construct($usuarios_login,$pista_ID_Pista,$fecha_reserva,$hora_inicio){
+function __construct($usuarios_login,$pista_ID_Pista,$fecha_reserva,$hora_inicio,$pago){
 	$this->usuarios_login = $usuarios_login;
 	$this->pista_ID_Pista = $pista_ID_Pista;
 	$this->fecha_reserva = $fecha_reserva;
 	$this->hora_inicio = $hora_inicio;
+	$this->pago = $pago;
 
 		//Incluimos el archivo de acceso a la bd
 		include_once 'Access_DB.php';
@@ -31,10 +33,12 @@ function add(){
 				'$this->usuarios_login',
 				'$this->pista_ID_Pista',
 				'$this->fecha_reserva',
-				'$this->hora_inicio'
-
+				'$this->hora_inicio',
+				'$this->pago'
+				
 				)
 			";
+			
 
 	if (!$this->mysqli->query($sql)) { 
 		return 'Error al insertar';//Devuelve mensaje de error
@@ -293,6 +297,25 @@ function rellenadatos() {
 		$result = $resultado;//Se guarda el resultado de la consulta sql
 		return $result;//Se devuelve el resultado de la consulta
 		
+	}
+}
+
+function devolverMetodoPago()
+{	
+    $sql = "SELECT pago FROM `reservas` WHERE (`usuarios_login` = '$this->usuarios_login'
+										AND `pista_ID_Pista` = '$this->pista_ID_Pista'
+										AND `fecha_reserva` = '$this->fecha_reserva'
+										AND `hora_inicio` = '$this->hora_inicio'
+										)";
+
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado->fetch_array()[0];//Se devuelve el resultado de la consulta
 	}
 }
 

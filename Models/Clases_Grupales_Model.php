@@ -444,6 +444,21 @@ function mostrarDia1()
 	}
 }
 
+function devolverTipo()
+{	
+    $sql = "SELECT tipo FROM `clases_grupales` WHERE ID_Clase = '$this->ID_Clase'";
+
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado->fetch_array()[0];//Se devuelve el resultado de la consulta
+	}
+}
+
 
 
 }//fin de clase

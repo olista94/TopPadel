@@ -962,6 +962,46 @@ function getClasificacionCuartos($idtorneo,$pareja){
 			}			
 			
 	}
+	
+	function clasificadosLocalSuperfinal($idtorneo){
+	
+	
+		$sql = "SELECT DISTINCT par.ID_Pareja as ID_ParejaLocal,par.usuarios_login as Local1,par.usuarios_login1 as Local2
+			FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+			phg.ID_Pareja = par.ID_Pareja and ronda = 'Superfinal' and phg.`ID_Torneo` = '".$idtorneo."'
+			order by 1
+			"; 
+
+		if (!$resultado = $this->mysqli->query($sql)) { 
+			return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
+		}
+		else{ 
+			return $resultado;  //Devuelve mensaje de exito	
+		}
+	}
+	
+	function clasificadosVisitanteSuperfinal($idtorneo){
+	
+	
+		$sql = "SELECT DISTINCT par1.ID_Pareja as ID_ParejaVisitante,par1.usuarios_login as Visitante1,par1.usuarios_login1 as Visitante2
+			FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+			phg.ID_Pareja = par.ID_Pareja and ronda = 'Superfinal' and phg.`ID_Torneo` = 1 and par1.ID_Pareja not in (SELECT DISTINCT par.ID_Pareja as ID_ParejaLocal
+			FROM parejas par,parejas par1,partidos part,parejas_has_partidos ph,parejas_has_grupos phg 
+			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
+			phg.ID_Pareja = par.ID_Pareja and ronda = 'Superfinal' and phg.`ID_Torneo` = '".$idtorneo."'
+			order by 1)
+			order by 1
+			"; 
+
+		if (!$resultado = $this->mysqli->query($sql)) { 
+			return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
+		}
+		else{ 
+			return $resultado;  //Devuelve mensaje de exito	
+		}
+	}
  
  
 }//fin de clase
