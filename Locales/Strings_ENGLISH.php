@@ -341,6 +341,8 @@ array(
 	'Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul' => 'Add successfull.You can go to Paypal website after clicking over its logo in the blue button',
 	'Metodo de pago' => 'Payment way',
 	'Recuerda realizar el pago en las instalaciones del club' => 'Don´t forget to pay in the club',
+	'CCV' => 'CCV',
+	'Numero de tarjeta' => 'Card number',
 	'' => '',
 	'' => '',
 	'' => ''

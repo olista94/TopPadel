@@ -341,6 +341,8 @@ array(
 	'Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul' => 'Inserción correcta.Podes acceder á páxina de Paypal facendo click sobre seu logo no botón azul',
 	'Metodo de pago' => 'Método de pago',
 	'Recuerda realizar el pago en las instalaciones del club' => 'Recorda realizar o pago nas instalacións do clube',
+	'CCV' => 'CCV',
+	'Numero de tarjeta' => 'Número de tarxeta',
 	'' => '',
 	'' => '',
 	'' => ''
