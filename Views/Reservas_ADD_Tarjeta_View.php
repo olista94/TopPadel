@@ -3,10 +3,15 @@
   //Declaracion de la clase
  class Reservas_ADD_Tarjeta{	 
 //Variable con el enlace al form de ADD Socio
+	var $pista;
+	var $fecha_reserva;
+	var $hora_reserva;
 	var $enlace;	
 	//Constructor de la clase
-	function __construct($enlace){
-		
+	function __construct($pista,$fecha_reserva,$hora_reserva,$enlace){
+		$this -> pista = $pista;
+		$this -> fecha_reserva = $fecha_reserva;
+		$this -> hora_reserva = $hora_reserva;
 		$this -> enlace = $enlace;
 		$this -> mostrar();
 	}
@@ -22,6 +27,10 @@
 ?>
 <!--Formulario para añadir socio-->
   <form name="Form" id="registerForm" action="../Controllers/Reservas_Controller.php" method="post" enctype="multipart/form-data" >
+					<input type = "hidden" name = "pista_ID_Pista" value = '<?php echo $this->pista; ?>'>
+					<input type = "hidden" name = "fecha_reserva" value = '<?php echo $this->fecha_reserva; ?>'>
+					<input type = "hidden" name = "hora_inicio" value = '<?php echo $this->hora_reserva; ?>'>
+					
     <legend><?php echo $strings['Añadir reserva']; ?>
 	<!--Boton para volver atras-->
     <button type="button" onclick="location.href='../Controllers/Reservas_Controller.php';" class="volver"></button>
@@ -39,9 +48,9 @@
        
 	  
     </div>
-     <!--Boton para confirmar insercion-->
-    <button type="submit" name="action" value="Confirmar_Socio" class="aceptar"></button>
-	<!--Boton para borrar texto-->
+     
+    <button type="submit" name="action" value="Confirmar_ADD_Tarjeta" class="aceptar"></button>
+	
     <button type="reset" value="Reset" class="cancelar"></button>
 
 	</form>
