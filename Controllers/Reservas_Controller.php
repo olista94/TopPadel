@@ -48,8 +48,6 @@ if (!IsAuthenticated()){ //si no está autenticado
 		}else{
 			$hora_inicio = ""; //Si no, se pone como vacío
 		}
-		
-		
 		//Comprueba si está el campo
 		if(isset($_REQUEST['pago'])){
 			$pago = $_REQUEST['pago'];//Si el campo se le ha pasado se le asigna

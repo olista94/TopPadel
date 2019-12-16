@@ -2,6 +2,7 @@
 <?php
 session_start();
 include_once "../Views/MESSAGE.php";
+include_once "../Views/MESSAGE_Pago.php";
 include_once "../Views/ALERT.php";
 include_once "../Functions/Authentication.php";
 if (!IsAuthenticated()){ //si no está autenticado
@@ -17,6 +18,8 @@ if (!IsAuthenticated()){ //si no está autenticado
 	/* include_once "../Views/Promociones_ADD_View.php"; */
 	include_once "../Views/Promociones_ADD_Fecha_View.php";
 	include_once "../Views/Promociones_ADD_Hora_View.php";
+	include_once "../Views/Promociones_ADD_Pago_View.php";
+	include_once "../Views/Promociones_ADD_Tarjeta_View.php";
 	include_once "../Views/Promociones_SEARCH_View.php";
 	include_once "../Views/Promociones_DELETE_View.php";
 	include_once "../Views/Promociones_SHOWCURRENT_View.php";
@@ -53,14 +56,26 @@ if (!IsAuthenticated()){ //si no está autenticado
 			$pista_ID_Pista = ""; //Si no, se pone como vacío
 		}
 		
-		if(isset($_REQUEST['socio'])){
-			$socio = $_REQUEST['socio'];//Si el campo se le ha pasado se le asigna
+		//Comprueba si está el campo
+		if(isset($_REQUEST['pago'])){
+			$pago = $_REQUEST['pago'];//Si el campo se le ha pasado se le asigna
 		}else{
-			$socio = ""; //Si no, se pone como vacío
+			$pago = ""; //Si no, se pone como vacío
+		}
+		
+		if(isset($_REQUEST['CCV'])){
+			$CCV = $_REQUEST['CCV'];//Si el campo se le ha pasado se le asigna
+		}else{
+			$CCV = ""; //Si no, se pone como vacío
+		}
+		
+		if(isset($_REQUEST['num_tarjeta'])){
+			$num_tarjeta = $_REQUEST['num_tarjeta'];//Si el campo se le ha pasado se le asigna
+		}else{
+			$num_tarjeta = ""; //Si no, se pone como vacío
 		}
 		//Construye el objeto promocion con los parámetros
-		$promocion = new Promociones_Model ($ID_Promo, $fecha, $hora_inicio, $usuarios_login,
-			$pista_ID_Pista,$socio);
+		$promocion = new Promociones_Model ($ID_Promo,$fecha,$hora_inicio,$usuarios_login,$pista_ID_Pista,$pago,$CCV,$num_tarjeta);
 		
 		//Devuelve el objeto promocion
 		return $promocion;
@@ -79,7 +94,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 
 		case 'Confirmar_ADD_Fecha':
 					
-				$promociones = new Promociones_Model("",$_REQUEST['fecha'],"","","","");
+				$promociones = new Promociones_Model("",$_REQUEST['fecha'],"","","","","","");
 				
 				$horasOcupadas = $promociones -> BuscarHorasOcupadas();
 				
@@ -101,103 +116,79 @@ if (!IsAuthenticated()){ //si no está autenticado
 			break;
 
 			case 'Confirmar_ADD_Hora':
-				/*$promociones = new Promociones_Model("",$_REQUEST['fecha'],$_REQUEST['hora_inicio'],"","","");
-				$pistasLibres = $promociones -> pistasLibres();*/
-				
-				/* $pista = new Pistas_Model("","","","");
-				$pistasTotales = $pista->DevolverTodasLasPistas();
-				
-				$arrayIDsOcupadas = Array();
-				$arrayIDsTotales = Array();
-				$arrayNombresOcupadas = Array();
-				$arrayNombresTotales = Array();
-				
-				while($i = $pistasOcupadas->fetch_array()[0]){
-					array_push($arrayIDsOcupadas,$i);
-				}
-				
-				while($j = $pistasTotales->fetch_array()[0]){
-					array_push($arrayIDsTotales,$j);
-				}
-				
-				while($i = $pistasOcupadas->fetch_array()[1]){
-					array_push($arrayNombresOcupadas,$i);
-				}
-				
-				while($j = $pistasTotales->fetch_array()[1]){
-					array_push($arrayNombresTotales,$j);
-				}
-				
-				$IDsLibres = array_diff($arrayIDsTotales, $arrayIDsOcupadas);
-				$NombresLibres = array_diff($arrayNombresTotales, $arrayNombresOcupadas); */
 
 				//Vaina de Iago
 				if(isset($_SESSION['tipo'])){
-				if($_SESSION['tipo']=='ADMIN'){	
-				$promocion = getDataForm();	//Asigna los datos obtenidos al objeto promocion		
-				$mensaje = $promocion-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
-				
-				$idpromo = $promocion -> DevolverIDPromo();
-				
-				$apuntar = new Promociones_has_Usuarios_Model($idpromo,"");
-				$a = $apuntar -> add();
-				
-				
-				//Si el insertado es correcto
-				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');	
-				}
-				else{
-					$promocion = getDataForm();	//Asigna los datos obtenidos al objeto promocion	
-					$mensaje = $promocion-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
-				
-					$idpromo = $promocion -> DevolverIDPromo();
-				
-					$apuntar = new Promociones_has_Usuarios_Model($idpromo,$_SESSION['login']);
-					$a = $apuntar -> add();
-				
-				
-				//Si el insertado es correcto
-				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');	
-				}
-			}
-			break;
-
-		case 'Confirmar_ADD2':	
-		
-			if(isset($_SESSION['tipo'])){
-				if($_SESSION['tipo']=='ADMIN'){	
-				$promocion = getDataForm();	//Asigna los datos obtenidos al objeto promocion		
-				$mensaje = $promocion-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
-				
-				$idpromo = $promocion -> DevolverIDPromo();
-				
-				$apuntar = new Promociones_has_Usuarios_Model($idpromo,"");
-				$a = $apuntar -> add();
-				
-				
-				//Si el insertado es correcto
-				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');	
-				}
-				else{
+					if($_SESSION['tipo']=='ADMIN'){	
 					$promocion = getDataForm();	//Asigna los datos obtenidos al objeto promocion		
 					$mensaje = $promocion-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
-				
-					$idpromo = $promocion -> DevolverIDPromo();
-				
-					$apuntar = new Promociones_has_Usuarios_Model($idpromo,$_SESSION['login']);
-					$a = $apuntar -> add();
-				
-				
-				//Si el insertado es correcto
-				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');	
-				}
-			}
 					
-		break;
+					$idpromo = $promocion -> DevolverIDPromo();
+					
+					$apuntar = new Promociones_has_Usuarios_Model($idpromo,"","","","");
+					$a = $apuntar -> add();
+					
+					
+					//Si el insertado es correcto
+					new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');	
+					}
+					else{
+						$promocion = getDataForm();	//Asigna los datos obtenidos al objeto promocion	
+						$mensaje = $promocion-> add(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
+					
+						$idpromo = $promocion -> DevolverIDPromo();
+					
+						$apuntar = new Promociones_has_Usuarios_Model($idpromo,$_SESSION['login'],"","","");
+						$a = $apuntar -> add();
+					
+					echo $idpromo;
+					//Si el insertado es correcto
+					//new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');
+					new Promociones_ADD_Pago($idpromo,'../Controllers/Promociones_Controller.php');
+					}
+				}
+			break;
+			
+			case 'Confirmar_ADD_Pago':
+			
+				$promo = getDataForm();
+				
+				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],'',"","",'',$_REQUEST['pago'],"","",'');
+				$promocion -> addMetodoPago();
+				$idpromo = $promocion -> DevolverIDPromo();
+				
+				$pago = $promocion -> devolverMetodoPago($_REQUEST['ID_Promo']);
+				
+				$phu = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login'],"","","");
+				$phu -> addMetodoPago($idpromo,$_SESSION['login'],$pago);
+				
+				if($pago == 'Paypal'){
+					new MESSAGE_Pago('Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul','../Controllers/Promociones_Controller.php');			 
+				}
+				else if($pago == 'Contrareembloso'){
+					new MESSAGE('Recuerda realizar el pago en las instalaciones del club','../Controllers/Promociones_Controller.php');
+				}
+				
+				else if($pago == 'Tarjeta'){
+					new Promociones_ADD_Tarjeta($_REQUEST['ID_Promo'],'../Controllers/Promociones_Controller.php');
+				}
+			
+			break;
+			
+			case 'Confirmar_ADD_Tarjeta':
+			
+				$promo = getDataForm();
+				$mensaje = $promo -> addTarjeta();
+				
+				$phu = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login'],"","","");
+				$phu -> addTarjeta($_REQUEST['ID_Promo'],$_SESSION['login'],$_REQUEST['CCV'],$_REQUEST['num_tarjeta']);
+				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');
+				
+			break;
 		
 		case 'Confirmar_INSCRIPCION1':
 		
-				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","");
+				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","","","");
 				
 				$ins = $promocion -> PuedeApuntarse();
 				
@@ -230,30 +221,31 @@ if (!IsAuthenticated()){ //si no está autenticado
 		
 		case 'Confirmar_INSCRIPCION2':
 				
-				$apuntar = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login']);
+				$apuntar = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login'],"","","");
 				$mensaje = $apuntar -> add();
 				
-				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","");
+				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","","","");
 				$promo = $promocion -> ContarUsuarios1();
-				
+				echo $_REQUEST['ID_Promo'];
 				if($promo->fetch_array()[0] == 4){
 					
 					$datos = $promocion -> rellenadatos()->fetch_array();
-					$p = new Promociones_Model($_REQUEST['ID_Promo'],$datos['fecha'],$datos['hora_inicio'],"",$datos['pista_ID_Pista'],"");
+					$p = new Promociones_Model($_REQUEST['ID_Promo'],$datos['fecha'],$datos['hora_inicio'],"",$datos['pista_ID_Pista'],"","","");
 					$pista = $p -> buscarPistasLibresPromo(); //Devuelve la 1º pista libre
 					if(!is_numeric($pista)){
 						$promocion->delete();
 						new MESSAGE('No hay pistas disponibles','../Controllers/Promociones_Controller.php');//Mostramos el mensaje
 					}
 					else{
-						$mensaje = $promocion -> cerrarPromocion($pista);
-					new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');//Mostramos el mensaje
+						$promocion -> cerrarPromocion($pista);
+					echo $_REQUEST['ID_Promo'];
+						new Promociones_ADD_Pago($_REQUEST['ID_Promo'],'../Controllers/Promociones_Controller.php');//Mostramos el mensaje
 					}
 				}
 				else{
 				//echo $promo->fetch_array()[0];
-				
-				new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');//Mostramos el mensaje				
+				echo $_REQUEST['ID_Promo'];
+					new Promociones_ADD_Pago($_REQUEST['ID_Promo'],'../Controllers/Promociones_Controller.php');
 				}
 				
 		break;
@@ -269,7 +261,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 		case 'Confirmar_SEARCH2':
 			//Si el usuario es de tipo admin puede buscar entre todas las tareas
 			
-			$promocion = new Promociones_Model('','','','','','');				
+			$promocion = new Promociones_Model('','','','','','',"","");				
 			$promocion = getDataForm(); 
 					
 			$datos = $promocion-> searchAdmin(); 
@@ -280,7 +272,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 		//Si se le da a borrar desde la vista del showall
 		case 'Confirmar_DELETE1':		
 				
-				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","");
+				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","","","");
 				
 				$datos = $promocion -> rellenadatos();
 				$array = $datos -> fetch_array();
@@ -298,13 +290,13 @@ if (!IsAuthenticated()){ //si no está autenticado
 		
 		// Si queremos borrar desde la vista de borrar
 		case 'Confirmar_DELETE2':		
-			$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","");
+			$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","","","");
 			$mensaje = $promocion-> delete(); 
 			new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php'); //Mostramos el mensaje	
 		break;
 		//Si queremos mostrar los datos de una tarea en concreto
 		case 'Confirmar_SHOWCURRENT':
-				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","");
+				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","","","");
 				
 				$datos = $promocion -> rellenadatos();
 				$array = $datos -> fetch_array();
@@ -317,7 +309,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$usuario = new Usuarios_Model($_REQUEST['login'],"","","","","","","","","","","","");
 				$socio = $usuario -> DevolverSocio();
 				
-				$apuntados = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],"");
+				$apuntados = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],"","","","");
 				$apunt = $apuntados -> apuntadosPromo();
 				
 				new Promociones_SHOWCURRENT($datos,$p,$apunt,$socio,'../Controllers/Promociones_Controller.php'); 
@@ -328,7 +320,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 			if(isset($_SESSION['tipo'])){
 				//Si el usuario es de tipo admin
 				if($_SESSION['tipo']=='ADMIN'){		   
-					$promocion = new Promociones_Model('','','','','','');//Creamos un objeto promocion
+					$promocion = new Promociones_Model('','','','','','',"","");//Creamos un objeto promocion
 					$promocion->borrarAntiguas();
 					
 					$datos = $promocion -> PromocionesShowAllTodas();
@@ -341,7 +333,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 					switch ($_REQUEST['action']){
 		
 					case 'Mostrar_Todas':
-						$promocion = new Promociones_Model('','','','','','');//Creamos un objeto promocion
+						$promocion = new Promociones_Model('','','','','','',"","");//Creamos un objeto promocion
 						$promocion->borrarAntiguas();
 						
 						$datos = $promocion -> PromocionesShowAllTodas();
@@ -352,7 +344,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 					
 					default:
 						
-						$promocion = new Promociones_Model('','','','','','');//Creamos un objeto promocion
+						$promocion = new Promociones_Model('','','','','','',"","");//Creamos un objeto promocion
 						$promocion->borrarAntiguas();
 						
 						$datos = $promocion -> PromocionesShowAllMias();
