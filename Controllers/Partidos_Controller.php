@@ -262,6 +262,11 @@ if (!IsAuthenticated()){ //si no está autenticado
 						$part1 -> getClasificacionFinal($_REQUEST["ID_Torneo"],$pV);
 					}
 					
+					if($ronda == 'Superfinal'){
+						$part1 -> getClasificacionSuperfinal($_REQUEST["ID_Torneo"],$pL);
+						$part1 -> getClasificacionSuperfinal($_REQUEST["ID_Torneo"],$pV);
+					}
+					
 					$part1 -> actualizarRanking($local1);
 					$part1 -> actualizarRanking($local2);
 					$part1 -> actualizarRanking($visitante1);

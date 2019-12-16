@@ -584,7 +584,8 @@ if(!IsAuthenticated()){
 				$partido = new Partidos_Model('','','','','','','','','','','','','');
 				$datos = $partido -> ShowAllSuperfinal($_REQUEST['ID_Torneo']);
 				
-				new Torneos_SHOWTORNEO_Generado_Superfinal($datos,$clasificados,$_REQUEST['ID_Torneo'],$_REQUEST['grupo'],$numGrupos,'../Controllers/Torneos_Controller.php');				
+				$clasif = $superfinal -> participantesSuperfinal($idtorneo);
+				new Torneos_SHOWTORNEO_Generado_Superfinal($datos,$clasif,$_REQUEST['ID_Torneo'],$_REQUEST['grupo'],$numGrupos,'../Controllers/Torneos_Controller.php');				
 			}
 				
 			else{
@@ -604,8 +605,9 @@ if(!IsAuthenticated()){
 				$partido = new Partidos_Model('','','','','','','','','','','','','');
 				$datos = $partido -> ShowAllSuperfinal($_REQUEST['ID_Torneo']);
 				$numGrupos = $superfinal -> numGrupos($idtorneo);
+				$clasif = $superfinal -> participantesSuperfinal($idtorneo);
 				
-				new Torneos_SHOWTORNEO_Generado_Superfinal($datos,$clasificados,$_REQUEST['ID_Torneo'],$_REQUEST['grupo'],$numGrupos,'../Controllers/Torneos_Controller.php');
+				new Torneos_SHOWTORNEO_Generado_Superfinal($datos,$clasif,$_REQUEST['ID_Torneo'],$_REQUEST['grupo'],$numGrupos,'../Controllers/Torneos_Controller.php');
 			}
 		}	
 				

@@ -56,8 +56,21 @@ if (!IsAuthenticated()){ //si no está autenticado
 		}else{
 			$pago = ""; //Si no, se pone como vacío
 		}
+		
+		if(isset($_REQUEST['CCV'])){
+			$CCV = $_REQUEST['CCV'];//Si el campo se le ha pasado se le asigna
+		}else{
+			$CCV = ""; //Si no, se pone como vacío
+		}
+		
+		if(isset($_REQUEST['num_tarjeta'])){
+			$num_tarjeta = $_REQUEST['num_tarjeta'];//Si el campo se le ha pasado se le asigna
+		}else{
+			$num_tarjeta = ""; //Si no, se pone como vacío
+		}
+		
 		//Construye el objeto reserva con los parámetros
-		$reserva = new Reservas_Model ($usuarios_login,$pista_ID_Pista,$fecha_reserva,$hora_inicio,$pago);
+		$reserva = new Reservas_Model ($usuarios_login,$pista_ID_Pista,$fecha_reserva,$hora_inicio,$pago,$CCV,$num_tarjeta);
 		
 		//Devuelve el objeto reserva
 		return $reserva;
@@ -70,7 +83,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 	switch ($_REQUEST['action']){
 		//Añadir una reserva desde el showall
 		case 'Confirmar_ADD1':
-				$reserva = new Reservas_Model("","",'','','');
+				$reserva = new Reservas_Model("","",'','','','','');
 				$numReservas = $reserva->contarReservasUsuario()->fetch_array()[1];
 
 				if($numReservas >= 5){
@@ -83,7 +96,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 			
 			case 'Confirmar_ADD_Fecha':
 					
-				$reservas = new Reservas_Model("","",$_REQUEST['fecha_reserva'],"",'');
+				$reservas = new Reservas_Model("","",$_REQUEST['fecha_reserva'],"",'','','');
 				$horasOcupadas = $reservas -> BuscarHorasOcupadas();
 				
 				$array = Array ('08:00:00','09:30:00','11:00:00','12:30:00','14:00:00','15:30:00','17:00:00','18:30:00','20:00:00','21:30:00');
@@ -103,7 +116,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 			break;
 			
 			case 'Confirmar_ADD_Hora':
-				$reservas = new Reservas_Model("","",$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],'');
+				$reservas = new Reservas_Model("","",$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],'','','');
 				$pistasLibres = $reservas -> pistasLibres();
 				
 				new Reservas_ADD_Pista($pistasLibres,$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],'../Controllers/Reservas_Controller.php');
@@ -120,9 +133,10 @@ if (!IsAuthenticated()){ //si no está autenticado
 			case 'Confirmar_ADD_Pago':
 			
 				$reserva = getDataForm();
-				$reservas = new Reservas_Model($_SESSION['login'],$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],$_REQUEST['pago']);
+				$reservas = new Reservas_Model($_SESSION['login'],$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],$_REQUEST['pago'],"","");
 				$reservas -> add();
 				$pago = $reservas -> devolverMetodoPago();
+				
 				if($pago == 'Paypal'){
 					new MESSAGE_Pago('Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul','../Controllers/Reservas_Controller.php');			 
 				}
@@ -131,8 +145,16 @@ if (!IsAuthenticated()){ //si no está autenticado
 				}
 				
 				else if($pago == 'Tarjeta'){
-					new Reservas_ADD_Tarjeta('../Controllers/Reservas_Controller.php');
+					new Reservas_ADD_Tarjeta($_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],'../Controllers/Reservas_Controller.php');
 				}
+				
+			break;
+			
+			case 'Confirmar_ADD_Tarjeta':
+			
+				$reserva = getDataForm();
+				$mensaje = $reserva -> addTarjeta();
+				new MESSAGE($mensaje,'../Controllers/Reservas_Controller.php');
 				
 			break;
 		
@@ -170,7 +192,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 		case 'Confirmar_DELETE1':		
 			
 				
-				$reserva = new Reservas_Model($_REQUEST['usuarios_login'],$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],"");
+				$reserva = new Reservas_Model($_REQUEST['usuarios_login'],$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],"",'','');
 				$puedeBorrar = $reserva -> puedeBorrarReserva();
 				
 				if($puedeBorrar == true){
@@ -194,14 +216,14 @@ if (!IsAuthenticated()){ //si no está autenticado
 		
 		// Si queremos borrar desde la vista de borrar
 		case 'Confirmar_DELETE2':		
-			$reserva = new Reservas_Model($_REQUEST['usuarios_login'],$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],"");
+			$reserva = new Reservas_Model($_REQUEST['usuarios_login'],$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],"",'',"");
 			$mensaje = $reserva-> delete(); //Llamamos a delete y guardamos el mensaje que devuelve
 			new MESSAGE($mensaje,'../Controllers/Reservas_Controller.php'); //Mostramos el mensaje	
 		break;
 		//Si queremos mostrar los datos de una reserva en concreto
 		case 'Confirmar_SHOWCURRENT':
 			//Si no se le pasan argumentos por request
-				$reserva = new Reservas_Model($_REQUEST['usuarios_login'],$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],"");
+				$reserva = new Reservas_Model($_REQUEST['usuarios_login'],$_REQUEST['pista_ID_Pista'],$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],"",'','');
 				
 				$datos = $reserva -> rellenadatos();
 				$array = $datos -> fetch_array();
@@ -223,7 +245,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 			if(isset($_SESSION['tipo'])){
 				//Si el usuario es de tipo admin
 				if($_SESSION['tipo']=='ADMIN'){		   
-					$reserva = new Reservas_Model('','','','','','');//Creamos un objeto reserva
+					$reserva = new Reservas_Model('','','','','','','');//Creamos un objeto reserva
 					$reserva -> borrarAntiguas();
 					$pistas = new Pistas_Model("","","",""); //Construye el objeto pistas llamando al modelo
 					$p = $pistas -> search(); //Busca las pistas
@@ -236,7 +258,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 				//Si es usuario normal
 				}else{
 					
-					$reserva = new Reservas_Model('','','','','','');//Creamos un objeto reserva
+					$reserva = new Reservas_Model('','','','','','','');//Creamos un objeto reserva
 					$reserva -> borrarAntiguas();
 					
 					$pistas = new Pistas_Model("","","",""); //Construye el objeto pistas llamando al modelo
