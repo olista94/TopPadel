@@ -2,14 +2,20 @@
 //Declaracion de la clase
 class Promociones_has_Usuarios_Model{
 	
-	var $promociones_ID_Promo;
+	var $ID_Promo;
 
 	var $usuarios_login;
+	var $pago;
+	var $CCV;
+	var $num_tarjeta;
 	
 	//Constructor de la clase
-	function __construct ($promociones_ID_Promo,$usuarios_login){
-		$this -> promociones_ID_Promo = $promociones_ID_Promo;
+	function __construct ($ID_Promo,$usuarios_login,$pago,$CCV,$num_tarjeta){
+		$this -> ID_Promo = $ID_Promo;
 		$this -> usuarios_login = $usuarios_login;
+		$this -> pago = $pago;
+		$this -> CCV = $CCV;
+		$this -> num_tarjeta = $num_tarjeta;
 		
 		//Incluimos el archivo de acceso a la bd
 		include_once 'Access_DB.php';
@@ -20,9 +26,9 @@ class Promociones_has_Usuarios_Model{
 function add(){
 	
 	//Sentencia sql para insertar
-	$sql = "INSERT INTO Promociones_has_Usuarios (`promociones_ID_Promo`, `usuarios_login`) 
+	$sql = "INSERT INTO Promociones_has_Usuarios (`ID_Promo`, `usuarios_login`) 
 			VALUES (
-				'$this->promociones_ID_Promo',
+				'$this->ID_Promo',
 				'$this->usuarios_login'
 				)
 			";
@@ -36,6 +42,63 @@ function add(){
 	}
 }
 
+function addMetodoPago($idpromo,$usuario,$pago){
+	
+    $sql = "SELECT * FROM promociones_has_usuarios WHERE (`ID_Promo` = '".$idpromo."' AND `usuarios_login` = '".$usuario."'
+										)";
+echo $sql;
+    $result = $this->mysqli->query($sql);
+    
+    if ($result->num_rows == 1)
+    {	
+		//Sentencia sql para editar
+		$sql = "UPDATE promociones_has_usuarios SET
+					`pago` = '".$pago."'
+
+				WHERE (`ID_Promo` = '".$idpromo."' AND `usuarios_login` = '".$usuario."'
+										)";
+echo $sql;
+        if (!($resultado = $this->mysqli->query($sql))){
+			return 'Error en la modificación';//Devuelve mensaje de error	
+		}
+		else{ 
+			
+			return 'Modificado correctamente'; //Exito
+		}
+    }
+    else 
+    	return 'No existe';//Devuelve mensaje de error	
+}
+
+function addTarjeta($idpromo,$usuario,$CCV,$num_tarjeta){
+	
+    $sql = "SELECT * FROM promociones_has_usuarios WHERE (`ID_Promo` = '".$idpromo."' AND `usuarios_login` = '".$usuario."'
+										)";
+echo $sql;
+    $result = $this->mysqli->query($sql);
+    
+    if ($result->num_rows == 1)
+    {	
+		//Sentencia sql para editar
+		$sql = "UPDATE promociones_has_usuarios SET
+					`CCV` = '".$CCV."',
+					`num_tarjeta` = '".$num_tarjeta."'
+
+				WHERE (`ID_Promo` = '".$idpromo."' AND `usuarios_login` = '".$usuario."'
+										)";
+echo $sql;
+        if (!($resultado = $this->mysqli->query($sql))){
+			return 'Error en la modificación';//Devuelve mensaje de error	
+		}
+		else{ 
+			
+			return 'Modificado correctamente'; //Exito
+		}
+    }
+    else 
+    	return 'No existe';//Devuelve mensaje de error	
+}
+
 //Funcion sql que buscara las categorias que correspondan
 function search(){ 
 			//Sentencia sql para buscar
@@ -43,7 +106,7 @@ function search(){
        			FROM Promociones_has_Usuarios
     			WHERE
     				( 
-    				(`promociones_ID_Promo` LIKE '%$this->ID_Torneo%') &&
+    				(`ID_Promo` LIKE '%$this->ID_Torneo%') &&
 	 				(`nombre` LIKE '%$this->nombre%') &&
 					(`categoria` LIKE '%$this->categoria%') &&
 					(`edicion` LIKE '%$this->edicion%') &&
@@ -111,7 +174,7 @@ function delete()
 function apuntadosPromo() 
 {	
 	
-    $sql = "SELECT usuarios_login FROM Promociones_has_Usuarios WHERE (`promociones_ID_Promo` = '".$this->promociones_ID_Promo."')";
+    $sql = "SELECT usuarios_login FROM Promociones_has_Usuarios WHERE (`ID_Promo` = '".$this->ID_Promo."')";
   
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'No existe'; //Devuelve mensaje de error
