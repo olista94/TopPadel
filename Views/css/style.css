@@ -440,9 +440,9 @@ button {
   background-image: url(../img/volver.png);
   background-color: rgb(76, 116, 175);
   /*display: table-caption;*/
-  float: right;
+  float: left;
   margin-top: 0;
-  margin-right: 0;
+  margin-left: 5px;
 }
 
 .buscar {
