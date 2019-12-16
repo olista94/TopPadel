@@ -29,7 +29,7 @@ if(!isset($_SESSION['idioma'])){
 		<br>
 		<br>
 		<p>
-		<H3>
+		<H3 style="margin-left: 5px">
 <?php		
 		//Aqui se muestra el mensaje
 		echo $strings[$this->string];
