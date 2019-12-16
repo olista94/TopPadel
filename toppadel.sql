@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-12-2019 a las 10:12:53
+-- Tiempo de generación: 16-12-2019 a las 19:36:09
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.1.32
 
@@ -86,25 +86,26 @@ CREATE TABLE `clases_grupales_has_usuarios` (
 --
 
 INSERT INTO `clases_grupales_has_usuarios` (`ID_Clase`, `login_usuario`, `dia1`, `dia2`, `dia3`, `dia4`, `dia5`, `dia6`, `dia7`, `dia8`, `dia9`, `dia10`) VALUES
-(23, 'anabarreiro', 1, 1, 0, 0, 0, 0, 0, 0, 0, 0),
-(23, 'carmenformoso', 1, 1, 0, 0, 0, 0, 1, 0, 0, 0),
-(23, 'davidmiguez', 0, 0, 0, 0, 0, 0, 1, 0, 0, 0),
+(23, 'anabarreiro', 1, 0, 0, 0, 0, 1, 1, 0, 0, 0),
+(23, 'carmenformoso', 0, 0, 0, 0, 0, 0, 1, 0, 0, 0),
+(23, 'davidmiguez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (23, 'jesusiglesias', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (23, 'jorgepuertas', 0, 0, 0, 0, 0, 0, 1, 0, 0, 0),
 (23, 'olista', 1, 1, 1, 1, 0, 0, 1, 0, 0, 0),
 (23, 'ritaconde', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (23, 'rosinafdez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (23, 'xianagolpe', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(23, 'ypgarcia', 0, 1, 0, 0, 0, 0, 0, 0, 0, 1),
-(24, 'davidmiguez', 0, 0, 0, 1, 0, 0, 0, 0, 0, 1),
+(23, 'ypgarcia', 1, 1, 0, 0, 0, 0, 0, 0, 0, 1),
+(24, 'davidmiguez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
 (27, 'davidmiguez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
 (28, 'davidmiguez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
-(32, 'adrianblanco', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(32, 'jfperez', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(32, 'olista', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(32, 'ritaconde', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(32, 'xacoboiglesias', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(32, 'ypgarcia', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
+(32, 'adrianblanco', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(32, 'jfperez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(32, 'olista', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(32, 'ritaconde', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(32, 'xacoboiglesias', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(32, 'ypgarcia', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
+(35, 'ypgarcia', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -130,7 +131,7 @@ INSERT INTO `clases_particulares` (`ID_Clase`, `login_usuario`, `login_entrenado
 (18, 'ypgarcia', 'mourinho', '2019-12-01', '21:30:00', 6, 'SI'),
 (24, 'olista', 'sisu', '2019-11-29', '20:00:00', 7, ''),
 (25, 'ypgarcia', 'mourinho', '2019-11-26', '08:00:00', 5, ''),
-(26, 'ypgarcia', 'guardiola', '2019-11-29', '17:00:00', 8, ''),
+(26, 'ypgarcia', 'guardiola', '2019-11-29', '17:00:00', 8, 'SI'),
 (27, 'ypgarcia', 'mourinho', '2019-11-29', '12:30:00', 6, ''),
 (28, 'ritaconde', 'sisu', '2019-12-04', '11:00:00', 1, ''),
 (29, 'olista', 'mourinho', '2019-12-17', '21:30:00', 6, '');
@@ -571,50 +572,58 @@ CREATE TABLE `parejas_has_torneos` (
   `JC` int(5) NOT NULL,
   `PtosCuartos` int(3) NOT NULL,
   `PtosSemis` int(3) NOT NULL,
-  `PtosFinal` int(3) NOT NULL
+  `PtosFinal` int(3) NOT NULL,
+  `PtosSuperFinal` int(3) NOT NULL,
+  `PJ_SF` int(3) NOT NULL,
+  `PG_SF` int(3) NOT NULL,
+  `PP_SF` int(3) NOT NULL,
+  `SF_SF` int(3) NOT NULL,
+  `SC_SF` int(3) NOT NULL,
+  `JF_SF` int(3) NOT NULL,
+  `JC_SF` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `parejas_has_torneos`
 --
 
-INSERT INTO `parejas_has_torneos` (`parejas_ID_Pareja`, `torneos_ID_Torneo`, `PJ`, `PG`, `PP`, `Ptos`, `SF`, `SC`, `JF`, `JC`, `PtosCuartos`, `PtosSemis`, `PtosFinal`) VALUES
-(185, 21, 8, 6, 2, 20, 13, 7, 108, 87, 3, 3, 0),
-(186, 21, 8, 4, 4, 16, 10, 9, 97, 92, 1, 0, 0),
-(187, 21, 8, 5, 3, 18, 11, 9, 103, 84, 3, 3, 0),
-(188, 21, 8, 4, 4, 16, 11, 9, 95, 91, 3, 1, 0),
-(189, 21, 8, 7, 1, 22, 14, 6, 116, 85, 3, 1, 0),
-(190, 21, 8, 3, 5, 14, 9, 10, 94, 95, 1, 0, 0),
-(191, 21, 8, 1, 7, 10, 4, 15, 60, 107, 0, 0, 0),
-(192, 21, 8, 4, 4, 16, 8, 10, 83, 95, 1, 0, 0),
-(193, 21, 8, 2, 6, 12, 9, 14, 101, 121, 1, 0, 0),
-(203, 1, 8, 8, 0, 24, 16, 8, 104, 64, 3, 3, 3),
-(204, 1, 8, 7, 1, 22, 15, 9, 99, 69, 3, 3, 1),
-(205, 1, 8, 6, 2, 20, 14, 10, 94, 74, 3, 1, 0),
-(206, 1, 8, 5, 3, 18, 13, 11, 89, 79, 3, 1, 0),
-(207, 1, 8, 4, 4, 16, 12, 12, 84, 84, 1, 0, 0),
-(208, 1, 8, 3, 5, 14, 11, 13, 79, 89, 1, 0, 0),
-(209, 1, 8, 2, 6, 12, 10, 14, 74, 94, 1, 0, 0),
-(210, 1, 8, 1, 7, 10, 9, 15, 69, 99, 1, 0, 0),
-(211, 1, 8, 0, 8, 8, 8, 16, 64, 104, 0, 0, 0),
-(212, 1, 8, 8, 0, 24, 16, 8, 104, 64, 3, 1, 0),
-(213, 1, 8, 7, 1, 22, 15, 9, 99, 69, 3, 3, 3),
-(214, 1, 8, 6, 2, 20, 14, 10, 94, 74, 3, 3, 1),
-(215, 1, 8, 5, 3, 18, 13, 11, 89, 79, 3, 1, 0),
-(216, 1, 8, 4, 4, 16, 12, 12, 84, 84, 1, 0, 0),
-(217, 1, 8, 3, 5, 14, 11, 13, 79, 89, 1, 0, 0),
-(218, 1, 8, 2, 6, 12, 10, 14, 74, 94, 1, 0, 0),
-(219, 1, 8, 1, 7, 10, 9, 15, 69, 99, 1, 0, 0),
-(220, 1, 8, 0, 8, 8, 8, 16, 64, 104, 0, 0, 0),
-(221, 1, 8, 8, 0, 24, 16, 8, 104, 64, 3, 1, 0),
-(222, 1, 8, 7, 1, 22, 15, 9, 99, 69, 3, 3, 3),
-(223, 1, 8, 6, 2, 20, 14, 10, 94, 74, 3, 3, 1),
-(224, 1, 8, 5, 3, 18, 13, 11, 89, 79, 3, 1, 0),
-(225, 1, 8, 4, 4, 16, 12, 12, 84, 84, 1, 0, 0),
-(226, 1, 8, 3, 5, 14, 11, 13, 79, 89, 1, 0, 0),
-(227, 1, 8, 2, 6, 12, 10, 14, 74, 94, 1, 0, 0),
-(228, 1, 8, 1, 7, 10, 9, 15, 69, 99, 1, 0, 0),
-(229, 1, 8, 0, 8, 8, 8, 16, 64, 104, 0, 0, 0);
+INSERT INTO `parejas_has_torneos` (`parejas_ID_Pareja`, `torneos_ID_Torneo`, `PJ`, `PG`, `PP`, `Ptos`, `SF`, `SC`, `JF`, `JC`, `PtosCuartos`, `PtosSemis`, `PtosFinal`, `PtosSuperFinal`, `PJ_SF`, `PG_SF`, `PP_SF`, `SF_SF`, `SC_SF`, `JF_SF`, `JC_SF`) VALUES
+(185, 21, 8, 6, 2, 20, 13, 7, 108, 87, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(186, 21, 8, 4, 4, 16, 10, 9, 97, 92, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(187, 21, 8, 5, 3, 18, 11, 9, 103, 84, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(188, 21, 8, 4, 4, 16, 11, 9, 95, 91, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(189, 21, 8, 7, 1, 22, 14, 6, 116, 85, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(190, 21, 8, 3, 5, 14, 9, 10, 94, 95, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(191, 21, 8, 1, 7, 10, 4, 15, 60, 107, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(192, 21, 8, 4, 4, 16, 8, 10, 83, 95, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(193, 21, 8, 2, 6, 12, 9, 14, 101, 121, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(203, 1, 8, 8, 0, 24, 16, 8, 104, 64, 3, 3, 3, 4, 2, 1, 1, 3, 3, 30, 27),
+(204, 1, 8, 7, 1, 22, 15, 9, 99, 69, 3, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0),
+(205, 1, 8, 6, 2, 20, 14, 10, 94, 74, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(206, 1, 8, 5, 3, 18, 13, 11, 89, 79, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(207, 1, 8, 4, 4, 16, 12, 12, 84, 84, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(208, 1, 8, 3, 5, 14, 11, 13, 79, 89, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(209, 1, 8, 2, 6, 12, 10, 14, 74, 94, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(210, 1, 8, 1, 7, 10, 9, 15, 69, 99, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(211, 1, 8, 0, 8, 8, 8, 16, 64, 104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(212, 1, 8, 8, 0, 24, 16, 8, 104, 64, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(213, 1, 8, 7, 1, 22, 15, 9, 99, 69, 3, 3, 3, 4, 2, 1, 1, 3, 3, 29, 30),
+(214, 1, 8, 6, 2, 20, 14, 10, 94, 74, 3, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0),
+(215, 1, 8, 5, 3, 18, 13, 11, 89, 79, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(216, 1, 8, 4, 4, 16, 12, 12, 84, 84, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(217, 1, 8, 3, 5, 14, 11, 13, 79, 89, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(218, 1, 8, 2, 6, 12, 10, 14, 74, 94, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(219, 1, 8, 1, 7, 10, 9, 15, 69, 99, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(220, 1, 8, 0, 8, 8, 8, 16, 64, 104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(221, 1, 8, 8, 0, 24, 16, 8, 104, 64, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(222, 1, 8, 7, 1, 22, 15, 9, 99, 69, 3, 3, 3, 4, 2, 1, 1, 3, 3, 26, 28),
+(223, 1, 8, 6, 2, 20, 14, 10, 94, 74, 3, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0),
+(224, 1, 8, 5, 3, 18, 13, 11, 89, 79, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(225, 1, 8, 4, 4, 16, 12, 12, 84, 84, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(226, 1, 8, 3, 5, 14, 11, 13, 79, 89, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(227, 1, 8, 2, 6, 12, 10, 14, 74, 94, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(228, 1, 8, 1, 7, 10, 9, 15, 69, 99, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(229, 1, 8, 0, 8, 8, 8, 16, 64, 104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -815,9 +824,9 @@ INSERT INTO `partidos` (`ID_Partido`, `fecha`, `hora`, `ronda`, `pista_ID_Pista`
 (810, '0000-00-00', '00:00:00', 'Final', NULL, 2, 1, 6, 1, 5, 7, 7, 6),
 (811, '0000-00-00', '00:00:00', 'Final', NULL, 2, 0, 6, 1, 6, 1, 0, 0),
 (812, '0000-00-00', '00:00:00', 'Final', NULL, 2, 0, 6, 1, 6, 1, 0, 0),
-(829, '0000-00-00', '00:00:00', 'Superfinal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(830, '0000-00-00', '00:00:00', 'Superfinal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(831, '0000-00-00', '00:00:00', 'Superfinal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(829, '0000-00-00', '00:00:00', 'Superfinal', NULL, 1, 2, 6, 3, 4, 6, 5, 7),
+(830, '0000-00-00', '00:00:00', 'Superfinal', NULL, 2, 1, 6, 1, 3, 6, 6, 4),
+(831, '2019-12-09', '08:00:00', 'Superfinal', 1, 1, 2, 6, 3, 3, 6, 4, 6);
 
 -- --------------------------------------------------------
 
@@ -896,36 +905,36 @@ CREATE TABLE `reservas` (
   `usuarios_login` varchar(45) NOT NULL,
   `pista_ID_Pista` tinyint(5) NOT NULL,
   `fecha_reserva` date NOT NULL,
-  `hora_inicio` time NOT NULL
+  `hora_inicio` time NOT NULL,
+  `pago` varchar(30) NOT NULL,
+  `CCV` int(5) DEFAULT NULL,
+  `num_tarjeta` int(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `reservas`
 --
 
-INSERT INTO `reservas` (`usuarios_login`, `pista_ID_Pista`, `fecha_reserva`, `hora_inicio`) VALUES
-('admin', 5, '2019-12-11', '21:30:00'),
-('alfredocasas', 8, '2019-12-27', '08:00:00'),
-('celiarodriguez', 1, '2019-12-11', '12:30:00'),
-('jaimesalgado', 1, '2019-12-12', '14:00:00'),
-('jaimesalgado', 1, '2019-12-20', '15:30:00'),
-('jorgepuertas', 7, '2019-12-27', '08:00:00'),
-('jorgesabucedo', 1, '2019-12-10', '11:00:00'),
-('josedacal', 1, '2019-12-17', '09:30:00'),
-('josedacal', 1, '2019-12-16', '18:30:00'),
-('linogonzalez', 1, '2019-12-27', '17:00:00'),
-('linogonzalez', 1, '2019-12-10', '18:30:00'),
-('linogonzalez', 5, '2019-12-27', '08:00:00'),
-('lucianespereira', 1, '2019-12-19', '20:00:00'),
-('lucianespereira', 6, '2019-12-27', '08:00:00'),
-('luisa_sevilla', 1, '2019-12-27', '09:30:00'),
-('mariaboveda', 1, '2019-12-27', '08:00:00'),
-('mariaboveda', 1, '2019-12-10', '12:30:00'),
-('mariaboveda', 1, '2019-12-11', '20:00:00'),
-('ritaconde', 1, '2019-12-12', '12:30:00'),
-('rosinafdez', 1, '2019-12-18', '08:00:00'),
-('rosinafdez', 1, '2019-12-23', '11:00:00'),
-('rosinafdez', 2, '2019-12-27', '08:00:00');
+INSERT INTO `reservas` (`usuarios_login`, `pista_ID_Pista`, `fecha_reserva`, `hora_inicio`, `pago`, `CCV`, `num_tarjeta`) VALUES
+('admin', 1, '2019-12-17', '08:00:00', 'Paypal', NULL, NULL),
+('admin', 1, '2019-12-23', '08:00:00', 'Paypal', NULL, NULL),
+('admin', 2, '2019-12-23', '08:00:00', 'Tarjeta', 123, 2147483647),
+('admin', 5, '2019-12-23', '08:00:00', 'Contrareembloso', NULL, NULL),
+('alfredocasas', 8, '2019-12-27', '08:00:00', '', NULL, NULL),
+('jaimesalgado', 1, '2019-12-20', '15:30:00', '', NULL, NULL),
+('jorgepuertas', 7, '2019-12-27', '08:00:00', '', NULL, NULL),
+('josedacal', 1, '2019-12-17', '09:30:00', '', NULL, NULL),
+('josedacal', 1, '2019-12-16', '18:30:00', '', NULL, NULL),
+('linogonzalez', 1, '2019-12-27', '17:00:00', '', NULL, NULL),
+('linogonzalez', 5, '2019-12-27', '08:00:00', '', NULL, NULL),
+('lucianespereira', 1, '2019-12-19', '20:00:00', '', NULL, NULL),
+('lucianespereira', 6, '2019-12-27', '08:00:00', '', NULL, NULL),
+('luisa_sevilla', 1, '2019-12-27', '09:30:00', '', NULL, NULL),
+('mariaboveda', 1, '2019-12-27', '08:00:00', '', NULL, NULL),
+('rosinafdez', 1, '2019-12-18', '08:00:00', '', NULL, NULL),
+('rosinafdez', 1, '2019-12-23', '11:00:00', '', NULL, NULL),
+('rosinafdez', 2, '2019-12-27', '08:00:00', '', NULL, NULL),
+('ypgarcia', 1, '2019-12-19', '08:00:00', 'Paypal', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -987,7 +996,7 @@ INSERT INTO `usuarios` (`login`, `password`, `dni`, `nombre`, `apellidos`, `tele
 ('alexandrefdez', 'alexandrefdez', '98790014T', 'Alexandre', 'Fernandez Gallego', '635426347', 'alexitomolon@yahoo.com', '1988-04-20', 'Masculina', 'NORMAL', 'NO', '', '', 21),
 ('alfonsoroman', 'alfonsoroman', '23882364S', 'Alfonso', 'Roman Romasanta', '674573432', 'romasantaroman@gmail.com', '1965-11-22', 'Masculina', 'NORMAL', 'SI', 'ES82', '50039592929781916551', -1),
 ('alfredocasas', 'alfredocasas', '99025185L', 'Alfredo', 'Casas Rojas', '988734623', 'alfredhard_occ@aol.es', '2001-01-01', 'Masculina', 'NORMAL', 'NO', '', '', 7),
-('alvarocardero', 'alvarocardero', '14408363J', 'Alvaro', 'Cardero Hernandez', '678493213', 'alvaritorito@gmail.com', '1997-11-20', 'Masculina', 'NORMAL', 'NO', '', '', 33),
+('alvarocardero', 'alvarocardero', '14408363J', 'Alvaro', 'Cardero Hernandez', '678493213', 'alvaritorito@gmail.com', '1997-11-20', 'Masculina', 'NORMAL', 'NO', '', '', 35),
 ('anabarreiro', 'anabarreiro', '30104099C', 'Ana', 'Barreiro Sequeiros', '983472822', 'anabarqueiros@hotmail.com', '2000-10-27', 'Femenina', 'NORMAL', 'SI', 'ES60', '78945551900533010001', 22),
 ('angelmonteagudo', 'angelmonteagudo', '42629771F', 'Angel', 'Monteagudo Leal', '666234237', 'angelmonteleal92@gmail.com', '1992-02-22', 'Masculina', 'NORMAL', 'NO', '', '', 21),
 ('arturolopez', 'arturolopez', '76578256D', 'Arturo', 'Lopez Rivera', '988374342', 'arturo_arturito@gmail.com', '1978-11-01', 'Masculina', 'NORMAL', 'NO', '', '', 7),
@@ -1021,7 +1030,7 @@ INSERT INTO `usuarios` (`login`, `password`, `dni`, `nombre`, `apellidos`, `tele
 ('javierlorenzo', 'javierlorenzo', '15396085T', 'Javier', 'Lorenzo Gil', '678321241', 'superjavi@yahoo.com', '1987-06-17', 'Masculina', 'NORMAL', 'NO', '', '', -1),
 ('jesusiglesias', 'jesusiglesias', '77523701Q', 'Jesus', 'Iglesias de la Torre', '987534234', 'jesusinho_towers@yahoo.es', '2001-07-04', 'Masculina', 'NORMAL', 'NO', '', '', -1),
 ('jfperez', 'joni', '44493919M', 'Jonathan', 'Fernandez Perez', '696627322', 'jfperez3@esei.uvigo.es', '1995-10-25', 'Masculina', 'NORMAL', 'NO', '', '', 0),
-('jordigonzalez', 'jordigonzalez', '35474611D', 'Jordi', 'Gonzalez Puig', '653472342', 'puigpuig3@hotmail.com', '1963-12-15', 'Masculina', 'NORMAL', 'NO', '', '', 29),
+('jordigonzalez', 'jordigonzalez', '35474611D', 'Jordi', 'Gonzalez Puig', '653472342', 'puigpuig3@hotmail.com', '1963-12-15', 'Masculina', 'NORMAL', 'NO', '', '', 31),
 ('jorgepuertas', 'jorgepuertas', '90471642S', 'Jorge', 'Puertas Ugarte', '987563421', 'jorginho_69@yahoo.com', '2002-07-30', 'Masculina', 'NORMAL', 'NO', '', '', 18),
 ('jorgesabucedo', 'jorgesabucedo', '51907965R', 'Jorge', 'Sabucedo Montes', '985847543', 'jorge4ever@gmail.com', '1994-07-26', 'Masculina', 'NORMAL', 'NO', '', '', 21),
 ('joseantonio', 'joseantonio', '06956257E', 'Jose Antonio', 'Moyano Brey', '683473292', 'breysuperstar@gmail.com', '2000-11-08', 'Masculina', 'NORMAL', 'NO', '', '', 14),
@@ -1035,11 +1044,11 @@ INSERT INTO `usuarios` (`login`, `password`, `dni`, `nombre`, `apellidos`, `tele
 ('linogonzalez', 'linogonzalez', '09915233W', 'Lino', 'Gonzalez Fuster', '674534233', 'linoavelino@yahoo.com', '1982-05-31', 'Masculina', 'NORMAL', 'NO', '', '', 14),
 ('lucianespereira', 'lucianespereira', '05932693G', 'Lucia', 'Nespereira Cuesta', '678432423', 'sorayanespe1995@hotmail.com', '1995-11-20', 'Femenina', 'NORMAL', 'NO', '', '', 22),
 ('luisa_sevilla', 'luisa_sevilla', '96676329S', 'Luisa', 'Sevilla Dominguez', '674834579', 'luisa_sevilla87@gmail.com', '1987-12-20', 'Femenina', 'NORMAL', 'SI', 'ES71', '00302053091234567895', 13),
-('luiscaride', 'luiscaride', '60545480G', 'Luis', 'Caride Abril', '678345352', 'luiscarabril@gmail.com', '0000-00-00', 'Masculina', 'NORMAL', 'NO', '', '', 29),
+('luiscaride', 'luiscaride', '60545480G', 'Luis', 'Caride Abril', '678345352', 'luiscarabril@gmail.com', '0000-00-00', 'Masculina', 'NORMAL', 'NO', '', '', 31),
 ('luiscarmona', 'luiscarmona', '61033162V', 'Luis', 'Carmona Goya', '653243243', 'luisinhocarmona@yahoo.com', '1980-08-24', 'Masculina', 'NORMAL', 'NO', '', '', -5),
 ('luisviejo', 'luisviejo', '25474614K', 'Luis', 'Viejo Gil', '683843422', 'luisviejo_09876@gmail.com', '1976-02-15', 'Masculina', 'NORMAL', 'NO', '', '', 25),
-('manuelangel', 'manuelangel', '03960290N', 'Manuel Angel', 'Perez Jimenez', '666234234', 'manuangel@hotmail.com', '1973-01-14', 'Masculina', 'NORMAL', 'NO', '', '', 33),
-('marcoscudeiro', 'marcoscudeiro', '17517361D', 'Marcos', 'Cudeiro Viso', '674853453', 'chinocudeiro@gmail.cn', '2000-02-29', 'Masculina', 'NORMAL', 'NO', '', '', 29),
+('manuelangel', 'manuelangel', '03960290N', 'Manuel Angel', 'Perez Jimenez', '666234234', 'manuangel@hotmail.com', '1973-01-14', 'Masculina', 'NORMAL', 'NO', '', '', 35),
+('marcoscudeiro', 'marcoscudeiro', '17517361D', 'Marcos', 'Cudeiro Viso', '674853453', 'chinocudeiro@gmail.cn', '2000-02-29', 'Masculina', 'NORMAL', 'NO', '', '', 31),
 ('mariaboveda', 'mariaboveda', '66818651V', 'Maria', 'Boveda Ruiz', '984734823', 'mbruiz@uvigo.es', '1993-05-23', 'Femenina', 'NORMAL', 'NO', '', '', 18),
 ('mariapumar', 'mariapumar', '78078690S', 'Maria', 'Pumar Vazquez', '683472331', 'pumarvazquezmar1234@gmail.com', '1997-03-18', 'Femenina', 'NORMAL', 'SI', 'AD66', '19518195619519819619', -1),
 ('mariohernandez', 'mariohernandez', '22474502Y', 'Mario', 'Hernandez Hermoso', '689242312', 'supermario64@gmail.com', '1964-04-03', 'Masculina', 'NORMAL', 'NO', '', '', -1),
@@ -1049,7 +1058,7 @@ INSERT INTO `usuarios` (`login`, `password`, `dni`, `nombre`, `apellidos`, `tele
 ('olallardgez', 'olallardgez', '50566997W', 'Olalla', 'Rodriguez Perez', '678433189', 'superolalla@yahoo.com', '1997-12-21', 'Femenina', 'NORMAL', 'NO', '', '', 18),
 ('olista', '1234', '24252751X', 'Oscar', 'Lista Rivera', '643956059', 'olista@gmail.com', '1994-05-22', 'Masculina', 'NORMAL', 'SI', 'ES00', '1234567890123456', 0),
 ('oscardominguez', 'oscardominguez', '40315187M', 'Oscar', 'Dominguez Sanz', '674324233', 'oscardomsanz456@hotmail.com', '1991-11-18', 'Masculina', 'NORMAL', 'NO', '', '', 3),
-('oscarfernadez', 'oscarfernadez', '36416302B', 'Oscar', 'Fernandez Dorado', '746345332', 'oscardorado98@gmail.com', '0000-00-00', 'Masculina', 'NORMAL', 'NO', '', '', 29),
+('oscarfernadez', 'oscarfernadez', '36416302B', 'Oscar', 'Fernandez Dorado', '746345332', 'oscardorado98@gmail.com', '0000-00-00', 'Masculina', 'NORMAL', 'NO', '', '', 31),
 ('pacobarrio', 'pacobarrio', '52957832X', 'Paco', 'Barrio Leon', '647583423', 'pacoleon@yahoo.com', '1977-03-28', 'Masculina', 'NORMAL', 'SI', 'ES82', '78945102345873061212', 21),
 ('pazbalboa', 'pazbalboa', '76101387E', 'Paz', 'Balboa Leon', '984375437', 'pacitabalboa94@gmail.com', '1994-01-05', 'Femenina', 'NORMAL', 'NO', '', '', -1),
 ('pedrocuesta', 'pedrocuesta', '72983428N', 'Pedro', 'Cuesta Morales', '669454344', 'pcmorales@uvigo.es', '1977-01-20', 'Masculina', 'NORMAL', 'SI', 'ES42', '11848468464655222222', -8),
