@@ -9,14 +9,18 @@ class Reservas_Model {
 	var $fecha_reserva;
 	var $hora_inicio;
 	var $pago;
+	var $CCV;
+	var $num_tarjeta;
 	
 //Constructor de la clase
-function __construct($usuarios_login,$pista_ID_Pista,$fecha_reserva,$hora_inicio,$pago){
+function __construct($usuarios_login,$pista_ID_Pista,$fecha_reserva,$hora_inicio,$pago,$CCV,$num_tarjeta){
 	$this->usuarios_login = $usuarios_login;
 	$this->pista_ID_Pista = $pista_ID_Pista;
 	$this->fecha_reserva = $fecha_reserva;
 	$this->hora_inicio = $hora_inicio;
 	$this->pago = $pago;
+	$this->CCV = $CCV;
+	$this->num_tarjeta = $num_tarjeta;
 
 		//Incluimos el archivo de acceso a la bd
 		include_once 'Access_DB.php';
@@ -28,7 +32,7 @@ function __construct($usuarios_login,$pista_ID_Pista,$fecha_reserva,$hora_inicio
 function add(){
 
 	//Sentencia sql para insertar
-	$sql = "INSERT INTO reservas
+	$sql = "INSERT INTO reservas (usuarios_login,pista_ID_Pista,fecha_reserva,hora_inicio,pago)
 			VALUES (
 				'$this->usuarios_login',
 				'$this->pista_ID_Pista',
@@ -46,6 +50,41 @@ function add(){
 	else{ 
 		return 'Insercion correcta'; //Devuelve mensaje de exito	
 	}
+} 
+
+function addTarjeta(){
+	
+    $sql = "SELECT * FROM reservas WHERE (`usuarios_login` = '$this->usuarios_login'
+										AND `pista_ID_Pista` = '$this->pista_ID_Pista'
+										AND `fecha_reserva` = '$this->fecha_reserva'
+										AND `hora_inicio` = '$this->hora_inicio'
+										)";
+    echo $sql;
+    $result = $this->mysqli->query($sql);
+    
+    if ($result->num_rows == 1)
+    {	
+		//Sentencia sql para editar
+		$sql = "UPDATE reservas SET
+					`CCV` = '$this->CCV',
+					`num_tarjeta` = '$this->num_tarjeta'
+
+				WHERE (`usuarios_login` = '$this->usuarios_login'
+										AND `pista_ID_Pista` = '$this->pista_ID_Pista'
+										AND `fecha_reserva` = '$this->fecha_reserva'
+										AND `hora_inicio` = '$this->hora_inicio'
+										)";
+echo $sql;
+        if (!($resultado = $this->mysqli->query($sql))){
+			return 'Error en la modificación';//Devuelve mensaje de error	
+		}
+		else{ 
+			
+			return 'Modificado correctamente'; //Exito
+		}
+    }
+    else 
+    	return 'No existe';//Devuelve mensaje de error	
 } 
 
 function addReservaPartido($idpista,$fecha,$hora){//Hace una reserva de un campeonato
@@ -307,7 +346,7 @@ function devolverMetodoPago()
 										AND `fecha_reserva` = '$this->fecha_reserva'
 										AND `hora_inicio` = '$this->hora_inicio'
 										)";
-
+echo $sql;
 	$result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){

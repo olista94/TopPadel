@@ -502,7 +502,7 @@ function ResultadosPartidosPareja($idpartido,$idparejalocal,$idparejavisitante){
 	}
  }
  
- function devolverClasificadosASuperfinal($grupo,$idtorneo){//Comprueba si ya se han generado los PO para no volver a generarlos
+ function devolverClasificadosASuperfinal($grupo,$idtorneo){//Devuelve los clasificados a la superfinal de cada grupo
 	 
 	$sql = "SELECT parejas_ID_Pareja
 			FROM `parejas_has_torneos` pht, `parejas_has_grupos` phg
@@ -510,6 +510,24 @@ function ResultadosPartidosPareja($idpartido,$idparejalocal,$idparejavisitante){
 			ORDER BY grupo,`PtosFinal` DESC
 			LIMIT 1
 	";
+	  $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'No existe'; //Devuelve mensaje de error
+	}
+    else{ 
+		return $result;//Se devuelve el resultado de la consulta
+	}
+ }
+ 
+ function participantesSuperfinal($idtorneo){//Devuelve todos los clasificados a la superfinal
+	 
+	$sql = "SELECT `parejas_ID_Pareja`,usuarios_login,usuarios_login1,PJ_SF,PG_SF,PP_SF,PtosSuperFinal,SF_SF,SC_SF,JF_SF,JC_SF
+			FROM parejas_has_torneos pht,parejas p 
+			WHERE pht.`parejas_ID_Pareja` = P.ID_Pareja and `torneos_ID_Torneo` = '".$idtorneo."' and `PtosFinal` = 3
+			ORDER BY `PtosSuperFinal` DESC,`SF` DESC,`SC` ASC,`JF` DESC,`JC` ASC
+			";
+			echo $sql;
 	  $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
     
     if (!($resultado = $this->mysqli->query($sql))){
