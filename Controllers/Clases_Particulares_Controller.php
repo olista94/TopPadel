@@ -305,17 +305,20 @@ if(isset($_SESSION['tipo'])){
 				
 				if($_SESSION['tipo'] == 'NORMAL'){
 					$clases_particulas = new Clases_Particulares_Model('','','','','','','','','');
+					$clases_particulas -> borrarAntiguas();
 					$datos = $clases_particulas -> ShowAllDeportista();
 					$respuesta = new Clases_Particulares_SHOWALL($datos,'../Controllers/Clases_Particulares_Controller.php'); 
 				}
 				else if($_SESSION['tipo'] == 'ADMIN'){
 					$clases_particulas = new Clases_Particulares_Model('','','','','','','','','');
+					$clases_particulas -> borrarAntiguas();
 					$datos = $clases_particulas -> ShowAllAdmin();
 					$respuesta = new Clases_Particulares_SHOWALL($datos,'../Controllers/Clases_Particulares_Controller.php'); 
 				}
 				
 				else if($_SESSION['tipo'] == 'ENTRENADOR'){
 					$clases_particulas = new Clases_Particulares_Model('','','','','','','','','');
+					$clases_particulas -> borrarAntiguas();
 					$datos = $clases_particulas -> ShowAllEntrenador();
 					$respuesta = new Clases_Particulares_SHOWALL($datos,'../Controllers/Clases_Particulares_Controller.php'); 
 				}

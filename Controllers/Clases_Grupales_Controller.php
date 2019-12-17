@@ -232,31 +232,33 @@ if(isset($_SESSION['tipo'])){
 				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","");
 				
 				$apuntarse = $clase -> PuedeApuntarse();
+				$fecha = $clase -> puedeApuntarseFecha();
 				
 				$tope = $clase -> devolverTope() -> fetch_array();
 				$numApuntados = $clase -> ContarUsuarios1() -> fetch_array();
-
-				if($tope[0] > $numApuntados[0]){
 				
+				if($fecha == true){
+					if($tope[0] > $numApuntados[0]){
+						if($apuntarse == false){
+							new MESSAGE('Ya estas apuntado','../Controllers/Clases_Grupales_Controller.php');
+						}	
+						else{
+							$datos = $clase -> rellenadatos();
+							$array = $datos -> fetch_array();
 				
-					if($apuntarse == false){
-						new MESSAGE('Ya estas apuntado','../Controllers/Clases_Grupales_Controller.php');
+							$pistas = new Pistas_Model($array['ID_Pista'],"","","");
+							$p = $pistas -> searchById();
+				
+							$datos = $clase -> rellenadatos();
+							
+							new Clases_Grupales_INSCRIPCION($datos,$p,'../Controllers/Clases_Grupales_Controller.php');
+						}
 					}
-				
 					else{
-						$datos = $clase -> rellenadatos();
-						$array = $datos -> fetch_array();
-				
-						$pistas = new Pistas_Model($array['ID_Pista'],"","","");
-						$p = $pistas -> searchById();
-				
-						$datos = $clase -> rellenadatos();
-						new Clases_Grupales_INSCRIPCION($datos,$p,'../Controllers/Clases_Grupales_Controller.php');
+						new MESSAGE('Ya se ha alcanzado el maximo de apuntados','../Controllers/Clases_Grupales_Controller.php');	
 					}
-				}
-				
-				else{
-					new MESSAGE('Ya se ha alcanzado el maximo de apuntados','../Controllers/Clases_Grupales_Controller.php');	
+				}else{
+					new MESSAGE('Fuera de plazo','../Controllers/Clases_Grupales_Controller.php');	
 				}
 			
 			break;

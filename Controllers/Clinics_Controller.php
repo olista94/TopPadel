@@ -257,17 +257,16 @@ if(isset($_SESSION['tipo'])){
 				$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");
 				
 				$apuntarse = $clase -> PuedeApuntarse();
+				$fecha = $clase -> puedeApuntarseFecha();
 				
 				$tope = $clase -> devolverTope() -> fetch_array();
 				$numApuntados = $clase -> ContarUsuarios1() -> fetch_array();
-
+				
+			if($fecha == true){
 				if($tope[0] > $numApuntados[0]){
-				
-				
 					if($apuntarse == false){
 						new MESSAGE('Ya estas apuntado','../Controllers/Clinics_Controller.php');
 					}
-				
 					else{
 						$datos = $clase -> rellenadatos();	
 						$array = $datos -> fetch_array();
@@ -278,10 +277,12 @@ if(isset($_SESSION['tipo'])){
 						new Clinics_INSCRIPCION($datos,$p,'../Controllers/Clinics_Controller.php');
 					}
 				}
-				
 				else{
 					new MESSAGE('Ya se ha alcanzado el maximo de apuntados','../Controllers/Clinics_Controller.php');	
 				}
+			}else{
+				new MESSAGE('Fuera de plazo','../Controllers/Clinics_Controller.php');	
+			}
 			
 			break;
 			
@@ -360,6 +361,7 @@ if(isset($_SESSION['tipo'])){
 				
 				if($_SESSION['tipo'] == 'NORMAL'){
 					$clinics = new Clinics_Model('','','','','','','','','');
+					$clinics -> borrarAntiguas();
 					$datos = $clinics -> ShowAllAdminNormal();
 					
 					$apuntados = $clinics -> ContarUsuarios();
@@ -368,6 +370,7 @@ if(isset($_SESSION['tipo'])){
 				}
 				else if($_SESSION['tipo'] == 'ADMIN'){
 					$clinics = new Clinics_Model('','','','','','','','','');
+					$clinics -> borrarAntiguas();
 					$datos = $clinics -> ShowAllAdminNormal();
 					
 					$apuntados = $clinics -> ContarUsuarios();
@@ -377,6 +380,7 @@ if(isset($_SESSION['tipo'])){
 				
 				else if($_SESSION['tipo'] == 'ENTRENADOR'){
 					$clinics = new Clinics_Model('','','','','','','','','');
+					$clinics -> borrarAntiguas();
 					$datos = $clinics -> ShowAllEntrenador();
 					
 					$apuntados = $clinics -> ContarUsuarios();
