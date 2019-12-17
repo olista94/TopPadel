@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2019 a las 19:36:09
+-- Tiempo de generación: 17-12-2019 a las 16:39:22
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.1.32
 
@@ -21,12 +21,10 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `toppadel`
 --
-
 DROP SCHEMA IF EXISTS `toppadel`;
 
 CREATE DATABASE IF NOT EXISTS `toppadel` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `toppadel`;
-
 -- --------------------------------------------------------
 
 --
@@ -78,34 +76,37 @@ CREATE TABLE `clases_grupales_has_usuarios` (
   `dia7` int(5) NOT NULL,
   `dia8` int(5) NOT NULL,
   `dia9` int(5) NOT NULL,
-  `dia10` int(5) NOT NULL
+  `dia10` int(5) NOT NULL,
+  `pago` varchar(15) NOT NULL,
+  `CCV` int(3) DEFAULT NULL,
+  `num_tarjeta` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `clases_grupales_has_usuarios`
 --
 
-INSERT INTO `clases_grupales_has_usuarios` (`ID_Clase`, `login_usuario`, `dia1`, `dia2`, `dia3`, `dia4`, `dia5`, `dia6`, `dia7`, `dia8`, `dia9`, `dia10`) VALUES
-(23, 'anabarreiro', 1, 0, 0, 0, 0, 1, 1, 0, 0, 0),
-(23, 'carmenformoso', 0, 0, 0, 0, 0, 0, 1, 0, 0, 0),
-(23, 'davidmiguez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(23, 'jesusiglesias', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(23, 'jorgepuertas', 0, 0, 0, 0, 0, 0, 1, 0, 0, 0),
-(23, 'olista', 1, 1, 1, 1, 0, 0, 1, 0, 0, 0),
-(23, 'ritaconde', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(23, 'rosinafdez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(23, 'xianagolpe', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(23, 'ypgarcia', 1, 1, 0, 0, 0, 0, 0, 0, 0, 1),
-(24, 'davidmiguez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
-(27, 'davidmiguez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
-(28, 'davidmiguez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
-(32, 'adrianblanco', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(32, 'jfperez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(32, 'olista', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(32, 'ritaconde', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(32, 'xacoboiglesias', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(32, 'ypgarcia', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
-(35, 'ypgarcia', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO `clases_grupales_has_usuarios` (`ID_Clase`, `login_usuario`, `dia1`, `dia2`, `dia3`, `dia4`, `dia5`, `dia6`, `dia7`, `dia8`, `dia9`, `dia10`, `pago`, `CCV`, `num_tarjeta`) VALUES
+(23, 'anabarreiro', 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, '', NULL, NULL),
+(23, 'carmenformoso', 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, '', NULL, NULL),
+(23, 'davidmiguez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(23, 'jesusiglesias', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(23, 'jorgepuertas', 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, '', NULL, NULL),
+(23, 'olista', 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, '', NULL, NULL),
+(23, 'ritaconde', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(23, 'rosinafdez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(23, 'xianagolpe', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(23, 'ypgarcia', 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, '', NULL, NULL),
+(24, 'ypgarcia', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(27, 'davidmiguez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', NULL, NULL),
+(28, 'davidmiguez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', NULL, NULL),
+(32, 'adrianblanco', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(32, 'jfperez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(32, 'olista', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(32, 'ritaconde', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(32, 'xacoboiglesias', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(32, 'ypgarcia', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', NULL, NULL),
+(35, 'ypgarcia', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -120,21 +121,26 @@ CREATE TABLE `clases_particulares` (
   `fecha_clase` date NOT NULL,
   `hora_clase` time NOT NULL,
   `ID_Pista` tinyint(5) NOT NULL,
-  `borrado` varchar(2) NOT NULL
+  `borrado` varchar(2) NOT NULL,
+  `pago` varchar(15) NOT NULL,
+  `CCV` int(3) DEFAULT NULL,
+  `num_tarjeta` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `clases_particulares`
 --
 
-INSERT INTO `clases_particulares` (`ID_Clase`, `login_usuario`, `login_entrenador`, `fecha_clase`, `hora_clase`, `ID_Pista`, `borrado`) VALUES
-(18, 'ypgarcia', 'mourinho', '2019-12-01', '21:30:00', 6, 'SI'),
-(24, 'olista', 'sisu', '2019-11-29', '20:00:00', 7, ''),
-(25, 'ypgarcia', 'mourinho', '2019-11-26', '08:00:00', 5, ''),
-(26, 'ypgarcia', 'guardiola', '2019-11-29', '17:00:00', 8, 'SI'),
-(27, 'ypgarcia', 'mourinho', '2019-11-29', '12:30:00', 6, ''),
-(28, 'ritaconde', 'sisu', '2019-12-04', '11:00:00', 1, ''),
-(29, 'olista', 'mourinho', '2019-12-17', '21:30:00', 6, '');
+INSERT INTO `clases_particulares` (`ID_Clase`, `login_usuario`, `login_entrenador`, `fecha_clase`, `hora_clase`, `ID_Pista`, `borrado`, `pago`, `CCV`, `num_tarjeta`) VALUES
+(24, 'olista', 'sisu', '2019-11-29', '20:00:00', 7, '', '', NULL, NULL),
+(25, 'ypgarcia', 'mourinho', '2019-11-26', '08:00:00', 5, '', '', NULL, NULL),
+(26, 'ypgarcia', 'guardiola', '2019-11-29', '17:00:00', 8, 'SI', '', NULL, NULL),
+(27, 'ypgarcia', 'mourinho', '2019-11-29', '12:30:00', 6, '', '', NULL, NULL),
+(28, 'ritaconde', 'sisu', '2019-12-04', '11:00:00', 1, '', '', NULL, NULL),
+(29, 'olista', 'mourinho', '2019-12-17', '21:30:00', 6, '', '', NULL, NULL),
+(34, 'xianagolpe', 'guardiola', '2019-12-17', '08:00:00', 1, '', 'Paypal', NULL, NULL),
+(35, 'xianagolpe', 'sisu', '2019-12-17', '08:00:00', 2, '', 'Contrareembloso', NULL, NULL),
+(41, 'xianagolpe', 'guardiola', '2019-12-26', '08:00:00', 1, '', 'Tarjeta', 123, '1234567890123456');
 
 -- --------------------------------------------------------
 
@@ -865,16 +871,22 @@ CREATE TABLE `promociones` (
   `hora_inicio` time NOT NULL,
   `usuarios_login_usuario` varchar(45) DEFAULT NULL,
   `pista_ID_Pista` tinyint(5) DEFAULT NULL,
-  `cerrada` enum('SI','NO') NOT NULL
+  `cerrada` enum('SI','NO') NOT NULL,
+  `pago` varchar(15) NOT NULL,
+  `CCV` int(3) DEFAULT NULL,
+  `num_tarjeta` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `promociones`
 --
 
-INSERT INTO `promociones` (`ID_Promo`, `fecha`, `hora_inicio`, `usuarios_login_usuario`, `pista_ID_Pista`, `cerrada`) VALUES
-(87, '2019-12-20', '18:30:00', 'hugo_mejide', NULL, 'NO'),
-(90, '2019-12-21', '12:30:00', 'admin', NULL, 'NO');
+INSERT INTO `promociones` (`ID_Promo`, `fecha`, `hora_inicio`, `usuarios_login_usuario`, `pista_ID_Pista`, `cerrada`, `pago`, `CCV`, `num_tarjeta`) VALUES
+(124, '2019-12-17', '08:00:00', 'ypgarcia', NULL, 'NO', 'Paypal', 123, '2147483647'),
+(125, '2019-12-17', '08:00:00', 'ypgarcia', NULL, 'NO', 'Paypal', NULL, NULL),
+(126, '2019-12-18', '08:00:00', 'ypgarcia', NULL, 'NO', 'Contrareembloso', NULL, NULL),
+(127, '2019-12-24', '08:00:00', 'ritaconde', NULL, 'NO', 'Tarjeta', 567, '2147483647'),
+(128, '2019-12-24', '08:00:00', 'ritaconde', NULL, 'NO', 'Paypal', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -883,7 +895,7 @@ INSERT INTO `promociones` (`ID_Promo`, `fecha`, `hora_inicio`, `usuarios_login_u
 --
 
 CREATE TABLE `promociones_has_usuarios` (
-  `promociones_ID_Promo` int(11) NOT NULL,
+  `ID_Promo` int(11) NOT NULL,
   `usuarios_login` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -891,9 +903,16 @@ CREATE TABLE `promociones_has_usuarios` (
 -- Volcado de datos para la tabla `promociones_has_usuarios`
 --
 
-INSERT INTO `promociones_has_usuarios` (`promociones_ID_Promo`, `usuarios_login`) VALUES
-(87, 'hugo_mejide'),
-(87, 'jfperez');
+INSERT INTO `promociones_has_usuarios` (`ID_Promo`, `usuarios_login`) VALUES
+(124, 'olista'),
+(124, 'ritaconde'),
+(124, 'ypgarcia'),
+(125, 'olista'),
+(125, 'ypgarcia'),
+(126, 'admin'),
+(126, 'ypgarcia'),
+(127, 'ritaconde'),
+(128, 'ritaconde');
 
 -- --------------------------------------------------------
 
@@ -908,7 +927,7 @@ CREATE TABLE `reservas` (
   `hora_inicio` time NOT NULL,
   `pago` varchar(30) NOT NULL,
   `CCV` int(5) DEFAULT NULL,
-  `num_tarjeta` int(16) DEFAULT NULL
+  `num_tarjeta` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -918,13 +937,12 @@ CREATE TABLE `reservas` (
 INSERT INTO `reservas` (`usuarios_login`, `pista_ID_Pista`, `fecha_reserva`, `hora_inicio`, `pago`, `CCV`, `num_tarjeta`) VALUES
 ('admin', 1, '2019-12-17', '08:00:00', 'Paypal', NULL, NULL),
 ('admin', 1, '2019-12-23', '08:00:00', 'Paypal', NULL, NULL),
-('admin', 2, '2019-12-23', '08:00:00', 'Tarjeta', 123, 2147483647),
+('admin', 2, '2019-12-23', '08:00:00', 'Tarjeta', 123, '2147483647'),
 ('admin', 5, '2019-12-23', '08:00:00', 'Contrareembloso', NULL, NULL),
 ('alfredocasas', 8, '2019-12-27', '08:00:00', '', NULL, NULL),
 ('jaimesalgado', 1, '2019-12-20', '15:30:00', '', NULL, NULL),
 ('jorgepuertas', 7, '2019-12-27', '08:00:00', '', NULL, NULL),
 ('josedacal', 1, '2019-12-17', '09:30:00', '', NULL, NULL),
-('josedacal', 1, '2019-12-16', '18:30:00', '', NULL, NULL),
 ('linogonzalez', 1, '2019-12-27', '17:00:00', '', NULL, NULL),
 ('linogonzalez', 5, '2019-12-27', '08:00:00', '', NULL, NULL),
 ('lucianespereira', 1, '2019-12-19', '20:00:00', '', NULL, NULL),
@@ -934,7 +952,8 @@ INSERT INTO `reservas` (`usuarios_login`, `pista_ID_Pista`, `fecha_reserva`, `ho
 ('rosinafdez', 1, '2019-12-18', '08:00:00', '', NULL, NULL),
 ('rosinafdez', 1, '2019-12-23', '11:00:00', '', NULL, NULL),
 ('rosinafdez', 2, '2019-12-27', '08:00:00', '', NULL, NULL),
-('ypgarcia', 1, '2019-12-19', '08:00:00', 'Paypal', NULL, NULL);
+('ypgarcia', 1, '2019-12-19', '08:00:00', 'Paypal', NULL, NULL),
+('ypgarcia', 1, '2019-12-24', '08:00:00', 'Tarjeta', 567, '1234567890098765');
 
 -- --------------------------------------------------------
 
@@ -1153,9 +1172,9 @@ ALTER TABLE `promociones`
 -- Indices de la tabla `promociones_has_usuarios`
 --
 ALTER TABLE `promociones_has_usuarios`
-  ADD PRIMARY KEY (`promociones_ID_Promo`,`usuarios_login`),
-  ADD KEY `ID_Promo` (`promociones_ID_Promo`),
-  ADD KEY `ID_Promo_2` (`promociones_ID_Promo`),
+  ADD PRIMARY KEY (`ID_Promo`,`usuarios_login`),
+  ADD KEY `ID_Promo` (`ID_Promo`),
+  ADD KEY `ID_Promo_2` (`ID_Promo`),
   ADD KEY `usuarios_login` (`usuarios_login`);
 
 --
@@ -1191,7 +1210,7 @@ ALTER TABLE `clases_grupales`
 -- AUTO_INCREMENT de la tabla `clases_particulares`
 --
 ALTER TABLE `clases_particulares`
-  MODIFY `ID_Clase` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `ID_Clase` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `parejas`
@@ -1215,7 +1234,7 @@ ALTER TABLE `pista`
 -- AUTO_INCREMENT de la tabla `promociones`
 --
 ALTER TABLE `promociones`
-  MODIFY `ID_Promo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `ID_Promo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT de la tabla `torneo`
@@ -1245,7 +1264,7 @@ ALTER TABLE `promociones`
 --
 ALTER TABLE `promociones_has_usuarios`
   ADD CONSTRAINT `promociones_has_usuarios_ibfk_1` FOREIGN KEY (`usuarios_login`) REFERENCES `usuarios` (`login`),
-  ADD CONSTRAINT `promociones_has_usuarios_ibfk_2` FOREIGN KEY (`promociones_ID_Promo`) REFERENCES `promociones` (`ID_Promo`);
+  ADD CONSTRAINT `promociones_has_usuarios_ibfk_2` FOREIGN KEY (`ID_Promo`) REFERENCES `promociones` (`ID_Promo`);
 
 --
 -- Filtros para la tabla `reservas`
