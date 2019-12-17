@@ -36,12 +36,15 @@ class Reservas_ADD_Fecha{
 				<?php
 					$hoy = date('Y-m-d');
 					$date=date_create($hoy);
-					date_add($date,date_interval_create_from_date_string("7 days"));
-					$semana = date_format($date,"Y-m-d");
+					$date1=date_create($hoy);
+					date_add($date,date_interval_create_from_date_string("1 day"));
+					date_add($date1,date_interval_create_from_date_string("7 days"));
+					$mañana = date_format($date,"Y-m-d");
+					$semana = date_format($date1,"Y-m-d");
 				?>
 
 				<label for="fecha_reserva"><?php echo $strings['Fecha']; ?></label>
-				<input type="date" id="fecha_reserva" name="fecha_reserva" min="<?php echo "$hoy";?>" max="<?php echo "$semana";?>" onblur=" return comprobarFecha(this)" >
+				<input type="date" id="fecha_reserva" name="fecha_reserva" min="<?php echo "$mañana";?>" max="<?php echo "$semana";?>" onblur=" return comprobarFecha(this)" >
 					
 				</div>
 				

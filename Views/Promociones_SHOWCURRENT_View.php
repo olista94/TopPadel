@@ -88,6 +88,11 @@
                     </tr> 
 					
 					<tr>
+                        <th><?php echo $strings['Metodo de pago']; ?></th>
+                        <td><?php echo $this -> fila['pago']; ?></td>
+                    </tr>
+					
+					<tr>
                         <th><?php echo $strings['Precio']; ?></th>
                         <td><?php if ($this -> socio == 'SI')
 								echo "10€";
@@ -187,6 +192,11 @@
 						else echo $fila['usuarios_login'];echo "-";
 						}?></td>
                     </tr> 
+					
+					<tr>
+                        <th><?php echo $strings['Metodo de pago']; ?></th>
+                        <td><?php echo $this -> fila['pago']; ?></td>
+                    </tr>
 					
 					<tr>
                         <th><?php echo $strings['Precio']; ?></th>

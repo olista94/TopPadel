@@ -50,6 +50,9 @@ if(isset($_SESSION['tipo'])){
 			
 				<th><?php echo $strings['Jugador 1']; ?></th>
 				<th><?php echo $strings['Jugador 2']; ?></th>
+				<th><?php echo $strings['Pago']; ?></th>
+				<th><?php echo $strings['CCV']; ?></th>
+				<th><?php echo $strings['Numero de tarjeta']; ?></th>
 				<th></th>
 			</tr>
 		<?php 
@@ -65,6 +68,9 @@ if(isset($_SESSION['tipo'])){
 
 					<td><?php echo $clasificacion['usuarios_login']; ?></td>
 					<td><?php echo $clasificacion['usuarios_login1']; ?></td>				
+					<td><?php echo $clasificacion['pago']; ?></td>				
+					<td><?php echo $clasificacion['CCV']; ?></td>				
+					<td><?php echo $clasificacion['num_tarjeta']; ?></td>				
 				</form>	
 			</tr>
 			

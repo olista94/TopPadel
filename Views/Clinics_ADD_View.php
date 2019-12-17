@@ -54,12 +54,12 @@ class Clinics_ADD{
 				<?php
 					$hoy = date('Y-m-d');
 					$date=date_create($hoy);
-					date_add($date,date_interval_create_from_date_string("7 days"));
-					$semana = date_format($date,"Y-m-d");
+					date_add($date,date_interval_create_from_date_string("1 day"));
+					$mañana = date_format($date,"Y-m-d");
 				?>
 
 				<label for="fecha_clase"><?php echo $strings['Fecha']; ?></label>
-				<input type="date" id="fecha_clase" name="fecha_clase" min="<?php echo "$hoy";?>" onblur=" return comprobarFecha(this)" >
+				<input type="date" id="fecha_clase" name="fecha_clase" min="<?php echo "$mañana";?>" onblur=" return comprobarFecha(this)" >
 					
 				</div>
 				

@@ -33,10 +33,16 @@ class Promociones_ADD_Fecha{
 				<div>
 				<?php
 					$hoy = date('Y-m-d');
+					$date=date_create($hoy);
+					$date1=date_create($hoy);
+					date_add($date,date_interval_create_from_date_string("1 day"));
+					date_add($date1,date_interval_create_from_date_string("7 days"));
+					$mañana = date_format($date,"Y-m-d");
+					$semana = date_format($date1,"Y-m-d");
 				?>
 
 				<label for="fecha"><?php echo $strings['Fecha']; ?></label>
-				<input type="date" name="fecha" min="<?php echo "$hoy";?>" size="18"  onblur=" return comprobarFecha(this)">
+				<input type="date" name="fecha" min="<?php echo "$mañana";?>" size="18"  onblur=" return comprobarFecha(this)">
 					
 				</div>
 				

@@ -58,8 +58,14 @@
       <label for="email"><?php echo $strings['Correo electronico']; ?></label>
       <input type="text" id="email" name="email" size="65"  onblur=" return !comprobarVacio(this) && comprobarEmail(this,60);" />	
 	<!--Campo fecha de nacimiento del usuario-->
+	<?php
+					$hoy = date('Y-m-d');
+					$date=date_create($hoy);
+					date_add($date,date_interval_create_from_date_string("1 day"));
+					$mañana = date_format($date,"Y-m-d");
+				?>
       <label for="fecha"><?php echo $strings['Fecha de nacimiento']; ?></label>
-	  <input type="date" name="fecha"  size="18" class="tcal" onblur=" return comprobarFecha(this)" >
+	  <input type="date" name="fecha" max="<?php echo "$hoy";?>" size="18" class="tcal" onblur=" return comprobarFecha(this)" >
 	  
 	   <label for="sexo"><?php echo $strings['Sexo']; ?></label>
 	  <select name="sexo" id="sexo">

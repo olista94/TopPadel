@@ -41,8 +41,15 @@
 		  <label for="edicion"><?php echo $strings['Edicion']; ?></label>
 		  <input type="number" name="edicion" id="edicion"  style="width: 75px;" onblur=" return !comprobarVacio(this) && comprobarEntero(this,0,9999);" />
 		  
+		  <?php
+					$hoy = date('Y-m-d');
+					$date=date_create($hoy);
+					date_add($date,date_interval_create_from_date_string("1 day"));
+					$mañana = date_format($date,"Y-m-d");
+				?>
+		  
 		  <label for="fecha"><?php echo $strings['Fecha']; ?></label>
-		  <input type="date" name="fecha" value="" onblur=" return comprobarFecha(this)">
+		  <input type="date" id="fecha" name="fecha" min="<?php echo "$mañana";?>" onblur=" return comprobarFecha(this)" >
 		  
 		  <label for="nivel"><?php echo $strings['Nivel']; ?></label>
 		  <input type="number" min="1" max="3" id="nivel" name="nivel" style="width: 75px;" onblur=" return !comprobarVacio(this) && comprobarEntero(this,1,3);"/>

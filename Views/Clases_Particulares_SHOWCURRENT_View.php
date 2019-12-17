@@ -66,6 +66,26 @@
                     <th><?php echo $strings['Pista']; ?></th>
                     <td><?php echo $this -> pista['Nombre_Pista']; ?></td>
                 </tr>
+				
+				<tr>
+                    <th><?php echo $strings['Metodo de pago']; ?></th>
+                    <td><?php echo $this -> fila['pago']; ?></td>
+                </tr>
+				
+				<?php if($this -> fila['pago'] == 'Tarjeta'){
+					?>
+				<tr>
+                    <th><?php echo $strings['CCV']; ?></th>
+                    <td><?php echo $this -> fila['CCV']; ?></td>
+                </tr>
+				
+				<tr>
+                    <th><?php echo $strings['Numero de tarjeta']; ?></th>
+                    <td><?php echo $this -> fila['num_tarjeta']; ?></td>
+                </tr>
+				<?php
+				}
+				?>
 
                                                                         
             </table>
