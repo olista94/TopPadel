@@ -13,16 +13,22 @@ class Clases_Particulares_Model {
 	var $hora_clase;
 	//Telefono del usuario
 	var $ID_Pista;
+	var $pago;
+	var $CCV;
+	var $num_tarjeta;
 
 
 //Constructor de la clase
-function __construct($ID_Clase,$login_usuario,$login_entrenador,$fecha_clase,$hora_clase,$ID_Pista){
+function __construct($ID_Clase,$login_usuario,$login_entrenador,$fecha_clase,$hora_clase,$ID_Pista,$pago,$CCV,$num_tarjeta){
 	$this->ID_Clase = $ID_Clase;
 	$this->login_usuario = $login_usuario;
 	$this->login_entrenador = $login_entrenador;
 	$this->fecha_clase = $fecha_clase;
 	$this->hora_clase = $hora_clase;
 	$this->ID_Pista = $ID_Pista;
+	$this->pago = $pago;
+	$this->CCV = $CCV;
+	$this->num_tarjeta = $num_tarjeta;
 
 	//Incluimos el archivo de acceso a la bd
 	include_once 'Access_DB.php';
@@ -55,6 +61,63 @@ function add(){
 			return  'Insercion correcta'; //operacion de insertado correcta
 		}		
 	}
+	
+	function addMetodoPago(){
+	
+    $sql = "SELECT * FROM clases_particulares WHERE (`ID_Clase` = '$this->ID_Clase'
+										)";
+
+    $result = $this->mysqli->query($sql);
+    
+    if ($result->num_rows == 1)
+    {	
+		//Sentencia sql para editar
+		$sql = "UPDATE clases_particulares SET
+					`pago` = '$this->pago'
+
+				WHERE (`ID_Clase` = '$this->ID_Clase'
+										)";
+
+        if (!($resultado = $this->mysqli->query($sql))){
+			return 'Error en la modificación';//Devuelve mensaje de error	
+		}
+		else{ 
+			
+			return 'Modificado correctamente'; //Exito
+		}
+    }
+    else 
+    	return 'No existe';//Devuelve mensaje de error	
+}
+
+function addTarjeta(){
+	
+    $sql = "SELECT * FROM clases_particulares WHERE (`ID_Clase` = '$this->ID_Clase'
+										)";
+
+    $result = $this->mysqli->query($sql);
+    
+    if ($result->num_rows == 1)
+    {	
+		//Sentencia sql para editar
+		$sql = "UPDATE clases_particulares SET
+					`CCV` = '$this->CCV',
+					`num_tarjeta` = '$this->num_tarjeta'
+
+				WHERE (`ID_Clase` = '$this->ID_Clase'
+										)";
+echo $sql;
+        if (!($resultado = $this->mysqli->query($sql))){
+			return 'Error en la modificación';//Devuelve mensaje de error	
+		}
+		else{ 
+			
+			return 'Modificado correctamente'; //Exito
+		}
+    }
+    else 
+    	return 'No existe';//Devuelve mensaje de error	
+} 
 
 
 //Funcion para buscar un usuario
@@ -280,6 +343,40 @@ function solicitaBorrado(){
 	}
 
 
+function devolverMaxID()
+{	
+    $sql = "SELECT MAX(ID_Clase)
+			FROM clases_particulares
+			";
+
+    $result = $this->mysqli->query($sql);//Guarda el resultado
+    
+	if ($result->num_rows == 1){
+		return $result -> fetch_array()[0];
+	}else{
+		return false;
+	}
+}
+
+function devolverMetodoPago($idclase)
+{	
+    $sql = "SELECT pago FROM `clases_particulares` WHERE (`ID_Clase` = '".$idclase."'
+										)";
+echo $sql;
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado->fetch_array()[0];//Se devuelve el resultado de la consulta
+	}
+}
+
+
+
 }//fin de clase
+
 
 ?> 

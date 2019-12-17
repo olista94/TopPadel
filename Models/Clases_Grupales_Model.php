@@ -61,6 +61,7 @@ function addGrupal(){
 		}		
 	}
 	
+	
 	function rellenadatos() 
 {	
     $sql = "SELECT * FROM clases_grupales WHERE (`ID_Clase` = '$this->ID_Clase')";

@@ -5,11 +5,17 @@ class Inscripcion_Model{
 	var $parejas_ID_Pareja;
 
 	var $torneos_ID_Torneo;
+	var $pago;
+	var $CCV;
+	var $num_tarjeta;
 	
 	//Constructor de la clase
-	function __construct ($parejas_ID_Pareja,$torneos_ID_Torneo){
+	function __construct ($parejas_ID_Pareja,$torneos_ID_Torneo,$pago,$CCV,$num_tarjeta){
 		$this -> parejas_ID_Pareja = $parejas_ID_Pareja;
 		$this -> torneos_ID_Torneo = $torneos_ID_Torneo;
+		$this -> pago = $pago;
+		$this -> CCV = $CCV;
+		$this -> num_tarjeta = $num_tarjeta;
 		
 		//Incluimos el archivo de acceso a la bd
 		include_once 'Access_DB.php';
@@ -33,6 +39,79 @@ function add(){
 	}
 	else{ 
 		return 'Insercion correcta'; //Devuelve mensaje de exito	
+	}
+}
+
+function addMetodoPago(){
+	
+    $sql = "SELECT * FROM `parejas_has_torneos` WHERE `parejas_ID_Pareja` = (SELECT MAX(`parejas_ID_Pareja`) FROM parejas_has_torneos)
+										";
+echo $sql;
+    $result = $this->mysqli->query($sql);
+    
+    if ($result->num_rows == 1)
+    {	
+		//Sentencia sql para editar
+		$sql = "UPDATE parejas_has_torneos SET
+					`pago` = '$this->pago'
+
+				WHERE `parejas_ID_Pareja` = (SELECT MAX(`parejas_ID_Pareja`) FROM parejas_has_torneos)
+										";
+echo $sql;
+        if (!($resultado = $this->mysqli->query($sql))){
+			return 'Error en la modificación';//Devuelve mensaje de error	
+		}
+		else{ 
+			
+			return 'Modificado correctamente'; //Exito
+		}
+    }
+    else 
+    	return 'No existe';//Devuelve mensaje de error	
+}
+
+function addTarjeta(){
+	
+    $sql = "SELECT * FROM parejas_has_torneos WHERE `parejas_ID_Pareja` = (SELECT MAX(`parejas_ID_Pareja`) FROM parejas_has_torneos)
+										";
+
+    $result = $this->mysqli->query($sql);
+    
+    if ($result->num_rows == 1)
+    {	
+		//Sentencia sql para editar
+		$sql = "UPDATE parejas_has_torneos SET
+					`CCV` = '$this->CCV',
+					`num_tarjeta` = '$this->num_tarjeta'
+
+				WHERE `parejas_ID_Pareja` = (SELECT MAX(`parejas_ID_Pareja`) FROM parejas_has_torneos)
+										";
+echo $sql;
+        if (!($resultado = $this->mysqli->query($sql))){
+			return 'Error en la modificación';//Devuelve mensaje de error	
+		}
+		else{ 
+			
+			return 'Modificado correctamente'; //Exito
+		}
+    }
+    else 
+    	return 'No existe';//Devuelve mensaje de error	
+}
+
+function devolverMetodoPago()
+{	
+    $sql = "SELECT pago FROM `parejas_has_torneos` WHERE `parejas_ID_Pareja` = (SELECT MAX(`parejas_ID_Pareja`) FROM parejas_has_torneos)
+										";
+echo $sql;
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado->fetch_array()[0];//Se devuelve el resultado de la consulta
 	}
 }
 
@@ -144,7 +223,7 @@ function DevolverClasificacion($grupo)
 
 function DevolverParejas($idtorneo)
 {	
-    $sql = "SELECT `parejas_ID_Pareja`,`usuarios_login`,`usuarios_login1`
+    $sql = "SELECT `parejas_ID_Pareja`,`usuarios_login`,`usuarios_login1`,pago,CCV,num_tarjeta
 			FROM `parejas_has_torneos` p,`parejas` par
 			WHERE (p.`parejas_ID_Pareja` = par.`ID_Pareja`) AND (p.`torneos_ID_Torneo` = '$idtorneo') ";
 
