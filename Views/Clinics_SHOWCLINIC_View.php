@@ -31,10 +31,10 @@ include_once '../Functions/Authentication.php';
 
 <div class="showall">   
      <table class="asistencia">
-			<tr><th style="border:none;" class="title" colspan="4"><?php echo $strings['Asistencia']; ?>
+			<tr><th style="border:none;background: #FFF;" class="title" colspan="4"><?php echo $strings['Asistencia']; ?>
 			<form class="tableActions" action="../Controllers/Clinics_Controller.php" method="">
 			<!--Botones para añadir o buscar-->
-			<button class="guardar" name="action" value="Confirmar_Edit_SHOWCLINIC" type="submit"></button>
+			<button style="margin-right: 50%;" class="refrescar" name="action" value="Confirmar_Edit_SHOWCLINIC" type="submit"></button>
 			<input type="hidden" name="ID_Clase" value="<?php echo $this -> apuntados -> fetch_array()[0]; ?>">
 			</form></th></tr>
 	<!--Campos Categoria,nombre,Edicion,Fecha,Nivel -->
@@ -54,6 +54,18 @@ include_once '../Functions/Authentication.php';
 					<!--Datos-->
 					
 					<td style="border:1px solid black;border-left:none;border-collapse:collapse;"><?php echo $fila['login_usuario']; ?></td>	
+
+
+					<!-- Estilo para alternar colores entre filas da table -->
+					<style type='text/css'>
+						tr:nth-child(odd) {	
+    						background-color:#f2f2f2; /*gris*/	
+						}	
+						tr:nth-child(even) {	
+    						background-color:#FFF; /*azul*/	
+						} 	
+					</style>
+					<!-- ************************************************* -->
 							
 					<td><?php if($fila['dia1'] == 0){
 								echo $strings['Asiste'];
