@@ -102,6 +102,37 @@ function searchAdminNormal(){
 	}
 }
 
+function borrarAntiguas()
+{	
+   
+		$fecha = date('Y-m-d', time());
+    	//Sentencia sql para borrar
+        $sql = "DELETE FROM clases_grupales WHERE (`fecha_clase` < '$fecha' AND tipo = 'CLINICS'
+										)";
+        
+        $this->mysqli->query($sql);
+        
+    	return 'Borrado correctamente';
+    
+}
+
+function puedeApuntarseFecha()
+{	
+   
+		$fecha = date('Y-m-d', time());
+    	//Sentencia sql para borrar
+        $sql = "SELECT * FROM clases_grupales WHERE (`fecha_clase` < '$fecha' AND ID_Clase = '$this->ID_Clase'
+										)";
+        
+        $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
+    
+	if ($result->num_rows == 1){
+		return false;
+	}else{
+		return true;
+	}
+    
+}
 
 
 function searchEntrenador(){ 

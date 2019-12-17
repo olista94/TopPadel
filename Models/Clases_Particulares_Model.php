@@ -119,6 +119,20 @@ echo $sql;
     	return 'No existe';//Devuelve mensaje de error	
 } 
 
+function borrarAntiguas()
+{	
+   
+		$fecha = date('Y-m-d', time());
+    	//Sentencia sql para borrar
+        $sql = "DELETE FROM clases_particulares WHERE (`fecha_clase` < '$fecha'
+										)";
+        
+        $this->mysqli->query($sql);
+        
+    	return 'Borrado correctamente';
+    
+}
+
 
 //Funcion para buscar un usuario
 function searchAdmin(){ 
