@@ -310,10 +310,10 @@ if(!IsAuthenticated()){
 					$torneo = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],'',''); 
 					$datos1 = $torneo->partidosPareja();
 
-					$inscripcion = new Inscripcion_Model('',$idtorneo);
+					$inscripcion = new Inscripcion_Model('',$idtorneo,'','','');
 					$clasificacion = $inscripcion -> DevolverClasificacionInicial();
 				
-					$apuntados = new Inscripcion_Model('','');
+					$apuntados = new Inscripcion_Model('','','','','');
 					$apuntados1 = $apuntados -> DevolverParejasGrupo($idtorneo,0);
 					$grupos = $apuntados ->DevolverGruposTorneo($idtorneo);
 					
@@ -324,10 +324,10 @@ if(!IsAuthenticated()){
 					$torneo = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],'',''); 
 					$datos1 = $torneo->partidosPareja();
 					
-					$inscripcion = new Inscripcion_Model('',$idtorneo);
+					$inscripcion = new Inscripcion_Model('',$idtorneo,'','','');
 					$clasificacion = $inscripcion -> DevolverParejas($_REQUEST['ID_Torneo']);
 				
-					$apuntados = new Inscripcion_Model('','');
+					$apuntados = new Inscripcion_Model('','','','','');
 					$apuntados1 = $apuntados -> DevolverParejasGrupo($idtorneo,0);
 					
 
@@ -343,10 +343,10 @@ if(!IsAuthenticated()){
 				$datos = $torneo->rellenadatos();//DEVUELVE LOS DATOS DE UN TORNEO
 				
 				
-				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
+				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo'],'','','');
 				$clasificacion = $inscripcion -> DevolverClasificacionInicial();//DEVUELVE LA CLASIFICACION DE UN TORNEO
 				
-				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
+				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo'],'','','');
 				$apuntados1 = $inscripcion -> DevolverIDParejas($_REQUEST['ID_Torneo']);//DEVUELVE LOS IDS DE LAS PAREJAS APUNTADAS A UN TORNEO
 				
 				$partido = new Partidos_Model('','','','','','','','','','','','','');
@@ -385,11 +385,11 @@ if(!IsAuthenticated()){
 				$datos1 = $torneo->partidosPareja();
 				
 				
-				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
+				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo'],'','','');
 				$clasificacion = $inscripcion -> DevolverClasificacion($grupo);//DEVUELVE LA CLASIFICACION DE UN TORNEO
 				
 				//$p = $torneo -> partidosPareja();
-				$apuntados = new Inscripcion_Model('','');
+				$apuntados = new Inscripcion_Model('','','','','');
 				$apuntados1 = $apuntados -> DevolverParejasGrupo($idtorneo,$grupo);
 				$grupos = $apuntados ->DevolverGruposTorneo($idtorneo);
 				
@@ -625,11 +625,11 @@ if(!IsAuthenticated()){
 				$datos1 = $torneo->partidosPareja();
 				
 				
-				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
+				$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo'],'','','');
 				$clasificacion = $inscripcion -> DevolverClasificacion($grupo);//DEVUELVE LA CLASIFICACION DE UN TORNEO
 				
 				//$p = $torneo -> partidosPareja();
-				$apuntados = new Inscripcion_Model('','');
+				$apuntados = new Inscripcion_Model('','','','','');
 				$apuntados1 = $apuntados -> DevolverParejasGrupo($idtorneo,$grupo);
 				$grupos = $apuntados ->DevolverGruposTorneo($idtorneo);
 				

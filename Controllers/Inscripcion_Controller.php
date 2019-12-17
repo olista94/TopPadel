@@ -6,6 +6,7 @@ session_start();
 //Incluye la funciones que se encuentran en los siguientes ficheros:
 include_once "../Views/Header.php";
 include_once "../Views/MESSAGE.php";
+include_once "../Views/MESSAGE_Pago.php";
 include_once "../Functions/Authentication.php";
 
 if(isset($_SESSION['tipo'])){
@@ -15,6 +16,8 @@ if(isset($_SESSION['tipo'])){
 		include_once "../Models/Parejas_Model.php";
 		//include_once "../Views/Inscripciones_SHOWALL_View.php";
 		include_once "../Views/Inscripcion_ADD_View.php";
+		include_once "../Views/Inscripcion_ADD_Pago_View.php";
+		include_once "../Views/Inscripcion_ADD_Tarjeta_View.php";
 		//include_once "../Views/Inscripciones_SEARCH_View.php";
 		//include_once "../Views/Inscripciones_EDIT_View.php";
 		//include_once "../Views/Inscripciones_SHOWCURRENT_View.php";
@@ -42,7 +45,31 @@ if(isset($_SESSION['tipo'])){
 				$torneos_ID_Torneo = "";
 			}
 			
-			$inscripcion = new Inscripcion_Model ($parejas_ID_Pareja,$torneos_ID_Torneo);
+			if(isset($_REQUEST['pago'])){
+				$pago = $_REQUEST['pago'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$pago = "";
+			}
+			
+			if(isset($_REQUEST['CCV'])){
+				$CCV = $_REQUEST['CCV'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$CCV = "";
+			}
+			
+			if(isset($_REQUEST['num_tarjeta'])){
+				$num_tarjeta = $_REQUEST['num_tarjeta'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$num_tarjeta = "";
+			}
+			
+			$inscripcion = new Inscripcion_Model ($parejas_ID_Pareja,$torneos_ID_Torneo,$pago,$CCV,$num_tarjeta);
 			
 			//Devuelve el objeto Inscripcion
 			return $inscripcion;
@@ -69,7 +96,7 @@ if(isset($_SESSION['tipo'])){
 			$sexo = $_SESSION['sexo'];
 			
 			
-			$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
+			$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo'],'','','');
 			$ins = $inscripcion -> PuedeApuntarse($_SESSION['login']);
 			
 		if($generado == false){
@@ -77,7 +104,7 @@ if(isset($_SESSION['tipo'])){
 			
 				if( ($cat == 'Masculina' && $sexo == 'Masculina') || ($cat == 'Mixta' && $sexo == 'Femenina') ){
 					
-					$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
+					$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo'],'','','');
 					
 					$todos = $usuario -> BuscarHombre();
 					$apuntados = $inscripcion -> Apuntados();
@@ -112,7 +139,7 @@ if(isset($_SESSION['tipo'])){
 				}
 				else if( ($cat == 'Mixta' && $sexo == 'Masculina') || ($cat == 'Femenina' && $sexo == 'Femenina') ){
 					
-					$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo']);
+					$inscripcion = new Inscripcion_Model('',$_REQUEST['ID_Torneo'],'','','');
 					
 					$todas = $usuario -> BuscarMujer();
 					$apuntadas = $inscripcion -> Apuntados();
@@ -163,14 +190,54 @@ if(isset($_SESSION['tipo'])){
 			$p = $pareja -> add();
 			$idpareja = $pareja -> DevolverIDPareja();
 				
-			$inscripcion = new Inscripcion_Model($idpareja,$_SESSION['idtorneo']);
+			$inscripcion = new Inscripcion_Model($idpareja,$_SESSION['idtorneo'],'','','');
 				
 			$mensaje = $inscripcion-> add();
 				
 				//Crea un nuevo objeto de tipo MESSAGE que muestra por pantalla el texto de la respuesta y hace un enlace para permitir la vuelta hacia atrás (hacia el controlador)
-			new MESSAGE($mensaje,'../Controllers/Inscripcion_Controller.php');
+			new Inscripcion_ADD_Pago($_REQUEST['torneos_ID_Torneo'],'../Controllers/Torneos_Controller.php');
 				
 			
+			break;
+			
+			case 'Confirmar_ADD_Pago':
+			
+				$torneo = getDataForm();
+				
+				$torneo = new Inscripcion_Model('',$_REQUEST['torneos_ID_Torneo'],$_REQUEST['pago'],'','');
+				$torneo -> addMetodoPago();
+				$idtorneo = $_REQUEST['torneos_ID_Torneo'];
+				
+				$pago = $torneo -> devolverMetodoPago();
+				echo $pago;
+				//$phu = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login'],"","","");
+				//$phu -> addMetodoPago($idpromo,$_SESSION['login'],$pago);
+				
+				if($pago == 'Paypal'){
+					new MESSAGE_Pago('Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul','../Controllers/Inscripcion_Controller.php');			 
+				}
+				else if($pago == 'Contrareembloso'){
+					new MESSAGE('Recuerda realizar el pago en las instalaciones del club','../Controllers/Inscripcion_Controller.php');
+				}
+				
+				else if($pago == 'Tarjeta'){
+					new Inscripcion_ADD_Tarjeta($_REQUEST['torneos_ID_Torneo'],'../Controllers/Inscripcion_Controller.php');
+				}
+			
+			break;
+			
+			case 'Confirmar_ADD_Tarjeta':
+			
+				$torneos = getDataForm();
+				
+				$torneo = new Inscripcion_Model('',$_REQUEST['torneos_ID_Torneo'],'',$_REQUEST['CCV'],$_REQUEST['num_tarjeta']);
+				
+				$mensaje = $torneo -> addTarjeta();
+				
+				//$phu = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login'],"","","");
+				//$phu -> addTarjeta($_REQUEST['ID_Promo'],$_SESSION['login'],$_REQUEST['CCV'],$_REQUEST['num_tarjeta']);
+				new MESSAGE($mensaje,'../Controllers/Inscripcion_Controller.php');
+				
 			break;
 			
 

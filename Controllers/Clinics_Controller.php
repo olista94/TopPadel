@@ -6,6 +6,7 @@ session_start();
 
 //Incluimos los mensajes y la funcion de autenticacion
 include_once "../Views/MESSAGE.php";
+include_once "../Views/MESSAGE_Pago.php";
 include_once "../Functions/Authentication.php";
 
 //Comprobamos si esta el tipo de usuario en sesion
@@ -21,11 +22,14 @@ if(isset($_SESSION['tipo'])){
 
 			//Incluimos las vistas y modelo necesarios
 			include_once "../Models/Clinics_Model.php";
+			include_once "../Models/Clases_Grupales_has_Usuarios_Model.php";
 			include_once "../Models/Pistas_Model.php";		
 			include_once "../Views/Clinics_SHOWALL_View.php";
 			include_once "../Views/Clinics_SHOWCURRENT_View.php";
 			include_once "../Views/Clinics_DELETE_View.php";
 			include_once "../Views/Clinics_ADD_View.php";
+			include_once "../Views/Clinics_ADD_Pago_View.php";
+			include_once "../Views/Clinics_ADD_Tarjeta_View.php";
 			include_once "../Views/Clinics_SEARCH_View.php";
 			include_once "../Views/Clinics_INSCRIPCION_View.php";
 			include_once "../Views/Clinics_SHOWCLINIC_View.php"; 
@@ -103,6 +107,30 @@ if(isset($_SESSION['tipo'])){
 			}
 			else{
 				$ID_Pista = "";
+			}
+			
+			if(isset($_REQUEST['pago'])){
+				$pago = $_REQUEST['pago'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$pago = "";
+			}
+			
+			if(isset($_REQUEST['CCV'])){
+				$CCV = $_REQUEST['CCV'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$CCV = "";
+			}
+			
+			if(isset($_REQUEST['num_tarjeta'])){
+				$num_tarjeta = $_REQUEST['num_tarjeta'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$num_tarjeta = "";
 			}
 				
 				$clinics = new Clinics_Model ($ID_Clase,$login_entrenador,$tope,$tipo,$descripcion,$invitado,$fecha_clase,$hora_clase,$ID_Pista); //creamos el objeto usuario
@@ -263,9 +291,51 @@ if(isset($_SESSION['tipo'])){
 				
 				$mensaje = $clase -> apuntarUsuario();
 				
-				new MESSAGE($mensaje,'../Controllers/Clinics_Controller.php');
+				new Clinics_ADD_Pago($_REQUEST['ID_Clase'],'../Controllers/Clinics_Controller.php');
 			
 			break;
+			
+			
+			case 'Confirmar_ADD_Pago':
+			
+				$clases = getDataForm();
+				
+				$clase = new Clases_Grupales_has_Usuarios_Model($_REQUEST['ID_Clase'],'','','','','','','','','','','',$_REQUEST['pago'],'','');
+				$clase -> addMetodoPago();
+				$idclase = $_REQUEST['ID_Clase'];
+				
+				$pago = $clase -> devolverMetodoPago($_REQUEST['ID_Clase'],$_SESSION['login']);
+				echo $pago;
+				//$phu = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login'],"","","");
+				//$phu -> addMetodoPago($idpromo,$_SESSION['login'],$pago);
+				
+				if($pago == 'Paypal'){
+					new MESSAGE_Pago('Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul','../Controllers/Clinics_Controller.php');			 
+				}
+				else if($pago == 'Contrareembloso'){
+					new MESSAGE('Recuerda realizar el pago en las instalaciones del club','../Controllers/Clinics_Controller.php');
+				}
+				
+				else if($pago == 'Tarjeta'){
+					new Clinics_ADD_Tarjeta($_REQUEST['ID_Clase'],'../Controllers/Clinics_Controller.php');
+				}
+			
+			break;
+			
+			case 'Confirmar_ADD_Tarjeta':
+			
+				$clases = getDataForm();
+				
+				$clase = new Clases_Grupales_has_Usuarios_Model($_REQUEST['ID_Clase'],'','','','','','','','','','','','',$_REQUEST['CCV'],$_REQUEST['num_tarjeta']);
+				
+				$mensaje = $clase -> addTarjeta();
+				
+				//$phu = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login'],"","","");
+				//$phu -> addTarjeta($_REQUEST['ID_Promo'],$_SESSION['login'],$_REQUEST['CCV'],$_REQUEST['num_tarjeta']);
+				new MESSAGE($mensaje,'../Controllers/Clinics_Controller.php');
+				
+			break;
+			
 			
 			case 'Confirmar_SHOWCLINIC':
 					$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");

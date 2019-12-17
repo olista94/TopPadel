@@ -6,6 +6,7 @@ session_start();
 
 //Incluimos los mensajes y la funcion de autenticacion
 include_once "../Views/MESSAGE.php";
+include_once "../Views/MESSAGE_Pago.php";
 include_once "../Functions/Authentication.php";
 
 //Comprobamos si esta el tipo de usuario en sesion
@@ -25,6 +26,8 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Views/Clases_Particulares_SHOWALL_View.php";
 			include_once "../Views/Clases_Particulares_ADD_Fecha_View.php";
 			include_once "../Views/Clases_Particulares_ADD_Hora_View.php";
+			include_once "../Views/Clases_Particulares_ADD_Pago_View.php";
+			include_once "../Views/Clases_Particulares_ADD_Tarjeta_View.php";
 			include_once "../Views/Clases_Particulares_ADD_Pista_View.php";
 			include_once "../Views/Clases_Particulares_ADD_Entrenador_View.php";
 			include_once "../Views/Clases_Particulares_DELETE_View.php";
@@ -81,8 +84,32 @@ if(isset($_SESSION['tipo'])){
 			else{
 				$ID_Pista = "";
 			}
+			
+			if(isset($_REQUEST['pago'])){
+				$pago = $_REQUEST['pago'];//Identificador de la Inscripcion
 				
-				$clases_particulas = new Clases_Particulares_Model ($ID_Clase,$login_usuario,$login_entrenador,$fecha_clase,$hora_clase,$ID_Pista); //creamos el objeto usuario
+			}
+			else{
+				$pago = "";
+			}
+			
+			if(isset($_REQUEST['CCV'])){
+				$CCV = $_REQUEST['CCV'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$CCV = "";
+			}
+			
+			if(isset($_REQUEST['num_tarjeta'])){
+				$num_tarjeta = $_REQUEST['num_tarjeta'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$num_tarjeta = "";
+			}
+				
+				$clases_particulas = new Clases_Particulares_Model ($ID_Clase,$login_usuario,$login_entrenador,$fecha_clase,$hora_clase,$ID_Pista,$pago,$CCV,$num_tarjeta); //creamos el objeto usuario
 				
 				return $clases_particulas; //devolvemos el objeto usuario
 			}
@@ -96,14 +123,14 @@ if(isset($_SESSION['tipo'])){
 			switch ($_REQUEST['action']){
 				
 				case 'Confirmar_ADD':
-				$reserva = new Clases_Particulares_Model("","",'','','','');
+				$reserva = new Clases_Particulares_Model("","",'','','','','','','');
 					new Clases_Particulares_ADD_Fecha('../Controllers/Clases_Particulares_Controller.php');	//Crea la vista de añadir
 				
 			break;
 			
 			case 'Confirmar_ADD_Fecha':
 					
-				$clase = new Clases_Particulares_Model("","",'',$_REQUEST['fecha_clase'],"","");
+				$clase = new Clases_Particulares_Model("","",'',$_REQUEST['fecha_clase'],"","",'','','');
 				$horasOcupadas = $clase -> BuscarHorasOcupadas();
 				
 				$array = Array ('08:00:00','09:30:00','11:00:00','12:30:00','14:00:00','15:30:00','17:00:00','18:30:00','20:00:00','21:30:00');
@@ -124,7 +151,7 @@ if(isset($_SESSION['tipo'])){
 			break;
 			
 			case 'Confirmar_ADD_Hora':
-				$clase = new Clases_Particulares_Model("","","",$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],"");
+				$clase = new Clases_Particulares_Model("","","",$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],"",'','','');
 				$pistasLibres = $clase -> pistasLibres();
 				
 				
@@ -133,7 +160,7 @@ if(isset($_SESSION['tipo'])){
 			
 			
 			case 'Confirmar_ADD_Pista':
-				$clase = new Clases_Particulares_Model("","","",$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],$_REQUEST['ID_Pista']);
+				$clase = new Clases_Particulares_Model("","","",$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],$_REQUEST['ID_Pista'],'','','');
 				$entrenadores = $clase -> buscarEntrenador();
 				
 				$entrenadoresDisponibles = Array();
@@ -147,17 +174,55 @@ if(isset($_SESSION['tipo'])){
 			
 			case 'Confirmar_ADD_Entrenador':
 				
-				$clase = new Clases_Particulares_Model("","",$_REQUEST['login_entrenador'],$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],$_REQUEST['ID_Pista']);
+				$clase = new Clases_Particulares_Model("","",$_REQUEST['login_entrenador'],$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],$_REQUEST['ID_Pista'],'','','');
 				
 				$mensaje = $clase -> add();
+				$idclase = $clase -> devolverMaxID();
 				
-				new MESSAGE($mensaje,'../Controllers/Clases_Particulares_Controller.php');
+				new Clases_Particulares_ADD_Pago($idclase,'../Controllers/Clases_Particulares_Controller.php');
 			
+			break;
+			
+			case 'Confirmar_ADD_Pago':
+			
+				$clase = getDataForm();
+				
+				$clase = new Clases_Particulares_Model($_REQUEST['ID_Clase'],'',"","",'',"",$_REQUEST['pago'],'','');
+				$clase -> addMetodoPago();
+				$idclase = $clase -> devolverMaxID();
+				
+				$pago = $clase -> devolverMetodoPago($_REQUEST['ID_Clase']);
+				
+				//$phu = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login'],"","","");
+				//$phu -> addMetodoPago($idpromo,$_SESSION['login'],$pago);
+				
+				if($pago == 'Paypal'){
+					new MESSAGE_Pago('Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul','../Controllers/Clases_Particulares_Controller.php');			 
+				}
+				else if($pago == 'Contrareembloso'){
+					new MESSAGE('Recuerda realizar el pago en las instalaciones del club','../Controllers/Clases_Particulares_Controller.php');
+				}
+				
+				else if($pago == 'Tarjeta'){
+					new Clases_Particulares_ADD_Tarjeta($_REQUEST['ID_Clase'],'../Controllers/Clases_Particulares_Controller.php');
+				}
+			
+			break;
+			
+			case 'Confirmar_ADD_Tarjeta':
+			
+				$clase = getDataForm();
+				$mensaje = $clase -> addTarjeta();
+				
+				//$phu = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login'],"","","");
+				//$phu -> addTarjeta($_REQUEST['ID_Promo'],$_SESSION['login'],$_REQUEST['CCV'],$_REQUEST['num_tarjeta']);
+				new MESSAGE($mensaje,'../Controllers/Clases_Particulares_Controller.php');
+				
 			break;
 			
 			case 'Confirmar_DELETE1':
 			
-				$clase = new Clases_Particulares_Model($_REQUEST['ID_Clase'],"","","","","");
+				$clase = new Clases_Particulares_Model($_REQUEST['ID_Clase'],"","","","","",'','','');
 				
 				$datos = $clase -> searchAdmin();
 				$array = $datos -> fetch_array();
@@ -174,14 +239,14 @@ if(isset($_SESSION['tipo'])){
 			case 'Confirmar_DELETE2':
 			
 			if($_SESSION['tipo'] == 'NORMAL' || $_SESSION['tipo'] == 'ADMIN'){
-				$clase = new Clases_Particulares_Model($_REQUEST['ID_Clase'],"","","","","");
+				$clase = new Clases_Particulares_Model($_REQUEST['ID_Clase'],"","","","","",'','','');
 				
 				$mensaje = $clase -> delete();
 				
 				new MESSAGE($mensaje,'../Controllers/Clases_Particulares_Controller.php');
 			}
 			else{
-				$clase = new Clases_Particulares_Model($_REQUEST['ID_Clase'],"","","","","");
+				$clase = new Clases_Particulares_Model($_REQUEST['ID_Clase'],"","","","","",'','','');
 				
 				$mensaje = $clase -> solicitaBorrado();
 				
@@ -192,7 +257,7 @@ if(isset($_SESSION['tipo'])){
 			
 			case 'Confirmar_SHOWCURRENT':
 			
-				$clase = new Clases_Particulares_Model($_REQUEST['ID_Clase'],"","","","","");
+				$clase = new Clases_Particulares_Model($_REQUEST['ID_Clase'],"","","","","",'','','');
 				
 				$datos = $clase -> searchAdmin();
 				$array = $datos -> fetch_array();
@@ -239,18 +304,18 @@ if(isset($_SESSION['tipo'])){
 				default: /*PARA EL SHOWALL */
 				
 				if($_SESSION['tipo'] == 'NORMAL'){
-					$clases_particulas = new Clases_Particulares_Model('','','','','','');
+					$clases_particulas = new Clases_Particulares_Model('','','','','','','','','');
 					$datos = $clases_particulas -> ShowAllDeportista();
 					$respuesta = new Clases_Particulares_SHOWALL($datos,'../Controllers/Clases_Particulares_Controller.php'); 
 				}
 				else if($_SESSION['tipo'] == 'ADMIN'){
-					$clases_particulas = new Clases_Particulares_Model('','','','','','');
+					$clases_particulas = new Clases_Particulares_Model('','','','','','','','','');
 					$datos = $clases_particulas -> ShowAllAdmin();
 					$respuesta = new Clases_Particulares_SHOWALL($datos,'../Controllers/Clases_Particulares_Controller.php'); 
 				}
 				
 				else if($_SESSION['tipo'] == 'ENTRENADOR'){
-					$clases_particulas = new Clases_Particulares_Model('','','','','','');
+					$clases_particulas = new Clases_Particulares_Model('','','','','','','','','');
 					$datos = $clases_particulas -> ShowAllEntrenador();
 					$respuesta = new Clases_Particulares_SHOWALL($datos,'../Controllers/Clases_Particulares_Controller.php'); 
 				}

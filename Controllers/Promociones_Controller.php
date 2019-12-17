@@ -238,14 +238,14 @@ if (!IsAuthenticated()){ //si no está autenticado
 					}
 					else{
 						$promocion -> cerrarPromocion($pista);
-					echo $_REQUEST['ID_Promo'];
-						new Promociones_ADD_Pago($_REQUEST['ID_Promo'],'../Controllers/Promociones_Controller.php');//Mostramos el mensaje
+				
+						new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');
 					}
 				}
 				else{
 				//echo $promo->fetch_array()[0];
-				echo $_REQUEST['ID_Promo'];
-					new Promociones_ADD_Pago($_REQUEST['ID_Promo'],'../Controllers/Promociones_Controller.php');
+				
+					new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');
 				}
 				
 		break;

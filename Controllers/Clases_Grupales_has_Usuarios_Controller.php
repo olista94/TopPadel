@@ -31,11 +31,35 @@ if(isset($_SESSION['tipo'])){
 			/* RECOGE LOS DATOS DEL FORMULARIO */
 			function getDataForm(){
 				
+			if(isset($_REQUEST['pago'])){
+				$pago = $_REQUEST['pago'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$pago = "";
+			}
+			
+			if(isset($_REQUEST['CCV'])){
+				$CCV = $_REQUEST['CCV'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$CCV = "";
+			}
+			
+			if(isset($_REQUEST['num_tarjeta'])){
+				$num_tarjeta = $_REQUEST['num_tarjeta'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$num_tarjeta = "";
+			}
+				
 				$dia = $_REQUEST['dia2'];
 				
 				$idclase = $_REQUEST['ID_Clase'];
 				
-				$clase = new Clases_Grupales_has_Usuarios_Model("","","","","","","","","","","","");
+				$clase = new Clases_Grupales_has_Usuarios_Model("","","","","","","","","","","","","","","");
 				
 				foreach($_REQUEST as $i => $dato){
 					if($i != "dia1" && $i != 'action' && $i != 'ID_Clase'){
@@ -54,7 +78,7 @@ if(isset($_SESSION['tipo'])){
 			switch ($_REQUEST['action']){
 			
 			case 'Ver_Dia':
-					$clase = new Clases_Grupales_has_Usuarios_Model($_REQUEST['ID_Clase'],"","","","","","","","","","","");
+					$clase = new Clases_Grupales_has_Usuarios_Model($_REQUEST['ID_Clase'],"","","","","","","","","","","","","","");
 					
 					$dia1 = $_REQUEST['dia1'];
 					$asistencia = $clase -> mostrarDia($dia1);
@@ -66,24 +90,26 @@ if(isset($_SESSION['tipo'])){
 			break;
 			
 			case 'Guardar_Asistencia':
-					$clase = new Clases_Grupales_has_Usuarios_Model("","","","","","","","","","","","");
+					$clase = new Clases_Grupales_has_Usuarios_Model("","","","","","","","","","","","","","","");
 					$clase = getDataForm(); 
 					
-					$clase = new Clases_Grupales_has_Usuarios_Model($_REQUEST['ID_Clase'],"","","","","","","","","","","");
+					$clase = new Clases_Grupales_has_Usuarios_Model($_REQUEST['ID_Clase'],"","","","","","","","","","","","","","");
 					$apuntados = $clase -> Apuntados();
 					
 					$clase2 = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","");
 					$tipo = $clase2 -> devolverTipo();
 					
 					if($tipo == 'ESCUELAS'){
-						echo $tipo;
+						
 						new Clases_Grupales_SHOWCLASE($apuntados,'../Controllers/Clases_Grupales_Controller.php');
 					}
 					else{
-						echo $tipo;
+						
 						new Clinics_SHOWCLINIC($apuntados,'../Controllers/Clases_Grupales_Controller.php');
 					}
 			break;
+			
+			
 			
 			/*case 'Confirmar_SHOWCLASE':
 					$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
