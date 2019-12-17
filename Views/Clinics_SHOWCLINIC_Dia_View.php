@@ -1,17 +1,13 @@
 <?php
 //Comprobamos que está autenticado
 include_once '../Functions/Authentication.php';
-
-
  class Clinics_SHOWCLINIC_Dia{	 
-
 	//Variable con el enlace al showall
 	var $apuntados;	
 	var $dia;	
 	var $enlace;	
 	//Constructor de la clase
 	function __construct($apuntados,$dia,$enlace){
-
 		$this -> apuntados = $apuntados;
 		$this -> dia = $dia;
 		$this -> enlace = $enlace;
@@ -27,7 +23,6 @@ include_once '../Functions/Authentication.php';
 	//Archivo del idioma	
 		include '../Locales/Strings_'. $_SESSION['idioma'] .'.php';  
 	 
-
 		
 ?>
 
@@ -85,4 +80,3 @@ include_once '../Functions/Authentication.php';
 <!--Pie de pagina-->
 	<?php include '../Views/Footer.php'; ?>
 </footer>
-

@@ -52,7 +52,7 @@ if ($_SESSION['tipo'] == "NORMAL"){
 			<!--Campos a mostrar-->
 			<tr>
 				<th><?php echo $strings['Descripcion']; ?></th>
-				<th><?php echo $strings['Fecha']; ?></th>
+				<th><?php echo $strings['Fecha limite']; ?></th>
 				<th><?php echo $strings['Tope']; ?></th>
 				<th><?php echo $strings['Apuntados']; ?></th>
 				<th></th>
@@ -166,7 +166,7 @@ if ($_SESSION['tipo'] == "NORMAL"){
 			<!--Campos a mostrar-->
 			<tr>
 				<th><?php echo $strings['Descripcion']; ?></th>
-				<th><?php echo $strings['Fecha']; ?></th>
+				<th><?php echo $strings['Fecha limite']; ?></th>
 				<th><?php echo $strings['Tope']; ?></th>
 				<th><?php echo $strings['Apuntados']; ?></th>
 				<th></th>
@@ -277,7 +277,7 @@ if ($_SESSION['tipo'] == "NORMAL"){
 			<!--Campos a mostrar-->
 			<tr>
 				<th><?php echo $strings['Descripcion']; ?></th>
-				<th><?php echo $strings['Fecha']; ?></th>
+				<th><?php echo $strings['Fecha limite']; ?></th>
 				<th><?php echo $strings['Tope']; ?></th>
 				<th><?php echo $strings['Apuntados']; ?></th>
 				<th></th>
