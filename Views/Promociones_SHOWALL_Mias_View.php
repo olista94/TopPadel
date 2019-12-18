@@ -124,6 +124,11 @@ include_once '../Views/Header.php';
 			}
 		?>                    
 		</table>        
+	</div> 
+
+	<div class="mensajes">
+	
+		<b><?php echo $strings['Si no se cierra la promoción se te devolverá el dinero']; ?></b>	
 	</div>           
         
 <?php   
