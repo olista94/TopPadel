@@ -344,6 +344,7 @@ array(
 	'Recuerda realizar el pago en las instalaciones del club' => 'Recuerda realizar el pago en las instalaciones del club',
 	'CCV' => 'CCV',
 	'Numero de tarjeta' => 'Número de tarjeta',
+	'Si no se cierra la promoción se te devolverá el dinero' => 'Si no se cierra la promoción se te devolverá el dinero',
 	'' => '',
 	'' => '',
 	'' => '',

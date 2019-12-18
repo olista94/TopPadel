@@ -343,6 +343,7 @@ array(
 	'Recuerda realizar el pago en las instalaciones del club' => 'Don´t forget to pay in the club',
 	'CCV' => 'CCV',
 	'Numero de tarjeta' => 'Card number',
+	'Si no se cierra la promoción se te devolverá el dinero' => 'If the promotion does not close, the money will be refunded.'
 	'' => '',
 	'' => '',
 	'' => ''
