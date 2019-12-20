@@ -4,7 +4,7 @@
 #2. Escribir en la barra de direcciones del navegador localhost/phpmyadmin
 #2.1. Importar el archivo sql
 #3. Escribir en la barra de direcciones del navegador localhost/TopPadel/index.php
-#3.1. Loguearse con alguno de los usuarios que se muestran a continuacion
+#3.1. Loguearse con alguno de los usuarios que se muestran a continuacion (o registrarse)
 
 # Usuarios para el proyecto TopPadel Versión Preeliminar
 
