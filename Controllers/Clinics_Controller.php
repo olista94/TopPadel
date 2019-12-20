@@ -33,6 +33,7 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Views/Clinics_SEARCH_View.php";
 			include_once "../Views/Clinics_INSCRIPCION_View.php";
 			include_once "../Views/Clinics_SHOWCLINIC_View.php"; 
+			include_once "../Views/Clinics_SHOWCLINIC_Admin_View.php"; 
 			include_once "../Views/Clinics_SHOWCLINIC_Dia_View.php"; 
 			
 			 
@@ -339,10 +340,17 @@ if(isset($_SESSION['tipo'])){
 			
 			
 			case 'Confirmar_SHOWCLINIC':
-					$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");
-					$apuntados = $clase -> Apuntados();
 					
-					new Clinics_SHOWCLINIC($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+					if($_SESSION['tipo'] == 'ENTRENADOR'){
+						$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");
+						$apuntados = $clase -> Apuntados();
+						new Clinics_SHOWCLINIC($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+					}
+					else if($_SESSION['tipo'] == 'ADMIN'){
+						$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");
+						$apuntados = $clase -> Apuntados();
+						new Clinics_SHOWCLINIC_Admin($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+					}
 			break;
 			
 			

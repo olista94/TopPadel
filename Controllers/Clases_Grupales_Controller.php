@@ -28,6 +28,7 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Views/Clases_Grupales_DELETE_View.php";
 			include_once "../Views/Clases_Grupales_SHOWCURRENT_View.php";
 			include_once "../Views/Clases_Grupales_SHOWCLASE_View.php"; 
+			include_once "../Views/Clases_Grupales_SHOWCLASE_Admin_View.php"; 
 			include_once "../Views/Clases_Grupales_SHOWCLASE_Dia_View.php";
 			include_once "../Views/Clases_Grupales_INSCRIPCION_View.php";
 			include_once "../Views/Clases_Grupales_SEARCH_View.php";
@@ -346,10 +347,18 @@ if(isset($_SESSION['tipo'])){
 			break;
 			
 			case 'Confirmar_SHOWCLASE':
-					$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
-					$apuntados = $clase -> Apuntados();
 					
-					new Clases_Grupales_SHOWCLASE($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+					if($_SESSION['tipo'] == 'ENTRENADOR'){
+						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
+						$apuntados = $clase -> Apuntados();
+						new Clases_Grupales_SHOWCLASE($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+					}
+					else if($_SESSION['tipo'] == 'ADMIN'){
+						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
+						$apuntados = $clase -> Apuntados();
+						new Clases_Grupales_SHOWCLASE_Admin($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+					}
+					
 			break;
 			
 			
@@ -360,6 +369,7 @@ if(isset($_SESSION['tipo'])){
 					$dia = mysqli_fetch_field_direct($asistencia, 2)->name;
 					
 					new Clases_Grupales_SHOWCLASE_Dia($asistencia,$dia,'../Controllers/Clases_Grupales_Controller.php');
+					
 			break;
 
 				
