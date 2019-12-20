@@ -99,7 +99,7 @@ function addTarjeta(){
 		}
 		else{ 
 			
-			return 'Modificado correctamente'; //Exito
+			return 'Pago realizado correctamente'; //Exito
 		}
     }
     else 
