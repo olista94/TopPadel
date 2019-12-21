@@ -209,14 +209,14 @@ if(isset($_SESSION['tipo'])){
 				$idtorneo = $_REQUEST['torneos_ID_Torneo'];
 				
 				$pago = $torneo -> devolverMetodoPago();
-				echo $pago;
+				
 				//$phu = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login'],"","","");
 				//$phu -> addMetodoPago($idpromo,$_SESSION['login'],$pago);
 				
 				if($pago == 'Paypal'){
 					new MESSAGE_Pago('Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul','../Controllers/Inscripcion_Controller.php');			 
 				}
-				else if($pago == 'Contrareembloso'){
+				else if($pago == 'Contrareembolso'){
 					new MESSAGE('Recuerda realizar el pago en las instalaciones del club','../Controllers/Inscripcion_Controller.php');
 				}
 				

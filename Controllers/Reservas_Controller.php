@@ -138,7 +138,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 				if($pago == 'Paypal'){
 					new MESSAGE_Pago('Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul','../Controllers/Reservas_Controller.php');			 
 				}
-				else if($pago == 'Contrareembloso'){
+				else if($pago == 'Contrareembolso'){
 					new MESSAGE('Recuerda realizar el pago en las instalaciones del club','../Controllers/Reservas_Controller.php');
 				}
 				

@@ -141,7 +141,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 						$apuntar = new Promociones_has_Usuarios_Model($idpromo,$_SESSION['login'],"","","");
 						$a = $apuntar -> add();
 					
-					echo $idpromo;
+					
 					//Si el insertado es correcto
 					//new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');
 					new Promociones_ADD_Pago($idpromo,'../Controllers/Promociones_Controller.php');
@@ -165,7 +165,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 				if($pago == 'Paypal'){
 					new MESSAGE_Pago('Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul','../Controllers/Promociones_Controller.php');			 
 				}
-				else if($pago == 'Contrareembloso'){
+				else if($pago == 'Contrareembolso'){
 					new MESSAGE('Recuerda realizar el pago en las instalaciones del club','../Controllers/Promociones_Controller.php');
 				}
 				
@@ -226,7 +226,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 				
 				$promocion = new Promociones_Model($_REQUEST['ID_Promo'],"","","","","","","");
 				$promo = $promocion -> ContarUsuarios1();
-				echo $_REQUEST['ID_Promo'];
+				
 				if($promo->fetch_array()[0] == 4){
 					
 					$datos = $promocion -> rellenadatos()->fetch_array();
@@ -243,7 +243,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 					}
 				}
 				else{
-				//echo $promo->fetch_array()[0];
+		
 				
 					new MESSAGE($mensaje,'../Controllers/Promociones_Controller.php');
 				}

@@ -199,7 +199,7 @@ if(isset($_SESSION['tipo'])){
 				if($pago == 'Paypal'){
 					new MESSAGE_Pago('Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul','../Controllers/Clases_Particulares_Controller.php');			 
 				}
-				else if($pago == 'Contrareembloso'){
+				else if($pago == 'Contrareembolso'){
 					new MESSAGE('Recuerda realizar el pago en las instalaciones del club','../Controllers/Clases_Particulares_Controller.php');
 				}
 				

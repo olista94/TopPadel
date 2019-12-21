@@ -29,6 +29,7 @@ if(isset($_SESSION['tipo'])){
 			include_once "../Views/Clases_Grupales_SHOWCURRENT_View.php";
 			include_once "../Views/Clases_Grupales_SHOWCLASE_View.php"; 
 			include_once "../Views/Clases_Grupales_SHOWCLASE_Admin_View.php"; 
+			include_once "../Views/Clases_Grupales_SHOWCLASE_Normal_View.php"; 
 			include_once "../Views/Clases_Grupales_SHOWCLASE_Dia_View.php";
 			include_once "../Views/Clases_Grupales_INSCRIPCION_View.php";
 			include_once "../Views/Clases_Grupales_SEARCH_View.php";
@@ -283,14 +284,14 @@ if(isset($_SESSION['tipo'])){
 				$idclase = $_REQUEST['ID_Clase'];
 				
 				$pago = $clase -> devolverMetodoPago($_REQUEST['ID_Clase'],$_SESSION['login']);
-				echo $pago;
+				
 				//$phu = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login'],"","","");
 				//$phu -> addMetodoPago($idpromo,$_SESSION['login'],$pago);
 				
 				if($pago == 'Paypal'){
 					new MESSAGE_Pago('Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul','../Controllers/Clases_Grupales_Controller.php');			 
 				}
-				else if($pago == 'Contrareembloso'){
+				else if($pago == 'Contrareembolso'){
 					new MESSAGE('Recuerda realizar el pago en las instalaciones del club','../Controllers/Clases_Grupales_Controller.php');
 				}
 				
@@ -357,6 +358,11 @@ if(isset($_SESSION['tipo'])){
 						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
 						$apuntados = $clase -> Apuntados();
 						new Clases_Grupales_SHOWCLASE_Admin($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+					}
+					if($_SESSION['tipo'] == 'NORMAL'){
+						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
+						$apuntados = $clase -> Apuntados();
+						new Clases_Grupales_SHOWCLASE_Normal($apuntados,'../Controllers/Clases_Grupales_Controller.php');
 					}
 					
 			break;

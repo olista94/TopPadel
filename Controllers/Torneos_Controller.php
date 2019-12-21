@@ -121,7 +121,7 @@ if(!IsAuthenticated()){
 			$contFin = ($apuntados/$numGrupos);
 				for($i = 0; $i < $numGrupos; $i++){
 					
-					//echo $numGrupos;
+					
 					for($j = $contInicio; $j < $contFin; $j++){
 						$partido -> insertarGrupo($parejasApuntadas[$j],$i,$idtorneo);
 					}
@@ -130,7 +130,7 @@ if(!IsAuthenticated()){
 						
 				}
 		}
-		//echo $numGrupos;
+		
 	}
 	
 	function generarEnfrentamientos($parejasApuntadas,$idtorneo,$partido,$enfrentamiento){
@@ -149,7 +149,7 @@ if(!IsAuthenticated()){
 					
 				for ($i = 0; $i < $longitud; $i++) {
 					for ($j = $i+1; $j < $longitud; $j++) {
-						//echo "$parejasArray[$i] vs $parejasArray[$j] --";
+						
 						$mensaje = $partido -> add();
 						$partido1 = new Partidos_Model('','','','','','','','','','','','','');
 						$idpartido = $partido1 -> DevolverID();
