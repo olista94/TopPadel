@@ -67,8 +67,16 @@ if(isset($_SESSION['tipo'])){
 					<input type="hidden" name="ID_Torneo" value=<?php echo $this->idtorneo; ?>>
 
 					<td><?php echo $clasificacion['usuarios_login']; ?></td>
-					<td><?php echo $clasificacion['usuarios_login1']; ?></td>				
-					<td><?php echo $clasificacion['pago']; ?></td>				
+					<td><?php echo $clasificacion['usuarios_login1']; ?></td>
+					
+					<td><?php if($clasificacion['pago'] == 'Paypal')
+								echo $strings['Paypal'];
+							else if($clasificacion['pago'] == 'Tarjeta')
+								echo $strings['Tarjeta'];
+							else if($clasificacion['pago'] == 'Contrareembolso')
+								echo $strings['Efectivo'];
+								?></td>
+							
 					<td><?php echo $clasificacion['CCV']; ?></td>				
 					<td><?php echo $clasificacion['num_tarjeta']; ?></td>				
 				</form>	

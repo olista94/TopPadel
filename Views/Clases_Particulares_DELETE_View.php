@@ -69,7 +69,13 @@
 				
 				<tr>
                     <th><?php echo $strings['Metodo de pago']; ?></th>
-                    <td><?php echo $this -> fila['pago']; ?></td>
+                    <td><?php if($this -> fila['pago'] == 'Paypal')
+								echo $strings['Paypal'];
+							else if($this -> fila['pago'] == 'Tarjeta')
+								echo $strings['Tarjeta'];
+							else if($this -> fila['pago'] == 'Contrareembolso')
+								echo $strings['Efectivo'];
+								?></td>
                 </tr>
 				
 				<?php if($this -> fila['pago'] == 'Tarjeta'){

@@ -51,7 +51,14 @@ include_once '../Functions/Authentication.php';
 					
 					<td style="border:1px solid black;border-left:none;border-collapse:collapse;"><?php echo $fila['login_usuario']; ?></td>	
 							
-					<td style="text-align:center"><?php echo $fila['pago']; ?></td>
+					<td style="text-align:center"><?php if($fila['pago'] == 'Paypal')
+								echo $strings['Paypal'];
+							else if($fila['pago'] == 'Tarjeta')
+								echo $strings['Tarjeta'];
+							else if($fila['pago'] == 'Contrareembolso')
+								echo $strings['Efectivo'];
+								?></td>
+								
 							<td style="text-align:center"><?php if($fila['CCV'] == null)
 								echo '-';
 							else

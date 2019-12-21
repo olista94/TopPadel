@@ -31,9 +31,9 @@ class Inscripcion_ADD_Pago{
 				</legend>
 
 				<div>
-					<input type="radio" name="pago" value="Paypal" checked> Paypal<br>
-					<input type="radio" name="pago" value="Tarjeta"> Tarjeta<br>
-					<input type="radio" name="pago" value="Contrareembloso"> Contra reembolso
+					<input type="radio" name="pago" value="Paypal" checked> <?php echo $strings['Paypal'];?><br>
+					<input type="radio" name="pago" value="Tarjeta"> <?php echo $strings['Tarjeta'];?><br>
+					<input type="radio" name="pago" value="Contrareembolso"> <?php echo $strings['Efectivo'];?>
 				</div>
 
 				<!--Boton para finalizar-->

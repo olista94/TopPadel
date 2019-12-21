@@ -57,7 +57,13 @@ class Clases_Grupales_SHOWCLASE_Admin{
 					
 					<!-- Estilo para alternar colores entre filas da table -->
 					<!-- ************************************************* -->
-							<td style="text-align:center"><?php echo $fila['pago']; ?></td>
+							<td style="text-align:center"><?php if($fila['pago'] == 'Paypal')
+								echo $strings['Paypal'];
+							else if($fila['pago'] == 'Tarjeta')
+								echo $strings['Tarjeta'];
+							else if($fila['pago'] == 'Contrareembolso')
+								echo $strings['Efectivo'];
+								?></td>
 							<td style="text-align:center"><?php if($fila['CCV'] == null)
 								echo '-';
 							else
