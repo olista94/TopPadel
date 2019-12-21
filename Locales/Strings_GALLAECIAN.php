@@ -346,6 +346,11 @@ array(
 	'Pagos' => 'Pagos',
 	'Fuera de plazo' => 'Fora de prazo',
 	'Pago realizado correctamente' => 'Pago realizado correctamente',
+	'Añadir pago' => 'Engadir pago',
+	'Pago' => 'Pago',
+	'Paypal' => 'Paypal',
+	'Tarjeta' => 'Tarxeta',
+	'Efectivo' => 'Efectivo',
 	'' => '',
 	'' => '',
 	'' => ''

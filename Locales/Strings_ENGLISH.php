@@ -318,7 +318,7 @@ array(
 	'Dia' => 'Day',
 	'Liga regular' => 'Regular season',
 	'Cuartos' => 'Quarter-finals',
-	'Semifinales' => 'Semi-finais',
+	'Semifinales' => 'Semi-finals',
 	'Final' => 'Final',
 	'La liga regular todavia no ha acabado' => 'Regular season hasn´t finished yet',
 	'Los cuartos de final todavia no han acabado' => 'Quarter-finals hasn´t finished yet',
@@ -346,7 +346,11 @@ array(
 	'Pagos' => 'Payments',
 	'Fuera de plazo' => 'Out of time',
 	'Pago realizado correctamente' => 'Payment correct',
-	'' => '',
+	'Añadir pago' => 'Add payment',
+	'Pago' => 'Payment',
+	'Paypal' => 'Paypal',
+	'Tarjeta' => 'Credit card',
+	'Efectivo' => 'Cash',
 	'' => '',
 	'' => ''
 	
