@@ -283,7 +283,7 @@ function apuntarUsuario(){
 				
 				)
 				";
-				echo $sql;
+				
 				
 		if (!$this->mysqli->query($sql)) {
 			

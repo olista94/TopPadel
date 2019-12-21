@@ -673,7 +673,7 @@ function ShowCurrentPartidos(){
 			WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido AND part.pista_ID_Pista = pis.ID_Pista 
 			AND (part.`ID_Partido` = '$this->ID_Partido' )
 			"; 
-echo $sql;
+
 	if (!$resultado = $this->mysqli->query($sql)) { 
 		return 'Ya te has inscrito en este torneo';//Devuelve mensaje de error
 	}
@@ -1054,7 +1054,7 @@ function getClasificacionCuartos($idtorneo,$pareja){
 					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
 					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaLocal = '".$pareja."' and ronda = 'Superfinal'
 					order by 1";
-		echo $sqlJFL;
+		
 			
 			$JFL = $this->mysqli->query($sqlJFL);
 			
@@ -1068,7 +1068,6 @@ function getClasificacionCuartos($idtorneo,$pareja){
 					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaLocal = '".$pareja."' and ronda = 'Superfinal'
 					order by 1";
 		
-	echo $sqlJCL;
 			$JCL = $this->mysqli->query($sqlJCL);
 			
 			$sql1 = "SELECT COUNT(*), part.ID_Partido as ID_Partido,part.fecha as fecha,part.hora as hora,part.ronda as ronda,phg.grupo as grupo,
@@ -1119,7 +1118,6 @@ function getClasificacionCuartos($idtorneo,$pareja){
 					WHERE par.ID_Pareja = ph.ID_ParejaLocal AND par1.ID_Pareja = ph.ID_ParejaVisitante AND part.ID_Partido = ph.ID_Partido and
 					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaVisitante = '".$pareja."' and ronda = 'Superfinal'
 					order by 1";
-		echo $sqlJFV;
 			
 			$JFV = $this->mysqli->query($sqlJFV);
 			
@@ -1133,7 +1131,6 @@ function getClasificacionCuartos($idtorneo,$pareja){
 					phg.ID_Pareja = par.ID_Pareja and phg.ID_Torneo = '".$idtorneo."' and ID_ParejaVisitante = '".$pareja."' and ronda = 'Superfinal'
 					order by 1";
 		
-			echo $sqlJCV;
 			$JCV = $this->mysqli->query($sqlJCV);
 			
 			$ganados = $resultado -> fetch_array()[0] + $resultado1 -> fetch_array()[0];

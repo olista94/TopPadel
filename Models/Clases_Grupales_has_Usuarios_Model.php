@@ -118,7 +118,7 @@ function addMetodoPago(){
 	
     $sql = "SELECT * FROM clases_grupales_has_usuarios WHERE (`ID_Clase` = '$this->ID_Clase' AND `login_usuario` = '".$_SESSION['login']."'
 										)";
-echo $sql;
+
     $result = $this->mysqli->query($sql);
     
     if ($result->num_rows == 1)
@@ -129,7 +129,7 @@ echo $sql;
 
 				WHERE (`ID_Clase` = '$this->ID_Clase' AND `login_usuario` = '".$_SESSION['login']."'
 										)";
-echo $sql;
+
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación';//Devuelve mensaje de error	
 		}
@@ -158,7 +158,7 @@ function addTarjeta(){
 
 				WHERE (`ID_Clase` = '$this->ID_Clase' AND `login_usuario` = '".$_SESSION['login']."'
 										)";
-echo $sql;
+
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación';//Devuelve mensaje de error	
 		}
@@ -175,7 +175,7 @@ function devolverMetodoPago($idclase,$usuario)
 {	
     $sql = "SELECT pago FROM `clases_grupales_has_usuarios` WHERE (`ID_Clase` = '".$idclase."' AND `login_usuario` = '".$usuario."'
 										)";
-echo $sql;
+
 	$result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){

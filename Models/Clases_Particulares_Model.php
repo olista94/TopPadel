@@ -106,7 +106,7 @@ function addTarjeta(){
 
 				WHERE (`ID_Clase` = '$this->ID_Clase'
 										)";
-echo $sql;
+
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación';//Devuelve mensaje de error	
 		}
@@ -376,7 +376,7 @@ function devolverMetodoPago($idclase)
 {	
     $sql = "SELECT pago FROM `clases_particulares` WHERE (`ID_Clase` = '".$idclase."'
 										)";
-echo $sql;
+
 	$result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){

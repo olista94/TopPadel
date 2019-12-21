@@ -476,6 +476,20 @@ function devolverTipo()
 	}
 }
 
+function devolverMetodoPagoCadaUsuario($idclase)
+{	
+    $sql = "SELECT * FROM `clases_grupales_has_usuarios` WHERE (`ID_Clase` = '".$idclase."')";
+
+	$result = $this->mysqli->query($sql);//Guarda el resultado
+    
+    if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado->fetch_array()[0];//Se devuelve el resultado de la consulta
+	}
+}
 
 
 }//fin de clase

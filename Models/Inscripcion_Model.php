@@ -46,7 +46,7 @@ function addMetodoPago(){
 	
     $sql = "SELECT * FROM `parejas_has_torneos` WHERE `parejas_ID_Pareja` = (SELECT MAX(`parejas_ID_Pareja`) FROM parejas_has_torneos)
 										";
-echo $sql;
+
     $result = $this->mysqli->query($sql);
     
     if ($result->num_rows == 1)
@@ -57,7 +57,7 @@ echo $sql;
 
 				WHERE `parejas_ID_Pareja` = (SELECT MAX(`parejas_ID_Pareja`) FROM parejas_has_torneos)
 										";
-echo $sql;
+
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación';//Devuelve mensaje de error	
 		}
@@ -86,7 +86,7 @@ function addTarjeta(){
 
 				WHERE `parejas_ID_Pareja` = (SELECT MAX(`parejas_ID_Pareja`) FROM parejas_has_torneos)
 										";
-echo $sql;
+
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación';//Devuelve mensaje de error	
 		}
@@ -103,7 +103,7 @@ function devolverMetodoPago()
 {	
     $sql = "SELECT pago FROM `parejas_has_torneos` WHERE `parejas_ID_Pareja` = (SELECT MAX(`parejas_ID_Pareja`) FROM parejas_has_torneos)
 										";
-echo $sql;
+
 	$result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){

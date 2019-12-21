@@ -40,7 +40,7 @@ function add(){
 				'NO'
 				)
 			";
-			echo $sql;
+			
 	if (!$this->mysqli->query($sql)) { 
 		return 'Error al insertar';//Devuelve mensaje de error
 	}
@@ -361,7 +361,7 @@ function devolverMetodoPago($idpromo)
 {	
     $sql = "SELECT pago FROM `promociones` WHERE (`ID_Promo` = '".$idpromo."'
 										)";
-echo $sql;
+
 	$result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){

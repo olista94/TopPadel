@@ -46,7 +46,7 @@ function addMetodoPago($idpromo,$usuario,$pago){
 	
     $sql = "SELECT * FROM promociones_has_usuarios WHERE (`ID_Promo` = '".$idpromo."' AND `usuarios_login` = '".$usuario."'
 										)";
-echo $sql;
+
     $result = $this->mysqli->query($sql);
     
     if ($result->num_rows == 1)
@@ -57,7 +57,7 @@ echo $sql;
 
 				WHERE (`ID_Promo` = '".$idpromo."' AND `usuarios_login` = '".$usuario."'
 										)";
-echo $sql;
+
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación';//Devuelve mensaje de error	
 		}
@@ -74,7 +74,7 @@ function addTarjeta($idpromo,$usuario,$CCV,$num_tarjeta){
 	
     $sql = "SELECT * FROM promociones_has_usuarios WHERE (`ID_Promo` = '".$idpromo."' AND `usuarios_login` = '".$usuario."'
 										)";
-echo $sql;
+
     $result = $this->mysqli->query($sql);
     
     if ($result->num_rows == 1)
@@ -86,7 +86,7 @@ echo $sql;
 
 				WHERE (`ID_Promo` = '".$idpromo."' AND `usuarios_login` = '".$usuario."'
 										)";
-echo $sql;
+
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación';//Devuelve mensaje de error	
 		}

@@ -59,7 +59,7 @@ function addTarjeta(){
 										AND `fecha_reserva` = '$this->fecha_reserva'
 										AND `hora_inicio` = '$this->hora_inicio'
 										)";
-    echo $sql;
+    
     $result = $this->mysqli->query($sql);
     
     if ($result->num_rows == 1)
@@ -74,7 +74,7 @@ function addTarjeta(){
 										AND `fecha_reserva` = '$this->fecha_reserva'
 										AND `hora_inicio` = '$this->hora_inicio'
 										)";
-echo $sql;
+
         if (!($resultado = $this->mysqli->query($sql))){
 			return 'Error en la modificación';//Devuelve mensaje de error	
 		}
@@ -346,7 +346,7 @@ function devolverMetodoPago()
 										AND `fecha_reserva` = '$this->fecha_reserva'
 										AND `hora_inicio` = '$this->hora_inicio'
 										)";
-echo $sql;
+
 	$result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){
