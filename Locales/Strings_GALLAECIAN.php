@@ -123,7 +123,7 @@ array(
 	'No puedes reservar partidos que no juegas' => 'Non podes reservar partidos que non xogas',
 	'No hay pistas libres ese dia,a esa hora.Por favor,escoge otra fecha' => 'Non hai pistas dispoñibles ese dia,a esa hora.Por favor,escolle outra data',
 	'Campeonato generado con exito' => 'Campeonato xerado con éxito',
-	'No hay pistas disponibles' => 'Non hai pistas dispoñibles',
+	'No hay pistas disponibles ese dia a esa hora.La promocion sera borrada' => 'Non hai pistas dispoñibles ese día a esa hora.A promoción será borrada',
 	'Soci@s' => 'Soci@s',
 	'Deportista' => 'Deportista',
 	'No es socio' => 'Non é socio',
@@ -351,6 +351,8 @@ array(
 	'Paypal' => 'Paypal',
 	'Tarjeta' => 'Tarxeta',
 	'Efectivo' => 'Efectivo',
+	'No hay pistas libres ese dia a esa hora.Prueba con otra hora' => 'Non hai pistas libres ese dia a esa hora.Proba con outra hora',
+	'No puedes ver esto si no estás logueado' => 'Non podes ver esto se non estás logueado',
 	'' => '',
 	'' => '',
 	'' => ''

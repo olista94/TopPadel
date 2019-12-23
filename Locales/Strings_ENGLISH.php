@@ -123,7 +123,7 @@ array(
 	'No puedes reservar partidos que no juegas' => 'You can´t book games that you don´t take part in',
 	'No hay pistas libres ese dia,a esa hora.Por favor,escoge otra fecha' => 'No free courts this day,at this time.Please,chose another date',
 	'Campeonato generado con exito' => 'Championship successfully generated',
-	'No hay pistas disponibles' => 'No free courts',
+	'No hay pistas disponibles ese dia a esa hora.La promocion sera borrada' => 'No free courts that day at that time.The promo will be eliminated',
 	'Soci@s' => 'Members',
 	'Deportista' => 'Athlete',
 	'No es socio' => 'Not a member',
@@ -351,6 +351,8 @@ array(
 	'Paypal' => 'Paypal',
 	'Tarjeta' => 'Credit card',
 	'Efectivo' => 'Cash',
+	'No hay pistas libres ese dia a esa hora.Prueba con otra hora' => 'No free courts in that date.Try with a different hour',
+	'No puedes ver esto si no estás logueado' => 'You can´t see this if you are not logued',
 	'' => '',
 	'' => ''
 	
