@@ -198,9 +198,17 @@ function add(){
 	 $sql = "SELECT `ID_Pista`,`Nombre_Pista`
 			FROM pista
 			WHERE `ID_Pista` NOT IN 
-							(SELECT `ID_Pista` FROM reservas r,pista p 
-							WHERE `fecha_reserva` = '$this->fecha' AND `hora_inicio` = '$this->hora' AND `pista_ID_Pista` = `ID_Pista`)";
-							
+			(SELECT pista_ID_Pista from reservas where fecha_reserva = '$this->fecha' AND hora_inicio = '$this->hora')
+			AND ID_Pista not in 
+			(SELECT pista_ID_Pista from promociones where fecha = '$this->fecha' AND hora_inicio = '$this->hora' AND cerrada = 'SI')
+			AND ID_Pista NOT IN 
+			(SELECT p.`ID_Pista` FROM clases_particulares cp,pista p
+			WHERE `fecha_clase` = '$this->fecha' AND `hora_clase` = '$this->hora' AND cp.`ID_Pista` = p.`ID_Pista`)
+			AND ID_Pista NOT IN
+			(SELECT p.`ID_Pista` FROM clases_grupales cg,pista p
+			WHERE `fecha_clase` = '$this->fecha' AND `hora_clase` = '$this->hora' AND cg.`ID_Pista` = p.`ID_Pista`)
+			";
+			echo $sql;				
 	$resultado = $this->mysqli->query($sql);
 	
 	if (!$resultado) { 
@@ -457,7 +465,7 @@ function add(){
 					AND (usuarios_login = '".$jugador."' OR usuarios_login1 = '".$jugador."')
 					ORDER BY `Ptos` DESC,`SF` DESC,`SC` ASC,`JF` DESC,`JC` ASC";
 
-			
+			echo $sql;
 			$resultado = $this->mysqli->query($sql);	
 			
 			if (!$this->mysqli->query($sql)) {

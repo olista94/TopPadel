@@ -341,15 +341,22 @@ function buscarPistasLibresPromo(){
 		$sql = "SELECT ID_Pista FROM `pista`
 				WHERE ID_Pista not in
 				(SELECT pista_ID_Pista from reservas where fecha_reserva = '".$this->fecha."' AND hora_inicio = '".$this->hora_inicio."')
-				AND ID_Pista not in (SELECT pista_ID_Pista from promociones where fecha = '".$this->fecha."' AND hora_inicio = '".$this->hora_inicio."' AND cerrada = 'SI')
+				AND ID_Pista not in
+				(SELECT pista_ID_Pista from promociones where fecha = '".$this->fecha."' AND hora_inicio = '".$this->hora_inicio."' AND cerrada = 'SI')
+				AND ID_Pista NOT IN 
+				(SELECT p.`ID_Pista` FROM clases_particulares cp,pista p
+				WHERE `fecha_clase` = '".$this->fecha."' AND `hora_clase` = '".$this->hora_inicio."' AND cp.`ID_Pista` = p.`ID_Pista`)
+				AND ID_Pista NOT IN
+				(SELECT p.`ID_Pista` FROM clases_grupales cg,pista p
+				WHERE `fecha_clase` = '".$this->fecha."' AND `hora_clase` = '".$this->hora_inicio."' AND cg.`ID_Pista` = p.`ID_Pista`)
 				LIMIT 1
 				";
-			 
+			 echo $sql;
 			$result = $this->mysqli->query($sql); 
 			//Si ya se han insertado la PK o FK
 		if (!$result) {
 			
-			return 'No hay pistas disponibles';
+			return 'No hay pistas disponibles ese dia a esa hora.La promocion sera borrada';
 		}
 		//operacion de insertado correcta
 		else{
