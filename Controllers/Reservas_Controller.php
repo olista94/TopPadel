@@ -117,7 +117,28 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$reservas = new Reservas_Model("","",$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],'','','');
 				$pistasLibres = $reservas -> pistasLibres();
 				
-				new Reservas_ADD_Pista($pistasLibres,$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],'../Controllers/Reservas_Controller.php');
+				if($pistasLibres->num_rows == 0){
+					$reservas = new Reservas_Model("","",$_REQUEST['fecha_reserva'],"",'','','');
+				$horasOcupadas = $reservas -> BuscarHorasOcupadas();
+				
+				$array = Array ('08:00:00','09:30:00','11:00:00','12:30:00','14:00:00','15:30:00','17:00:00','18:30:00','20:00:00','21:30:00');
+				
+		
+				$ocup = Array();
+				
+				while($h = $horasOcupadas->fetch_array()[0]){
+					array_push($ocup,$h);
+				}
+				
+				$resultado = array_diff($array, $ocup);
+					
+					new Reservas_ADD_Hora($resultado,$_REQUEST['fecha_reserva'],'../Controllers/Reservas_Controller.php');
+					new ALERT('No hay pistas libres ese dia a esa hora.Prueba con otra hora');
+					//new MESSAGE('No hay pistas libres ese dia a esa hora.Prueba con otro','../Controllers/Reservas_Controller.php');
+				}
+				else{
+					new Reservas_ADD_Pista($pistasLibres,$_REQUEST['fecha_reserva'],$_REQUEST['hora_inicio'],'../Controllers/Reservas_Controller.php');
+				}
 			break;
 			
 			case 'Confirmar_ADD_Pista':

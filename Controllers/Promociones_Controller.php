@@ -234,7 +234,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 					$pista = $p -> buscarPistasLibresPromo(); //Devuelve la 1º pista libre
 					if(!is_numeric($pista)){
 						$promocion->delete();
-						new MESSAGE('No hay pistas disponibles','../Controllers/Promociones_Controller.php');//Mostramos el mensaje
+						new MESSAGE('No hay pistas disponibles ese dia a esa hora.La promocion sera borrada','../Controllers/Promociones_Controller.php');//Mostramos el mensaje
 					}
 					else{
 						$promocion -> cerrarPromocion($pista);

@@ -6,6 +6,7 @@ session_start();
 
 //Incluimos los mensajes y la funcion de autenticacion
 include_once "../Views/MESSAGE.php";
+include_once "../Views/ALERT.php";
 include_once "../Views/MESSAGE_Pago.php";
 include_once "../Functions/Authentication.php";
 
@@ -154,8 +155,28 @@ if(isset($_SESSION['tipo'])){
 				$clase = new Clases_Particulares_Model("","","",$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],"",'','','');
 				$pistasLibres = $clase -> pistasLibres();
 				
+				if($pistasLibres->num_rows == 0){
+				$clase = new Clases_Particulares_Model("","",'',$_REQUEST['fecha_clase'],"","",'','','');
+				$horasOcupadas = $clase -> BuscarHorasOcupadas();
 				
-				new Clases_Particulares_ADD_Pista($pistasLibres,$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],'../Controllers/Clases_Particulares_Controller.php');
+				$array = Array ('08:00:00','09:30:00','11:00:00','12:30:00','14:00:00','15:30:00','17:00:00','18:30:00','20:00:00','21:30:00');
+				
+		
+				$ocup = Array();
+				
+				while($h = $horasOcupadas->fetch_array()[0]){
+					array_push($ocup,$h);
+					
+				}
+				
+				$resultado = array_diff($array, $ocup);
+
+				new Clases_Particulares_ADD_Hora($resultado,$_REQUEST['fecha_clase'],'../Controllers/Clases_Particulares_Controller.php');
+				new ALERT('No hay pistas libres ese dia a esa hora.Prueba con otra hora');
+				}else{
+				
+					new Clases_Particulares_ADD_Pista($pistasLibres,$_REQUEST['fecha_clase'],$_REQUEST['hora_clase'],'../Controllers/Clases_Particulares_Controller.php');
+				}
 			break;
 			
 			

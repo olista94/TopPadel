@@ -144,7 +144,7 @@ if (!IsAuthenticated()){ //si no está autenticado
 		switch ($_REQUEST['action']){
 			
 			case 'Cerrar_Partido':	
-				$reserva = new Reservas_Model("","",'','');
+				$reserva = new Reservas_Model("","",'','','','','');
 				$numReservas = $reserva->contarReservasUsuario()->fetch_array()[1];
 				
 				$partido = new Partidos_Model($_REQUEST['ID_Partido'],"","","","","","","","","","","","");
@@ -186,22 +186,40 @@ if (!IsAuthenticated()){ //si no está autenticado
 			case 'Confirmar_ADD_Hora':
 				$partido = new Partidos_Model($_REQUEST['ID_Partido'],$_REQUEST['fecha'],$_REQUEST['hora'],"","","","","","","","","","");
 				$idpista = $partido->pistasLibres()->fetch_array()[0];
-				$fecha = $_REQUEST['fecha'];
-				$hora = $_REQUEST['hora'];
 				
-				$reserva = new Reservas_Model("","","","");
-				$reserva -> addReservaPartido($idpista,$fecha,$hora);
+				if($idpista == null){
+					$partido = new Partidos_Model($_REQUEST['ID_Partido'],$_REQUEST['fecha'],"","","","","","","","","","","");
 				
+					$horasOcupadas = $partido -> BuscarHorasOcupadas();
 				
+					$array = Array ('08:00:00','09:30:00','11:00:00','12:30:00','14:00:00','15:30:00','17:00:00','18:30:00','20:00:00','21:30:00');
+					$ocup = Array();
 				
-				$partido = getDataForm();	//Asigna los datos obtenidos al objeto promocion		
-				$mensaje1 = $partido-> addFechaHora(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
-				$mensaje = $partido-> addPista($idpista);
+					while($h = $horasOcupadas->fetch_array()[0]){
+						array_push($ocup,$h);
+					}
 				
-				
-				new MESSAGE($mensaje,'../Controllers/Torneos_Controller.php');	
-				
-				
+					$resultado = array_diff($array, $ocup);
+							
+					new Partidos_ADD_Hora($_REQUEST['ID_Partido'],$_REQUEST['ID_Torneo'],$_REQUEST['fecha'],$resultado,'../Controllers/Partidos_Controller.php');
+					new ALERT('No hay pistas libres ese dia a esa hora.Prueba con otra hora');
+				}
+				else{
+					$fecha = $_REQUEST['fecha'];
+					$hora = $_REQUEST['hora'];
+					
+					$reserva = new Reservas_Model("","","","",'','','');
+					$reserva -> addReservaPartido($idpista,$fecha,$hora);
+					
+					
+					
+					$partido = getDataForm();	//Asigna los datos obtenidos al objeto promocion		
+					$mensaje1 = $partido-> addFechaHora(); //Llama al modelo para añadirla y le pasa la respuesta a MESSAGE
+					$mensaje = $partido-> addPista($idpista);
+					
+					
+					new MESSAGE($mensaje,'../Controllers/Torneos_Controller.php');	
+				}
 			break;
 					
 		case 'Acta_Partido':	
