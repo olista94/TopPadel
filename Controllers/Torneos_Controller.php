@@ -3,6 +3,7 @@
 session_start();
 //Incluye la funciones que se encuentran en los siguientes ficheros:
 include_once "../Views/MESSAGE.php";
+include_once "../Views/ALERT.php";
 include_once "../Functions/Authentication.php";
 
 if(!IsAuthenticated()){
@@ -367,7 +368,21 @@ if(!IsAuthenticated()){
 				$torneo = generarEnfrentamientos($parejasArray,$_REQUEST['ID_Torneo'],$partido,$enfrentamiento);
 				
 				if($torneo1 == -1){
-					new MESSAGE('No se ha llegado al minimo de parejas','../Controllers/Torneos_Controller.php'); 
+					
+					$idtorneo = $_REQUEST['ID_Torneo'];
+					$torneo = new Parejas_has_Partidos_Model('',$_REQUEST['ID_Torneo'],'',''); 
+					$datos1 = $torneo->partidosPareja();
+					
+					$inscripcion = new Inscripcion_Model('',$idtorneo,'','','');
+					$clasificacion = $inscripcion -> DevolverParejas($_REQUEST['ID_Torneo']);
+				
+					$apuntados = new Inscripcion_Model('','','','','');
+					$apuntados1 = $apuntados -> DevolverParejasGrupo($idtorneo,0);
+					
+
+					new Torneos_SHOWTORNEO($datos1,$clasificacion,$apuntados1,$idtorneo,'../Controllers/Torneos_Controller.php');
+					new ALERT('No se ha llegado al minimo de parejas');
+					//new MESSAGE('No se ha llegado al minimo de parejas','../Controllers/Torneos_Controller.php'); 
 				}else{
 				
 				new MESSAGE('Campeonato generado con exito','../Controllers/Torneos_Controller.php'); 

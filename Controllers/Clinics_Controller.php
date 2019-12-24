@@ -6,6 +6,7 @@ session_start();
 
 //Incluimos los mensajes y la funcion de autenticacion
 include_once "../Views/MESSAGE.php";
+include_once "../Views/ALERT.php";
 include_once "../Views/MESSAGE_Pago.php";
 include_once "../Functions/Authentication.php";
 
@@ -266,7 +267,37 @@ if(isset($_SESSION['tipo'])){
 			if($fecha == true){
 				if($tope[0] > $numApuntados[0]){
 					if($apuntarse == false){
-						new MESSAGE('Ya estas apuntado','../Controllers/Clinics_Controller.php');
+						
+						if($_SESSION['tipo'] == 'NORMAL'){
+					$clinics = new Clinics_Model('','','','','','','','','');
+					$clinics -> borrarAntiguas();
+					$datos = $clinics -> ShowAllAdminNormal();
+					
+					$apuntados = $clinics -> ContarUsuarios();
+					
+					$respuesta = new Clinics_SHOWALL($datos,$apuntados,'../Controllers/Clinics_Controller.php'); 
+				}
+				else if($_SESSION['tipo'] == 'ADMIN'){
+					$clinics = new Clinics_Model('','','','','','','','','');
+					$clinics -> borrarAntiguas();
+					$datos = $clinics -> ShowAllAdminNormal();
+					
+					$apuntados = $clinics -> ContarUsuarios();
+					
+					$respuesta = new Clinics_SHOWALL($datos,$apuntados,'../Controllers/Clinics_Controller.php'); 
+				}
+				
+				else if($_SESSION['tipo'] == 'ENTRENADOR'){
+					$clinics = new Clinics_Model('','','','','','','','','');
+					$clinics -> borrarAntiguas();
+					$datos = $clinics -> ShowAllEntrenador();
+					
+					$apuntados = $clinics -> ContarUsuarios();
+					
+					$respuesta = new Clinics_SHOWALL($datos,$apuntados,'../Controllers/Clinics_Controller.php'); 
+				}
+						new ALERT('Ya estas apuntado');
+						//new MESSAGE('Ya estas apuntado','../Controllers/Clinics_Controller.php');
 					}
 					else{
 						$datos = $clase -> rellenadatos();	
@@ -279,7 +310,36 @@ if(isset($_SESSION['tipo'])){
 					}
 				}
 				else{
-					new MESSAGE('Ya se ha alcanzado el maximo de apuntados','../Controllers/Clinics_Controller.php');	
+					if($_SESSION['tipo'] == 'NORMAL'){
+					$clinics = new Clinics_Model('','','','','','','','','');
+					$clinics -> borrarAntiguas();
+					$datos = $clinics -> ShowAllAdminNormal();
+					
+					$apuntados = $clinics -> ContarUsuarios();
+					
+					$respuesta = new Clinics_SHOWALL($datos,$apuntados,'../Controllers/Clinics_Controller.php'); 
+				}
+				else if($_SESSION['tipo'] == 'ADMIN'){
+					$clinics = new Clinics_Model('','','','','','','','','');
+					$clinics -> borrarAntiguas();
+					$datos = $clinics -> ShowAllAdminNormal();
+					
+					$apuntados = $clinics -> ContarUsuarios();
+					
+					$respuesta = new Clinics_SHOWALL($datos,$apuntados,'../Controllers/Clinics_Controller.php'); 
+				}
+				
+				else if($_SESSION['tipo'] == 'ENTRENADOR'){
+					$clinics = new Clinics_Model('','','','','','','','','');
+					$clinics -> borrarAntiguas();
+					$datos = $clinics -> ShowAllEntrenador();
+					
+					$apuntados = $clinics -> ContarUsuarios();
+					
+					$respuesta = new Clinics_SHOWALL($datos,$apuntados,'../Controllers/Clinics_Controller.php'); 
+				}
+						new ALERT('Ya se ha alcanzado el maximo de apuntados');
+					//new MESSAGE('Ya se ha alcanzado el maximo de apuntados','../Controllers/Clinics_Controller.php');	
 				}
 			}else{
 				new MESSAGE('Fuera de plazo','../Controllers/Clinics_Controller.php');	

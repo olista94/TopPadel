@@ -85,7 +85,35 @@ if (!IsAuthenticated()){ //si no está autenticado
 				$numReservas = $reserva->contarReservasUsuario()->fetch_array()[1];
 
 				if($numReservas >= 5){
-					new MESSAGE('No puedes tener mas de 5 reservas activas a la vez','../Controllers/Reservas_Controller.php');
+					
+					if($_SESSION['tipo']=='ADMIN'){		   
+					$reserva = new Reservas_Model('','','','','','','');//Creamos un objeto reserva
+					$reserva -> borrarAntiguas();
+					$pistas = new Pistas_Model("","","",""); //Construye el objeto pistas llamando al modelo
+					$p = $pistas -> search(); //Busca las pistas
+					       
+					$datos = $reserva -> ReservasShowAll();//Recuperamos todas las reservas y las guardamos en datos						
+					
+					
+					//Creamos una vista de todas las reservas completas con los datos
+					$respuesta = new Reservas_SHOWALL($datos,$p,'../Controllers/Reservas_Controller.php');	
+				//Si es usuario normal
+				}else{
+					
+					$reserva = new Reservas_Model('','','','','','','');//Creamos un objeto reserva
+					$reserva -> borrarAntiguas();
+					
+					$pistas = new Pistas_Model("","","",""); //Construye el objeto pistas llamando al modelo
+					$p = $pistas -> search(); //Busca las pistas
+					       
+					$datos = $reserva -> ReservasShowAllNormal();//Recuperamos todas las reservas y las guardamos en datos						
+					
+					
+					//Creamos una vista de todas las reservas completas con los datos
+					$respuesta = new Reservas_SHOWALL($datos,$p,'../Controllers/Reservas_Controller.php');
+				}
+					//new MESSAGE('No puedes tener mas de 5 reservas activas a la vez','../Controllers/Reservas_Controller.php');
+					new ALERT('No puedes tener mas de 5 reservas activas a la vez');
 				}
 				else{
 					new Reservas_ADD_Fecha('../Controllers/Reservas_Controller.php');	//Crea la vista de añadir
@@ -229,7 +257,37 @@ if (!IsAuthenticated()){ //si no está autenticado
 				new Reservas_DELETE($datos,$p,$socio,'../Controllers/Reservas_Controller.php'); //Creamos una vista de delete con los datos obtenidos
 				}
 				else{
-					new MESSAGE('No puedes cancelar una reserva que se dispute hoy','../Controllers/Reservas_Controller.php');
+					
+					if($_SESSION['tipo']=='ADMIN'){		   
+					$reserva = new Reservas_Model('','','','','','','');//Creamos un objeto reserva
+					$reserva -> borrarAntiguas();
+					$pistas = new Pistas_Model("","","",""); //Construye el objeto pistas llamando al modelo
+					$p = $pistas -> search(); //Busca las pistas
+					       
+					$datos = $reserva -> ReservasShowAll();//Recuperamos todas las reservas y las guardamos en datos						
+					
+					
+					//Creamos una vista de todas las reservas completas con los datos
+					$respuesta = new Reservas_SHOWALL($datos,$p,'../Controllers/Reservas_Controller.php');	
+				//Si es usuario normal
+				}else{
+					
+					$reserva = new Reservas_Model('','','','','','','');//Creamos un objeto reserva
+					$reserva -> borrarAntiguas();
+					
+					$pistas = new Pistas_Model("","","",""); //Construye el objeto pistas llamando al modelo
+					$p = $pistas -> search(); //Busca las pistas
+					       
+					$datos = $reserva -> ReservasShowAllNormal();//Recuperamos todas las reservas y las guardamos en datos						
+					
+					
+					//Creamos una vista de todas las reservas completas con los datos
+					$respuesta = new Reservas_SHOWALL($datos,$p,'../Controllers/Reservas_Controller.php');
+				}
+					
+					new ALERT('No puedes cancelar una reserva que se dispute hoy');
+					
+					//new MESSAGE('No puedes cancelar una reserva que se dispute hoy','../Controllers/Reservas_Controller.php');
 				}
 		break;
 		

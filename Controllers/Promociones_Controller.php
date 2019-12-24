@@ -211,11 +211,89 @@ if (!IsAuthenticated()){ //si no está autenticado
 				
 						new Promociones_INSCRIPCION($datos,$p,$socio,'../Controllers/Promociones_Controller.php');
 					}else{
-						new MESSAGE('Ya estas apuntado','../Controllers/Promociones_Controller.php');
+						
+						
+						if($_SESSION['tipo']=='ADMIN'){		   
+					$promocion = new Promociones_Model('','','','','','',"","");//Creamos un objeto promocion
+					$promocion->borrarAntiguas();
+					
+					$datos = $promocion -> PromocionesShowAllTodas();
+					$usuarios = $promocion -> ContarUsuarios();
+					//Creamos una vista de todas las promociones completas con los datos
+					$respuesta = new Promociones_SHOWALL_Admin($datos,$usuarios,'../Controllers/Promociones_Controller.php');	
+				//Si es usuario normal
+				}else{
+
+					switch ($_REQUEST['action']){
+		
+					case 'Mostrar_Todas':
+						$promocion = new Promociones_Model('','','','','','',"","");//Creamos un objeto promocion
+						$promocion->borrarAntiguas();
+						
+						$datos = $promocion -> PromocionesShowAllTodas();
+						$usuarios = $promocion -> ContarUsuarios();
+						//Creamos una vista de todas las promociones completas con los datos
+						$respuesta = new Promociones_SHOWALL_Todas($datos,$usuarios,'../Controllers/Promociones_Controller.php');	
+					break;
+					
+					default:
+						
+						$promocion = new Promociones_Model('','','','','','',"","");//Creamos un objeto promocion
+						$promocion->borrarAntiguas();
+						
+						$datos = $promocion -> PromocionesShowAllMias();
+						$usuarios = $promocion -> ContarUsuarios();
+						//Creamos una vista de todas las promociones completas con los datos
+						$respuesta = new Promociones_SHOWALL_Mias($datos,$usuarios,'../Controllers/Promociones_Controller.php');	
+					break;
+					
+				}	 
+			}
+						new ALERT('Ya estas apuntado');
+						//new MESSAGE('Ya estas apuntado','../Controllers/Promociones_Controller.php');
 					}
 				}
 				else{
-					new MESSAGE('Esta promocion esta cerrada','../Controllers/Promociones_Controller.php');
+					
+					
+					if($_SESSION['tipo']=='ADMIN'){		   
+					$promocion = new Promociones_Model('','','','','','',"","");//Creamos un objeto promocion
+					$promocion->borrarAntiguas();
+					
+					$datos = $promocion -> PromocionesShowAllTodas();
+					$usuarios = $promocion -> ContarUsuarios();
+					//Creamos una vista de todas las promociones completas con los datos
+					$respuesta = new Promociones_SHOWALL_Admin($datos,$usuarios,'../Controllers/Promociones_Controller.php');	
+				//Si es usuario normal
+				}else{
+
+					switch ($_REQUEST['action']){
+		
+					case 'Mostrar_Todas':
+						$promocion = new Promociones_Model('','','','','','',"","");//Creamos un objeto promocion
+						$promocion->borrarAntiguas();
+						
+						$datos = $promocion -> PromocionesShowAllTodas();
+						$usuarios = $promocion -> ContarUsuarios();
+						//Creamos una vista de todas las promociones completas con los datos
+						$respuesta = new Promociones_SHOWALL_Todas($datos,$usuarios,'../Controllers/Promociones_Controller.php');	
+					break;
+					
+					default:
+						
+						$promocion = new Promociones_Model('','','','','','',"","");//Creamos un objeto promocion
+						$promocion->borrarAntiguas();
+						
+						$datos = $promocion -> PromocionesShowAllMias();
+						$usuarios = $promocion -> ContarUsuarios();
+						//Creamos una vista de todas las promociones completas con los datos
+						$respuesta = new Promociones_SHOWALL_Mias($datos,$usuarios,'../Controllers/Promociones_Controller.php');	
+					break;
+					
+				}	 
+			}
+					new ALERT('Esta promocion esta cerrada');
+					//new MESSAGE('Esta promocion esta cerrada','../Controllers/Promociones_Controller.php');
 				}
 		break;
 		

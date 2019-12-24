@@ -6,6 +6,7 @@ session_start();
 //Incluye la funciones que se encuentran en los siguientes ficheros:
 include_once "../Views/Header.php";
 include_once "../Views/MESSAGE.php";
+include_once "../Views/ALERT.php";
 include_once "../Views/MESSAGE_Pago.php";
 include_once "../Functions/Authentication.php";
 
@@ -15,6 +16,7 @@ if(isset($_SESSION['tipo'])){
 		include_once "../Models/Inscripcion_Model.php";
 		include_once "../Models/Parejas_Model.php";
 		//include_once "../Views/Inscripciones_SHOWALL_View.php";
+		include_once "../Views/Torneos_SHOWALL_View.php";
 		include_once "../Views/Inscripcion_ADD_View.php";
 		include_once "../Views/Inscripcion_ADD_Pago_View.php";
 		include_once "../Views/Inscripcion_ADD_Tarjeta_View.php";
@@ -174,10 +176,31 @@ if(isset($_SESSION['tipo'])){
 					}
 				}
 				else{
-					new MESSAGE('Ya estas apuntado a este campeonato','../Controllers/Torneos_Controller.php');
+					
+					if($_SESSION['tipo']=='ADMIN'){		 
+						$torneo = new Torneos_Model('','','','','',''); //Se construye el objeto torneo
+						$datos = $torneo -> search(); //Se buscan todos los torneos y se pasan a datos
+						$respuesta = new Torneos_SHOWALL_Admin($datos,'../Controllers/Torneos_Controller.php'); //Se crea el SHOWALL para mostrar todos los torneos
+					}else{
+						$torneo = new Torneos_Model('','','','','',''); //Se construye el objeto torneo
+						$datos = $torneo -> searchPorCategoria(); //Se buscan todos los torneos y se pasan a datos
+						$respuesta = new Torneos_SHOWALL($datos,'../Controllers/Torneos_Controller.php');
+					}
+					new ALERT('Ya estas apuntado a este campeonato');
+					//new MESSAGE('Ya estas apuntado a este campeonato','../Controllers/Torneos_Controller.php');
 				}
 		}else{
-					new MESSAGE('No puedes anotarte a un campeonato ya iniciado','../Controllers/Torneos_Controller.php');
+			if($_SESSION['tipo']=='ADMIN'){		 
+				$torneo = new Torneos_Model('','','','','',''); //Se construye el objeto torneo
+				$datos = $torneo -> search(); //Se buscan todos los torneos y se pasan a datos
+				$respuesta = new Torneos_SHOWALL_Admin($datos,'../Controllers/Torneos_Controller.php'); //Se crea el SHOWALL para mostrar todos los torneos
+			}else{
+				$torneo = new Torneos_Model('','','','','',''); //Se construye el objeto torneo
+				$datos = $torneo -> searchPorCategoria(); //Se buscan todos los torneos y se pasan a datos
+				$respuesta = new Torneos_SHOWALL($datos,'../Controllers/Torneos_Controller.php');
+			}
+				new ALERT('No puedes anotarte a un campeonato ya iniciado');
+					//new MESSAGE('No puedes anotarte a un campeonato ya iniciado','../Controllers/Torneos_Controller.php');
 		}
 			
 			break;
@@ -214,14 +237,14 @@ if(isset($_SESSION['tipo'])){
 				//$phu -> addMetodoPago($idpromo,$_SESSION['login'],$pago);
 				
 				if($pago == 'Paypal'){
-					new MESSAGE_Pago('Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul','../Controllers/Inscripcion_Controller.php');			 
+					new MESSAGE_Pago('Insercion correcta.Puedes acceder a la pagina de paypal haciendo click sobre su logo en el boton azul','../Controllers/Torneos_Controller.php');			 
 				}
 				else if($pago == 'Contrareembolso'){
-					new MESSAGE('Recuerda realizar el pago en las instalaciones del club','../Controllers/Inscripcion_Controller.php');
+					new MESSAGE('Recuerda realizar el pago en las instalaciones del club','../Controllers/Torneos_Controller.php');
 				}
 				
 				else if($pago == 'Tarjeta'){
-					new Inscripcion_ADD_Tarjeta($_REQUEST['torneos_ID_Torneo'],'../Controllers/Inscripcion_Controller.php');
+					new Inscripcion_ADD_Tarjeta($_REQUEST['torneos_ID_Torneo'],'../Controllers/Torneos_Controller.php');
 				}
 			
 			break;
@@ -236,7 +259,7 @@ if(isset($_SESSION['tipo'])){
 				
 				//$phu = new Promociones_has_Usuarios_Model($_REQUEST['ID_Promo'],$_SESSION['login'],"","","");
 				//$phu -> addTarjeta($_REQUEST['ID_Promo'],$_SESSION['login'],$_REQUEST['CCV'],$_REQUEST['num_tarjeta']);
-				new MESSAGE($mensaje,'../Controllers/Inscripcion_Controller.php');
+				new MESSAGE($mensaje,'../Controllers/Torneos_Controller.php');
 				
 			break;
 			
