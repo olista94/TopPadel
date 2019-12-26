@@ -33,6 +33,15 @@ traduce['SPANISH']['El tamaño del campo IBAN es erróneo']='El tamaño del camp
 traduce['SPANISH']['El formato del campo IBAN es erróneo (Ej:ES40)']='El formato del campo IBAN es erróneo (Ej:ES40)';
 traduce['SPANISH']['El tamaño de la cuenta es erróneo']='El tamaño de la cuenta es erróneo';
 traduce['SPANISH']['El formato del campo cuenta es erróneo (20 números)']='El formato del campo cuenta es erróneo (20 números)';
+traduce['SPANISH']['El tamaño del campo CCV es erróneo (3 números)']='El tamaño del campo CCV es erróneo (3 números)';
+traduce['SPANISH']['El formato del campo CCV es erróneo (3 números)']='El formato del campo CCV es erróneo (3 números)';
+traduce['SPANISH']['El tamaño del campo número de tarjeta es erróneo (16 números)']='El tamaño del campo número de tarjeta es erróneo (16 números)';
+traduce['SPANISH']['El formato del campo número de tarjeta es erróneo (16 números)']='El formato del campo número de tarjeta es erróneo (16 números)';
+traduce['SPANISH']['El campo descripcion está vacío o es muy largo (maximo 100 caracteres)']='El campo descripcion está vacío o es muy largo (máximo 100 caracteres)';
+traduce['SPANISH']['El tamaño del campo tope es erróneo (De 1 a 50)']='El tamaño del campo tope es erróneo (De 1 a 50)';
+traduce['SPANISH']['El formato del campo tope es erróneo (De 1 a 50)']='El formato del campo tope es erróneo (De 1 a 50)';
+traduce['SPANISH']['El tamaño del campo invitado es erróneo (max 50 caracteres)']='El tamaño del campo invitado es erróneo (max 50 caracteres)';
+traduce['SPANISH']['El formato del campo invitado es erróneo (Solo letras)']='El formato del campo invitado es erróneo (Solo letras)';
 
 //Traducción al gallego
 traduce['GALLAECIAN']=new Array();
@@ -64,6 +73,15 @@ traduce['GALLAECIAN']['El tamaño del campo IBAN es erróneo']='O tamaño do cam
 traduce['GALLAECIAN']['El formato del campo IBAN es erróneo (Ej:ES40)']='O formato do campo IBAN é erróneo (Ex:ES40)';
 traduce['GALLAECIAN']['El tamaño de la cuenta es erróneo']='O tamaño da conta é erróneo';
 traduce['GALLAECIAN']['El formato del campo cuenta es erróneo (20 números)']='O formato do campo conta é erróneo';
+traduce['GALLAECIAN']['El tamaño del campo CCV es erróneo (3 números)']='O tamaño do campo CCV é erróneo (3 números)';
+traduce['GALLAECIAN']['El formato del campo CCV es erróneo (3 números)']='O formato do campo CCV é erróneo (3 números)';
+traduce['GALLAECIAN']['El tamaño del campo número de tarjeta es erróneo (16 números)']='O tamaño do campo número de tarxeta é erróneo (16 números)';
+traduce['GALLAECIAN']['El formato del campo número de tarjeta es erróneo (16 números)']='O formato do campo número de tarxeta é erróneo (16 números)';
+traduce['GALLAECIAN']['El campo descripcion está vacío o es muy largo (maximo 100 caracteres)']='O campo descrición está baleiro ou é moi longo (máximo 100 caracteres)';
+traduce['GALLAECIAN']['El tamaño del campo tope es erróneo (De 1 a 50)']='O tamaño do campo tope é erróneo (De 1 a 50)';
+traduce['GALLAECIAN']['El formato del campo tope es erróneo (De 1 a 50)']='O formato do campo tope é erróneo (De 1 a 50)';
+traduce['GALLAECIAN']['El tamaño del campo invitado es erróneo (max 50 caracteres)']='O tamaño do campo invitado é erróneo (max 50 caracteres)';
+traduce['GALLAECIAN']['El formato del campo invitado es erróneo (Solo letras)']='O formato do campo invitado é erróneo (Solo letras)';
 
 //Traducción al inglés
 traduce['ENGLISH']=new Array();
@@ -95,6 +113,15 @@ traduce['ENGLISH']['El tamaño del campo IBAN es erróneo']='Incorrect size at I
 traduce['ENGLISH']['El formato del campo IBAN es erróneo (Ej:ES40)']='Incorrect format at IBAN field (Ex:ES40)';
 traduce['ENGLISH']['El tamaño de la cuenta es erróneo']='Incorrect size at IBAN field';
 traduce['ENGLISH']['El formato del campo cuenta es erróneo (20 números)']='Incorrect format at account field (20 numbers)';
+traduce['ENGLISH']['El tamaño del campo CCV es erróneo (3 números)']='Incorrect size at CCV field (3 numbers)';
+traduce['ENGLISH']['El formato del campo CCV es erróneo (3 números)']='Incorrect format at CCV field (3 numbers)';
+traduce['ENGLISH']['El tamaño del campo número de tarjeta es erróneo (16 números)']='Incorrect size at credit card number field (16 numbers)';
+traduce['ENGLISH']['El formato del campo número de tarjeta es erróneo (16 números)']='Incorrect format at credit card number field (16 numbers)';
+traduce['ENGLISH']['El campo descripcion está vacío o es muy largo (maximo 100 caracteres)']='Date field is empty or is too long (max 100 characters)';
+traduce['ENGLISH']['El tamaño del campo tope es erróneo (De 1 a 50)']='Incorrect size at max field (From 1 to 50)';
+traduce['ENGLISH']['El formato del campo tope es erróneo (De 1 a 50)']='Incorrect format at max field (From 1 to 50)';
+traduce['GALLAECIAN']['El tamaño del campo invitado es erróneo (max 50 caracteres)']='Incorrect size at guest field (max 50 characters)';
+traduce['GALLAECIAN']['El formato del campo invitado es erróneo (Solo letras)']='Incorrect format at guest field (Just letters)';
 
 /* Función que comprueba si un campo que se le pasa como parámetro está o no vacío.True si lo está,false en caso contrario. */
 function comprobarVacio(campo){
@@ -110,6 +137,21 @@ function comprobarVacio(campo){
 	/* Si el valor introducido es correcto,mostrará el campo con un borde verde */
 	campo.style.border = "1px solid green"; 
 	return false;
+}
+
+function comprobarTamaño(campo,max){
+	//Campo será la variable que represente al campo del formulario
+	/* Comprueba si el tamaño del valor del campo es igual a 0 */
+	
+	if(campo.value.length > max){
+		/* Si el valor introducido es erróneo,mostrará el campo con un borde rojo */
+		campo.style.border = "1px solid red";
+		return false;
+	}
+	
+	/* Si el valor introducido es correcto,mostrará el campo con un borde verde */
+	campo.style.border = "1px solid green"; 
+	return true;
 }
 
 
@@ -287,6 +329,7 @@ function comprobarFecha(campo){
 	//Si está vacía
 	
 	if(campo.value.length == 0){
+		
 		campo.style.border = "1px solid red";
 		return false;
 	}
@@ -325,22 +368,33 @@ function comprobarCuenta(campo,size){
 	}
 }
 
-/* 
- function controlFechas(finicio,ffin){
-	//creo dos nuevas variables para almacenar a objetos tipo fecha
-	var inicio = new Date(finicio.value).getTime();
-	var fin = new Date(ffin.value).getTime();
-	//Ahora puedo compararlas: si el inicio es menor o igual al fin retorno true
-	if(fin>=inicio){
+function comprobarCCV(campo,size){
+	
+	/* Comprueba que el valor contenga cualquier caracter de la expresión*/
+	if(comprobarExpresionRegular(campo,'^[0-9]{3}$',size)){
+		
+		campo.style.border = "1px solid green";
 		return true;
 	}
 	else{
-		//sino retorno false y lanzo mensaje
-		alert(traduce[idioma]['La fecha '] + finicio.value + traduce[idioma][' no puede ser posterior a la fecha '] + ffin.value + '.');
+		campo.style.border = "1px solid red";
 		return false;
 	}
-}  */
+}
 
+function comprobarNumTarjeta(campo,size){
+	
+	/* Comprueba que el valor contenga cualquier caracter de la expresión*/
+	if(comprobarExpresionRegular(campo,'^[0-9]{16}$',size)){
+		
+		campo.style.border = "1px solid green";
+		return true;
+	}
+	else{
+		campo.style.border = "1px solid red";
+		return false;
+	}
+}
 
 
 //Se comprueba que los campos de registrar usuario son correctos
@@ -520,9 +574,19 @@ function comprobarFechaPromo(formu){
 		alert(traduce[idioma]['El campo fecha no puede estar vacío']);
 		return false;
 	}
-	
-	
 	else{//Si todo está correcto
+		return true;
+	}
+}
+
+function comprobarFechaClase(formu){
+	
+	if(formu.fecha_clase.value.length == 0){	
+		alert(traduce[idioma]['El campo fecha no puede estar vacío']);
+		return false;
+	}
+	else{//Si todo está correcto
+	
 		return true;
 	}
 }
@@ -688,5 +752,109 @@ function comprobarSocio(formu){
 		return true;
 	}
 	
+}
+
+//------------------------------------------------------------------------NUEVO-------------------------------------------------------------------------------------------------
+
+function comprobarTarjeta(formu){
+	
+	if(formu.CCV.value.length == 0 || formu.CCV.value.length > 3){
+		alert(traduce[idioma]['El tamaño del campo CCV es erróneo (3 números)']);
+		
+		return false;
+	}
+	
+	else if(comprobarCCV(formu.CCV) ==  false){
+		alert(traduce[idioma]['El formato del campo CCV es erróneo (3 números)']);
+		return false;
+	}
+	
+	if(formu.num_tarjeta.value.length == 0 || formu.num_tarjeta.value.length > 16){
+		alert(traduce[idioma]['El tamaño del campo número de tarjeta es erróneo (16 números)']);
+		
+		return false;
+	}
+	
+	else if(comprobarNumTarjeta(formu.num_tarjeta) ==  false){
+		alert(traduce[idioma]['El formato del campo número de tarjeta es erróneo (16 números)']);
+		return false;
+	}
+	
+	else{//Si todo está correcto
+		return true;
+	}
+	
+}
+
+function comprobarClaseGrupal(formu){
+	
+	if(formu.descripcion.value.length == 0 || formu.descripcion.value.length > 100){
+		alert(traduce[idioma]['El campo descripcion está vacío o es muy largo (maximo 100 caracteres)']);
+		
+		return false;
+	}
+	
+	if(formu.tope.value.length == 0 || formu.tope.value.length > 2){
+		alert(traduce[idioma]['El tamaño del campo tope es erróneo (De 1 a 50)']);
+		
+		return false;
+	}
+	
+	else if(comprobarEntero(formu.tope,1,50) ==  false){
+		alert(traduce[idioma]['El formato del campo tope es erróneo (De 1 a 50)']);
+		return false;
+	}
+	
+	else if(comprobarFecha(formu.fecha_clase) == false){
+		
+		alert(traduce[idioma]['El campo fecha no puede estar vacío']);
+		return false;
+	}
+	
+	else{//Si todo está correcto
+		return true;
+	}
+	
+}
+
+function comprobarClinic(formu){
+	
+	if(formu.descripcion.value.length == 0 || formu.descripcion.value.length > 100){
+		alert(traduce[idioma]['El campo descripcion está vacío o es muy largo (maximo 100 caracteres)']);
+		
+		return false;
+	}
+	
+	if(formu.tope.value.length == 0 || formu.tope.value.length > 2){
+		alert(traduce[idioma]['El tamaño del campo tope es erróneo (De 1 a 50)']);
+		
+		return false;
+	}
+	
+	else if(comprobarEntero(formu.tope,1,50) ==  false){
+		alert(traduce[idioma]['El formato del campo tope es erróneo (De 1 a 50)']);
+		return false;
+	}
+	
+	if(formu.invitado.value.length == 0 || formu.invitado.value.length > 50){
+		alert(traduce[idioma]['El tamaño del campo invitado es erróneo (max 50 caracteres)']);
+		
+		return false;
+	}
+	
+	else if(comprobarTexto(formu.invitado,50) ==  false){
+		alert(traduce[idioma]['El formato del campo invitado es erróneo (Solo letras)']);
+		return false;
+	}
+	
+	else if(comprobarFecha(formu.fecha_clase) == false){
+		
+		alert(traduce[idioma]['El campo fecha no puede estar vacío']);
+		return false;
+	}
+	
+	else{//Si todo está correcto
+		return true;
+	}
 	
 }
