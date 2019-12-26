@@ -22,7 +22,7 @@ class Clases_Grupales_ADD{
 <!--Formulario para añadir tarea-->
 		<div class="form">
 
-			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Clases_Grupales_Controller.php" enctype="multipart/form-data" onsubmit="return comprobarTarea(this)">
+			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Clases_Grupales_Controller.php" enctype="multipart/form-data" onsubmit="return comprobarClaseGrupal(this)">
 				<legend><?php echo $strings['Añadir clase'];?>
 				<!--Boton para volver atras-->
 				<button type="button" type="button" onclick="location.href='../Controllers/Clases_Grupales_Controller.php';" class="volver"></button>
@@ -31,7 +31,7 @@ class Clases_Grupales_ADD{
 				<div>
 					<!--Campo descripcion de la tarea-->
 					<label for="descripcion"><?php echo $strings['Descripcion']; ?></label>
-					 <textarea name="descripcion" rows="5" cols="40"></textarea>
+					 <textarea name="descripcion" rows="5" cols="40" onblur="return !comprobarVacio(this) && comprobarTamaño(this,100)" ></textarea>
 						
 				</div>
 				
@@ -39,7 +39,7 @@ class Clases_Grupales_ADD{
 				<div>
 					
 					<label for="tope"><?php echo $strings['Tope']; ?></label>
-					<input type="number" id="tope" name="tope" >
+					<input type="number" id="tope" name="tope" onblur="return !comprobarVacio(this) && comprobarEntero(this,1,50)" >
 						
 				</div>			
 				
@@ -60,7 +60,6 @@ class Clases_Grupales_ADD{
 				<label>
 					<?php echo $strings['Hora']; ?></label>
 					<select name = "hora_clase">
-						<option value=""></option>
 						<option value="08:00">08:00</option>
 						<option value="09:30">09:30</option>
 						<option value="11:00">11:00</option>

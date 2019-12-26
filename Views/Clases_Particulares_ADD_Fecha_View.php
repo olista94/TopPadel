@@ -26,7 +26,7 @@ class Clases_Particulares_ADD_Fecha{
 <!--Formulario para añadir fase-->
 		<div class="form">
  
-			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Clases_Particulares_Controller.php" enctype="multipart/form-data" onsubmit="return comprobarFechaReserva(this)">
+			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Clases_Particulares_Controller.php" enctype="multipart/form-data" onsubmit="return comprobarFechaClase(this)">
 				<legend><?php echo $strings['Añadir fecha'];?>
 				<button type="button" type="button" onClick="history.go(-1);" class="volver"></button>
 				</legend>

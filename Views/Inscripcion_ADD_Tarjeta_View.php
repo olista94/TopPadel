@@ -22,23 +22,20 @@
 	 	 
 ?>
 <!--Formulario para añadir socio-->
-  <form name="Form" id="registerForm" action="../Controllers/Inscripcion_Controller.php" method="post" enctype="multipart/form-data" >
+  <form name="Form" id="registerForm" action="../Controllers/Inscripcion_Controller.php" method="post" enctype="multipart/form-data" onsubmit="return comprobarTarjeta(this)">
 					<input type = "hidden" name = "torneos_ID_Torneo" value = '<?php echo $this->idtorneo; ?>'>
 					
     <legend><?php echo $strings['Añadir pago']; ?>
 	<!--Boton para volver atras-->
-    <button type="button" onclick="location.href='../Controllers/Clinics_Controller.php';" class="volver"></button>
     </legend>
 
     <div>	
 		
       <label for="CCV"><?php echo $strings['CCV']; ?></label>
-      <input type="text" id="CCV" name="CCV" size="5"   onblur=" return !comprobarVacio(this) && comprobarIBAN(this,4);" />
-	
-     
+      <input type="text" id="CCV" name="CCV" size="5"   onblur=" return !comprobarVacio(this) && comprobarCCV(this,3);" />
 		
       <label for="num_tarjeta"><?php echo $strings['Numero de tarjeta']; ?></label>
-      <input type="text" id="num_tarjeta" name="num_tarjeta" size="22"  onblur=" return !comprobarVacio(this) && comprobarCuenta(this,20);" />
+      <input type="text" id="num_tarjeta" name="num_tarjeta" size="22"  onblur=" return !comprobarVacio(this) && comprobarNumTarjeta(this,16);" />
        
 	  
     </div>
