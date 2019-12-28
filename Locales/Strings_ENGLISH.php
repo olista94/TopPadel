@@ -353,7 +353,8 @@ array(
 	'Efectivo' => 'Cash',
 	'No hay pistas libres ese dia a esa hora.Prueba con otra hora' => 'No free courts in that date.Try with a different hour',
 	'No puedes ver esto si no estás logueado' => 'You can´t see this if you are not logued',
-	'' => '',
+	'No es tu categoria' => 'Not your category',
+	'Si no se cierra la promoción se te devolverá el dinero' => 'If promo doesn´t close,we will repay you',
 	'' => ''
 	
 )

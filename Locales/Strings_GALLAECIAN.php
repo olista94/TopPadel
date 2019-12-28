@@ -353,6 +353,8 @@ array(
 	'Efectivo' => 'Efectivo',
 	'No hay pistas libres ese dia a esa hora.Prueba con otra hora' => 'Non hai pistas libres ese dia a esa hora.Proba con outra hora',
 	'No puedes ver esto si no estás logueado' => 'Non podes ver esto se non estás logueado',
+	'No es tu categoria' => 'Non é a tua categoria',
+	'Si no se cierra la promoción se te devolverá el dinero' => 'Se non se pecha a promoción,devolveranseche os cartos',
 	'' => '',
 	'' => '',
 	'' => ''

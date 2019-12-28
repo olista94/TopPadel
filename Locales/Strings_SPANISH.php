@@ -354,7 +354,8 @@ array(
 	'Efectivo' => 'Efectivo',
 	'No hay pistas libres ese dia a esa hora.Prueba con otra hora' => 'No hay pistas libres ese dia a esa hora.Prueba con otra hora',
 	'No puedes ver esto si no estás logueado' => 'No puedes ver esto si no estás logueado',
-	'' => '',
+	'No es tu categoria' => 'No es tu categoria',
+	'Si no se cierra la promoción se te devolverá el dinero' => 'Si no se cierra la promoción,se te devolverá el dinero',
 	'' => '',
 	'' => '',
 	
