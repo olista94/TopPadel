@@ -3,19 +3,23 @@
  //Declaracion de la clase
  class Usuarios_ESTADISTICAS{
 	 //Datos del usuario
-	var $datos;
+	var $ganados;
+	var $jugados;
+	var $torneosDisputados;
 	var $ranking;
 	//Variable con el enlace al form para ADD usuaro
 	var $enlace;
 	var $fila;
 	
 		//Constructor de la clase	
-	function __construct($datos,$ranking,$enlace){
+	function __construct($ganados,$jugados,$torneosDisputados,$ranking,$enlace){
 		
-		$this -> datos = $datos;
+		$this -> ganados = $ganados;
+		$this -> jugados = $jugados;
+		$this -> torneosDisputados = $torneosDisputados;
 		$this -> ranking =$ranking;
 		$this -> enlace = $enlace;
-		$this -> fila = $this -> datos -> fetch_array();
+		//$this -> fila = $this -> datos -> fetch_array();
 		$this -> mostrar();
 	}
 	
@@ -40,28 +44,21 @@
 				<!--Campo login del usuario-->
                 <tr>
                     <th><?php echo $strings['Partidos Jugados']; ?></th>
-                    <td><?php if($this->fila['PJ'] == null)
-								echo '0';
-							else
-								echo $this -> fila['PJ']; ?>
+                    <td><?php echo $this -> jugados; ?> 
 					</td>								
 				</tr>
 				<!--Campo password del usuario-->
                 <tr>
                     <th><?php echo $strings['Partidos Ganados']; ?></th>
-                    <td><?php if($this->fila['PG'] == null)
-								echo '0';
-							else
-								echo $this -> fila['PG']; ?>
+                    <td><?php 
+								echo $this -> ganados; ?>
 					</td>
                 </tr>
 				<!--Campo nombre del usuario-->
                 <tr>
                     <th><?php echo $strings['Partidos Perdidos']; ?></th>
-                    <td><?php if($this->fila['PP'] == null)
-								echo '0';
-							else
-								echo $this -> fila['PP']; ?>
+                    <td><?php 
+								echo $this -> jugados - $this -> ganados; ?>
 					</td>
                 </tr>
 				
@@ -69,25 +66,25 @@
                     <th><?php echo $strings['% victorias']; ?></th>
                     <td><?php 
 					
-					if($this -> fila['PJ'] == 0)
+					if($this -> jugados == 0)
 						echo "-";
 					else
-					echo ( ($this -> fila['PG']) / ($this -> fila['PJ']) ) * 100;echo "%";
-					
+					echo round( ( ($this -> ganados) / ($this -> jugados) ), 3 )* 100;echo "%";
+					//echo round(5.055, 2);
 					 ?></td>
                 </tr>
 				
 				<tr>
                     <th><?php echo $strings['Torneos Disputados']; ?></th>
-                    <td><?php echo $this -> fila['Num_Torneos']; ?></td>
+                    <td><?php echo $this -> torneosDisputados; ?></td>
                 </tr>
 				
 				<tr>
                     <th><?php echo $strings['Ranking']; ?></th>
                     <td><?php 
 					
-					
-					echo ($this -> fila['PG']*3) - ($this -> fila['PP']);
+					echo $this -> ranking;
+					//echo ($this -> fila['PG']*3) - ($this -> fila['PP']);
 					
 					 ?></td>
                 </tr>
