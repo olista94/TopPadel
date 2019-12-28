@@ -337,12 +337,15 @@ if(isset($_SESSION['tipo'])){
 		else if($_REQUEST['action'] == 'Ver_Estadisticas'){
 					
 						$partido = new Partidos_Model('','','','','','','','','','','','','');
-						$datos = $partido->estadisticas($_SESSION['login']);
+						
+						$ganados = $partido->partidosGanados($_SESSION['login']);
+						$jugados = $partido->partidosJugados($_SESSION['login']);
+						$torneosDisputados = $partido->torneosDisputados($_SESSION['login']);
 						
 						$usuario = new Usuarios_Model($_SESSION['login'],'','','','','','','','','','','','');
 						$ranking = $usuario -> getPuntosRanking();
 						
-						new Usuarios_ESTADISTICAS($datos,$ranking,'../Controllers/Usuarios_Controller.php');
+						new Usuarios_ESTADISTICAS($ganados,$jugados,$torneosDisputados,$ranking,'../Controllers/Usuarios_Controller.php');
 
 		}
 		
