@@ -454,10 +454,69 @@ function add(){
 				return  'Insercion correcta'; 
 			}	
 	}  
+	
+	function partidosGanados($jugador){
+			//Sentencia sql que insetara la categoria
+			$sql = "SELECT COUNT(*) FROM `partidos` p WHERE Sets_Local = 2 AND ID_Partido IN
+					(SELECT ID_Partido
+					FROM parejas_has_partidos ph,parejas par
+					WHERE p.ID_Partido = ph.ID_Partido and (par.ID_Pareja = ph.ID_ParejaLocal) AND (usuarios_login = '".$jugador."' or usuarios_login1 = '".$jugador."'))";
+		echo $sql;
+			
+			$resultado = $this->mysqli->query($sql);
+			
+			
+			
+			$sql1 = "SELECT COUNT(*) FROM `partidos` p WHERE Sets_Visitante = 2 AND ID_Partido IN
+					(SELECT ID_Partido
+					FROM parejas_has_partidos ph,parejas par
+					WHERE p.ID_Partido = ph.ID_Partido and (par.ID_Pareja = ph.ID_ParejaVisitante) AND (usuarios_login = '".$jugador."' or usuarios_login1 = '".$jugador."'))";
+			 
+			echo $sql1;
+			$resultado1 = $this->mysqli->query($sql1);
+			
+			
+			$ganados = $resultado -> fetch_array()[0] + $resultado1 -> fetch_array()[0];
+
+			return $ganados;
+	}
+	
+	function partidosJugados($jugador){
+			//Sentencia sql que insetara la categoria
+			$sql = "SELECT COUNT(*) FROM `parejas_has_partidos` ph,`partidos` p, `parejas` par
+					WHERE  (p.`ID_Partido` = ph.`ID_Partido`) and (par.ID_Pareja = ph.ID_ParejaLocal OR par.ID_Pareja = ph.ID_ParejaVisitante)
+					AND (usuarios_login = '".$jugador."' OR usuarios_login1 = '".$jugador."') AND `Sets_Local` IS NOT NULL";
+
+			
+			$resultado = $this->mysqli->query($sql);
+			
+			
+			
+			$jugados = $resultado -> fetch_array()[0];
+
+			return $jugados;
+	}
+	
+	function torneosDisputados($jugador){
+			//Sentencia sql que insetara la categoria
+			$sql = "SELECT COUNT(`torneos_ID_Torneo`) AS Num_Torneos
+					FROM `parejas_has_torneos` p,`parejas` par,`torneo` t
+					WHERE (p.`parejas_ID_Pareja` = par.`ID_Pareja`) AND (p.`torneos_ID_Torneo` = t.`ID_Torneo`)
+					AND (usuarios_login = '".$jugador."' OR usuarios_login1 = '".$jugador."')";
+
+			
+			$resultado = $this->mysqli->query($sql);
+			
+			
+			
+			$disputados = $resultado -> fetch_array()[0];
+
+			return $disputados;
+	}
 
 
 	
-	function estadisticas($jugador){
+	/* function estadisticas($jugador){
 			//Sentencia sql que insetara la categoria
 			$sql = "SELECT COUNT(`torneos_ID_Torneo`) AS Num_Torneos,`nombre`,`edicion`,`parejas_ID_Pareja`,`usuarios_login`,`usuarios_login1`,SUM(`PJ`) AS PJ,SUM(`PG`) AS PG,SUM(`PP`) AS PP,`Ptos`,`SF`,`SC`,`JF`,`JC`
 					FROM `parejas_has_torneos` p,`parejas` par,`torneo` t
@@ -476,7 +535,7 @@ function add(){
 			else{
 				return  $resultado; 
 			}	
-	}
+	} */
 	
 	function BuscarHorasOcupadas(){
 	 $sql = "SELECT `hora`,COUNT(*) AS Num_Reservas
