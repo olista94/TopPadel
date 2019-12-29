@@ -135,9 +135,9 @@
             </legend>
            
             <div class="form-group">
-                <label for="login_entrenador"><?php echo $strings['Entrenador']; ?></label>
-                <input type="text" id="login_entrenador" name="login_entrenador" maxlength="50" size="40"/>
-            </div>
+                <label for="tope"><?php echo $strings['Tope']; ?></label>
+                <input type="text" id="tope" name="tope" maxlength="25"/>
+            </div><br>
 			<!--Campo apellidos del usuario-->
             <div class="form-group">
                 <label for="fecha_clase"><?php echo $strings['Fecha']; ?></label>
