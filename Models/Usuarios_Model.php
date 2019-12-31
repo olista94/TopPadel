@@ -382,7 +382,7 @@ function addSocio(){
 	
 	
 		function verRanking() {	
-			$sql = "SELECT login,ranking FROM usuarios Order by ranking desc LIMIT 20";
+			$sql = "SELECT login,ranking FROM usuarios WHERE tipo <> 'ENTRENADOR' Order by ranking desc LIMIT 20";
 
 			if (!($resultado = $this->mysqli->query($sql))){
 				return 'No existe'; //Devuelve mensaje de error	
@@ -408,7 +408,7 @@ function addSocio(){
 		}
 		
 		function verRankingMasculino() {	
-			$sql = "SELECT login,ranking FROM usuarios WHERE `sexo` = 'Masculina' Order by ranking desc LIMIT 20";
+			$sql = "SELECT login,ranking FROM usuarios WHERE `sexo` = 'Masculina' AND tipo <> 'ENTRENADOR' Order by ranking desc LIMIT 20";
 
 			if (!($resultado = $this->mysqli->query($sql))){
 				return 'No existe'; //Devuelve mensaje de error	
@@ -420,7 +420,7 @@ function addSocio(){
 		}
 		
 		function verRankingFemenino() {	
-			$sql = "SELECT login,ranking FROM usuarios WHERE `sexo` = 'Femenina' Order by ranking desc LIMIT 20";
+			$sql = "SELECT login,ranking FROM usuarios WHERE `sexo` = 'Femenina' AND tipo <> 'ENTRENADOR' Order by ranking desc LIMIT 20";
 
 			if (!($resultado = $this->mysqli->query($sql))){
 				return 'No existe'; //Devuelve mensaje de error	
