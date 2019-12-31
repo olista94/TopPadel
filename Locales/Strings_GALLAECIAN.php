@@ -358,7 +358,7 @@ array(
 	'No se puede borrar. Hay actividades asociadas a esta pista' => 'Non se pode borrar. Hai actividades asociadas a esta pista',
 	'' => '',
 	'' => '',
-	'' => ''
+	'' => '',
 	
 )
 ;

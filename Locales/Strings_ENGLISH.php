@@ -356,10 +356,10 @@ array(
 	'No es tu categoria' => 'Not your category',
 	'Si no se cierra la promoción se te devolverá el dinero' => 'If promo doesn´t close,we will repay you',
 	'No se puede borrar. Hay actividades asociadas a esta pista' => 'This court can´t be deleted.There are activities asociated',
-	'' => ''
-	'' => ''
-	'' => ''
-	'' => ''
+	'' => '',
+	'' => '',
+	'' => '',
+	'' => '',
 	
 )
 ;
