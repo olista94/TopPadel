@@ -309,7 +309,7 @@ array(
 	'Añadir clinic' => 'Add clinic',
 	'No hay pista y/o entrenadores disponibles' => 'No courts and/or coaches available',
 	'Rankings' => 'Rankings',
-	'Ranking' => 'Ranking',
+	'Ranking' => 'Ranking Points',
 	'Estadisticas' => 'Stats',
 	'Partidos Jugados' => 'Games Played',
 	'Partidos Ganados' => 'Wins',
@@ -355,6 +355,10 @@ array(
 	'No puedes ver esto si no estás logueado' => 'You can´t see this if you are not logued',
 	'No es tu categoria' => 'Not your category',
 	'Si no se cierra la promoción se te devolverá el dinero' => 'If promo doesn´t close,we will repay you',
+	'No se puede borrar. Hay actividades asociadas a esta pista' => 'This court can´t be deleted.There are activities asociated',
+	'' => ''
+	'' => ''
+	'' => ''
 	'' => ''
 	
 )
