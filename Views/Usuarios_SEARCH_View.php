@@ -180,6 +180,17 @@
 	  </select>
 	  </div>
 	  <br>
+	  
+	  <div class="form-group">
+		   <label for="tipo"><?php echo $strings['Tipo']; ?></label>
+	  <select name="tipo" id="tipo">
+		<option value=""></option selected>
+		<option value="ADMIN"><?php echo $strings['Admin']; ?></option>
+		<option value="NORMAL"><?php echo $strings['Deportista']; ?></option>
+		<option value="ENTRENADOR"><?php echo $strings['Entrenador']; ?></option>
+	  </select>
+	  </div>
+	  <br>
 			
 		   <!--Boton de confirmar busqueda-->
             <button type="submit" name="action" value="Confirmar_SEARCH" class="buscar"></button>

@@ -25,11 +25,9 @@ if(!isset($_SESSION['idioma'])){
 		//Header
 		include_once '../Views/Header.php';
 ?>
-		<br>
-		<br>
-		<br>
+
 		<p>
-		<H3 style="margin-left: 5px">
+		<H3 style="margin-left: 20%;margin-top: 10%">
 <?php		
 		//Aqui se muestra el mensaje
 		echo $strings[$this->string];
@@ -42,7 +40,7 @@ if(!isset($_SESSION['idioma'])){
 
 <?php
 		//Aqui se muestra el enlace en forma de boton
-		echo '<button class="volver" onclick=location.href=\'' . $this->volver . "'> </button>";
+		echo '<button class="volver" style="margin-left:50%" onclick=location.href=\'' . $this->volver . "'> </button>";
 
 		//Pie
 		include_once '../Views/Footer.php';

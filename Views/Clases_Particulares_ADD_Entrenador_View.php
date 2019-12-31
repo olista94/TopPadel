@@ -35,7 +35,7 @@ class Clases_Particulares_ADD_Entrenador{
 			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Clases_Particulares_Controller.php" enctype="multipart/form-data">
 				<legend><?php echo $strings['Escoger entrenador'];?>
 				<!--Boton para volver atras-->
-				<button type="button" type="button" onclick="location.href='../Controllers/Clases_Particulares_Controller.php';" class="volver"></button>
+				
 				</legend>
 				<div>
 					

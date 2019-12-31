@@ -45,7 +45,6 @@ include_once '../Views/Header.php';
 			
 			<form class="tableActions" action="../Controllers/Promociones_Controller.php" method="">
 			<!--Botones para añadir o buscar-->
-			<button class="buscar-little" name="action" value="Confirmar_SEARCH1" type="submit"></button>
 			<button class="anadir-little"  name="action" value="Confirmar_ADD1" type="submit"></button>
 			</form>
 			<form class="tableActions" action="../Controllers/Promociones_Controller.php" method="">
