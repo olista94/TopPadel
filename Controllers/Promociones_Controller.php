@@ -341,10 +341,23 @@ if (!IsAuthenticated()){ //si no está autenticado
 			
 			$promocion = new Promociones_Model('','','','','','',"","");				
 			$promocion = getDataForm(); 
-					
-			$datos = $promocion-> searchAdmin(); 
+			
+			
+			
+			if($_REQUEST['pista_ID_Pista']){
+				$datos = $promocion-> searchAdminConPista(); 
+			}
+			else{
+				$datos = $promocion-> searchAdminSinPista(); 
+			}
+			
 			$usuarios = $promocion -> ContarUsuarios();
-			new Promociones_SHOWALL_Todas($datos,$usuarios,'../Controllers/Promociones_Controller.php'); 		
+			if($_SESSION['tipo'] == 'ADMIN'){
+				new Promociones_SHOWALL_Admin($datos,$usuarios,'../Controllers/Promociones_Controller.php');
+			}
+			else{
+				new Promociones_SHOWALL_Todas($datos,$usuarios,'../Controllers/Promociones_Controller.php');
+			}			
 			
 		break;
 		//Si se le da a borrar desde la vista del showall
