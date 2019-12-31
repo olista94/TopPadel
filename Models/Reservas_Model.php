@@ -99,7 +99,7 @@ function addReservaPartido($idpista,$fecha,$hora){//Hace una reserva de un campe
 
 				)
 			";
-echo $sql;
+
 	if (!$this->mysqli->query($sql)) { 
 		return 'No hay pistas disponibles ese dia a esa hora';//Devuelve mensaje de error
 	}
@@ -123,7 +123,7 @@ function pistasLibres(){
 				(SELECT p.`ID_Pista` FROM clases_grupales cg,pista p
 				WHERE `fecha_clase` = '$this->fecha_reserva' AND `hora_clase` = '$this->hora_inicio' AND cg.`ID_Pista` = p.`ID_Pista`)
 				";
-echo $sql;
+
 	$resultado = $this->mysqli->query($sql);
 	
 	if (!$resultado) { 
@@ -140,7 +140,7 @@ function BuscarHorasOcupadas(){
 			FROM reservas,pista 
 			WHERE `fecha_reserva` = '$this->fecha_reserva' and pista_ID_Pista = ID_Pista GROUP BY `hora_inicio` HAVING COUNT(*) >= (SELECT COUNT(ID_Pista) FROM pista)
 			";
-	echo $sql;
+	
 
 	$resultado = $this->mysqli->query($sql);
 	

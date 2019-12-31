@@ -162,10 +162,10 @@ function delete()
         if($this->mysqli->query($sql)){
         
 			return 'Borrado correctamente';
-		}/*
+		}
 		else{//Si esta asociada a una tarea no se puede borrar
-			return 'No se puede borrar. Hay tareas asociadas a esta pista';
-		}*/
+			return 'No se puede borrar. Hay actividades asociadas a esta pista';
+		}
     } 
     else//Si no existe
         return 'No existe';

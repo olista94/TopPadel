@@ -259,7 +259,7 @@ function pistasLibres(){
 						AND ID_Pista NOT IN (SELECT pista_ID_Pista from promociones where fecha = '$this->fecha_clase' AND hora_inicio = '$this->hora_clase' AND cerrada = 'SI')
 						AND ID_Pista NOT IN (SELECT p.`ID_Pista` FROM clases_grupales cg,pista p WHERE `fecha_clase` = '$this->fecha_clase' AND `hora_clase` = '$this->hora_clase' AND cg.`ID_Pista` = p.`ID_Pista`)
 						";
-						echo $sql;	
+							
 	$resultado = $this->mysqli->query($sql);
 	
 	if (!$resultado) { 
@@ -273,7 +273,8 @@ function pistasLibres(){
 function buscarEntrenador(){
 
 	 $sql = "SELECT login FROM usuarios WHERE (`tipo` = 'ENTRENADOR') AND 
-	 login not in (SELECT login_entrenador from clases_particulares where `fecha_clase` = '$this->fecha_clase' AND `hora_clase` )";
+	 login not in (SELECT login_entrenador from clases_particulares where `fecha_clase` = '$this->fecha_clase' AND `hora_clase` = '$this->hora_clase')";
+	 
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){

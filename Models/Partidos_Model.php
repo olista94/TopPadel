@@ -208,7 +208,7 @@ function add(){
 			(SELECT p.`ID_Pista` FROM clases_grupales cg,pista p
 			WHERE `fecha_clase` = '$this->fecha' AND `hora_clase` = '$this->hora' AND cg.`ID_Pista` = p.`ID_Pista`)
 			";
-			echo $sql;				
+							
 	$resultado = $this->mysqli->query($sql);
 	
 	if (!$resultado) { 
@@ -461,7 +461,7 @@ function add(){
 					(SELECT ID_Partido
 					FROM parejas_has_partidos ph,parejas par
 					WHERE p.ID_Partido = ph.ID_Partido and (par.ID_Pareja = ph.ID_ParejaLocal) AND (usuarios_login = '".$jugador."' or usuarios_login1 = '".$jugador."'))";
-		echo $sql;
+		
 			
 			$resultado = $this->mysqli->query($sql);
 			
@@ -472,7 +472,6 @@ function add(){
 					FROM parejas_has_partidos ph,parejas par
 					WHERE p.ID_Partido = ph.ID_Partido and (par.ID_Pareja = ph.ID_ParejaVisitante) AND (usuarios_login = '".$jugador."' or usuarios_login1 = '".$jugador."'))";
 			 
-			echo $sql1;
 			$resultado1 = $this->mysqli->query($sql1);
 			
 			
@@ -524,7 +523,7 @@ function add(){
 					AND (usuarios_login = '".$jugador."' OR usuarios_login1 = '".$jugador."')
 					ORDER BY `Ptos` DESC,`SF` DESC,`SC` ASC,`JF` DESC,`JC` ASC";
 
-			echo $sql;
+			
 			$resultado = $this->mysqli->query($sql);	
 			
 			if (!$this->mysqli->query($sql)) {

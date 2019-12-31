@@ -120,7 +120,29 @@ function search1(){
 	}
 }
 //Funcion para buscar todas las promociones si es ADMIN
-function searchAdmin(){ 
+function searchAdminSinPista(){ 
+	$sql = "
+			  SELECT promo.ID_Promo,fecha,hora_inicio,usuarios_login_usuario,pista_ID_Pista
+			   FROM promociones promo
+			   WHERE 
+			    (
+					(`usuarios_login_usuario` LIKE '%$this->usuarios_login_usuario%') &&
+					(`fecha` LIKE '%$this->fecha%') &&
+					(`hora_inicio` LIKE '%$this->hora_inicio%') &&
+					(`ID_Promo` LIKE '%$this->ID_Promo%')
+					
+			)";
+			
+	if (!($resultado = $this->mysqli->query($sql))){
+	return 'Error en la búsqueda';//Devuelve mensaje de error
+	
+	}
+	else{ 
+	return $resultado;//Se devuelve el resultado de la consulta
+	}
+}
+
+function searchAdminConPista(){ 
 	$sql = "
 			  SELECT promo.ID_Promo,fecha,hora_inicio,usuarios_login_usuario,pista_ID_Pista
 			   FROM promociones promo
@@ -131,7 +153,9 @@ function searchAdmin(){
 					(`hora_inicio` LIKE '%$this->hora_inicio%') &&
 					(`ID_Promo` LIKE '%$this->ID_Promo%') &&
 					(`pista_ID_Pista` LIKE '%$this->pista_ID_Pista%')
-			)";  
+					
+			)";
+			
 	if (!($resultado = $this->mysqli->query($sql))){
 	return 'Error en la búsqueda';//Devuelve mensaje de error
 	
@@ -351,7 +375,7 @@ function buscarPistasLibresPromo(){
 				WHERE `fecha_clase` = '".$this->fecha."' AND `hora_clase` = '".$this->hora_inicio."' AND cg.`ID_Pista` = p.`ID_Pista`)
 				LIMIT 1
 				";
-			 echo $sql;
+			 
 			$result = $this->mysqli->query($sql); 
 			//Si ya se han insertado la PK o FK
 		if (!$result) {
