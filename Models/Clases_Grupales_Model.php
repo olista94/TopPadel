@@ -11,10 +11,11 @@ class Clases_Grupales_Model {
 	var $fecha_clase;
 	var $hora_clase;
 	var $ID_Pista;
+	var $sesiones;
 
 
 //Constructor de la clase
-function __construct($ID_Clase,$login_entrenador,$tope,$tipo,$descripcion,$invitado,$fecha_clase,$hora_clase,$ID_Pista){
+function __construct($ID_Clase,$login_entrenador,$tope,$tipo,$descripcion,$invitado,$fecha_clase,$hora_clase,$ID_Pista,$sesiones){
 	$this->ID_Clase = $ID_Clase;
 	$this->login_entrenador = $login_entrenador;
 	$this->tope = $tope;
@@ -24,6 +25,7 @@ function __construct($ID_Clase,$login_entrenador,$tope,$tipo,$descripcion,$invit
 	$this->fecha_clase = $fecha_clase;
 	$this->hora_clase = $hora_clase;
 	$this->ID_Pista = $ID_Pista;
+	$this->sesiones = $sesiones;
 
 	//Incluimos el archivo de acceso a la bd
 	include_once 'Access_DB.php';
@@ -45,12 +47,13 @@ function addGrupal(){
 				'$this->invitado',
 				'$this->fecha_clase',
 				'$this->hora_clase',
-				'$this->ID_Pista'
+				'$this->ID_Pista',
+				'$this->sesiones'
 				
 				)
 				";
 				
-				
+
 		if (!$this->mysqli->query($sql)) {
 			
 			return 'Error al insertar';//Devuelve mensaje de error	
@@ -495,6 +498,26 @@ function devolverMetodoPagoCadaUsuario($idclase)
     else{ 
 		return $resultado->fetch_array()[0];//Se devuelve el resultado de la consulta
 	}
+}
+
+function numSesiones()
+{	
+    $sql = "SELECT `sesiones`
+			FROM clases_grupales
+			WHERE (`ID_Clase` = '$this->ID_Clase')
+			
+			";
+			echo $sql;
+		
+    $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
+    
+    if ($result)
+    {
+    	
+       return $result;//Se devuelve el resultado de la consulta
+    } 
+    else
+        return 'No existe';//Devuelve mensaje de error
 }
 
 
