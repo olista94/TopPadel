@@ -119,6 +119,14 @@ if(isset($_SESSION['tipo'])){
 			else{
 				$ID_Pista = "";
 			}
+
+			if(isset($_REQUEST['sesiones'])){
+				$sesiones = $_REQUEST['sesiones'];//Identificador de la Inscripcion
+				
+			}
+			else{
+				$sesiones = "";
+			}
 			
 			if(isset($_REQUEST['pago'])){
 				$pago = $_REQUEST['pago'];//Identificador de la Inscripcion
@@ -144,7 +152,7 @@ if(isset($_SESSION['tipo'])){
 				$num_tarjeta = "";
 			}
 				
-				$clases_grupales = new Clases_Grupales_Model ($ID_Clase,$login_entrenador,$tope,$tipo,$descripcion,$invitado,$fecha_clase,$hora_clase,$ID_Pista); //creamos el objeto usuario
+				$clases_grupales = new Clases_Grupales_Model ($ID_Clase,$login_entrenador,$tope,$tipo,$descripcion,$invitado,$fecha_clase,$hora_clase,$ID_Pista,$sesiones); //creamos el objeto usuario
 				
 				return $clases_grupales; //devolvemos el objeto usuario
 			}
@@ -158,7 +166,7 @@ if(isset($_SESSION['tipo'])){
 			switch ($_REQUEST['action']){
 				
 				case 'Confirmar_ADD1':
-					$clase = new Clases_Grupales_Model("","",'','','','','','','');
+					$clase = new Clases_Grupales_Model("","",'','','','','','','','');
 					new Clases_Grupales_ADD('../Controllers/Clases_Grupales_Controller.php');	//Crea la vista de añadir
 				
 				break;
@@ -190,7 +198,7 @@ if(isset($_SESSION['tipo'])){
 			
 			case 'Confirmar_DELETE1':
 			
-				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","");
+				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","",'');
 				
 				$datos = $clase -> rellenadatos();
 				$array = $datos -> fetch_array();
@@ -206,7 +214,7 @@ if(isset($_SESSION['tipo'])){
 			
 			case 'Confirmar_DELETE2':
 			
-				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","");
+				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","",'');
 				
 				$mensaje = $clase -> delete();
 				
@@ -216,7 +224,7 @@ if(isset($_SESSION['tipo'])){
 			
 			case 'Confirmar_SHOWCURRENT':
 			
-				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","");
+				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","",'');
 				
 				$datos = $clase -> rellenadatos();
 				$array = $datos -> fetch_array();
@@ -232,7 +240,7 @@ if(isset($_SESSION['tipo'])){
 			
 			case 'Confirmar_INSCRIPCION1':
 			
-				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","");
+				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","",'');
 				
 				$apuntarse = $clase -> PuedeApuntarse();
 				$fecha = $clase -> puedeApuntarseFecha();
@@ -245,7 +253,7 @@ if(isset($_SESSION['tipo'])){
 						if($apuntarse == false){
 							
 							if($_SESSION['tipo'] == 'NORMAL' || $_SESSION['tipo'] == 'ADMIN'){
-								$clases = new Clases_Grupales_Model('','','','','','','','','');
+								$clases = new Clases_Grupales_Model('','','','','','','','','','');
 					
 								$apuntados = $clases -> ContarUsuarios();
 								
@@ -254,7 +262,7 @@ if(isset($_SESSION['tipo'])){
 							}			
 				
 							else if($_SESSION['tipo'] == 'ENTRENADOR'){
-								$clases = new Clases_Grupales_Model('','','','','','','','','');
+								$clases = new Clases_Grupales_Model('','','','','','','','','','');
 								
 								$apuntados = $clases -> ContarUsuarios();
 								
@@ -279,7 +287,7 @@ if(isset($_SESSION['tipo'])){
 					else{
 						
 						if($_SESSION['tipo'] == 'NORMAL' || $_SESSION['tipo'] == 'ADMIN'){
-								$clases = new Clases_Grupales_Model('','','','','','','','','');
+								$clases = new Clases_Grupales_Model('','','','','','','','','','');
 					
 								$apuntados = $clases -> ContarUsuarios();
 								
@@ -288,7 +296,7 @@ if(isset($_SESSION['tipo'])){
 							}			
 				
 							else if($_SESSION['tipo'] == 'ENTRENADOR'){
-								$clases = new Clases_Grupales_Model('','','','','','','','','');
+								$clases = new Clases_Grupales_Model('','','','','','','','','','');
 								
 								$apuntados = $clases -> ContarUsuarios();
 								
@@ -301,7 +309,7 @@ if(isset($_SESSION['tipo'])){
 				}else{
 					
 					if($_SESSION['tipo'] == 'NORMAL' || $_SESSION['tipo'] == 'ADMIN'){
-					$clases = new Clases_Grupales_Model('','','','','','','','','');
+					$clases = new Clases_Grupales_Model('','','','','','','','','','');
 					
 					$apuntados = $clases -> ContarUsuarios();
 					
@@ -310,7 +318,7 @@ if(isset($_SESSION['tipo'])){
 				}
 				
 				else if($_SESSION['tipo'] == 'ENTRENADOR'){
-					$clases = new Clases_Grupales_Model('','','','','','','','','');
+					$clases = new Clases_Grupales_Model('','','','','','','','','','');
 					
 					$apuntados = $clases -> ContarUsuarios();
 					
@@ -325,7 +333,7 @@ if(isset($_SESSION['tipo'])){
 			
 			case 'Confirmar_INSCRIPCION2':
 			
-				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","");
+				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","",'');
 				
 				$mensaje = $clase -> apuntarUsuario();
 				
@@ -408,17 +416,19 @@ if(isset($_SESSION['tipo'])){
 			case 'Confirmar_SHOWCLASE':
 					
 					if($_SESSION['tipo'] == 'ENTRENADOR'){
-						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
+						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','','');
 						$apuntados = $clase -> Apuntados();
-						new Clases_Grupales_SHOWCLASE($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+						$num_sesiones = $clase -> numSesiones() -> fetch_array()[0];
+						echo $num_sesiones;
+						new Clases_Grupales_SHOWCLASE($apuntados,$num_sesiones,'../Controllers/Clases_Grupales_Controller.php');
 					}
 					else if($_SESSION['tipo'] == 'ADMIN'){
-						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
+						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','','');
 						$apuntados = $clase -> Apuntados();
 						new Clases_Grupales_SHOWCLASE_Admin($apuntados,'../Controllers/Clases_Grupales_Controller.php');
 					}
 					if($_SESSION['tipo'] == 'NORMAL'){
-						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
+						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','','');
 						$apuntados = $clase -> Apuntados();
 						new Clases_Grupales_SHOWCLASE_Normal($apuntados,'../Controllers/Clases_Grupales_Controller.php');
 					}
@@ -427,7 +437,7 @@ if(isset($_SESSION['tipo'])){
 			
 			
 			case 'Confirmar_Edit_SHOWCLASE':
-					$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','');
+					$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','','');
 					
 					$asistencia = $clase -> mostrarDia1();
 					$dia = mysqli_fetch_field_direct($asistencia, 2)->name;
@@ -441,7 +451,7 @@ if(isset($_SESSION['tipo'])){
 				default: /*PARA EL SHOWALL */
 				
 				if($_SESSION['tipo'] == 'NORMAL' || $_SESSION['tipo'] == 'ADMIN'){
-					$clases = new Clases_Grupales_Model('','','','','','','','','');
+					$clases = new Clases_Grupales_Model('','','','','','','','','','');
 					
 					$apuntados = $clases -> ContarUsuarios();
 					
@@ -450,7 +460,7 @@ if(isset($_SESSION['tipo'])){
 				}
 				
 				else if($_SESSION['tipo'] == 'ENTRENADOR'){
-					$clases = new Clases_Grupales_Model('','','','','','','','','');
+					$clases = new Clases_Grupales_Model('','','','','','','','','','');
 					
 					$apuntados = $clases -> ContarUsuarios();
 					
