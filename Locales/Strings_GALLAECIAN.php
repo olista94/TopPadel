@@ -309,7 +309,7 @@ array(
 	'Añadir clinic' => 'Engadir clinic',
 	'No hay pista y/o entrenadores disponibles' => 'Non hai pista e/ou adestradores dispoñibles',
 	'Rankings' => 'Rankings',
-	'Ranking' => 'Puntos Ranking',
+	'Ranking' => 'Ranking',
 	'Estadisticas' => 'Estatisticas',
 	'Partidos Jugados' => 'Partidos Xogados',
 	'Partidos Ganados' => 'Partidos Gañados',
@@ -355,10 +355,10 @@ array(
 	'No puedes ver esto si no estás logueado' => 'Non podes ver esto se non estás logueado',
 	'No es tu categoria' => 'Non é a tua categoria',
 	'Si no se cierra la promoción se te devolverá el dinero' => 'Se non se pecha a promoción,devolveranseche os cartos',
-	'No se puede borrar. Hay actividades asociadas a esta pista' => 'Non se pode borrar. Hai actividades asociadas a esta pista',
+	'Sesiones' => 'Sesións',
 	'' => '',
 	'' => '',
-	'' => '',
+	'' => ''
 	
 )
 ;
