@@ -7,11 +7,12 @@ include_once '../Functions/Authentication.php';
 
 	//Variable con el enlace al showall
 	var $apuntados;	
+	var $num_sesiones;	
 	var $enlace;	
 	//Constructor de la clase
-	function __construct($apuntados,$enlace){
-
+	function __construct($apuntados,$num_sesiones,$enlace){
 		$this -> apuntados = $apuntados;
+		$this -> num_sesiones = $num_sesiones;
 		$this -> enlace = $enlace;
 		$this -> mostrar();
 		
@@ -41,16 +42,13 @@ include_once '../Functions/Authentication.php';
 			<tr>
 			
 				<th style="border-left:none;border-top:none;background: #FFF"></th>
-				<th><?php echo $strings['Dia'];echo " 1" ?></th>
-				<th><?php echo $strings['Dia'];echo " 2" ?></th>
-				<th><?php echo $strings['Dia'];echo " 3" ?></th>
-				<th><?php echo $strings['Dia'];echo " 4" ?></th>
-				<th><?php echo $strings['Dia'];echo " 5" ?></th>
-				<th><?php echo $strings['Dia'];echo " 6" ?></th>
-				<th><?php echo $strings['Dia'];echo " 7" ?></th>
-				<th><?php echo $strings['Dia'];echo " 8" ?></th>
-				<th><?php echo $strings['Dia'];echo " 9" ?></th>
-				<th><?php echo $strings['Dia'];echo " 10" ?></th>
+				<?php
+					for ($i=1; $i <= $this->num_sesiones; $i++) { 
+						?>
+						<th><?php echo $strings['Dia'];echo " $i" ?></th>
+						<?php
+					}
+				?>
 			</tr>
 		<?php 
 		//Mientras haya filas en la bd
