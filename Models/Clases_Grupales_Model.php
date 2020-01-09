@@ -507,8 +507,7 @@ function numSesiones()
 			WHERE (`ID_Clase` = '$this->ID_Clase')
 			
 			";
-			echo $sql;
-		
+					
     $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
     
     if ($result)
