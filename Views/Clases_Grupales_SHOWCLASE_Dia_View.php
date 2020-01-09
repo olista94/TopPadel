@@ -6,14 +6,16 @@ include_once '../Functions/Authentication.php';
  class Clases_Grupales_SHOWCLASE_Dia{	 
 
 	//Variable con el enlace al showall
-	var $apuntados;	
+	var $apuntados;		
 	var $dia;	
+	var $num_sesiones;	
 	var $enlace;	
 	//Constructor de la clase
-	function __construct($apuntados,$dia,$enlace){
+	function __construct($apuntados,$dia,$num_sesiones,$enlace){
 
 		$this -> apuntados = $apuntados;
 		$this -> dia = $dia;
+		$this -> num_sesiones = $num_sesiones;
 		$this -> enlace = $enlace;
 		$this -> mostrar();
 		
@@ -42,7 +44,7 @@ include_once '../Functions/Authentication.php';
 					<label style="margin-left: 40%;font-size: 16px;" class="lblSearch" for="action">
 					<?php echo $strings['Dia']; ?>:</label>
 					<select class="slcSearch" name="dia1">
-					<?php for($i = 1; $i < 11; $i++){
+					<?php for($i = 1; $i <= $this->num_sesiones; $i++){
 						?>
 					<option  value="<?php echo 'dia'.$i;?>"><?php echo 'Dia '.$i;?></option>
 						
