@@ -59,7 +59,7 @@ if(isset($_SESSION['tipo'])){
 				
 				$idclase = $_REQUEST['ID_Clase'];
 				
-				$clase = new Clases_Grupales_has_Usuarios_Model("","","","","","","","","","","","","","","");
+				$clase = new Clases_Grupales_has_Usuarios_Model("","","","","","","","","","","","","","","","","");
 				
 				foreach($_REQUEST as $i => $dato){
 					if($i != "dia1" && $i != 'action' && $i != 'ID_Clase'){
@@ -78,30 +78,32 @@ if(isset($_SESSION['tipo'])){
 			switch ($_REQUEST['action']){
 			
 			case 'Ver_Dia':
-					$clase = new Clases_Grupales_has_Usuarios_Model($_REQUEST['ID_Clase'],"","","","","","","","","","","","","","");
+					$clase = new Clases_Grupales_has_Usuarios_Model($_REQUEST['ID_Clase'],"","","","","","","","","","","","","","","","");
 					
 					$dia1 = $_REQUEST['dia1'];
 					$asistencia = $clase -> mostrarDia($dia1);
 					
 					$dia = mysqli_fetch_field_direct($asistencia, 2)->name;
 					
+					$clase2 = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","","");
+					$num_sesiones = $clase2 -> numSesiones() -> fetch_array()[0];
 					
-					new Clases_Grupales_SHOWCLASE_Dia($asistencia,$dia,'../Controllers/Clases_Grupales_Controller.php');
+					new Clases_Grupales_SHOWCLASE_Dia($asistencia,$dia,$num_sesiones,'../Controllers/Clases_Grupales_Controller.php');
 			break;
 			
 			case 'Guardar_Asistencia':
-					$clase = new Clases_Grupales_has_Usuarios_Model("","","","","","","","","","","","","","","");
+					$clase = new Clases_Grupales_has_Usuarios_Model("","","","","","","","","","","","","","","","","");
 					$clase = getDataForm(); 
 					
-					$clase = new Clases_Grupales_has_Usuarios_Model($_REQUEST['ID_Clase'],"","","","","","","","","","","","","","");
+					$clase = new Clases_Grupales_has_Usuarios_Model($_REQUEST['ID_Clase'],"","","","","","","","","","","","","","","","");
 					$apuntados = $clase -> Apuntados();
 					
-					$clase2 = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","");
+					$clase2 = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","","");
 					$tipo = $clase2 -> devolverTipo();
-					
+					$num_sesiones = $clase2 -> numSesiones() -> fetch_array()[0];
 					if($tipo == 'ESCUELAS'){
 						
-						new Clases_Grupales_SHOWCLASE($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+						new Clases_Grupales_SHOWCLASE($apuntados,$num_sesiones,'../Controllers/Clases_Grupales_Controller.php');
 					}
 					else{
 						

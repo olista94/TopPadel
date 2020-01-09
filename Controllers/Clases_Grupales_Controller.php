@@ -419,7 +419,6 @@ if(isset($_SESSION['tipo'])){
 						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','','');
 						$apuntados = $clase -> Apuntados();
 						$num_sesiones = $clase -> numSesiones() -> fetch_array()[0];
-						echo $num_sesiones;
 						new Clases_Grupales_SHOWCLASE($apuntados,$num_sesiones,'../Controllers/Clases_Grupales_Controller.php');
 					}
 					else if($_SESSION['tipo'] == 'ADMIN'){
@@ -430,7 +429,8 @@ if(isset($_SESSION['tipo'])){
 					if($_SESSION['tipo'] == 'NORMAL'){
 						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','','');
 						$apuntados = $clase -> Apuntados();
-						new Clases_Grupales_SHOWCLASE_Normal($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+						$num_sesiones = $clase -> numSesiones() -> fetch_array()[0];
+						new Clases_Grupales_SHOWCLASE_Normal($apuntados,$num_sesiones,'../Controllers/Clases_Grupales_Controller.php');
 					}
 					
 			break;
@@ -442,7 +442,9 @@ if(isset($_SESSION['tipo'])){
 					$asistencia = $clase -> mostrarDia1();
 					$dia = mysqli_fetch_field_direct($asistencia, 2)->name;
 					
-					new Clases_Grupales_SHOWCLASE_Dia($asistencia,$dia,'../Controllers/Clases_Grupales_Controller.php');
+					$num_sesiones = $clase -> numSesiones() -> fetch_array()[0];
+					
+					new Clases_Grupales_SHOWCLASE_Dia($asistencia,$dia,$num_sesiones,'../Controllers/Clases_Grupales_Controller.php');
 					
 			break;
 
