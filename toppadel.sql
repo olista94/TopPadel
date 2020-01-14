@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-01-2020 a las 14:33:13
+-- Tiempo de generación: 14-01-2020 a las 01:05:51
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.1.32
 
@@ -21,10 +21,12 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `toppadel`
 --
+
 DROP SCHEMA IF EXISTS `toppadel`;
 
 CREATE DATABASE IF NOT EXISTS `toppadel` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `toppadel`;
+
 -- --------------------------------------------------------
 
 --
@@ -38,9 +40,7 @@ CREATE TABLE `clases_grupales` (
   `tipo` enum('ESCUELAS','CLINICS') NOT NULL,
   `descripcion` varchar(128) NOT NULL,
   `invitado` varchar(50) NOT NULL,
-  `fecha_clase` date NOT NULL,
-  `hora_clase` time NOT NULL,
-  `ID_Pista` int(5) NOT NULL,
+  `fecha_limite` date NOT NULL,
   `sesiones` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -48,9 +48,74 @@ CREATE TABLE `clases_grupales` (
 -- Volcado de datos para la tabla `clases_grupales`
 --
 
-INSERT INTO `clases_grupales` (`ID_Clase`, `login_entrenador`, `tope`, `tipo`, `descripcion`, `invitado`, `fecha_clase`, `hora_clase`, `ID_Pista`, `sesiones`) VALUES
-(51, 'guardiola', 7, 'CLINICS', 'Prueba', 'Miguel Angel', '2020-01-08', '21:30:00', 8, 0),
-(52, 'guardiola', 10, 'ESCUELAS', 'sad', '', '2020-01-16', '21:30:00', 1, 6);
+INSERT INTO `clases_grupales` (`ID_Clase`, `login_entrenador`, `tope`, `tipo`, `descripcion`, `invitado`, `fecha_limite`, `sesiones`) VALUES
+(3, 'sisu', 15, 'ESCUELAS', 'asdfgh', '', '2020-01-20', 6),
+(11, 'guardiola', 10, 'ESCUELAS', 'Coach', '', '2020-01-21', 9),
+(12, 'guardiola', 5, 'ESCUELAS', 'cdwcwdc', '', '2020-01-22', 7),
+(13, 'isabel', 5, 'ESCUELAS', 'dwcvwfcwe', '', '2020-01-22', 11),
+(14, 'simeone', 5, 'ESCUELAS', 'MMMM', '', '2020-02-01', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clases_grupales_has_sesiones`
+--
+
+CREATE TABLE `clases_grupales_has_sesiones` (
+  `ID_Clase` int(5) NOT NULL,
+  `fecha_clase` date NOT NULL,
+  `hora_clase` time NOT NULL,
+  `ID_Pista` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `clases_grupales_has_sesiones`
+--
+
+INSERT INTO `clases_grupales_has_sesiones` (`ID_Clase`, `fecha_clase`, `hora_clase`, `ID_Pista`) VALUES
+(3, '2020-01-27', '08:00:00', 1),
+(3, '2020-02-03', '08:00:00', 1),
+(3, '2020-02-10', '08:00:00', 1),
+(3, '2020-02-17', '08:00:00', 1),
+(3, '2020-02-24', '08:00:00', 1),
+(3, '2020-03-02', '08:00:00', 2),
+(11, '2020-01-28', '17:00:00', 1),
+(11, '2020-02-04', '17:00:00', 1),
+(11, '2020-02-11', '17:00:00', 1),
+(11, '2020-02-18', '17:00:00', 1),
+(11, '2020-02-25', '17:00:00', 1),
+(11, '2020-03-03', '17:00:00', 1),
+(11, '2020-03-10', '17:00:00', 1),
+(11, '2020-03-17', '17:00:00', 1),
+(11, '2020-03-24', '17:00:00', 1),
+(12, '2020-01-29', '08:00:00', 1),
+(12, '2020-02-05', '08:00:00', 1),
+(12, '2020-02-12', '08:00:00', 1),
+(12, '2020-02-19', '08:00:00', 1),
+(12, '2020-02-26', '08:00:00', 1),
+(12, '2020-03-04', '08:00:00', 1),
+(12, '2020-03-11', '08:00:00', 1),
+(13, '2020-01-29', '20:00:00', 1),
+(13, '2020-02-05', '20:00:00', 1),
+(13, '2020-02-12', '20:00:00', 1),
+(13, '2020-02-19', '20:00:00', 1),
+(13, '2020-02-26', '20:00:00', 1),
+(13, '2020-03-04', '20:00:00', 1),
+(13, '2020-03-11', '20:00:00', 1),
+(13, '2020-03-18', '20:00:00', 1),
+(13, '2020-03-25', '20:00:00', 1),
+(13, '2020-04-01', '20:00:00', 1),
+(13, '2020-04-08', '20:00:00', 1),
+(14, '2020-02-08', '20:00:00', 1),
+(14, '2020-02-15', '20:00:00', 1),
+(14, '2020-02-22', '20:00:00', 1),
+(14, '2020-02-29', '20:00:00', 1),
+(14, '2020-03-07', '20:00:00', 1),
+(14, '2020-03-14', '20:00:00', 1),
+(14, '2020-03-21', '20:00:00', 1),
+(14, '2020-03-28', '20:00:00', 1),
+(14, '2020-04-04', '20:00:00', 1),
+(14, '2020-04-11', '20:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -83,16 +148,9 @@ CREATE TABLE `clases_grupales_has_usuarios` (
 --
 
 INSERT INTO `clases_grupales_has_usuarios` (`ID_Clase`, `login_usuario`, `dia1`, `dia2`, `dia3`, `dia4`, `dia5`, `dia6`, `dia7`, `dia8`, `dia9`, `dia10`, `dia11`, `dia12`, `pago`, `CCV`, `num_tarjeta`) VALUES
-(52, 'adrianblanco', 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
-(52, 'anabarreiro', 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Tarjeta', 567, '1234567890123456'),
-(52, 'fabioroson', 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
-(52, 'guillermomtnez', 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
-(52, 'linogonzalez', 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
-(52, 'olista', 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Contrareembolso', NULL, NULL),
-(52, 'ritaconde', 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
-(52, 'rosinafdez', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
-(52, 'taniafernandez', 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 'Tarjeta', 567, '1234567890098765'),
-(52, 'ypgarcia', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL);
+(3, 'adrianblanco', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Contrareembolso', NULL, NULL),
+(3, 'olista', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
+(3, 'ypgarcia', 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1006,6 +1064,24 @@ CREATE TABLE `reservas` (
   `num_tarjeta` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `reservas`
+--
+
+INSERT INTO `reservas` (`usuarios_login`, `pista_ID_Pista`, `fecha_reserva`, `hora_inicio`, `pago`, `CCV`, `num_tarjeta`) VALUES
+('admin', 1, '2020-01-20', '08:00:00', 'Paypal', NULL, NULL),
+('admin', 2, '2020-01-20', '08:00:00', 'Paypal', NULL, NULL),
+('admin', 5, '2020-01-20', '08:00:00', 'Paypal', NULL, NULL),
+('admin', 6, '2020-01-20', '08:00:00', 'Paypal', NULL, NULL),
+('admin', 7, '2020-01-20', '08:00:00', 'Paypal', NULL, NULL),
+('admin', 8, '2020-01-20', '08:00:00', 'Paypal', NULL, NULL),
+('olista', 1, '2020-03-02', '08:00:00', 'Contrareembolso', NULL, NULL),
+('ypgarcia', 1, '2020-01-20', '09:30:00', 'Paypal', NULL, NULL),
+('ypgarcia', 2, '2020-01-20', '09:30:00', 'Paypal', NULL, NULL),
+('ypgarcia', 5, '2020-01-20', '09:30:00', 'Contrareembolso', NULL, NULL),
+('ypgarcia', 6, '2020-01-20', '09:30:00', 'Paypal', NULL, NULL),
+('ypgarcia', 7, '2020-01-20', '09:30:00', 'Paypal', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -1166,6 +1242,12 @@ ALTER TABLE `clases_grupales`
   ADD PRIMARY KEY (`ID_Clase`);
 
 --
+-- Indices de la tabla `clases_grupales_has_sesiones`
+--
+ALTER TABLE `clases_grupales_has_sesiones`
+  ADD PRIMARY KEY (`ID_Clase`,`fecha_clase`);
+
+--
 -- Indices de la tabla `clases_grupales_has_usuarios`
 --
 ALTER TABLE `clases_grupales_has_usuarios`
@@ -1264,7 +1346,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clases_grupales`
 --
 ALTER TABLE `clases_grupales`
-  MODIFY `ID_Clase` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `ID_Clase` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `clases_particulares`
