@@ -16,8 +16,10 @@
 |	USUARIO		|	PASSWORD	|	TIPO		|
 |-----------------------|-----------------------|-----------------------|
 |	admin           |	admin		| 	Administrador 	|						
-|	alfonsoroman	|	alfonsoroman	|	Normal          |
-|	josedacal	|	josedacal	|	Normal          |
-|	celiarodriguez	|	celiarodriguez	|	Normal          |
-|	pazbalboa	|	pazbalboa	|	Normal          |
+|	alfonsoroman	|	alfonsoroman	|	Deportista      |
+|	josedacal	|	josedacal	|	Deportista      |
+|	celiarodriguez	|	celiarodriguez	|	Deportista      |
+|	pazbalboa	|	pazbalboa	|	Deportista      |
+|	guardiola	|	guardiola	|	Entrenador	|
+|	isabel		|	isabel		|	Entrenador	|
 -------------------------------------------------------------------------
