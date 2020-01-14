@@ -604,9 +604,9 @@ function insertarPistaParaSesion($pista,$semana,$idclase){
 	
 	function showSesion(){
 			//Sentencia sql que insetara la categoria
-		$sql = "SELECT *
-			FROM clases_grupales_has_sesiones
-			WHERE (`ID_Clase` = '$this->ID_Clase')
+		$sql = "SELECT c.*,p.Nombre_Pista
+			FROM clases_grupales_has_sesiones c, pista p
+			WHERE (`ID_Clase` = '$this->ID_Clase') and p.ID_Pista = c.ID_Pista
 			";
 			
 			//Si ya se han insertado la PK o FK
