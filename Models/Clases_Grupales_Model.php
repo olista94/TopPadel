@@ -8,23 +8,19 @@ class Clases_Grupales_Model {
 	var $tipo;
 	var $descripcion;
 	var $invitado;
-	var $fecha_clase;
-	var $hora_clase;
-	var $ID_Pista;
+	var $fecha_limite;
 	var $sesiones;
 
 
 //Constructor de la clase
-function __construct($ID_Clase,$login_entrenador,$tope,$tipo,$descripcion,$invitado,$fecha_clase,$hora_clase,$ID_Pista,$sesiones){
+function __construct($ID_Clase,$login_entrenador,$tope,$tipo,$descripcion,$invitado,$fecha_limite,$sesiones){
 	$this->ID_Clase = $ID_Clase;
 	$this->login_entrenador = $login_entrenador;
 	$this->tope = $tope;
 	$this->tipo = $tipo;
 	$this->descripcion = $descripcion;
 	$this->invitado = $invitado;
-	$this->fecha_clase = $fecha_clase;
-	$this->hora_clase = $hora_clase;
-	$this->ID_Pista = $ID_Pista;
+	$this->fecha_limite = $fecha_limite;
 	$this->sesiones = $sesiones;
 
 	//Incluimos el archivo de acceso a la bd
@@ -45,9 +41,7 @@ function addGrupal(){
 				'ESCUELAS',
 				'$this->descripcion',
 				'$this->invitado',
-				'$this->fecha_clase',
-				'$this->hora_clase',
-				'$this->ID_Pista',
+				'$this->fecha_limite',
 				'$this->sesiones'
 				
 				)
@@ -83,7 +77,7 @@ function puedeApuntarseFecha()
    
 		$fecha = date('Y-m-d', time());
     	//Sentencia sql para borrar
-        $sql = "SELECT * FROM clases_grupales WHERE (`fecha_clase` < '$fecha' AND ID_Clase = '$this->ID_Clase'
+        $sql = "SELECT * FROM clases_grupales WHERE (`fecha_limite` < '$fecha' AND ID_Clase = '$this->ID_Clase'
 										)";
         
         $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
@@ -106,10 +100,8 @@ function searchAdminNormal(){
     			WHERE
     				( 
 					(`login_entrenador` LIKE '%$this->login_entrenador%') &&
-					(`fecha_clase` LIKE '%$this->fecha_clase%') &&
-					(`hora_clase` LIKE '%$this->hora_clase%') &&
+					(`fecha_limite` LIKE '%$this->fecha_limite%') &&
 					(`tope` LIKE '%$this->tope%') &&
-					(`ID_Pista` LIKE '%$this->ID_Pista%') &&
 					(`tipo` LIKE 'ESCUELAS')					
     				)";
 				
@@ -132,14 +124,12 @@ function searchEntrenador(){
     			WHERE
     				( 
 					(`login_entrenador` LIKE '".$_SESSION['login']."') &&
-					(`fecha_clase` LIKE '%$this->fecha_clase%') &&
-					(`hora_clase` LIKE '%$this->hora_clase%') &&
+					(`fecha_limite` LIKE '%$this->fecha_limite%') &&
 					(`tope` LIKE '%$this->tope%') &&
-					(`ID_Pista` LIKE '%$this->ID_Pista%') &&
 					(`tipo` LIKE 'ESCUELAS')
 					
     				)";
-				
+
 
     if (!($resultado = $this->mysqli->query($sql))){
 		return 'Error en la búsqueda';//Devuelve mensaje de error	
@@ -177,7 +167,7 @@ function BuscarHorasOcupadas(){
 
 	 $sql = "SELECT `hora_clase`,COUNT(*) AS Num_Reservas
 			FROM clases_grupales cp,pista p
-			WHERE `fecha_clase` = '$this->fecha_clase' and p.ID_Pista = cp.ID_Pista GROUP BY `hora_clase` HAVING COUNT(*) >= (SELECT COUNT(ID_Pista) FROM pista)
+			WHERE `fecha_limite` = '$this->fecha_limite' and p.ID_Pista = cp.ID_Pista GROUP BY `hora_clase` HAVING COUNT(*) >= (SELECT COUNT(ID_Pista) FROM pista)
 			";
 
 
@@ -197,11 +187,11 @@ function pistasLibres(){
 			FROM pista
 			WHERE `ID_Pista` NOT IN 
 						(SELECT p.`ID_Pista` FROM clases_grupales cp,pista p 
-						WHERE `fecha_clase` = '$this->fecha_clase' AND `hora_clase` = '$this->hora_clase' AND cp.`ID_Pista` = p.`ID_Pista`)
+						WHERE `fecha_limite` = '$this->fecha_limite' AND `hora_clase` = '$this->hora_clase' AND cp.`ID_Pista` = p.`ID_Pista`)
 						(SELECT p.`ID_Pista` FROM clases_particulares cp,pista p 
-						WHERE `fecha_clase` = '$this->fecha_clase' AND `hora_clase` = '$this->hora_clase' AND cp.`ID_Pista` = p.`ID_Pista`)
-						AND ID_Pista NOT IN (SELECT pista_ID_Pista from reservas where fecha_reserva = '$this->fecha_clase' AND hora_inicio = '$this->hora_clase')
-						AND ID_Pista NOT IN (SELECT pista_ID_Pista from promociones where fecha = '$this->fecha_clase' AND hora_inicio = '$this->hora_clase' AND cerrada = 'SI')
+						WHERE `fecha_limite` = '$this->fecha_limite' AND `hora_clase` = '$this->hora_clase' AND cp.`ID_Pista` = p.`ID_Pista`)
+						AND ID_Pista NOT IN (SELECT pista_ID_Pista from reservas where fecha_reserva = '$this->fecha_limite' AND hora_inicio = '$this->hora_clase')
+						AND ID_Pista NOT IN (SELECT pista_ID_Pista from promociones where fecha = '$this->fecha_limite' AND hora_inicio = '$this->hora_clase' AND cerrada = 'SI')
 						LIMIT 1
 						";
 
@@ -218,7 +208,7 @@ function pistasLibres(){
 function buscarEntrenador(){
 
 	 $sql = "SELECT login FROM usuarios WHERE (`tipo` = 'ENTRENADOR') AND 
-	 login not in (SELECT login_entrenador from clases_grupales where `fecha_clase` = '$this->fecha_clase' AND `hora_clase` )";
+	 login not in (SELECT login_entrenador from clases_grupales where `fecha_limite` = '$this->fecha_limite' AND `hora_clase` )";
     $result = $this->mysqli->query($sql);//Guarda el resultado
     
     if (!($resultado = $this->mysqli->query($sql))){
@@ -365,9 +355,9 @@ function buscarPistasLibresClases(){
 			//Sentencia sql que insetara la categoria
 		$sql = "SELECT ID_Pista FROM `pista`
 				WHERE ID_Pista not in
-				(SELECT pista_ID_Pista from reservas where fecha_reserva = '".$this->fecha_clase."' AND hora_inicio = '".$this->hora_clase."')
-				AND ID_Pista not in (SELECT pista_ID_Pista from promociones where fecha = '".$this->fecha_clase."' AND hora_inicio = '".$this->hora_clase."' AND cerrada = 'SI') AND
-				ID_Pista not in (SELECT ID_Pista from clases_grupales where fecha_clase = '".$this->fecha_clase."' AND hora_clase = '".$this->hora_clase."')
+				(SELECT pista_ID_Pista from reservas where fecha_reserva = '".$this->fecha_limite."' AND hora_inicio = '".$this->hora_clase."')
+				AND ID_Pista not in (SELECT pista_ID_Pista from promociones where fecha = '".$this->fecha_limite."' AND hora_inicio = '".$this->hora_clase."' AND cerrada = 'SI') AND
+				ID_Pista not in (SELECT ID_Pista from clases_grupales where fecha_limite = '".$this->fecha_limite."' AND hora_clase = '".$this->hora_clase."')
 				LIMIT 1
 				
 				";
@@ -384,15 +374,19 @@ function buscarPistasLibresClases(){
 		}		
 	}
 	
-	function buscarEntrenadoresLibresClases(){
+	function buscarEntrenadoresLibresClases($idclase,$fecha,$hora){
 			//Sentencia sql que insetara la categoria
 		$sql = "SELECT login FROM `usuarios`
-				WHERE tipo = 'ENTRENADOR' AND login not in
-				(SELECT login_entrenador from clases_particulares where fecha_clase = '".$this->fecha_clase."' AND hora_clase = '".$this->hora_clase."')
-				AND login not in (SELECT login_entrenador from clases_grupales where fecha_clase = '".$this->fecha_clase."' AND hora_clase = '".$this->hora_clase."')
+				WHERE tipo = 'ENTRENADOR'
+				AND login not in
+				(SELECT login_entrenador from clases_particulares where fecha_clase = '".$fecha."' AND hora_clase = '".$hora."')
+				AND login not in 
+				(SELECT login_entrenador from clases_grupales where fecha_limite = '".$fecha."')
+				ORDER BY RAND()
 				LIMIT 1
 				
 				";
+				echo $sql;
 			$result = $this->mysqli->query($sql); 
 			//Si ya se han insertado la PK o FK
 		if (!$result) {
@@ -405,10 +399,9 @@ function buscarPistasLibresClases(){
 		}		
 	}
 	
-	function insertarPistayEntrenador($pista,$entrenador,$idclase){
+	function insertarEntrenador($entrenador,$idclase){
 			//Sentencia sql que insetara la categoria
 		$sql = "UPDATE clases_grupales SET
-			`ID_Pista` = '".$pista."',
 			`login_entrenador` = '".$entrenador."'
 			
 			WHERE (`ID_Clase` = '".$idclase."')";
@@ -518,6 +511,112 @@ function numSesiones()
     else
         return 'No existe';//Devuelve mensaje de error
 }
+
+function addFechaSesion($idclase,$fecha_limite,$hora_clase){
+
+		//Sentencia sql para insertar	
+		$sql = "INSERT INTO clases_grupales_has_sesiones (ID_Clase,fecha_clase,hora_clase)
+			VALUES (
+				'".$idclase."',
+				'".$fecha_limite."',
+				'".$hora_clase."'				
+				)
+				";
+				
+
+		if (!$this->mysqli->query($sql)) {
+			
+			return 'Error al insertar';//Devuelve mensaje de error	
+		}
+		else{
+			
+			return  'Insercion correcta'; //operacion de insertado correcta
+		}		
+	}
+	
+	function buscarPistaParaSesions($fecha_clase,$hora_clase){
+
+	 $sql = "SELECT `ID_Pista`,`Nombre_Pista`
+			FROM pista
+			WHERE `ID_Pista` NOT IN 
+						(SELECT p.`ID_Pista` FROM clases_grupales_has_sesiones cp,pista p 
+						WHERE `fecha_clase` = '".$fecha_clase."' AND `hora_clase` = '".$hora_clase."' AND cp.`ID_Pista` = p.`ID_Pista`)
+						AND ID_Pista NOT IN
+						(SELECT p.`ID_Pista` FROM clases_particulares cp,pista p 
+						WHERE `fecha_clase` = '".$fecha_clase."' AND `hora_clase` = '".$hora_clase."' AND cp.`ID_Pista` = p.`ID_Pista`)
+						AND ID_Pista NOT IN
+						(SELECT pista_ID_Pista from reservas where fecha_reserva = '".$fecha_clase."' AND hora_inicio = '".$hora_clase."')
+						AND ID_Pista NOT IN 
+						(SELECT pista_ID_Pista from promociones where fecha = '".$fecha_clase."' AND hora_inicio = '".$hora_clase."' AND cerrada = 'SI')
+						LIMIT 1
+						";
+						
+
+	$resultado = $this->mysqli->query($sql);
+	
+	if (!$resultado) { 
+		return 'No hay pistas este dia';//Devuelve mensaje de error
+	}
+	else{ 
+		return $resultado; //Devuelve mensaje de exito	
+	}
+}
+
+function buscarEntrenadoresParaSesion($fecha_clase,$hora_clase){
+			//Sentencia sql que insetara la categoria
+		$sql = "SELECT login FROM `usuarios`
+				WHERE tipo = 'ENTRENADOR' AND login not in
+				(SELECT login_entrenador from clases_particulares where fecha_clase = '".$fecha_clase."' AND hora_clase = '".$hora_clase."')
+				AND login not in (SELECT login_entrenador from clases_grupales_has_sesiones where fecha_limite = '".$fecha_clase."' AND hora_clase = '".$hora_clase."')
+				";
+			$result = $this->mysqli->query($sql); 
+			//Si ya se han insertado la PK o FK
+		if (!$result) {
+			
+			return 'No hay pistas disponibles';
+		}
+		//operacion de insertado correcta
+		else{
+			return  $result; 
+		}		
+	}
+
+function insertarPistaParaSesion($pista,$semana,$idclase){
+			//Sentencia sql que insetara la categoria
+		$sql = "UPDATE clases_grupales_has_sesiones SET
+			`ID_Pista` = '".$pista."'
+			
+			WHERE (`ID_Clase` = '".$idclase."' AND `fecha_clase` = '".$semana."')";
+			
+			//Si ya se han insertado la PK o FK
+		if (!$this->mysqli->query($sql)) {
+			
+			return 'Error al insertar';
+		}
+		//operacion de insertado correcta
+		else{
+			return  'Insercion correcta'; 
+		}		
+	}
+	
+	function showSesion(){
+			//Sentencia sql que insetara la categoria
+		$sql = "SELECT *
+			FROM clases_grupales_has_sesiones
+			WHERE (`ID_Clase` = '$this->ID_Clase')
+			";
+			
+			//Si ya se han insertado la PK o FK
+		if (!($resultado = $this->mysqli->query($sql))){
+		return 'Error en la búsqueda';//Devuelve mensaje de error	
+		
+	}
+    else{ 
+		return $resultado;//Se devuelve el resultado de la consulta
+	}		
+	}
+	
+	
 
 
 }//fin de clase
