@@ -101,9 +101,10 @@ if(isset($_SESSION['tipo'])){
 					$clase2 = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","","");
 					$tipo = $clase2 -> devolverTipo();
 					$num_sesiones = $clase2 -> numSesiones() -> fetch_array()[0];
+					$datos = $clase2 -> showSesion();
 					if($tipo == 'ESCUELAS'){
 						
-						new Clases_Grupales_SHOWCLASE($apuntados,$num_sesiones,'../Controllers/Clases_Grupales_Controller.php');
+						new Clases_Grupales_SHOWCLASE($apuntados,$num_sesiones,$datos,'../Controllers/Clases_Grupales_Controller.php');
 					}
 					else{
 						

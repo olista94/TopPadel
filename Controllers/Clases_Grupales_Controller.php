@@ -96,28 +96,12 @@ if(isset($_SESSION['tipo'])){
 				$invitado = "";
 			}
 			
-			if(isset($_REQUEST['fecha_clase'])){
-				$fecha_clase = $_REQUEST['fecha_clase'];//Identificador de la Inscripcion
+			if(isset($_REQUEST['fecha_limite'])){
+				$fecha_limite = $_REQUEST['fecha_limite'];//Identificador de la Inscripcion
 				
 			}
 			else{
-				$fecha_clase = "";
-			}
-			
-			if(isset($_REQUEST['hora_clase'])){
-				$hora_clase = $_REQUEST['hora_clase'];//Identificador de la Inscripcion
-				
-			}
-			else{
-				$hora_clase = "";
-			}
-			
-			if(isset($_REQUEST['ID_Pista'])){
-				$ID_Pista = $_REQUEST['ID_Pista'];//Identificador de la Inscripcion
-				
-			}
-			else{
-				$ID_Pista = "";
+				$fecha_limite = "";
 			}
 
 			if(isset($_REQUEST['sesiones'])){
@@ -152,7 +136,7 @@ if(isset($_SESSION['tipo'])){
 				$num_tarjeta = "";
 			}
 				
-				$clases_grupales = new Clases_Grupales_Model ($ID_Clase,$login_entrenador,$tope,$tipo,$descripcion,$invitado,$fecha_clase,$hora_clase,$ID_Pista,$sesiones); //creamos el objeto usuario
+				$clases_grupales = new Clases_Grupales_Model ($ID_Clase,$login_entrenador,$tope,$tipo,$descripcion,$invitado,$fecha_limite,$sesiones); //creamos el objeto usuario
 				
 				return $clases_grupales; //devolvemos el objeto usuario
 			}
@@ -175,23 +159,46 @@ if(isset($_SESSION['tipo'])){
 					
 					$clase = getDataForm();
 					
-					$pista = $clase -> buscarPistasLibresClases();
-					$entrenador = $clase -> buscarEntrenadoresLibresClases();
+					
+					//$pista = $clase -> buscarPistasLibresClases();
 					
 					
-					if(!is_string($entrenador) || !is_numeric($pista)){
+					
+					/* if(!is_string($entrenador) || !is_numeric($pista)){
 						new MESSAGE('No hay pista y/o entrenadores disponibles','../Controllers/Clases_Grupales_Controller.php');
-					}else{
+					}else{ */
 						
 						$mensaje = $clase -> addGrupal();
 						$idclase = $clase -> DevolverMaxIDClase();
 						
-						$clase -> insertarPistayEntrenador($pista,$entrenador,$idclase);
+						$limite = $_REQUEST['fecha_limite'];
+						$hora = $_REQUEST['hora_clase'];
+						
+						$entrenador = $clase -> buscarEntrenadoresLibresClases($idclase,$limite,$hora);
+						
+						//$hoy = date('Y-m-d');
+					$date=date_create($limite);
+					
+					//$num_sesiones = $clase -> numSesiones() -> fetch_array()[0];
+					
+					
+					for($i = 1; $i <= $_REQUEST['sesiones']; $i++){
+						$j = $i * 7;
+						echo " ".$j." ";
+						date_add($date,date_interval_create_from_date_string("$j days"));
+						$semana = date_format($date,"Y-m-d");
+						echo $semana." ";
+						
+						$clase -> addFechaSesion($idclase,$semana,$_REQUEST['hora_clase']);
+						$pista = $clase -> buscarPistaParaSesions($semana,$_REQUEST['hora_clase']) -> fetch_array()[0];
+						$clase -> insertarPistaParaSesion($pista,$semana,$idclase);
+						$date=date_create($limite);
+					}
+						
+						$clase -> insertarEntrenador($entrenador,$idclase);
 						
 						new MESSAGE($mensaje,'../Controllers/Clases_Grupales_Controller.php');
-					
-					}
-				
+
 			break;
 			
 			
@@ -203,12 +210,12 @@ if(isset($_SESSION['tipo'])){
 				$datos = $clase -> rellenadatos();
 				$array = $datos -> fetch_array();
 				
-				$pistas = new Pistas_Model($array['ID_Pista'],"","","");
-				$p = $pistas -> searchById();
+				//$pistas = new Pistas_Model($array['ID_Pista'],"","","");
+				//$p = $pistas -> searchById();
 				
 				$datos = $clase -> rellenadatos();
 				
-				new Clases_Grupales_DELETE($datos,$p,'../Controllers/Clases_Grupales_Controller.php');
+				new Clases_Grupales_DELETE($datos,'../Controllers/Clases_Grupales_Controller.php');
 			
 			break;
 			
@@ -229,12 +236,12 @@ if(isset($_SESSION['tipo'])){
 				$datos = $clase -> rellenadatos();
 				$array = $datos -> fetch_array();
 				
-				$pistas = new Pistas_Model($array['ID_Pista'],"","","");
-				$p = $pistas -> searchById();
+				//$pistas = new Pistas_Model($array['ID_Pista'],"","","");
+				//$p = $pistas -> searchById();
 				
 				$datos = $clase -> rellenadatos();
 				
-				new Clases_Grupales_SHOWCURRENT($datos,$p,'../Controllers/Clases_Grupales_Controller.php');
+				new Clases_Grupales_SHOWCURRENT($datos,'../Controllers/Clases_Grupales_Controller.php');
 			
 			break;
 			
@@ -276,12 +283,12 @@ if(isset($_SESSION['tipo'])){
 							$datos = $clase -> rellenadatos();
 							$array = $datos -> fetch_array();
 				
-							$pistas = new Pistas_Model($array['ID_Pista'],"","","");
-							$p = $pistas -> searchById();
+							/* $pistas = new Pistas_Model($array['ID_Pista'],"","","");
+							$p = $pistas -> searchById(); */
 				
 							$datos = $clase -> rellenadatos();
 							
-							new Clases_Grupales_INSCRIPCION($datos,$p,'../Controllers/Clases_Grupales_Controller.php');
+							new Clases_Grupales_INSCRIPCION($datos,'../Controllers/Clases_Grupales_Controller.php');
 						}
 					}
 					else{
@@ -419,18 +426,23 @@ if(isset($_SESSION['tipo'])){
 						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','','');
 						$apuntados = $clase -> Apuntados();
 						$num_sesiones = $clase -> numSesiones() -> fetch_array()[0];
-						new Clases_Grupales_SHOWCLASE($apuntados,$num_sesiones,'../Controllers/Clases_Grupales_Controller.php');
+						
+						$datos = $clase -> showSesion();
+						new Clases_Grupales_SHOWCLASE($apuntados,$num_sesiones,$datos,'../Controllers/Clases_Grupales_Controller.php');
 					}
 					else if($_SESSION['tipo'] == 'ADMIN'){
 						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','','');
 						$apuntados = $clase -> Apuntados();
+						
 						new Clases_Grupales_SHOWCLASE_Admin($apuntados,'../Controllers/Clases_Grupales_Controller.php');
 					}
 					if($_SESSION['tipo'] == 'NORMAL'){
 						$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],'','','','','','','','','');
 						$apuntados = $clase -> Apuntados();
 						$num_sesiones = $clase -> numSesiones() -> fetch_array()[0];
-						new Clases_Grupales_SHOWCLASE_Normal($apuntados,$num_sesiones,'../Controllers/Clases_Grupales_Controller.php');
+						
+						$datos = $clase -> showSesion();
+						new Clases_Grupales_SHOWCLASE_Normal($apuntados,$num_sesiones,$datos,'../Controllers/Clases_Grupales_Controller.php');
 					}
 					
 			break;

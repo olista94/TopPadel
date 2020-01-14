@@ -83,22 +83,8 @@ if (!IsAuthenticated()){ //si no está autenticado
 		case 'Confirmar_ADD1':
 				$reserva = new Reservas_Model("","",'','','','','');
 				$numReservas = $reserva->contarReservasUsuario()->fetch_array()[1];
-
-				if($numReservas >= 5){
-					
-					if($_SESSION['tipo']=='ADMIN'){		   
-					$reserva = new Reservas_Model('','','','','','','');//Creamos un objeto reserva
-					$reserva -> borrarAntiguas();
-					$pistas = new Pistas_Model("","","",""); //Construye el objeto pistas llamando al modelo
-					$p = $pistas -> search(); //Busca las pistas
-					       
-					$datos = $reserva -> ReservasShowAll();//Recuperamos todas las reservas y las guardamos en datos						
-					
-					
-					//Creamos una vista de todas las reservas completas con los datos
-					$respuesta = new Reservas_SHOWALL($datos,$p,'../Controllers/Reservas_Controller.php');	
-				//Si es usuario normal
-				}else{
+				
+				if($numReservas >= 5 && $_SESSION['tipo'] == 'NORMAL'){
 					
 					$reserva = new Reservas_Model('','','','','','','');//Creamos un objeto reserva
 					$reserva -> borrarAntiguas();
@@ -111,8 +97,6 @@ if (!IsAuthenticated()){ //si no está autenticado
 					
 					//Creamos una vista de todas las reservas completas con los datos
 					$respuesta = new Reservas_SHOWALL($datos,$p,'../Controllers/Reservas_Controller.php');
-				}
-					//new MESSAGE('No puedes tener mas de 5 reservas activas a la vez','../Controllers/Reservas_Controller.php');
 					new ALERT('No puedes tener mas de 5 reservas activas a la vez');
 				}
 				else{
