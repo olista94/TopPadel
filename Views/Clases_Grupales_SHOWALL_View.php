@@ -67,7 +67,7 @@ if ($_SESSION['tipo'] == "NORMAL"){
 					<!--Datos-->
 					<td><button title =	"<?php echo $strings['Pulsa para controlar asistencia']; ?>" 
 						class="tarea" name="action" value="Confirmar_SHOWCLASE"><?php echo $fila['descripcion']; ?></button></td>
-					<td><?php echo $fila['fecha_clase']; ?></td>
+					<td><?php echo $fila['fecha_limite']; ?></td>
 					<td><?php echo $fila['tope']; ?></td>
 					<td>
 						 <!--Muestra el numero de usuarios-->
@@ -182,7 +182,7 @@ if ($_SESSION['tipo'] == "NORMAL"){
 					<!--Datos-->
 					<td><button title =	"<?php echo $strings['Pulsa para controlar asistencia']; ?>" 
 						class="tarea" name="action" value="Confirmar_SHOWCLASE"><?php echo $fila['descripcion']; ?></button></td>
-					<td><?php echo $fila['fecha_clase']; ?></td>
+					<td><?php echo $fila['fecha_limite']; ?></td>
 					<td><?php echo $fila['tope']; ?></td>
 					<td>
 						 <!--Muestra el numero de usuarios-->
@@ -295,7 +295,7 @@ if ($_SESSION['tipo'] == "NORMAL"){
 					<!--Datos-->
 					<td><button title =	"<?php echo $strings['Pulsa para controlar asistencia']; ?>" 
 						class="tarea" name="action" value="Confirmar_SHOWCLASE"><?php echo $fila['descripcion']; ?></button></td>
-					<td><?php echo $fila['fecha_clase']; ?></td>
+					<td><?php echo $fila['fecha_limite']; ?></td>
 					<td><?php echo $fila['tope']; ?></td>
 					<td>
 						 <!--Muestra el numero de usuarios-->

@@ -7,12 +7,14 @@ include_once '../Functions/Authentication.php';
 	//Variable con el enlace al showall
 	var $apuntados;	
 	var $num_sesiones;	
+	var $datos;	
 	var $enlace;	
 	//Constructor de la clase
-	function __construct($apuntados,$num_sesiones,$enlace){
+	function __construct($apuntados,$num_sesiones,$datos,$enlace){
 
 		$this -> apuntados = $apuntados;
 		$this -> num_sesiones = $num_sesiones;
+		$this -> datos = $datos;
 		$this -> enlace = $enlace;
 		$this -> mostrar();
 		
@@ -58,17 +60,17 @@ include_once '../Functions/Authentication.php';
 					<input type="hidden" name="ID_Clase" value="<?php echo $fila['ID_Clase']; ?>">
 					<!--Datos-->
 					
-					<td style="border:1px solid black;border-left:none;border-collapse:collapse;"><?php echo $fila['login_usuario']; ?></td>	
-					
-					<!-- Estilo para alternar colores entre filas da table -->
-					<style type='text/css'>
-						tr:nth-child(odd) {	
-    						background-color:#f2f2f2; /*gris*/	
+					<td style="border:1px solid black;border-left:none;border-collapse:collapse;
+					tr:nth-child(odd) {	
+    						background-color:#f2f2f2;
 						}	
 						tr:nth-child(even) {	
-    						background-color:#FFF; /*azul*/	
-						} 	
-					</style>
+    						background-color:#FFF;
+						}
+					"><?php echo $fila['login_usuario']; ?></td>	
+					
+					<!-- Estilo para alternar colores entre filas da table -->
+				
 					<!-- ************************************************* -->
 							<?php
 					for ($i=1; $i <= $this->num_sesiones; $i++) { 
@@ -90,6 +92,53 @@ include_once '../Functions/Authentication.php';
 		</table>  
 			       
 	</div> 	
+	
+	
+	
+	
+	
+	
+	<div class="showall">   
+     <table class="showAllUsers" style="width:50%;">
+			<tr><th class="title" colspan="4"><?php echo $strings['Clases']; ?>
+			<form class="tableActions" action="../Controllers/Usuarios_Controller.php" method="">
+			<!--Botones para añadir o buscar-->
+			</form></th></tr>
+			<!--Campos a mostrar-->
+			<tr>
+				<th><?php echo $strings['Dia']; ?></th>
+				<th><?php echo $strings['Fecha']; ?></th>
+				<th><?php echo $strings['Hora']; ?></th>
+				<th><?php echo $strings['Pista']; ?></th>
+				
+				<th></th>
+			</tr>
+		<?php 
+		//Mientras haya filas en la bd
+		$j = 1;	
+			while($fila = $this ->datos->fetch_array()){                        
+		?>
+			<tr>
+				<form action="../Controllers/Usuarios_Controller.php" method="post" name="action" >
+					<input type="hidden" name="login" value="<?php echo $fila['login']; ?>">
+					<!--Datos-->
+					<td><?php echo $strings['Dia'];echo " $j"; $j = $j+1;?></td>
+					<td><?php echo $fila['fecha_clase']; ?></td>
+					<td><?php echo $fila['hora_clase']; ?></td>
+					<td><?php echo $fila['ID_Pista']; ?></td>	
+					<td style="text-align:right;background:#FFF">
+				
+					<!--Botones para editar,borrar o ver en detalle-->
+
+					</td>
+				</form>
+			</tr>
+		<?php
+			}
+		?>                    
+		</table>
+			       
+	</div> 
        
 <?php   
     }

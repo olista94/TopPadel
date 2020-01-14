@@ -64,10 +64,11 @@ class Clases_Grupales_ADD{
 					$mañana = date_format($date,"Y-m-d");
 				?>
 
-				<label for="fecha_clase"><?php echo $strings['Fecha']; ?></label>
-				<input type="date" id="fecha_clase" name="fecha_clase" min="<?php echo "$mañana";?>" onblur=" return comprobarFecha(this)" >
+				<label for="fecha_limite"><?php echo $strings['Fecha limite']; ?></label>
+				<input type="date" id="fecha_limite" name="fecha_limite" min="<?php echo "$mañana";?>" onblur=" return comprobarFecha(this)" >
 					
 				</div>
+				<br>
 				
 				<label>
 					<?php echo $strings['Hora']; ?></label>
@@ -82,7 +83,8 @@ class Clases_Grupales_ADD{
 						<option value="18:30">18:30</option>
 						<option value="20:00">20:00</option>
 						<option value="21:30">21:30</option>
-				</select>	<br>
+				</select>
+				<br>
 				
 				
 				<!--Boton para añadir la tarea y pasar a añadir fases-->

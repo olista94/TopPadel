@@ -6,16 +6,14 @@
 
 	//Datos del usuario
 	var $datos;
-	var $pista;
 	//Variable con el enlace al form para ADD usuaro
 	var $enlace;
 	var $fila;
 	
 	//Constructor de la clase	
-	function __construct($datos,$pista,$enlace){
+	function __construct($datos,$enlace){
 	
 		$this -> datos = $datos;
-		$this -> pista = $pista -> fetch_array();
 		$this -> enlace = $enlace;
 		$this -> fila = $this -> datos -> fetch_array();
 		$this -> mostrar();
@@ -55,18 +53,8 @@
                 </tr>	
 				
                 <tr>
-                    <th><?php echo $strings['Fecha']; ?></th>
-                    <td><?php echo $this -> fila['fecha_clase']; ?></td>
-                </tr>
-				<!--Campo apellidos del usuario-->
-                <tr>
-                    <th><?php echo $strings['Hora']; ?></th>
-                    <td><?php echo $this -> fila['hora_clase']; ?></td>
-                </tr>
-				<!--Campo DNI del usuario-->
-                <tr>
-                    <th><?php echo $strings['Pista']; ?></th>
-                    <td><?php echo $this -> pista['Nombre_Pista']; ?></td>
+                    <th><?php echo $strings['Fecha limite']; ?></th>
+                    <td><?php echo $this -> fila['fecha_limite']; ?></td>
                 </tr>
 				
 				<tr>
