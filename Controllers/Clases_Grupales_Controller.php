@@ -184,10 +184,10 @@ if(isset($_SESSION['tipo'])){
 					
 					for($i = 1; $i <= $_REQUEST['sesiones']; $i++){
 						$j = $i * 7;
-						echo " ".$j." ";
+					
 						date_add($date,date_interval_create_from_date_string("$j days"));
 						$semana = date_format($date,"Y-m-d");
-						echo $semana." ";
+						
 						
 						$clase -> addFechaSesion($idclase,$semana,$_REQUEST['hora_clase']);
 						$pista = $clase -> buscarPistaParaSesions($semana,$_REQUEST['hora_clase']) -> fetch_array()[0];
@@ -437,6 +437,7 @@ if(isset($_SESSION['tipo'])){
 						$num_sesiones = $clase -> numSesiones() -> fetch_array()[0];
 						
 						$datos = $clase -> showSesion();
+				
 						new Clases_Grupales_SHOWCLASE($apuntados,$num_sesiones,$datos,'../Controllers/Clases_Grupales_Controller.php');
 					}
 					else if($_SESSION['tipo'] == 'ADMIN'){
