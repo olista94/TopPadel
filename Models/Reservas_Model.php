@@ -120,7 +120,7 @@ function pistasLibres(){
 				(SELECT p.`ID_Pista` FROM clases_particulares cp,pista p
 				WHERE `fecha_clase` = '$this->fecha_reserva' AND `hora_clase` = '$this->hora_inicio' AND cp.`ID_Pista` = p.`ID_Pista`)
 				AND ID_Pista NOT IN
-				(SELECT p.`ID_Pista` FROM clases_grupales cg,pista p
+				(SELECT p.`ID_Pista` FROM clases_grupales_has_sesiones cg,pista p
 				WHERE `fecha_clase` = '$this->fecha_reserva' AND `hora_clase` = '$this->hora_inicio' AND cg.`ID_Pista` = p.`ID_Pista`)
 				";
 

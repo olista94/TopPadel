@@ -205,7 +205,7 @@ function add(){
 			(SELECT p.`ID_Pista` FROM clases_particulares cp,pista p
 			WHERE `fecha_clase` = '$this->fecha' AND `hora_clase` = '$this->hora' AND cp.`ID_Pista` = p.`ID_Pista`)
 			AND ID_Pista NOT IN
-			(SELECT p.`ID_Pista` FROM clases_grupales cg,pista p
+			(SELECT p.`ID_Pista` FROM clases_grupales_has_sesiones cg,pista p
 			WHERE `fecha_clase` = '$this->fecha' AND `hora_clase` = '$this->hora' AND cg.`ID_Pista` = p.`ID_Pista`)
 			";
 							

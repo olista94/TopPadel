@@ -257,7 +257,7 @@ function pistasLibres(){
 						WHERE `fecha_clase` = '$this->fecha_clase' AND `hora_clase` = '$this->hora_clase' AND cp.`ID_Pista` = p.`ID_Pista`)
 						AND ID_Pista NOT IN (SELECT pista_ID_Pista from reservas where fecha_reserva = '$this->fecha_clase' AND hora_inicio = '$this->hora_clase')
 						AND ID_Pista NOT IN (SELECT pista_ID_Pista from promociones where fecha = '$this->fecha_clase' AND hora_inicio = '$this->hora_clase' AND cerrada = 'SI')
-						AND ID_Pista NOT IN (SELECT p.`ID_Pista` FROM clases_grupales cg,pista p WHERE `fecha_clase` = '$this->fecha_clase' AND `hora_clase` = '$this->hora_clase' AND cg.`ID_Pista` = p.`ID_Pista`)
+						AND ID_Pista NOT IN (SELECT p.`ID_Pista` FROM clases_grupales_has_sesiones cg,pista p WHERE `fecha_clase` = '$this->fecha_clase' AND `hora_clase` = '$this->hora_clase' AND cg.`ID_Pista` = p.`ID_Pista`)
 						";
 							
 	$resultado = $this->mysqli->query($sql);

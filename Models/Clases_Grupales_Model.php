@@ -42,7 +42,8 @@ function addGrupal(){
 				'$this->descripcion',
 				'$this->invitado',
 				'$this->fecha_limite',
-				'$this->sesiones'
+				'$this->sesiones',
+				'NO'
 				
 				)
 				";
@@ -152,9 +153,11 @@ function delete()
 			//Sentencia sql para borrar
 			$sql = "DELETE FROM clases_grupales WHERE (`ID_Clase` = '$this->ID_Clase')";
 			$sql1 = "DELETE FROM clases_grupales_has_usuarios WHERE (`ID_Clase` = '$this->ID_Clase')";
+			$sql2 = "DELETE FROM clases_grupales_has_sesiones WHERE (`ID_Clase` = '$this->ID_Clase')";
 			
 			$this->mysqli->query($sql);
 			$this->mysqli->query($sql1);
+			$this->mysqli->query($sql2);
 			
 			return 'Borrado correctamente';//Exito
 		
@@ -186,7 +189,7 @@ function pistasLibres(){
 	 $sql = "SELECT `ID_Pista`,`Nombre_Pista`
 			FROM pista
 			WHERE `ID_Pista` NOT IN 
-						(SELECT p.`ID_Pista` FROM clases_grupales cp,pista p 
+						(SELECT p.`ID_Pista` FROM clases_grupales_has_sesiones cp,pista p 
 						WHERE `fecha_limite` = '$this->fecha_limite' AND `hora_clase` = '$this->hora_clase' AND cp.`ID_Pista` = p.`ID_Pista`)
 						(SELECT p.`ID_Pista` FROM clases_particulares cp,pista p 
 						WHERE `fecha_limite` = '$this->fecha_limite' AND `hora_clase` = '$this->hora_clase' AND cp.`ID_Pista` = p.`ID_Pista`)
@@ -386,7 +389,7 @@ function buscarPistasLibresClases(){
 				LIMIT 1
 				
 				";
-				echo $sql;
+				
 			$result = $this->mysqli->query($sql); 
 			//Si ya se han insertado la PK o FK
 		if (!$result) {
@@ -616,7 +619,24 @@ function insertarPistaParaSesion($pista,$semana,$idclase){
 	}		
 	}
 	
-	
+	function solicitaBorrado(){
+			//Sentencia sql que insetara la categoria
+		$sql = "UPDATE clases_grupales SET
+			`borrado` = 'SI'
+			
+			WHERE (`ID_Clase` = '$this->ID_Clase')
+			";
+			
+			//Si ya se han insertado la PK o FK
+		if (!$this->mysqli->query($sql)) {
+			
+			return 'Error al insertar';
+		}
+		//operacion de insertado correcta
+		else{
+			return  'Solicitud enviada'; 
+		}		
+	}
 
 
 }//fin de clase
