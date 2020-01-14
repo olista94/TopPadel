@@ -221,12 +221,21 @@ if(isset($_SESSION['tipo'])){
 			
 			case 'Confirmar_DELETE2':
 			
+			if($_SESSION['tipo'] == 'NORMAL' || $_SESSION['tipo'] == 'ADMIN'){
 				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","",'');
 				
 				$mensaje = $clase -> delete();
 				
 				new MESSAGE($mensaje,'../Controllers/Clases_Grupales_Controller.php');
+			}
 			
+			else{
+				$clase = new Clases_Grupales_Model($_REQUEST['ID_Clase'],"","","","","","","","",'');
+				
+				$mensaje = $clase -> solicitaBorrado();
+				
+				new MESSAGE($mensaje,'../Controllers/Clases_Grupales_Controller.php');
+			}
 			break;
 			
 			case 'Confirmar_SHOWCURRENT':
