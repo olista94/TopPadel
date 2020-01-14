@@ -91,7 +91,6 @@ include_once '../Functions/Authentication.php';
      <table class="showAllUsers" style="width:50%;">
 			<tr><th class="title" colspan="4"><?php echo $strings['Clases']; ?>
 			<form class="tableActions" action="../Controllers/Usuarios_Controller.php" method="">
-			<!--Botones para añadir o buscar-->
 			</form></th></tr>
 			<!--Campos a mostrar-->
 			<tr>
@@ -114,7 +113,7 @@ include_once '../Functions/Authentication.php';
 					<td><?php echo $strings['Dia'];echo " $j"; $j = $j+1;?></td>
 					<td><?php echo $fila['fecha_clase']; ?></td>
 					<td><?php echo $fila['hora_clase']; ?></td>
-					<td><?php echo $fila['ID_Pista']; ?></td>	
+					<td><?php echo $fila['Nombre_Pista']; ?></td>	
 					<td style="text-align:right;background:#FFF">
 				
 					<!--Botones para editar,borrar o ver en detalle-->

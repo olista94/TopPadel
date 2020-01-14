@@ -125,7 +125,7 @@ include_once '../Functions/Authentication.php';
 					<td><?php echo $strings['Dia'];echo " $j"; $j = $j+1;?></td>
 					<td><?php echo $fila['fecha_clase']; ?></td>
 					<td><?php echo $fila['hora_clase']; ?></td>
-					<td><?php echo $fila['ID_Pista']; ?></td>	
+					<td><?php echo $fila['Nombre_Pista']; ?></td>
 					<td style="text-align:right;background:#FFF">
 				
 					<!--Botones para editar,borrar o ver en detalle-->
