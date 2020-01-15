@@ -30,7 +30,7 @@ if(!isset($_SESSION['idioma'])){
 		<br>
 		<br>
 		<p>
-		<H3>
+		<H3 style="text-align:center;margin-top: 15%">
 <?php		
 		//Aqui se muestra el mensaje
 		echo $strings[$this->string];
@@ -42,9 +42,9 @@ if(!isset($_SESSION['idioma'])){
 		<br>
 		<br>
 		<br>
-<button class="paypal"><a style="color:white" href="https://www.paypal.com/es/home" target = "_blank">a</a></button>
+<button class="paypal" style="display: inline;"><a style="color:white" href="https://www.paypal.com/es/home" target = "_blank">a</a></button>
 <?php			
-echo '<button class="volver" onclick=location.href=\'' . $this->enlace1 . "'> </button>";
+echo '<button class="volver_centrado" style="display: inline;margin-left:10%;" onclick=location.href=\'' . $this->enlace1 . "'> </button>";
 		//Pie
 		include_once '../Views/Footer.php';
 	} //fin metodo render
