@@ -805,7 +805,7 @@ function comprobarClaseGrupal(formu){
 		return false;
 	}
 	
-	else if(comprobarFecha(formu.fecha_clase) == false){
+	else if(comprobarFecha(formu.fecha_limite) == false){
 		
 		alert(traduce[idioma]['El campo fecha no puede estar vacío']);
 		return false;
