@@ -1270,5 +1270,18 @@ nav a{
 .paypal{
 	background-color:rgb(76, 116, 175);
 	background-image: url(../img/paypal.png); 
+	text-align:center;
+	margin-top: 0;
+	margin-left:40%;
 }
 
+
+
+.volver_centrado{
+  background-image: url(../img/volver.png);
+  background-color: rgb(76, 116, 175);
+  text-align:center;
+  margin-top: 0;
+
+
+}
