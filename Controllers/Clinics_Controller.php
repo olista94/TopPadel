@@ -88,27 +88,20 @@ if(isset($_SESSION['tipo'])){
 			else{
 				$invitado = "";
 			}
-			if(isset($_REQUEST['fecha_clase'])){
-				$fecha_clase = $_REQUEST['fecha_clase'];//Identificador de la Inscripcion
+			if(isset($_REQUEST['fecha_limite'])){
+				$fecha_limite = $_REQUEST['fecha_limite'];//Identificador de la Inscripcion
 				
 			}
 			else{
-				$fecha_clase = "";
+				$fecha_limite = "";
 			}
-			if(isset($_REQUEST['hora_clase'])){
-				$hora_clase = $_REQUEST['hora_clase'];//Identificador de la Inscripcion
+
+			if(isset($_REQUEST['sesiones'])){
+				$sesiones = $_REQUEST['sesiones'];//Identificador de la Inscripcion
 				
 			}
 			else{
-				$hora_clase = "";
-			}
-			
-			if(isset($_REQUEST['ID_Pista'])){
-				$ID_Pista = $_REQUEST['ID_Pista'];//Identificador de la Inscripcion
-				
-			}
-			else{
-				$ID_Pista = "";
+				$sesiones = "";
 			}
 			
 			if(isset($_REQUEST['pago'])){
@@ -135,7 +128,7 @@ if(isset($_SESSION['tipo'])){
 				$num_tarjeta = "";
 			}
 				
-				$clinics = new Clinics_Model ($ID_Clase,$login_entrenador,$tope,$tipo,$descripcion,$invitado,$fecha_clase,$hora_clase,$ID_Pista); //creamos el objeto usuario
+				$clinics = new Clinics_Model ($ID_Clase,$login_entrenador,$tope,$tipo,$descripcion,$invitado,$fecha_limite,$sesiones); //creamos el objeto usuario
 				
 				return $clinics; //devolvemos el objeto usuario
 			}
@@ -158,22 +151,24 @@ if(isset($_SESSION['tipo'])){
 					
 					$clase = getDataForm();
 					
-					$pista = $clase -> buscarPistasLibresClases();
-					$entrenador = $clase -> buscarEntrenadoresLibresClases();
+					$mensaje = $clase -> addClinic();
+					$idclase = $clase -> DevolverMaxIDClase();
 					
+					$limite = $_REQUEST['fecha_limite'];
+					$hora = $_REQUEST['hora_clase'];
 					
-					if(!is_string($entrenador) || !is_numeric($pista)){
-						new MESSAGE('No hay pista y/o entrenadores disponibles','../Controllers/Clinics_Controller.php');
-					}else{
-						
-						$mensaje = $clase -> addClinic();
-						$idclase = $clase -> DevolverMaxIDClase();
-						
-						$clase -> insertarPistayEntrenador($pista,$entrenador,$idclase);
-						
-						new MESSAGE($mensaje,'../Controllers/Clinics_Controller.php');
+					$entrenador = $clase -> buscarEntrenadoresLibresClases($idclase,$limite,$hora);
 					
-					}
+					//$date=date_create($limite);
+						
+					$clase -> addFechaSesion($idclase,$_REQUEST['fecha_limite'],$_REQUEST['hora_clase']);
+					$pista = $clase -> buscarPistaParaSesions($_REQUEST['fecha_limite'],$_REQUEST['hora_clase']) -> fetch_array()[0];
+					$clase -> insertarPistaParaSesion($pista,$_REQUEST['fecha_limite'],$idclase);
+					//$date=date_create($limite);
+					
+					$clase -> insertarEntrenador($entrenador,$idclase);
+						
+					new MESSAGE($mensaje,'../Controllers/Clinics_Controller.php');
 				
 			break;
 			
@@ -184,22 +179,30 @@ if(isset($_SESSION['tipo'])){
 				$datos = $clase -> rellenadatos();
 				
 				$array = $datos -> fetch_array();
-				$pistas = new Pistas_Model($array['ID_Pista'],"","","");
-				$p = $pistas -> searchById();
 				
 				$datos = $clase -> rellenadatos();
 				
-				new Clinics_DELETE($datos,$p,'../Controllers/Clinics_Controller.php');
+				new Clinics_DELETE($datos,'../Controllers/Clinics_Controller.php');
 			
 			break;
 			
 			case 'Confirmar_DELETE2':
+				
+				if($_SESSION['tipo'] == 'NORMAL' || $_SESSION['tipo'] == 'ADMIN'){
+					$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","",'');
+				
+					$mensaje = $clase -> delete();
+				
+					new MESSAGE($mensaje,'../Controllers/Clinics_Controller.php');
+				}
 			
-				$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");
+				else{
+					$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","",'');
 				
-				$mensaje = $clase -> delete();
+					$mensaje = $clase -> solicitaBorrado();
 				
-				new MESSAGE($mensaje,'../Controllers/Clinics_Controller.php');
+					new MESSAGE($mensaje,'../Controllers/Clinics_Controller.php');
+				}
 			
 			break;
 			
@@ -210,12 +213,11 @@ if(isset($_SESSION['tipo'])){
 				$datos = $clase -> rellenadatos();
 				
 				$array = $datos -> fetch_array();
-				$pistas = new Pistas_Model($array['ID_Pista'],"","","");
-				$p = $pistas -> searchById();
+				
 				
 				$datos = $clase -> rellenadatos();
 				
-				new Clinics_SHOWCURRENT($datos,$p,'../Controllers/Clinics_Controller.php');
+				new Clinics_SHOWCURRENT($datos,'../Controllers/Clinics_Controller.php');
 			
 			break;
 			
@@ -302,11 +304,10 @@ if(isset($_SESSION['tipo'])){
 					else{
 						$datos = $clase -> rellenadatos();	
 						$array = $datos -> fetch_array();
-						$pistas = new Pistas_Model($array['ID_Pista'],"","","");
-						$p = $pistas -> searchById();
+
 				
 						$datos = $clase -> rellenadatos();
-						new Clinics_INSCRIPCION($datos,$p,'../Controllers/Clinics_Controller.php');
+						new Clinics_INSCRIPCION($datos,'../Controllers/Clinics_Controller.php');
 					}
 				}
 				else{
@@ -404,7 +405,9 @@ if(isset($_SESSION['tipo'])){
 					if($_SESSION['tipo'] == 'ENTRENADOR'){
 						$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");
 						$apuntados = $clase -> Apuntados();
-						new Clinics_SHOWCLINIC($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+						
+						$datos = $clase -> showSesion();
+						new Clinics_SHOWCLINIC($apuntados,$datos,'../Controllers/Clases_Grupales_Controller.php');
 					}
 					else if($_SESSION['tipo'] == 'ADMIN'){
 						$clase = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","");

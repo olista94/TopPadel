@@ -22,6 +22,7 @@ if(isset($_SESSION['tipo'])){
 			//Incluimos las vistas y modelo necesarios
 			include_once "../Views/Clases_Grupales_SHOWALL_View.php";
 			include_once "../Models/Clases_Grupales_Model.php";
+			include_once "../Models/Clinics_Model.php";
 			include_once "../Models/Clases_Grupales_has_Usuarios_Model.php";
 			include_once "../Views/Clases_Grupales_SHOWCLASE_View.php";
 			include_once "../Views/Clinics_SHOWCLINIC_View.php";
@@ -107,8 +108,10 @@ if(isset($_SESSION['tipo'])){
 						new Clases_Grupales_SHOWCLASE($apuntados,$num_sesiones,$datos,'../Controllers/Clases_Grupales_Controller.php');
 					}
 					else{
-						
-						new Clinics_SHOWCLINIC($apuntados,'../Controllers/Clases_Grupales_Controller.php');
+						$clin = getDataForm(); 
+						$clin = new Clinics_Model($_REQUEST['ID_Clase'],"","","","","","","","","");
+						$datos1 = $clin -> showSesion();
+						new Clinics_SHOWCLINIC($apuntados,$datos1,'../Controllers/Clases_Grupales_Controller.php');
 					}
 			break;
 			

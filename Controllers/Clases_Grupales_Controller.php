@@ -158,15 +158,6 @@ if(isset($_SESSION['tipo'])){
 			case 'Confirmar_ADD2':
 					
 					$clase = getDataForm();
-					
-					
-					//$pista = $clase -> buscarPistasLibresClases();
-					
-					
-					
-					/* if(!is_string($entrenador) || !is_numeric($pista)){
-						new MESSAGE('No hay pista y/o entrenadores disponibles','../Controllers/Clases_Grupales_Controller.php');
-					}else{ */
 						
 						$mensaje = $clase -> addGrupal();
 						$idclase = $clase -> DevolverMaxIDClase();
@@ -176,12 +167,8 @@ if(isset($_SESSION['tipo'])){
 						
 						$entrenador = $clase -> buscarEntrenadoresLibresClases($idclase,$limite,$hora);
 						
-						//$hoy = date('Y-m-d');
 					$date=date_create($limite);
-					
-					//$num_sesiones = $clase -> numSesiones() -> fetch_array()[0];
-					
-					
+	
 					for($i = 1; $i <= $_REQUEST['sesiones']; $i++){
 						$j = $i * 7;
 					
