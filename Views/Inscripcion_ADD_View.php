@@ -34,7 +34,7 @@ class Inscripcion_ADD{
 			<form name="registerForm" id="registerForm" method="post" action="../Controllers/Inscripcion_Controller.php" enctype="multipart/form-data">
 				<legend><?php echo $strings['Elegir pareja'];?>
 				<!--Boton para volver atras-->
-				<button type="button" type="button" onclick="location.href='../Controllers/Inscripcion_Controller.php';" class="volver"></button>
+				<button type="button" type="button" onclick="location.href='../Controllers/Torneos_Controller.php';" class="volver"></button>
 				</legend>
 				<div>
 					

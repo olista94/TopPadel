@@ -26,14 +26,12 @@
 	 	 
 ?>
 <!--Formulario para añadir socio-->
-  <form name="Form" id="registerForm" action="../Controllers/Reservas_Controller.php" method="post" enctype="multipart/form-data" >
+  <form name="Form" id="registerForm" action="../Controllers/Reservas_Controller.php" method="post" enctype="multipart/form-data" onsubmit="return comprobarTarjeta(this)">
 					<input type = "hidden" name = "pista_ID_Pista" value = '<?php echo $this->pista; ?>'>
 					<input type = "hidden" name = "fecha_reserva" value = '<?php echo $this->fecha_reserva; ?>'>
 					<input type = "hidden" name = "hora_inicio" value = '<?php echo $this->hora_reserva; ?>'>
 					
     <legend><?php echo $strings['Añadir reserva']; ?>
-	<!--Boton para volver atras-->
-    <button type="button" onclick="location.href='../Controllers/Reservas_Controller.php';" class="volver"></button>
     </legend>
 
     <div>	

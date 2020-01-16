@@ -22,20 +22,16 @@
 	 	 
 ?>
 <!--Formulario para añadir socio-->
-  <form name="Form" id="registerForm" action="../Controllers/Promociones_Controller.php" method="post" enctype="multipart/form-data" >
+  <form name="Form" id="registerForm" action="../Controllers/Promociones_Controller.php" method="post" enctype="multipart/form-data" onsubmit="return comprobarTarjeta(this)">
 					<input type = "hidden" name = "ID_Promo" value = '<?php echo $this->idpromo; ?>'>
 					
     <legend><?php echo $strings['Añadir promocion']; ?>
-	<!--Boton para volver atras-->
-    <button type="button" onclick="location.href='../Controllers/Promociones_Controller.php';" class="volver"></button>
     </legend>
 
     <div>	
 		
       <label for="CCV"><?php echo $strings['CCV']; ?></label>
       <input type="text" id="CCV" name="CCV" size="5"   onblur=" return !comprobarVacio(this) && comprobarIBAN(this,4);" />
-	
-     
 		
       <label for="num_tarjeta"><?php echo $strings['Numero de tarjeta']; ?></label>
       <input type="text" id="num_tarjeta" name="num_tarjeta" size="22"  onblur=" return !comprobarVacio(this) && comprobarCuenta(this,20);" />

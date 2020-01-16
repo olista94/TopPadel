@@ -26,9 +26,7 @@ if(!isset($_SESSION['idioma'])){
 		//Header
 		include_once '../Views/Header.php';
 ?>
-		<br>
-		<br>
-		<br>
+		<div class ="prueba">
 		<p>
 		<H3 style="text-align:center;margin-top: 15%">
 <?php		
@@ -50,3 +48,5 @@ echo '<button class="volver_centrado" style="display: inline;margin-left:10%;" o
 	} //fin metodo render
 
 }
+?>
+</div>

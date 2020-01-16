@@ -95,7 +95,8 @@ if($_SESSION['tipo'] == "ADMIN"){
 							$entra = 0;
 						}
 						?>
-						</td>					
+						</td>	
+					<td><b><?php if ($fila['borrado'] == 'SI') echo $strings['Aplazamiento sugerido']; else echo ""; ?>							
 					<td style="text-align:right">
 					<!--Botones para editar,borrar o ver en detalle-->
 						<button class="borrar" name="action" value="Confirmar_DELETE1" type="submit"></button>
@@ -317,7 +318,8 @@ if($_SESSION['tipo'] == "ADMIN"){
 							$entra = 0;
 						}
 						?>
-						</td>					
+						</td>
+						<td><b><?php if ($fila['borrado'] == 'SI') echo $strings['Aplazamiento sugerido']; else echo ""; ?>	
 					<td style="text-align:right">
 					<!--Botones para editar,borrar o ver en detalle-->
 						<button class="borrar" name="action" value="Confirmar_DELETE1" type="submit"></button>

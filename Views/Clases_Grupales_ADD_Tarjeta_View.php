@@ -26,8 +26,6 @@
 					<input type = "hidden" name = "ID_Clase" value = '<?php echo $this->idclase; ?>'>
 					
     <legend><?php echo $strings['Añadir pago']; ?>
-	<!--Boton para volver atras-->
-    <button type="button" onclick="location.href='../Controllers/Clases_Grupales_Controller.php';" class="volver"></button>
     </legend>
 
     <div>	

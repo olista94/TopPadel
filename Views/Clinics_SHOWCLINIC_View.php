@@ -4,10 +4,12 @@ include_once '../Functions/Authentication.php';
  class Clinics_SHOWCLINIC{	 
 	//Variable con el enlace al showall
 	var $apuntados;	
+	var $datos;
 	var $enlace;	
 	//Constructor de la clase
-	function __construct($apuntados,$enlace){
+	function __construct($apuntados,$datos,$enlace){
 		$this -> apuntados = $apuntados;
+		$this -> datos = $datos;
 		$this -> enlace = $enlace;
 		$this -> mostrar();
 		
@@ -49,18 +51,6 @@ include_once '../Functions/Authentication.php';
 					<!--Datos-->
 					
 					<td style="border:1px solid black;border-left:none;border-collapse:collapse;"><?php echo $fila['login_usuario']; ?></td>	
-
-
-					<!-- Estilo para alternar colores entre filas da table -->
-					<style type='text/css'>
-						tr:nth-child(odd) {	
-    						background-color:#f2f2f2; /*gris*/	
-						}	
-						tr:nth-child(even) {	
-    						background-color:#FFF; /*azul*/	
-						} 	
-					</style>
-					<!-- ************************************************* -->
 							
 					<td><?php if($fila['dia1'] == 0){
 								echo $strings['Asiste'];
@@ -76,6 +66,48 @@ include_once '../Functions/Authentication.php';
 		</table>  
 			       
 	</div> 	
+	
+	<div class="showall">   
+     <table class="showAllUsers" style="width:50%;">
+			<tr><th class="title" colspan="4"><?php echo $strings['Clases']; ?>
+			<form class="tableActions" action="../Controllers/Usuarios_Controller.php" method="">
+			<!--Botones para añadir o buscar-->
+			</form></th></tr>
+			<!--Campos a mostrar-->
+			<tr>
+				<th><?php echo $strings['Dia']; ?></th>
+				<th><?php echo $strings['Fecha']; ?></th>
+				<th><?php echo $strings['Hora']; ?></th>
+				<th><?php echo $strings['Pista']; ?></th>
+				
+				<th></th>
+			</tr>
+		<?php 
+		//Mientras haya filas en la bd
+		$j = 1;	
+			while($fila = $this ->datos->fetch_array()){                        
+		?>
+			<tr>
+				<form action="../Controllers/Usuarios_Controller.php" method="post" name="action" >
+					<input type="hidden" name="login" value="<?php echo $fila['login']; ?>">
+					<!--Datos-->
+					<td><?php echo $strings['Dia'];echo " $j"; $j = $j+1;?></td>
+					<td><?php echo $fila['fecha_clase']; ?></td>
+					<td><?php echo $fila['hora_clase']; ?></td>
+					<td><?php echo $fila['Nombre_Pista']; ?></td>
+					<td style="text-align:right;background:#FFF">
+				
+					<!--Botones para editar,borrar o ver en detalle-->
+
+					</td>
+				</form>
+			</tr>
+		<?php
+			}
+		?>                    
+		</table>
+			       
+	</div>
        
 <?php   
     }

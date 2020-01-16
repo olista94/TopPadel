@@ -58,8 +58,8 @@ class Clinics_ADD{
 					$mañana = date_format($date,"Y-m-d");
 				?>
 
-				<label for="fecha_clase"><?php echo $strings['Fecha']; ?></label>
-				<input type="date" id="fecha_clase" name="fecha_clase" min="<?php echo "$mañana";?>" onblur=" return comprobarFecha(this)" >
+				<label for="fecha_limite"><?php echo $strings['Fecha']; ?></label>
+				<input type="date" id="fecha_limite" name="fecha_limite" min="<?php echo "$mañana";?>" onblur=" return comprobarFecha(this)" >
 					
 				</div>
 				
