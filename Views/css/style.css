@@ -1282,6 +1282,15 @@ nav a{
   background-color: rgb(76, 116, 175);
   text-align:center;
   margin-top: 0;
+}
 
 
+.prueba{
+	background-color:#D5FFD6;
+	margin-left:25%;
+	margin-top:5%;
+	height:50%;
+	width:50%;
+	border-style:groove;
+	border-color:blue;
 }
