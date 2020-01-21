@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-01-2020 a las 01:05:51
+-- Tiempo de generación: 20-01-2020 a las 17:41:17
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.1.32
 
@@ -41,19 +41,22 @@ CREATE TABLE `clases_grupales` (
   `descripcion` varchar(128) NOT NULL,
   `invitado` varchar(50) NOT NULL,
   `fecha_limite` date NOT NULL,
-  `sesiones` int(5) NOT NULL
+  `sesiones` int(5) NOT NULL,
+  `borrado` varchar(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `clases_grupales`
 --
 
-INSERT INTO `clases_grupales` (`ID_Clase`, `login_entrenador`, `tope`, `tipo`, `descripcion`, `invitado`, `fecha_limite`, `sesiones`) VALUES
-(3, 'sisu', 15, 'ESCUELAS', 'asdfgh', '', '2020-01-20', 6),
-(11, 'guardiola', 10, 'ESCUELAS', 'Coach', '', '2020-01-21', 9),
-(12, 'guardiola', 5, 'ESCUELAS', 'cdwcwdc', '', '2020-01-22', 7),
-(13, 'isabel', 5, 'ESCUELAS', 'dwcvwfcwe', '', '2020-01-22', 11),
-(14, 'simeone', 5, 'ESCUELAS', 'MMMM', '', '2020-02-01', 10);
+INSERT INTO `clases_grupales` (`ID_Clase`, `login_entrenador`, `tope`, `tipo`, `descripcion`, `invitado`, `fecha_limite`, `sesiones`, `borrado`) VALUES
+(3, 'sisu', 15, 'ESCUELAS', 'asdfgh', '', '2020-01-10', 6, 'NO'),
+(11, 'guardiola', 10, 'ESCUELAS', 'Coach', '', '2020-01-21', 9, 'NO'),
+(15, 'simeone', 1, 'ESCUELAS', 'LUNES', '', '2020-01-27', 6, 'SI'),
+(18, 'klopp', 2, 'ESCUELAS', 'Prueba', '', '2020-01-24', 6, 'NO'),
+(19, 'vicenta', 5, 'ESCUELAS', 'advsgsg', '', '2020-01-20', 6, 'NO'),
+(31, 'sisu', 11, 'CLINICS', 'Prueba', 'Roger Federer', '2020-01-31', 1, 'NO'),
+(32, 'guardiola', 15, 'CLINICS', 'sdav', 'migu', '2020-01-30', 1, 'NO');
 
 -- --------------------------------------------------------
 
@@ -115,7 +118,52 @@ INSERT INTO `clases_grupales_has_sesiones` (`ID_Clase`, `fecha_clase`, `hora_cla
 (14, '2020-03-21', '20:00:00', 1),
 (14, '2020-03-28', '20:00:00', 1),
 (14, '2020-04-04', '20:00:00', 1),
-(14, '2020-04-11', '20:00:00', 1);
+(14, '2020-04-11', '20:00:00', 1),
+(15, '2020-02-03', '08:00:00', 2),
+(15, '2020-02-10', '08:00:00', 2),
+(15, '2020-02-17', '08:00:00', 2),
+(15, '2020-02-24', '08:00:00', 2),
+(15, '2020-03-02', '08:00:00', 5),
+(15, '2020-03-09', '08:00:00', 1),
+(17, '2020-01-21', '08:00:00', 1),
+(17, '2020-01-23', '08:00:00', 1),
+(17, '2020-01-28', '08:00:00', 1),
+(17, '2020-01-30', '08:00:00', 1),
+(17, '2020-01-31', '08:00:00', 1),
+(17, '2020-02-03', '08:00:00', 5),
+(17, '2020-02-04', '08:00:00', 1),
+(17, '2020-02-06', '08:00:00', 1),
+(17, '2020-02-07', '08:00:00', 1),
+(17, '2020-02-10', '08:00:00', 5),
+(17, '2020-02-11', '08:00:00', 1),
+(17, '2020-02-13', '08:00:00', 1),
+(17, '2020-02-14', '08:00:00', 1),
+(17, '2020-02-17', '08:00:00', 5),
+(17, '2020-02-18', '08:00:00', 1),
+(17, '2020-02-20', '08:00:00', 1),
+(17, '2020-02-21', '08:00:00', 1),
+(17, '2020-02-24', '08:00:00', 5),
+(17, '2020-02-25', '08:00:00', 1),
+(17, '2020-02-27', '08:00:00', 1),
+(17, '2020-02-28', '08:00:00', 1),
+(17, '2020-03-02', '08:00:00', 6),
+(17, '2020-03-06', '08:00:00', 1),
+(17, '2020-03-09', '08:00:00', 2),
+(18, '2020-01-31', '08:00:00', 2),
+(18, '2020-02-07', '08:00:00', 2),
+(18, '2020-02-14', '08:00:00', 2),
+(18, '2020-02-21', '08:00:00', 2),
+(18, '2020-02-28', '08:00:00', 2),
+(18, '2020-03-06', '08:00:00', 2),
+(19, '2020-01-27', '08:00:00', 8),
+(19, '2020-02-03', '08:00:00', 6),
+(19, '2020-02-10', '08:00:00', 6),
+(19, '2020-02-17', '08:00:00', 6),
+(19, '2020-02-24', '08:00:00', 6),
+(19, '2020-03-02', '08:00:00', 7),
+(30, '2020-01-30', '08:00:00', 2),
+(31, '2020-01-31', '17:00:00', 1),
+(32, '2020-01-30', '14:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -150,7 +198,10 @@ CREATE TABLE `clases_grupales_has_usuarios` (
 INSERT INTO `clases_grupales_has_usuarios` (`ID_Clase`, `login_usuario`, `dia1`, `dia2`, `dia3`, `dia4`, `dia5`, `dia6`, `dia7`, `dia8`, `dia9`, `dia10`, `dia11`, `dia12`, `pago`, `CCV`, `num_tarjeta`) VALUES
 (3, 'adrianblanco', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Contrareembolso', NULL, NULL),
 (3, 'olista', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
-(3, 'ypgarcia', 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL);
+(3, 'ypgarcia', 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
+(11, 'ritaconde', 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'Tarjeta', 222, '1234567890098765'),
+(31, 'olista', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
+(31, 'ypgarcia', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -176,14 +227,7 @@ CREATE TABLE `clases_particulares` (
 --
 
 INSERT INTO `clases_particulares` (`ID_Clase`, `login_usuario`, `login_entrenador`, `fecha_clase`, `hora_clase`, `ID_Pista`, `borrado`, `pago`, `CCV`, `num_tarjeta`) VALUES
-(12, 'ritaconde', 'guardiola', '2020-01-14', '17:00:00', 7, '', 'Tarjeta', 123, '1234567890123456'),
-(13, 'manuelangel', 'natalia', '2020-01-16', '15:30:00', 6, 'SI', 'Contrareembolso', NULL, NULL),
-(14, 'manuelangel', 'guardiola', '2020-01-16', '15:30:00', 1, '', 'Paypal', NULL, NULL),
-(15, 'manuelangel', 'isabel', '2020-01-16', '15:30:00', 2, '', 'Tarjeta', 123, '1234567890098765'),
-(16, 'manuelangel', 'klopp', '2020-01-16', '15:30:00', 5, '', 'Paypal', NULL, NULL),
-(17, 'manuelangel', 'mourinho', '2020-01-16', '15:30:00', 7, '', 'Paypal', NULL, NULL),
-(18, 'manuelangel', 'marisa', '2020-01-16', '15:30:00', 8, '', 'Paypal', NULL, NULL),
-(19, 'manuelangel', 'sisu', '2020-01-16', '09:30:00', 5, '', 'Paypal', NULL, NULL);
+(20, 'adrianblanco', 'klopp', '2020-01-27', '08:00:00', 7, '', 'Paypal', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -238,24 +282,33 @@ INSERT INTO `parejas` (`ID_Pareja`, `usuarios_login`, `usuarios_login1`) VALUES
 (227, 'danielceballos', 'alfonsoroman'),
 (228, 'robertotato', 'felixperez'),
 (229, 'pedrocuesta', 'ivanvalcarcel'),
-(230, 'ypgarcia', 'anabarreiro'),
-(231, 'ypgarcia', 'anabarreiro'),
-(232, 'ypgarcia', 'anabarreiro'),
-(233, 'ypgarcia', 'anabarreiro'),
-(234, 'olista', 'carmenformoso'),
-(235, 'jfperez', 'celiarodriguez'),
-(238, 'ypgarcia', 'anabarreiro'),
-(239, 'olista', 'carmenformoso'),
-(240, 'jfperez', 'celiarodriguez'),
-(242, 'ritaconde', 'abelardoglez'),
-(243, 'xianagolpe', 'adrianantolinez'),
-(244, 'fabioroson', 'dianacasanova'),
-(245, 'esthermontecelo', 'adrianblanco'),
-(246, 'jorgepuertas', 'isabelmata'),
-(247, 'jesusiglesias', 'lucianespereira'),
-(248, 'ypgarcia', 'abelardoglez'),
-(249, 'olista', 'adrianantolinez'),
-(250, 'carlosconde', 'adrianblanco');
+(303, 'manuelangel', 'alvarocardero'),
+(304, 'luisviejo', 'diegojorreto'),
+(305, 'jorgepuertas', 'cristoffpereira'),
+(306, 'juansoler', 'joseantonio'),
+(307, 'alfredocasas', 'juanllano'),
+(308, 'juancorral', 'guillermomtnez'),
+(309, 'javierlorenzo', 'mariohernandez'),
+(310, 'albertordgz', 'luiscarmona'),
+(311, 'juancarlos', 'diegoportela'),
+(312, 'joseluis', 'teofilomartin'),
+(313, 'luiscaride', 'oscarfernadez'),
+(314, 'jorgesabucedo', 'pacobarrio'),
+(315, 'abelardoglez', 'linogonzalez'),
+(316, 'carlosperez', 'arturolopez'),
+(317, 'oscardominguez', 'carlosconde'),
+(318, 'jesusiglesias', 'josemaria'),
+(319, 'diegocurras', 'jaimesalgado'),
+(320, 'fabioroson', 'rubengonzalez'),
+(321, 'adrianblanco', 'davidmiguez'),
+(322, 'marcoscudeiro', 'jordigonzalez'),
+(323, 'alexandrefdez', 'angelmonteagudo'),
+(324, 'xacoboiglesias', 'carlosguede'),
+(325, 'carlossiota', 'jantoniooute'),
+(326, 'adrianantolinez', 'davidmanuel'),
+(327, 'danielceballos', 'alfonsoroman'),
+(328, 'robertotato', 'felixperez'),
+(329, 'pedrocuesta', 'ivanvalcarcel');
 
 -- --------------------------------------------------------
 
@@ -309,16 +362,7 @@ INSERT INTO `parejas_has_grupos` (`ID_Pareja`, `grupo`, `ID_Torneo`) VALUES
 (226, 2, 1),
 (227, 2, 1),
 (228, 2, 1),
-(229, 2, 1),
-(238, 0, 25),
-(239, 0, 25),
-(240, 0, 25),
-(242, 0, 25),
-(243, 0, 25),
-(244, 0, 25),
-(245, 0, 25),
-(246, 0, 25),
-(247, 0, 25);
+(229, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -627,43 +671,7 @@ INSERT INTO `parejas_has_partidos` (`ID_Partido`, `ID_Torneo`, `ID_ParejaLocal`,
 (828, 1, 213, 222),
 (829, 1, 203, 213),
 (830, 1, 203, 222),
-(831, 1, 213, 222),
-(832, 25, 238, 239),
-(833, 25, 238, 240),
-(834, 25, 238, 242),
-(835, 25, 238, 243),
-(836, 25, 238, 244),
-(837, 25, 238, 245),
-(838, 25, 238, 246),
-(839, 25, 238, 247),
-(840, 25, 239, 240),
-(841, 25, 239, 242),
-(842, 25, 239, 243),
-(843, 25, 239, 244),
-(844, 25, 239, 245),
-(845, 25, 239, 246),
-(846, 25, 239, 247),
-(847, 25, 240, 242),
-(848, 25, 240, 243),
-(849, 25, 240, 244),
-(850, 25, 240, 245),
-(851, 25, 240, 246),
-(852, 25, 240, 247),
-(853, 25, 242, 243),
-(854, 25, 242, 244),
-(855, 25, 242, 245),
-(856, 25, 242, 246),
-(857, 25, 242, 247),
-(858, 25, 243, 244),
-(859, 25, 243, 245),
-(860, 25, 243, 246),
-(861, 25, 243, 247),
-(862, 25, 244, 245),
-(863, 25, 244, 246),
-(864, 25, 244, 247),
-(865, 25, 245, 246),
-(866, 25, 245, 247),
-(867, 25, 246, 247);
+(831, 1, 213, 222);
 
 -- --------------------------------------------------------
 
@@ -739,21 +747,33 @@ INSERT INTO `parejas_has_torneos` (`parejas_ID_Pareja`, `torneos_ID_Torneo`, `PJ
 (227, 1, 8, 2, 6, 12, 10, 14, 74, 94, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
 (228, 1, 8, 1, 7, 10, 9, 15, 69, 99, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
 (229, 1, 8, 0, 8, 8, 8, 16, 64, 104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
-(233, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
-(234, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Contrareembolso', NULL, NULL),
-(235, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Tarjeta', 222, '22222222222222222222222'),
-(238, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Tarjeta', 123, '1234567890098765'),
-(239, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
-(240, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Contrareembolso', NULL, NULL),
-(242, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Contrareembolso', NULL, NULL),
-(243, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Contrareembolso', NULL, NULL),
-(244, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
-(245, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
-(246, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Tarjeta', 123, '1234567890123456'),
-(247, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Contrareembolso', NULL, NULL),
-(248, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Contrareembolso', NULL, NULL),
-(249, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Paypal', NULL, NULL),
-(250, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Tarjeta', 123, '2222222222222222');
+(303, 2, 8, 8, 0, 24, 16, 8, 104, 64, 3, 3, 3, 4, 2, 1, 1, 3, 3, 30, 27, '', NULL, NULL),
+(304, 2, 8, 7, 1, 22, 15, 9, 99, 69, 3, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(305, 2, 8, 6, 2, 20, 14, 10, 94, 74, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(306, 2, 8, 5, 3, 18, 13, 11, 89, 79, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(307, 2, 8, 4, 4, 16, 12, 12, 84, 84, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(308, 2, 8, 3, 5, 14, 11, 13, 79, 89, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(309, 2, 8, 2, 6, 12, 10, 14, 74, 94, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(310, 2, 8, 1, 7, 10, 9, 15, 69, 99, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(311, 2, 8, 0, 8, 8, 8, 16, 64, 104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(312, 2, 8, 8, 0, 24, 16, 8, 104, 64, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(313, 2, 8, 7, 1, 22, 15, 9, 99, 69, 3, 3, 3, 4, 2, 1, 1, 3, 3, 29, 30, '', NULL, NULL),
+(314, 2, 8, 6, 2, 20, 14, 10, 94, 74, 3, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(315, 2, 8, 5, 3, 18, 13, 11, 89, 79, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(316, 2, 8, 4, 4, 16, 12, 12, 84, 84, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(317, 2, 8, 3, 5, 14, 11, 13, 79, 89, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(318, 2, 8, 2, 6, 12, 10, 14, 74, 94, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(319, 2, 8, 1, 7, 10, 9, 15, 69, 99, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(320, 2, 8, 0, 8, 8, 8, 16, 64, 104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(321, 2, 8, 8, 0, 24, 16, 8, 104, 64, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(322, 2, 8, 7, 1, 22, 15, 9, 99, 69, 3, 3, 3, 4, 2, 1, 1, 3, 3, 26, 28, '', NULL, NULL),
+(323, 2, 8, 6, 2, 20, 14, 10, 94, 74, 3, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(324, 2, 8, 5, 3, 18, 13, 11, 89, 79, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(325, 2, 8, 4, 4, 16, 12, 12, 84, 84, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(326, 2, 8, 3, 5, 14, 11, 13, 79, 89, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(327, 2, 8, 2, 6, 12, 10, 14, 74, 94, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(328, 2, 8, 1, 7, 10, 9, 15, 69, 99, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL),
+(329, 2, 8, 0, 8, 8, 8, 16, 64, 104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -782,7 +802,7 @@ CREATE TABLE `partidos` (
 --
 
 INSERT INTO `partidos` (`ID_Partido`, `fecha`, `hora`, `ronda`, `pista_ID_Pista`, `Sets_Local`, `Sets_Visitante`, `JuegosSet1_Local`, `JuegosSet1_Visitante`, `JuegosSet2_Local`, `JuegosSet2_Visitante`, `JuegosSet3_Local`, `JuegosSet3_Visitante`) VALUES
-(416, '2019-12-24', '21:30:00', 'Grupos', 1, 2, 1, 6, 1, 3, 6, 6, 4),
+(416, '2020-01-27', '08:00:00', 'Grupos', 5, 2, 1, 6, 1, 3, 6, 6, 4),
 (417, '2020-01-10', '21:30:00', 'Grupos', 5, 1, 2, 6, 4, 4, 6, 4, 6),
 (418, '2020-01-10', '21:30:00', 'Grupos', 5, 2, 0, 6, 1, 6, 3, 0, 0),
 (419, '2020-01-10', '21:30:00', 'Grupos', 5, 2, 0, 7, 5, 7, 6, 0, 0),
@@ -824,7 +844,7 @@ INSERT INTO `partidos` (`ID_Partido`, `fecha`, `hora`, `ronda`, `pista_ID_Pista`
 (497, '2020-01-10', '21:30:00', 'Cuartos', 5, 2, 0, 6, 2, 6, 3, 0, 0),
 (501, '2020-01-10', '08:00:00', 'Semis', 1, 2, 0, 6, 1, 6, 1, 0, 0),
 (502, '2020-01-11', '11:00:00', 'Semis', 1, 2, 0, 6, 1, 6, 1, 0, 0),
-(503, '2020-01-12', '12:30:00', 'Final', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(503, '2020-01-31', '08:00:00', 'Final', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (630, '2019-12-30', '11:00:00', 'Grupos', 1, 2, 1, 6, 1, 1, 6, 6, 1),
 (631, '2019-12-30', '09:30:00', 'Grupos', 1, 2, 1, 6, 1, 1, 6, 6, 1),
 (632, '2020-01-12', '12:30:00', 'Grupos', 2, 2, 1, 6, 1, 1, 6, 6, 1),
@@ -956,43 +976,7 @@ INSERT INTO `partidos` (`ID_Partido`, `fecha`, `hora`, `ronda`, `pista_ID_Pista`
 (812, '2020-01-11', '11:00:00', 'Final', 1, 2, 0, 6, 1, 6, 1, 0, 0),
 (829, '2020-01-11', '11:00:00', 'Superfinal', 1, 1, 2, 6, 3, 4, 6, 5, 7),
 (830, '2020-01-12', '12:30:00', 'Superfinal', 2, 2, 1, 6, 1, 3, 6, 6, 4),
-(831, '2020-01-12', '12:30:00', 'Superfinal', 2, 1, 2, 6, 3, 3, 6, 4, 6),
-(832, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(833, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(834, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(835, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(836, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(837, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(838, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(839, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(840, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(841, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(842, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(843, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(844, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(845, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(846, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(847, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(848, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(849, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(850, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(851, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(852, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(853, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(854, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(855, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(856, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(857, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(858, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(859, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(860, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(861, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(862, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(863, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(864, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(865, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(866, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(867, '0000-00-00', '00:00:00', 'Grupos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(831, '2020-01-12', '12:30:00', 'Superfinal', 2, 1, 2, 6, 3, 3, 6, 4, 6);
 
 -- --------------------------------------------------------
 
@@ -1037,6 +1021,25 @@ CREATE TABLE `promociones` (
   `num_tarjeta` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `promociones`
+--
+
+INSERT INTO `promociones` (`ID_Promo`, `fecha`, `hora_inicio`, `usuarios_login_usuario`, `pista_ID_Pista`, `cerrada`, `pago`, `CCV`, `num_tarjeta`) VALUES
+(12, '2020-01-27', '08:00:00', 'esthermontecelo', 6, 'SI', 'Paypal', NULL, NULL),
+(13, '2020-01-29', '08:00:00', 'admin', NULL, 'NO', '', NULL, NULL),
+(14, '2020-01-29', '08:00:00', 'ypgarcia', NULL, 'NO', 'Paypal', NULL, NULL),
+(15, '2020-01-29', '08:00:00', 'ypgarcia', NULL, 'NO', 'Contrareembolso', NULL, NULL),
+(16, '2020-01-20', '08:00:00', 'hugo_mejide', NULL, 'NO', 'Paypal', NULL, NULL),
+(17, '2020-01-30', '08:00:00', 'hugo_mejide', NULL, 'NO', 'Tarjeta', NULL, NULL),
+(18, '2020-01-28', '08:00:00', 'hugo_mejide', NULL, 'NO', 'Tarjeta', NULL, NULL),
+(19, '2020-01-24', '08:00:00', 'hugo_mejide', NULL, 'NO', 'Paypal', NULL, NULL),
+(20, '2020-01-29', '08:00:00', 'hugo_mejide', NULL, 'NO', 'Tarjeta', NULL, NULL),
+(21, '2020-01-22', '08:00:00', 'admin', NULL, 'NO', '', NULL, NULL),
+(22, '2020-01-31', '08:00:00', 'ritaconde', NULL, 'NO', 'Tarjeta', NULL, NULL),
+(23, '2020-01-27', '08:00:00', 'ypgarcia', NULL, 'NO', 'Paypal', NULL, NULL),
+(24, '2020-01-29', '08:00:00', 'ypgarcia', NULL, 'NO', 'Tarjeta', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -1047,6 +1050,26 @@ CREATE TABLE `promociones_has_usuarios` (
   `ID_Promo` int(11) NOT NULL,
   `usuarios_login` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `promociones_has_usuarios`
+--
+
+INSERT INTO `promociones_has_usuarios` (`ID_Promo`, `usuarios_login`) VALUES
+(12, 'adrianblanco'),
+(12, 'esthermontecelo'),
+(12, 'olista'),
+(12, 'ypgarcia'),
+(14, 'ypgarcia'),
+(15, 'ypgarcia'),
+(16, 'hugo_mejide'),
+(17, 'hugo_mejide'),
+(18, 'hugo_mejide'),
+(19, 'hugo_mejide'),
+(20, 'hugo_mejide'),
+(22, 'ritaconde'),
+(23, 'ypgarcia'),
+(24, 'ypgarcia');
 
 -- --------------------------------------------------------
 
@@ -1069,18 +1092,15 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`usuarios_login`, `pista_ID_Pista`, `fecha_reserva`, `hora_inicio`, `pago`, `CCV`, `num_tarjeta`) VALUES
-('admin', 1, '2020-01-20', '08:00:00', 'Paypal', NULL, NULL),
-('admin', 2, '2020-01-20', '08:00:00', 'Paypal', NULL, NULL),
-('admin', 5, '2020-01-20', '08:00:00', 'Paypal', NULL, NULL),
-('admin', 6, '2020-01-20', '08:00:00', 'Paypal', NULL, NULL),
-('admin', 7, '2020-01-20', '08:00:00', 'Paypal', NULL, NULL),
-('admin', 8, '2020-01-20', '08:00:00', 'Paypal', NULL, NULL),
-('olista', 1, '2020-03-02', '08:00:00', 'Contrareembolso', NULL, NULL),
-('ypgarcia', 1, '2020-01-20', '09:30:00', 'Paypal', NULL, NULL),
-('ypgarcia', 2, '2020-01-20', '09:30:00', 'Paypal', NULL, NULL),
-('ypgarcia', 5, '2020-01-20', '09:30:00', 'Contrareembolso', NULL, NULL),
-('ypgarcia', 6, '2020-01-20', '09:30:00', 'Paypal', NULL, NULL),
-('ypgarcia', 7, '2020-01-20', '09:30:00', 'Paypal', NULL, NULL);
+('admin', 1, '2020-01-22', '08:00:00', 'Tarjeta', 567, '1234567890123456'),
+('admin', 2, '2020-01-21', '08:00:00', 'Contrareembolso', NULL, NULL),
+('admin', 2, '2020-01-23', '08:00:00', 'Tarjeta', 123, '1234567890098765'),
+('admin', 2, '2020-01-27', '08:00:00', 'Paypal', NULL, NULL),
+('admin', 5, '2020-01-21', '08:00:00', 'Paypal', NULL, NULL),
+('admin', 5, '2020-01-22', '08:00:00', 'Tarjeta', 0, ''),
+('esthermontecelo', 5, '2020-01-31', '08:00:00', '', NULL, NULL),
+('hugo_mejide', 5, '2020-01-23', '08:00:00', 'Tarjeta', 123, '1234567890123456'),
+('olista', 1, '2020-03-02', '08:00:00', 'Contrareembolso', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1103,9 +1123,8 @@ CREATE TABLE `torneo` (
 
 INSERT INTO `torneo` (`ID_Torneo`, `nombre`, `categoria`, `fecha`, `edicion`, `nivel`) VALUES
 (1, 'Ourense Open M2', 'Masculina', '2019-10-01', 2019, 2),
-(21, 'Ourense Open F', 'Femenina', '2019-12-03', 2020, 1),
-(25, 'AAA', 'Mixta', '2019-12-23', 2003, 2),
-(26, 'asdf', 'Masculina', '2019-12-31', 2018, 1);
+(2, 'Copia', 'Masculina', '2019-10-01', 2019, 2),
+(21, 'Ourense Open F', 'Femenina', '2019-12-03', 2020, 1);
 
 -- --------------------------------------------------------
 
@@ -1346,13 +1365,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clases_grupales`
 --
 ALTER TABLE `clases_grupales`
-  MODIFY `ID_Clase` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID_Clase` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `clases_particulares`
 --
 ALTER TABLE `clases_particulares`
-  MODIFY `ID_Clase` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID_Clase` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `parejas`
@@ -1376,13 +1395,13 @@ ALTER TABLE `pista`
 -- AUTO_INCREMENT de la tabla `promociones`
 --
 ALTER TABLE `promociones`
-  MODIFY `ID_Promo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID_Promo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `torneo`
 --
 ALTER TABLE `torneo`
-  MODIFY `ID_Torneo` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID_Torneo` tinyint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Restricciones para tablas volcadas
