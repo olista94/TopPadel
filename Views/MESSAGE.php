@@ -25,9 +25,10 @@ if(!isset($_SESSION['idioma'])){
 		//Header
 		include_once '../Views/Header.php';
 ?>
-
+<div class ="prueba">
 		<p>
 		<H3 style="text-align:center;margin-top: 15%">
+
 <?php		
 		//Aqui se muestra el mensaje
 		echo $strings[$this->string];
@@ -37,13 +38,15 @@ if(!isset($_SESSION['idioma'])){
 		<br>
 		<br>
 		<br>
+		
 
 <?php
 		//Aqui se muestra el enlace en forma de boton
 		echo '<button class="volver_centrado" style="margin-left:50%" onclick=location.href=\'' . $this->volver . "'> </button>";
-
 		//Pie
 		include_once '../Views/Footer.php';
 	} //fin metodo render
 
 }
+?>
+</div>
