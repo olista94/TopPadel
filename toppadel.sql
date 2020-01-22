@@ -54,7 +54,7 @@ INSERT INTO `clases_grupales` (`ID_Clase`, `login_entrenador`, `tope`, `tipo`, `
 (11, 'guardiola', 6, 'ESCUELAS', 'Coach', '', '2020-01-21', 9, 'NO'),
 (15, 'simeone', 5, 'ESCUELAS', 'Dejadas', '', '2020-01-27', 6, 'SI'),
 (31, 'sisu', 11, 'CLINICS', 'Charla tactica', 'Roger Federer', '2020-01-31', 1, 'NO'),
-(32, 'guardiola', 15, 'CLINICS', 'Golpeo', 'migu', '2020-01-30', 1, 'NO');
+(32, 'guardiola', 15, 'CLINICS', 'Golpeo', 'Miguel Ruiz', '2020-01-30', 1, 'NO');
 
 -- --------------------------------------------------------
 
