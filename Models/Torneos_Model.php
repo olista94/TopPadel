@@ -525,7 +525,7 @@ function ResultadosPartidosPareja($idpartido,$idparejalocal,$idparejavisitante){
 	$sql = "SELECT `parejas_ID_Pareja`,usuarios_login,usuarios_login1,PJ_SF,PG_SF,PP_SF,PtosSuperFinal,SF_SF,SC_SF,JF_SF,JC_SF
 			FROM parejas_has_torneos pht,parejas p 
 			WHERE pht.`parejas_ID_Pareja` = P.ID_Pareja and `torneos_ID_Torneo` = '".$idtorneo."' and `PtosFinal` = 3
-			ORDER BY `PtosSuperFinal` DESC,`SF` DESC,`SC` ASC,`JF` DESC,`JC` ASC
+			ORDER BY `PtosSuperFinal` DESC,`SF_SF` DESC,`SC_SF` ASC,`JF_SF` DESC,`JC_SF` ASC
 			";
 			
 	  $result = $this->mysqli->query($sql);//Se guarda el resultado de la consulta sql
