@@ -310,6 +310,7 @@ array(
 	'No hay pista y/o entrenadores disponibles' => 'No courts and/or coaches available',
 	'Rankings' => 'Rankings',
 	'Ranking' => 'Ranking',
+	'Puntos ranking' => 'Ranking points',
 	'Estadisticas' => 'Stats',
 	'Partidos Jugados' => 'Games Played',
 	'Partidos Ganados' => 'Wins',

@@ -265,7 +265,7 @@ array(
 	
 	
 	'No puedes ver esto si no eres administrador' => 'No puedes ver esto si no eres administrador',
-	'No se puede borrar el usuario admin' => 'No se puede borrar el usuario admin',
+	'No se puede borrar el usuario admin' => 'No se puede borrar el usuario admin. Que no eres D.Bartolome Mendez Zuloaga; maestro y mentor',
 
 	'Criterios desempate:' => 'Criterios desempate:',
 	'Pulsa para ver partidos' => 'Pulsa para ver partidos',
@@ -311,6 +311,7 @@ array(
 	'No hay pista y/o entrenadores disponibles' => 'No hay pista y/o entrenadores disponibles',
 	'Rankings' => 'Rankings',
 	'Ranking' => 'Ranking',
+	'Puntos ranking' => 'Puntos ranking',
 	'Estadisticas' => 'Estadisticas',
 	'Partidos Jugados' => 'Partidos Jugados',
 	'Partidos Ganados' => 'Partidos Ganados',
