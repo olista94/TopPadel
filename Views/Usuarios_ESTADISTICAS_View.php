@@ -80,7 +80,7 @@
                 </tr>
 				
 				<tr>
-                    <th><?php echo $strings['Ranking']; ?></th>
+                    <th><?php echo $strings['Puntos ranking']; ?></th>
                     <td><?php 
 					
 					echo $this -> ranking;
